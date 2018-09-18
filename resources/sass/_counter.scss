@@ -1,0 +1,44 @@
+.counter {
+	background-image: url('/img/counterbg.png');
+	background-size: cover;
+	background-color: $main-black;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+	padding-left: 3.25rem;
+	padding-right: 3.25rem;
+	color: white;
+	.count-box {
+		height: 5.25rem;
+		width: 5.25rem;
+		border-left: 1px solid $red;
+		border-bottom: 1px solid $red;
+		position: relative;
+		&:after {
+			display: block;
+			content: '';
+			width: 1.68rem;
+			border-top: 1px solid $red;
+		}
+		&:before {
+			display: block;
+			content: '';
+			height: 1.68rem;
+			border-right: 1px solid $red;
+			position: absolute;
+			bottom: 0;
+			right: 0;
+		}
+		& + span {
+			flex: 1;
+			margin-left: 1rem;
+			align-self: flex-end;
+		}
+	}
+	.count {
+		font-size: 2.62rem;
+		line-height: 2.7rem;
+		position: absolute;
+		top: 0.5rem;
+		right: -0.68rem;
+	}
+}

@@ -1,0 +1,32 @@
+
+.hero {
+	background-image: radial-gradient(ellipse at center, rgba(255,255,255,0) 24%,rgba(255,255,255,0.05) 32%,rgba(94,115,160,0.44) 99%,rgba(94,115,160,0.45) 100%), url('/img/headerbg.png');
+	background-size: cover;
+	background-color: #7F8890;
+	height: 45vw;
+	.hero-title {
+		color: #0f0f0f;
+		font-size: 1.87rem;
+		font-weight: 700;
+		margin-bottom: 4.1rem;
+		h2 {
+			margin-bottom: 1.87rem;
+			color: white;
+			font-size: 60px;
+			font-weight: 100;
+	    }
+	}
+}
+.home-features {
+	padding-top: 2rem;
+	color: $text-gray;
+	text-align: center;
+	.features-title {
+		font-size: 2.25rem;
+		max-width: 724px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.features-slogan 
+		
+}

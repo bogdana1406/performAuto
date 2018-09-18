@@ -1,0 +1,39 @@
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+//includes
+@import 'header';
+@import 'triangle-black';
+@import 'main-search';
+@import 'triangles-down';
+@import 'counter';
+
+//pages
+@import 'home';
+
+body {
+	font-family: 'Roboto', sans-serif;
+}
+
+.btn-outline {
+	background: none;
+}
+
+.btn:focus, .btn:active:focus, .btn.active:focus,
+.form-control:focus, .form-control:active:focus, .form-control.active:focus, {
+    outline: 0 none;
+    box-shadow: none;
+    border-color:inherit;
+}
+
+.navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}

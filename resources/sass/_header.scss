@@ -1,0 +1,150 @@
+
+header {
+	background-color: rgba(0, 0, 0, .8);
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	.navbar {
+		max-width: 1094px;
+		margin-left: auto;
+		margin-right: auto;
+		a {
+			color: white;
+		}
+		.top-bar {
+			padding: 1.2rem 0;
+			color: white;
+		}
+		.nav-wrapper {
+			margin-left: 8%;
+			flex: 1;
+		}
+		.header-divider {
+			border-top: 1px solid rgba(225, 225, 225, .15);
+		}
+		.navbar-nav {
+			padding: 1.3rem 0;
+		}
+		.btn {
+			color: white;
+			text-transform: uppercase;
+		}
+		.btn-navbar {
+			padding-left: 2.5rem;
+			padding-right: 2.5rem;
+			&:hover {
+				background-color: $black80;
+			}
+		}
+		.nav-toggler {
+			font-size: 24px;
+			color: white;
+		}
+	}
+	.dropdown-menu {
+		background-color: $black80;
+		min-width: 13.75rem;
+		top: 4.5rem;
+		.dropdown-item {
+			text-transform: uppercase;
+			&:hover {
+				background-color: $black80;
+				color: white;
+			}
+		}
+		&.triangle-top::after {
+		    content: ''; 
+		    position: absolute;
+		    left: 42px;
+		    top: -20px;
+		    border: 10px solid transparent;
+		    border-bottom: 10px solid $black80;
+   		}
+	}
+	.navbar-expand-lg .navbar-nav a.nav-link {
+		text-transform: uppercase;
+		font-size: 0.87rem;
+		padding-left: 1.8rem;
+		padding-right: 1.8rem;
+		border: 1px solid rgba(225, 225, 225, 0);
+		transition: all .25s ease-out;
+		&:hover {
+			border: 1px solid rgba(225, 225, 225, .2);
+			border-radius: 0.25rem;
+		}
+		&.dropdown-toggle:focus {
+			border: 1px solid rgba(225, 225, 225, .4);
+		}
+	}
+	.social {
+		a.rounded-circle {
+			width: 1.6rem;
+			height: 1.6rem;
+			background-color: white;
+			margin-right: 0.62rem;
+			transition: all .25s ease-out;
+			.fa {
+				line-height: 1.7rem;
+				color: #0f0f0f;
+			}
+			&:last-child {
+				margin-right: 0;
+			}
+			&:hover {
+				opacity: .6;
+			}
+		}
+	}
+	.top-bar{
+		.contacts {
+			.fa {
+				color: $red;
+				font-size: 1.37rem;
+			}
+		}
+		.dropdown-menu {
+			background-color: black;
+			box-shadow: 0 0 30px black;
+			border: none;
+			border-top-left-radius: 0;
+			border-top-right-radius: 0;
+			min-width: inherit;
+			margin-top: 0;
+			left: 0;
+			right: 0;
+			top: 100%;
+			.dropdown-item {
+				padding-left: 0;
+				padding-right: 0;
+				&:hover {
+					color: $red;
+					background-color: inherit;
+				}
+			}
+		}
+	    .btn-group .btn {
+			font-size: 0.87rem;
+			padding-right: 1.2rem;
+			text-transform: uppercase;
+			border: none;
+			&.btn-outline:focus {
+				background: black;
+				border-bottom-left-radius: 0;
+				border-bottom-right-radius: 0;
+			}
+		}
+	}
+	.dropdown-toggle {
+		&:after {
+	    	vertical-align: baseline;
+	    	font-family: 'themify';
+	    	font-size: .6rem;
+	    	content: "\e64b";
+	    	border-top: 0;
+	    	border-right: 0;
+	    	border-bottom: 0;
+	    	border-left: 0;
+		}
+	}
+}
