@@ -8,12 +8,6 @@
         font-size: 1.87rem;
         font-weight: 700;
         margin-bottom: 4.1rem;
-        h2 {
-            margin-bottom: 1.87rem;
-            color: white;
-            font-size: 60px;
-            font-weight: 100;
-        }
     }
 }
 
@@ -46,6 +40,74 @@
             top: 0;
             left: 50%;
             transform: translateX(-50%);
+        }
+    }
+}
+.video-box {
+    background-color: $main-black;
+    background-image: url('/img/videobg.png');
+    background-size: cover;
+    padding-top: 6.25rem;
+    padding-bottom: 9rem;
+    .title {
+        margin-bottom: 6rem;
+    }
+    .video-wrapper {
+        position: relative;
+        .bordered-angle-top,
+        .bordered-angle-bottom {
+            position: absolute;
+            height: 83px;
+            width: 83px;
+            border-color: $red;
+            border-width: 1px;
+        }
+        .bordered-angle-top::before,
+        .bordered-angle-top::after,
+        .bordered-angle-bottom::before,
+        .bordered-angle-bottom::after {
+            content: "";
+            display: block;
+            border-color: $red;
+            border-width: 1px;
+        }
+        .bordered-angle-top {
+            border-top-style: solid;
+            border-left-style: solid;
+            left: -40px;
+            top: -40px;
+            &::before {
+                width: 30px;
+                height: 100%;
+                border-bottom-style: solid;
+            }
+            &::after {
+                position: absolute;
+                top: 0;
+                width: 100%;
+                height: 30px;
+                border-right-style: solid;
+            }
+        }
+        .bordered-angle-bottom {
+            border-right-style: solid;
+            border-bottom-style: solid;
+            right: -40px;
+            bottom: -40px;
+            &::before {
+                position: absolute;
+                right: 0;
+                width: 30px;
+                height: 100%;
+                border-top-style: solid;
+            }
+            &::after {
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                height: 30px;
+                border-left-style: solid;
+            }
         }
     }
 }

@@ -26,4 +26,6 @@
 
 	@include('common.gallery')
 
+	@include('includes.video')
+
 @endsection
