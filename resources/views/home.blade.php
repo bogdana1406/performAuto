@@ -13,13 +13,17 @@
 	@include('includes.main-search')
 
 	<section class="home-features">
-		<div class="container">
+		<div class="main-wrapper">
 
 			@include('includes.counter')
 	
 		</div>
-		<h2 class="features-title">@lang('home.features-title')</h2>
-		<div class="divider"></div>
-		<p class="features-slogan">@lang('home.features-slogan')<span>&laquo;@lang('home.features-quote')&raquo;</span></p>
+		<h2 class="features-title mt-5">@lang('home.features-title')</h2>
+		<div class="divider mt-4"></div>
+		<p class="features-slogan mx-auto my-4">@lang('home.features-slogan')</p>
+		<span>&laquo;@lang('home.features-quote')&raquo;</span>
 	</section>
+
+	@include('common.gallery')
+
 @endsection

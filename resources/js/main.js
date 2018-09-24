@@ -1,7 +1,7 @@
 
-//counter
-
 $(document).ready(function() {
+
+//counter
 
   var counters = $(".count");
   var countersQuantity = counters.length;
@@ -24,4 +24,5 @@ $(document).ready(function() {
   for (j = 0; j < countersQuantity; j++) {
     count(0, counter[j], j);
   }
+
 });

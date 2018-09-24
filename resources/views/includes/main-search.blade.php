@@ -1,7 +1,9 @@
-@include('includes.triangle-black')
+<div class="arrow-black">
+	@include('includes.arrow-down')
+</div>
 
 <div class="search px-3">
-	<div class="wrapper">
+	<div class="main-wrapper">
 		<form action="" class="form-row mb-0 align-items-center">
 			<div class="form-group col test">
 				<label for="inputBrand" class="sr-only">Brand</label>

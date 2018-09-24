@@ -10649,25 +10649,25 @@ header .dropdown-toggle:after {
   border-left: 0;
 }
 
-.triangle-black {
-  height: 45px;
+.arrow-down {
+  height: 46px;
   margin-top: -45px;
-  background: #0f0f0f;
   -webkit-clip-path: polygon(0 100%, 0 0, 50% calc(100% - 1px), 100% 0, 100% 100%, 50% 100%);
           clip-path: polygon(0 100%, 0 0, 50% calc(100% - 1px), 100% 0, 100% 100%, 50% 100%);
+}
+
+.arrow-up {
+  height: 46px;
+  margin-bottom: -45px;
+  -webkit-clip-path: polygon(0 0, 0 100%, 50% 1px, 100% 100%, 100% 0);
+          clip-path: polygon(0 0, 0 100%, 50% 1px, 100% 100%, 100% 0);
 }
 
 .search {
   background-color: #0f0f0f;
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
-  margin-top: -1px;
   margin-bottom: -2px;
-}
-
-.search .wrapper {
-  max-width: 1144px;
-  margin: 0 auto;
 }
 
 .search .form-group,
@@ -10743,21 +10743,111 @@ header .dropdown-toggle:after {
   right: 0;
 }
 
-.counter .count-box + span {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  margin-left: 1rem;
-  -ms-flex-item-align: end;
-      align-self: flex-end;
-}
-
 .counter .count {
   font-size: 2.62rem;
   line-height: 2.7rem;
   position: absolute;
   top: 0.5rem;
   right: -0.68rem;
+}
+
+.gallery {
+  padding-bottom: 13.12rem;
+}
+
+.gallery .gallery-filter {
+  margin-top: 4.37rem;
+  margin-bottom: 6.87rem;
+}
+
+.gallery .gallery-title {
+  font-size: 1.87rem;
+  line-height: 1.8rem;
+  color: #0f0f0f;
+}
+
+.gallery .gallery-title h2 {
+  font-weight: 700;
+}
+
+.gallery .gallery-title span {
+  font-size: 1rem;
+  line-height: 1.1rem;
+  color: #363636;
+}
+
+.gallery .nav {
+  background-color: #0f0f0f;
+}
+
+.gallery .nav-link {
+  color: white;
+  font-size: 1.12rem;
+  line-height: 2.1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.gallery .card {
+  margin-bottom: 2rem;
+  margin-left: -10px;
+  margin-right: -10px;
+  font-size: 0.87rem;
+  line-height: 1.2rem;
+  -webkit-transition: all .25s ease-in-out;
+  transition: all .25s ease-in-out;
+  border: 0 none;
+}
+
+.gallery .card a {
+  color: #6a6969;
+  text-decoration: none;
+}
+
+.gallery .card:hover {
+  -webkit-box-shadow: 0 0 30px #dedede;
+          box-shadow: 0 0 30px #dedede;
+}
+
+.gallery .card .card-title {
+  font-size: 1.12rem;
+  line-height: 1.15rem;
+  font-weight: 700;
+  color: #0f0f0f;
+  margin-bottom: 0;
+}
+
+.gallery .card .date {
+  vertical-align: bottom;
+}
+
+.gallery .card .car-price,
+.gallery .card .currency {
+  font-weight: 700;
+  color: #c92223;
+}
+
+.gallery .card-img-top {
+  position: relative;
+}
+
+.gallery .card-img-top .img-thumb {
+  width: 100%;
+}
+
+.gallery .btn {
+  font-size: 0.87rem;
+  line-height: 0.9rem;
+  font-weight: 700;
+  padding: 0.75rem 2.375rem;
+  border: 1px solid #0f0f0f;
+  text-transform: uppercase;
+  color: #c92223;
+}
+
+.gallery .modal .img-zoom {
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .hero {
@@ -10783,19 +10873,49 @@ header .dropdown-toggle:after {
 
 .home-features {
   padding-top: 2rem;
-}
-
-.home-features .features-title {
-  color: #363636;
-  font-size: 2.25rem;
-  max-width: 724px;
-  margin-left: auto;
-  margin-right: auto;
+  padding-bottom: 5rem;
+  color: #6a6969;
   text-align: center;
 }
 
+.home-features .features-title {
+  font-size: 2.25rem;
+  font-weight: 400;
+  color: #363636;
+  max-width: 724px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.home-features .features-slogan {
+  max-width: 480px;
+}
+
+.home-features .divider {
+  height: 1px;
+  position: relative;
+}
+
+.home-features .divider::after {
+  content: "";
+  position: absolute;
+  height: 1px;
+  width: 236px;
+  background-color: #6a6969;
+  opacity: .2;
+  top: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+
 body {
+  background-color: white;
   font-family: 'Roboto', sans-serif;
+}
+
+.btn {
+  border-radius: 0.187rem;
 }
 
 .btn-outline {
@@ -10814,9 +10934,19 @@ body {
   border-color: inherit;
 }
 
-.navbar-laravel {
-  background-color: #fff;
-  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+.main-wrapper {
+  max-width: 1144px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.arrow-black .arrow-up,
+.arrow-black .arrow-down {
+  background-color: #0f0f0f;
+}
+
+.arrow-white .arrow-up,
+.arrow-white .arrow-down {
+  background-color: white;
 }
 

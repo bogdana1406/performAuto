@@ -10,16 +10,23 @@
 
 //includes
 @import 'header';
-@import 'triangle-black';
+@import 'arrow-down';
+@import 'arrow-up';
 @import 'main-search';
 @import 'triangles-down';
 @import 'counter';
+@import 'gallery';
 
 //pages
 @import 'home';
 
 body {
+	background-color: white;
 	font-family: 'Roboto', sans-serif;
+}
+
+.btn {
+	border-radius: 0.187rem;
 }
 
 .btn-outline {
@@ -33,7 +40,27 @@ body {
     border-color:inherit;
 }
 
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+// .navbar-laravel {
+//   background-color: #fff;
+//   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+// }
+
+.main-wrapper {
+	max-width: 1144px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+//arrows
+
+.arrow-black {
+    .arrow-up, .arrow-down {
+        background-color: $main-black;
+    }
+}
+
+.arrow-white {
+	.arrow-up, .arrow-down {
+		background-color: white;
+	}
 }
