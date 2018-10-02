@@ -7,14 +7,20 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+//noUIslider
+//@import '~noUiSlider-12.0.0/distribute/nouislider.css';
+
 //includes
 @import 'header';
-@import 'arrow-down';
-@import 'arrow-up';
+@import 'arrows';
 @import 'main-search';
+@import 'custom-select';
+@import 'nouislider.css';
 @import 'triangles-down';
 @import 'counter';
 @import 'gallery';
+@import 'reviews';
+@import 'footer';
 
 //pages
 @import 'home';
@@ -61,17 +67,46 @@ h2 {
     margin-right: auto;
 }
 
-//arrows
-.arrow-black {
-    .arrow-up,
-    .arrow-down {
-        background-color: $main-black;
+.contacts {
+    a {
+        color: white;
+    }
+    .fa {
+        color: $red;
+        font-size: 1.37rem;
     }
 }
 
-.arrow-white {
-    .arrow-up,
-    .arrow-down {
+.social {
+    a.rounded-circle {
+        width: 1.6rem;
+        height: 1.6rem;
         background-color: white;
+        margin-right: 0.62rem;
+        transition: all .25s ease-out;
+        .fa {
+            line-height: 1.7rem;
+            color: #0f0f0f;
+        }
+        &:last-child {
+            margin-right: 0;
+        }
+        &:hover {
+            opacity: .6;
+        }
+    }
+}
+
+.inline-title {
+    h2 {
+        font-size: 1.87rem;
+        line-height: 1.8rem;
+        color: $text-black;
+        font-weight: 700;
+    }
+    span {
+        font-size: 1rem;
+        line-height: 1.1rem;
+        color: $text-dark-gray;
     }
 }

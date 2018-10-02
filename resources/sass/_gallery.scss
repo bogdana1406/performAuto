@@ -14,7 +14,7 @@
 		span {
 			font-size: 1rem;
 			line-height: 1.1rem;
-			color: $text-gray;
+			color: $text-dark-gray;
 		}
 	}
 	.nav {
@@ -36,7 +36,7 @@
 		transition: all .25s ease-in-out;
 		border: 0 none;
 		a {
-			color: $text-light-gray;
+			color: $text-gray;
 			text-decoration: none;
 		}
 		&:hover {

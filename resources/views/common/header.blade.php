@@ -1,7 +1,7 @@
 <header>
   <nav class="navbar navbar-expand-lg">
     <a class="navbar-brand" href="#">
-    	<img src="{{ asset('img/logo.png') }}" alt="">
+    	<img src="{{ asset('img/logo.png') }}" alt="Perform Auto">
   	</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="nav-toggler ti-view-list"></span>
@@ -46,25 +46,25 @@
 		  <div class="collapse navbar-collapse header-divider pt-1" id="navbarSupportedContent">
 		    <ul class="navbar-nav py-1 mr-auto">
 		    	<li class="nav-item dropdown">
-		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@lang('header.nav-link1')</a>
+		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@lang('navigation.nav-link1')</a>
 		        <div class="dropdown-menu triangle-top" aria-labelledby="navbarDropdown">
-		          <a class="dropdown-item" href="#">@lang('header.dropdown-link1')<span class="float-right">24</span></a>
-		          <a class="dropdown-item" href="#">@lang('header.dropdown-link2')<span class="float-right">2</span></a>
-		          <a class="dropdown-item" href="#">@lang('header.dropdown-link3')<span class="float-right">6</span></a>
-		          <a class="dropdown-item" href="#">@lang('header.dropdown-link4')<span class="float-right">2</span></a>
-		          <a class="dropdown-item" href="#">@lang('header.dropdown-link5')<span class="float-right">1</span></a>
-		          <a class="dropdown-item" href="#">@lang('header.dropdown-link6')<span class="float-right">5</span></a>
-		          <a class="dropdown-item" href="#">@lang('header.dropdown-link7')<span class="float-right">8</span></a>
+		          <a class="dropdown-item" href="#">@lang('navigation.dropdown-link1')<span class="float-right">24</span></a>
+		          <a class="dropdown-item" href="#">@lang('navigation.dropdown-link2')<span class="float-right">2</span></a>
+		          <a class="dropdown-item" href="#">@lang('navigation.dropdown-link3')<span class="float-right">6</span></a>
+		          <a class="dropdown-item" href="#">@lang('navigation.dropdown-link4')<span class="float-right">2</span></a>
+		          <a class="dropdown-item" href="#">@lang('navigation.dropdown-link5')<span class="float-right">1</span></a>
+		          <a class="dropdown-item" href="#">@lang('navigation.dropdown-link6')<span class="float-right">5</span></a>
+		          <a class="dropdown-item" href="#">@lang('navigation.dropdown-link7')<span class="float-right">8</span></a>
 		        </div>
 		      </li>
 		      <li class="nav-item active">
-		        <a class="nav-link" href="#">@lang('header.nav-link2')</a>
+		        <a class="nav-link" href="#">@lang('navigation.nav-link2')</a>
 		      </li>
 		      <li class="nav-item">
-		        <a class="nav-link" href="#">@lang('header.nav-link3')</a>
+		        <a class="nav-link" href="#">@lang('navigation.nav-link3')</a>
 		      </li>
 		      <li class="nav-item">
-		        <a class="nav-link" href="#">@lang('header.nav-link4')</a>
+		        <a class="nav-link" href="#">@lang('navigation.nav-link4')</a>
 		      </li>
 		    </ul>
 		    <div class="btn-group">

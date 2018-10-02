@@ -1,0 +1,76 @@
+footer {
+	.top-footer {
+		background-color: #111111;
+		background-image: url(/img/footerbg.png);
+		background-size: cover;
+		background-position-y: -5px;
+	}
+	.contacts-container {
+		padding-top: 9rem;
+		margin-bottom: 5.12rem;
+		a {
+			color: white;
+		}
+	}
+	.cards-wrapper {
+		margin-bottom: -8rem;
+	}
+	.card {
+		flex-basis: 538px;
+	}
+	.card-body {
+		background-color: #111;
+		flex: inherit;
+		.card-title {
+			padding-top: 2rem;
+			padding-bottom: 1.25rem;
+			padding-left: 2rem;
+			background-color: $main-black;
+			position: relative;
+			h3 {
+				font-size: 1.12rem;
+				line-height: 1.15rem;
+				color: white;
+				font-weight: 700;
+
+			}
+			.position {
+				font-size: .87rem;
+				line-height: .9rem;
+				color: #767575;
+			}
+			&::after {
+				content: "";
+				position: absolute;
+				bottom: 0;
+				left: 1.85rem;
+				height: 1px;
+				width: 60%;
+				background-color: rgba(51, 51, 51, .6);
+			} 
+		}
+		.contacts {
+			margin-left: 2rem;
+			margin-bottom: .87rem;
+		}
+	}
+	.card-img {
+		flex: 1;
+	}
+	.footer-links {
+		background-color: $main-black;
+		text-transform: uppercase;
+		font-size: .75rem;
+		.nav-link {
+			color: #a9a9a9;
+		}
+	}
+	.sub-footer {
+		background-color: #111;
+		padding-top: 2rem;
+		padding-bottom: 2rem;
+		font-size: .75rem;
+		font-weight: 300;
+		color: #5b5b5b;
+	}
+}

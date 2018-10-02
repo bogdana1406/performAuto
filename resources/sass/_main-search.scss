@@ -2,7 +2,8 @@
     background-color: $main-black;
     padding-top: 2.5rem;
     padding-bottom: 2.5rem;
-    margin-bottom: -2px;	
+    margin-bottom: -2px;
+
     .form-group {
         margin-bottom: 0;
         padding: 1.12rem 1.87rem;
@@ -20,11 +21,28 @@
 
     .trackbar {
         @extend .form-group;
-        input {
-            // position: absolute;
-            // opacity: 0;
-            // z-index: 10;
-            width: 100%;
+
+        .noUi-horizontal {
+            border: 0 none;
+            height: 4px;
+            .noUi-handle {
+                height: 14px;
+                width: 14px;
+                background-color: $red;
+                border: 1px solid $main-black;
+                border-radius: 50%;
+                box-shadow: none;
+                top: -5px;
+                &::before,
+                &::after {
+                    display: none;
+                }
+
+            }
+            .noUi-connect {
+                background-color: $red;
+
+            }
         }
     }
 

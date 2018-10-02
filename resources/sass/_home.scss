@@ -14,12 +14,12 @@
 .home-features {
     padding-top: 2rem;
     padding-bottom: 5rem;
-    color: $text-light-gray;
+    color: $text-gray;
     text-align: center;
     .features-title {
         font-size: 2.25rem;
         font-weight: 400;
-        color: $text-gray;
+        color: $text-dark-gray;
         max-width: 724px;
         margin-left: auto;
         margin-right: auto;
@@ -35,7 +35,7 @@
             position: absolute;
             height: 1px;
             width: 236px;
-            background-color: $text-light-gray;
+            background-color: $text-gray;
             opacity: .2;
             top: 0;
             left: 50%;

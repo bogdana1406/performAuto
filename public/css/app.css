@@ -1,4 +1,294 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900);/*!
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900);/*! nouislider - 12.0.0 - 9/14/2018 */
+/* Functional styling;
+ * These styles are required for noUiSlider to function.
+ * You don't need to change these rules to apply your design.
+ */
+.noUi-target,
+.noUi-target * {
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-user-select: none;
+  -ms-touch-action: none;
+  touch-action: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.noUi-target {
+  position: relative;
+  direction: ltr;
+}
+.noUi-base,
+.noUi-connects {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}
+/* Wrapper for all connect elements.
+ */
+.noUi-connects {
+  overflow: hidden;
+  z-index: 0;
+}
+.noUi-connect,
+.noUi-origin {
+  will-change: transform;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+}
+/* Offset direction
+ */
+html:not([dir="rtl"]) .noUi-horizontal .noUi-origin {
+  left: auto;
+  right: 0;
+}
+/* Give origins 0 height/width so they don't interfere with clicking the
+ * connect elements.
+ */
+.noUi-vertical .noUi-origin {
+  width: 0;
+}
+.noUi-horizontal .noUi-origin {
+  height: 0;
+}
+.noUi-handle {
+  position: absolute;
+}
+.noUi-state-tap .noUi-connect,
+.noUi-state-tap .noUi-origin {
+  -webkit-transition: transform 0.3s;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
+}
+.noUi-state-drag * {
+  cursor: inherit !important;
+}
+/* Slider size and handle placement;
+ */
+.noUi-horizontal {
+  height: 18px;
+}
+.noUi-horizontal .noUi-handle {
+  width: 34px;
+  height: 28px;
+  left: -17px;
+  top: -6px;
+}
+.noUi-vertical {
+  width: 18px;
+}
+.noUi-vertical .noUi-handle {
+  width: 28px;
+  height: 34px;
+  left: -6px;
+  top: -17px;
+}
+html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
+  right: -17px;
+  left: auto;
+}
+/* Styling;
+ * Giving the connect element a border radius causes issues with using transform: scale
+ */
+.noUi-target {
+  background: #FAFAFA;
+  border-radius: 4px;
+  border: 1px solid #D3D3D3;
+  -webkit-box-shadow: inset 0 1px 1px #F0F0F0, 0 3px 6px -5px #BBB;
+          box-shadow: inset 0 1px 1px #F0F0F0, 0 3px 6px -5px #BBB;
+}
+.noUi-connects {
+  border-radius: 3px;
+}
+.noUi-connect {
+  background: #3FB8AF;
+}
+/* Handles and cursors;
+ */
+.noUi-draggable {
+  cursor: ew-resize;
+}
+.noUi-vertical .noUi-draggable {
+  cursor: ns-resize;
+}
+.noUi-handle {
+  border: 1px solid #D9D9D9;
+  border-radius: 3px;
+  background: #FFF;
+  cursor: default;
+  -webkit-box-shadow: inset 0 0 1px #FFF, inset 0 1px 7px #EBEBEB, 0 3px 6px -3px #BBB;
+          box-shadow: inset 0 0 1px #FFF, inset 0 1px 7px #EBEBEB, 0 3px 6px -3px #BBB;
+}
+.noUi-active {
+  -webkit-box-shadow: inset 0 0 1px #FFF, inset 0 1px 7px #DDD, 0 3px 6px -3px #BBB;
+          box-shadow: inset 0 0 1px #FFF, inset 0 1px 7px #DDD, 0 3px 6px -3px #BBB;
+}
+/* Handle stripes;
+ */
+.noUi-handle:before,
+.noUi-handle:after {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 14px;
+  width: 1px;
+  background: #E8E7E6;
+  left: 14px;
+  top: 6px;
+}
+.noUi-handle:after {
+  left: 17px;
+}
+.noUi-vertical .noUi-handle:before,
+.noUi-vertical .noUi-handle:after {
+  width: 14px;
+  height: 1px;
+  left: 6px;
+  top: 14px;
+}
+.noUi-vertical .noUi-handle:after {
+  top: 17px;
+}
+/* Disabled state;
+ */
+[disabled] .noUi-connect {
+  background: #B8B8B8;
+}
+[disabled].noUi-target,
+[disabled].noUi-handle,
+[disabled] .noUi-handle {
+  cursor: not-allowed;
+}
+/* Base;
+ *
+ */
+.noUi-pips,
+.noUi-pips * {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.noUi-pips {
+  position: absolute;
+  color: #999;
+}
+/* Values;
+ *
+ */
+.noUi-value {
+  position: absolute;
+  white-space: nowrap;
+  text-align: center;
+}
+.noUi-value-sub {
+  color: #ccc;
+  font-size: 10px;
+}
+/* Markings;
+ *
+ */
+.noUi-marker {
+  position: absolute;
+  background: #CCC;
+}
+.noUi-marker-sub {
+  background: #AAA;
+}
+.noUi-marker-large {
+  background: #AAA;
+}
+/* Horizontal layout;
+ *
+ */
+.noUi-pips-horizontal {
+  padding: 10px 0;
+  height: 80px;
+  top: 100%;
+  left: 0;
+  width: 100%;
+}
+.noUi-value-horizontal {
+  -webkit-transform: translate(-50%, 50%);
+  transform: translate(-50%, 50%);
+}
+.noUi-rtl .noUi-value-horizontal {
+  -webkit-transform: translate(50%, 50%);
+  transform: translate(50%, 50%);
+}
+.noUi-marker-horizontal.noUi-marker {
+  margin-left: -1px;
+  width: 2px;
+  height: 5px;
+}
+.noUi-marker-horizontal.noUi-marker-sub {
+  height: 10px;
+}
+.noUi-marker-horizontal.noUi-marker-large {
+  height: 15px;
+}
+/* Vertical layout;
+ *
+ */
+.noUi-pips-vertical {
+  padding: 0 10px;
+  height: 100%;
+  top: 0;
+  left: 100%;
+}
+.noUi-value-vertical {
+  -webkit-transform: translate(0, -50%);
+  transform: translate(0, -50%, 0);
+  padding-left: 25px;
+}
+.noUi-rtl .noUi-value-vertical {
+  -webkit-transform: translate(0, 50%);
+  transform: translate(0, 50%);
+}
+.noUi-marker-vertical.noUi-marker {
+  width: 5px;
+  height: 2px;
+  margin-top: -1px;
+}
+.noUi-marker-vertical.noUi-marker-sub {
+  width: 10px;
+}
+.noUi-marker-vertical.noUi-marker-large {
+  width: 15px;
+}
+.noUi-tooltip {
+  display: block;
+  position: absolute;
+  border: 1px solid #D9D9D9;
+  border-radius: 3px;
+  background: #fff;
+  color: #000;
+  padding: 5px;
+  text-align: center;
+  white-space: nowrap;
+}
+.noUi-horizontal .noUi-tooltip {
+  -webkit-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+  left: 50%;
+  bottom: 120%;
+}
+.noUi-vertical .noUi-tooltip {
+  -webkit-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  top: 50%;
+  right: 120%;
+}
+/*!
  * Bootstrap v4.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors
  * Copyright 2011-2018 Twitter, Inc.
@@ -10574,33 +10864,6 @@ header .navbar-expand-lg .navbar-nav a.nav-link.dropdown-toggle:focus {
   border: 1px solid rgba(225, 225, 225, 0.4);
 }
 
-header .social a.rounded-circle {
-  width: 1.6rem;
-  height: 1.6rem;
-  background-color: white;
-  margin-right: 0.62rem;
-  -webkit-transition: all .25s ease-out;
-  transition: all .25s ease-out;
-}
-
-header .social a.rounded-circle .fa {
-  line-height: 1.7rem;
-  color: #0f0f0f;
-}
-
-header .social a.rounded-circle:last-child {
-  margin-right: 0;
-}
-
-header .social a.rounded-circle:hover {
-  opacity: .6;
-}
-
-header .top-bar .contacts .fa {
-  color: #c92223;
-  font-size: 1.37rem;
-}
-
 header .top-bar .dropdown-menu {
   background-color: black;
   -webkit-box-shadow: 0 0 30px black;
@@ -10649,18 +10912,51 @@ header .dropdown-toggle:after {
   border-left: 0;
 }
 
-.arrow-down {
+.arrow-up,
+.arrow-down,
+.arrow-down-rev {
+  position: relative;
+}
+
+.arrow-up::before,
+.arrow-down::before,
+.arrow-down-rev::after {
+  position: absolute;
+  content: "";
+  display: block;
   height: 46px;
-  margin-top: -45px;
+  width: 100%;
+  left: 0;
+}
+
+.arrow-up::before {
+  bottom: -45px;
+  -webkit-clip-path: polygon(0 0, 0 100%, 50% 1px, 100% 100%, 100% 0);
+          clip-path: polygon(0 0, 0 100%, 50% 1px, 100% 100%, 100% 0);
+}
+
+.arrow-down::before {
+  top: -45px;
   -webkit-clip-path: polygon(0 100%, 0 0, 50% calc(100% - 1px), 100% 0, 100% 100%, 50% 100%);
           clip-path: polygon(0 100%, 0 0, 50% calc(100% - 1px), 100% 0, 100% 100%, 50% 100%);
 }
 
-.arrow-up {
-  height: 46px;
-  margin-bottom: -45px;
-  -webkit-clip-path: polygon(0 0, 0 100%, 50% 1px, 100% 100%, 100% 0);
-          clip-path: polygon(0 0, 0 100%, 50% 1px, 100% 100%, 100% 0);
+.arrow-down-rev::after {
+  bottom: -45px;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 1px, 50% 100%, 0 1px);
+          clip-path: polygon(0 0, 100% 0, 100% 1px, 50% 100%, 0 1px);
+}
+
+.arrow-black.arrow-up::before,
+.arrow-black.arrow-down::before,
+.arrow-black.arrow-down-rev::after {
+  background-color: #0f0f0f;
+}
+
+.arrow-white.arrow-up::before,
+.arrow-white.arrow-down::before,
+.arrow-white.arrow-down-rev::after {
+  background-color: white;
 }
 
 .search {
@@ -10686,8 +10982,29 @@ header .dropdown-toggle:after {
   padding: 0.87rem 1.1rem;
 }
 
-.search .trackbar input {
-  width: 100%;
+.search .trackbar .noUi-horizontal {
+  border: 0 none;
+  height: 4px;
+}
+
+.search .trackbar .noUi-horizontal .noUi-handle {
+  height: 14px;
+  width: 14px;
+  background-color: #c92223;
+  border: 1px solid #0f0f0f;
+  border-radius: 50%;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  top: -5px;
+}
+
+.search .trackbar .noUi-horizontal .noUi-handle::before,
+.search .trackbar .noUi-horizontal .noUi-handle::after {
+  display: none;
+}
+
+.search .trackbar .noUi-horizontal .noUi-connect {
+  background-color: #c92223;
 }
 
 .search .btn-search {
@@ -10698,6 +11015,74 @@ header .dropdown-toggle:after {
   margin-left: 1.87rem;
   font-size: 0.87rem;
   line-height: 0.87rem;
+}
+
+.custom-select {
+  position: relative;
+  background-color: transparent;
+  border-radius: 0;
+  border-color: #494949;
+  color: white;
+  height: auto;
+  /*style the arrow inside the select element:*/
+  /*point the arrow upwards when the select box is open (active):*/
+  /*style the items (options), including the selected item:*/
+  /*style items (options):*/
+  /*hide the items when the select box is closed:*/
+}
+
+.custom-select select {
+  display: none;
+  /*hide original SELECT element:*/
+}
+
+.custom-select .select-selected {
+  background-color: #0f0f0f;
+}
+
+.custom-select .select-selected:after {
+  position: absolute;
+  font-family: 'themify';
+  content: "\E64B";
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  right: 10px;
+  background-color: #0f0f0f;
+}
+
+.custom-select .select-selected.select-arrow-active:after {
+  content: "\E648";
+}
+
+.custom-select .select-items div,
+.custom-select .select-selected {
+  color: #ffffff;
+  cursor: pointer;
+  padding: .3rem .8rem;
+}
+
+.custom-select .select-items {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+
+.custom-select .select-items:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+}
+
+.custom-select .select-hide {
+  display: none;
+}
+
+.custom-select .select-items div:hover,
+.custom-select .same-as-selected {
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .triangles-down {
@@ -10845,6 +11230,187 @@ header .dropdown-toggle:after {
 .gallery .modal .img-zoom {
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+.reviews {
+  padding-top: 6.25rem;
+  padding-bottom: 7.93rem;
+}
+
+.reviews .inline-title {
+  margin-bottom: 3.12rem;
+}
+
+.reviews .card {
+  padding: 1.12rem;
+  margin-bottom: 1.25rem;
+  -webkit-box-shadow: 0 0 30px #dedede;
+          box-shadow: 0 0 30px #dedede;
+  min-height: 13rem;
+}
+
+.reviews .card:hover {
+  -webkit-box-shadow: 0 0 30px #cddeff;
+          box-shadow: 0 0 30px #cddeff;
+}
+
+.reviews a {
+  display: block;
+  text-decoration: none;
+}
+
+.reviews .card-img {
+  height: 100px;
+  width: 100px;
+  margin-bottom: 1rem;
+}
+
+.reviews .stars {
+  border-radius: .71rem;
+  width: 2.5rem;
+  color: white;
+  font-size: .87rem;
+}
+
+.reviews .stars .fa {
+  margin-left: .2rem;
+}
+
+.reviews .card-title {
+  margin-bottom: 1.25rem;
+}
+
+.reviews .card-title h3 {
+  color: #0f0f0f;
+  font-size: 1.125rem;
+  line-height: 1.25rem;
+  font-weight: 700;
+}
+
+.reviews .date {
+  font-size: .87rem;
+  line-height: .9rem;
+  color: #696969;
+}
+
+.reviews .icon-fb {
+  width: 24px;
+  height: 24px;
+  background-color: #4267b2;
+}
+
+.reviews .icon-fb .fa {
+  color: white;
+  font-size: 1.1rem;
+  line-height: 1.7rem;
+}
+
+.reviews .card-post {
+  font-size: .87rem;
+  color: #363636;
+}
+
+.reviews .fb-btn {
+  background-color: #4267b2;
+  padding: 0.75rem 2rem;
+  font-size: 0.87rem;
+  line-height: 0.9rem;
+  color: #fefeff;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+footer .top-footer {
+  background-color: #111111;
+  background-image: url(/img/footerbg.png);
+  background-size: cover;
+  background-position-y: -5px;
+}
+
+footer .contacts-container {
+  padding-top: 9rem;
+  margin-bottom: 5.12rem;
+}
+
+footer .contacts-container a {
+  color: white;
+}
+
+footer .cards-wrapper {
+  margin-bottom: -8rem;
+}
+
+footer .card {
+  -ms-flex-preferred-size: 538px;
+      flex-basis: 538px;
+}
+
+footer .card-body {
+  background-color: #111;
+  -webkit-box-flex: inherit;
+      -ms-flex: inherit;
+          flex: inherit;
+}
+
+footer .card-body .card-title {
+  padding-top: 2rem;
+  padding-bottom: 1.25rem;
+  padding-left: 2rem;
+  background-color: #0f0f0f;
+  position: relative;
+}
+
+footer .card-body .card-title h3 {
+  font-size: 1.12rem;
+  line-height: 1.15rem;
+  color: white;
+  font-weight: 700;
+}
+
+footer .card-body .card-title .position {
+  font-size: .87rem;
+  line-height: .9rem;
+  color: #767575;
+}
+
+footer .card-body .card-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 1.85rem;
+  height: 1px;
+  width: 60%;
+  background-color: rgba(51, 51, 51, 0.6);
+}
+
+footer .card-body .contacts {
+  margin-left: 2rem;
+  margin-bottom: .87rem;
+}
+
+footer .card-img {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+footer .footer-links {
+  background-color: #0f0f0f;
+  text-transform: uppercase;
+  font-size: .75rem;
+}
+
+footer .footer-links .nav-link {
+  color: #a9a9a9;
+}
+
+footer .sub-footer {
+  background-color: #111;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  font-size: .75rem;
+  font-weight: 300;
+  color: #5b5b5b;
 }
 
 .hero {
@@ -11016,13 +11582,47 @@ h2 {
   margin-right: auto;
 }
 
-.arrow-black .arrow-up,
-.arrow-black .arrow-down {
-  background-color: #0f0f0f;
+.contacts a {
+  color: white;
 }
 
-.arrow-white .arrow-up,
-.arrow-white .arrow-down {
+.contacts .fa {
+  color: #c92223;
+  font-size: 1.37rem;
+}
+
+.social a.rounded-circle {
+  width: 1.6rem;
+  height: 1.6rem;
   background-color: white;
+  margin-right: 0.62rem;
+  -webkit-transition: all .25s ease-out;
+  transition: all .25s ease-out;
+}
+
+.social a.rounded-circle .fa {
+  line-height: 1.7rem;
+  color: #0f0f0f;
+}
+
+.social a.rounded-circle:last-child {
+  margin-right: 0;
+}
+
+.social a.rounded-circle:hover {
+  opacity: .6;
+}
+
+.inline-title h2 {
+  font-size: 1.87rem;
+  line-height: 1.8rem;
+  color: #0f0f0f;
+  font-weight: 700;
+}
+
+.inline-title span {
+  font-size: 1rem;
+  line-height: 1.1rem;
+  color: #363636;
 }
 

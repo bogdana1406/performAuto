@@ -28,4 +28,6 @@
 
 	@include('includes.video')
 
+	@include('common.reviews')
+	
 @endsection

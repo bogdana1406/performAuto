@@ -1,0 +1,71 @@
+.reviews {
+    padding-top: 6.25rem;
+    padding-bottom: 7.93rem;
+    .inline-title {
+        margin-bottom: 3.12rem;
+    }
+    .card {
+        padding: 1.12rem;
+        margin-bottom: 1.25rem;
+        box-shadow: 0 0 30px #dedede;
+        min-height: 13rem;
+        &:hover {
+            box-shadow: 0 0 30px #cddeff;
+        }
+    }
+    a {
+        display: block;
+        text-decoration: none;
+    }
+    .card-img {
+        height: 100px;
+        width: 100px;
+        margin-bottom: 1rem;
+    }
+    .stars {
+    	border-radius: .71rem;
+    	width: 2.5rem;
+    	color: white;
+    	font-size: .87rem;
+		.fa {
+			margin-left: .2rem;
+		}
+    }
+    .card-title {
+    	margin-bottom: 1.25rem;
+        h3 {
+            color: $text-black;
+            font-size: 1.125rem;
+            line-height: 1.25rem;
+            font-weight: 700;
+        }
+    }
+    .date {
+        font-size: .87rem;
+        line-height: .9rem;
+        color: $text-light-gray;
+    }
+    .icon-fb {
+		width: 24px;
+		height: 24px;
+		background-color: $fb-blue;
+		.fa {
+			color: white;
+			font-size: 1.1rem;
+			line-height: 1.7rem;
+		}
+    }
+    .card-post {
+    	font-size: .87rem;
+		color: $text-dark-gray;
+    }
+    .fb-btn {
+    	background-color: $fb-blue;
+		padding: 0.75rem 2rem;
+		font-size: 0.87rem;
+		line-height: 0.9rem;
+		color: #fefeff;
+		font-weight: 700;
+		text-transform: uppercase;
+    }
+}

@@ -1,0 +1,45 @@
+.arrow-up,
+.arrow-down,
+.arrow-down-rev {
+	position: relative;
+}
+
+.arrow-up::before,
+.arrow-down::before,
+.arrow-down-rev::after {
+	position: absolute;
+	content: "";
+	display: block;
+	height: 46px;
+	width: 100%;
+	left: 0;
+}
+
+.arrow-up::before {
+    bottom: -45px;
+    clip-path: polygon(0 0, 0 100%, 50% 1px, 100% 100%, 100% 0);
+}
+
+.arrow-down::before {
+    top: -45px;
+    clip-path: polygon(0 100%, 0 0, 50% calc(100% - 1px), 100% 0, 100% 100%, 50% 100%);
+}
+
+.arrow-down-rev::after {
+    bottom: -45px;
+    clip-path: polygon(0 0, 100% 0, 100% 1px, 50% 100%, 0 1px);
+}
+
+
+//arrows colors
+.arrow-black.arrow-up::before,
+.arrow-black.arrow-down::before,
+.arrow-black.arrow-down-rev::after {
+    background-color: $main-black;
+}
+
+.arrow-white.arrow-up::before,
+.arrow-white.arrow-down::before,
+.arrow-white.arrow-down-rev::after {
+    background-color: white;
+}

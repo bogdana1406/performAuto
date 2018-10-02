@@ -1,4 +1,4 @@
-<section class="gallery">
+<section class="gallery arrow-up arrow-white">
 	<div class="main-wrapper">
 		<div class="gallery-filter d-flex">
 			<div class="gallery-title">
@@ -6,13 +6,13 @@
 				<span>@lang('gallery.sub-title')</span>
 			</div>
 			<nav class="nav ml-auto">
-				<a href="#" class="nav-link">@lang('gallery.filter-item1')<sup class="cars-number">24</sup></a>
-				<a href="#" class="nav-link">@lang('gallery.filter-item2')<sup class="cars-number">2</sup></a>
-				<a href="#" class="nav-link">@lang('gallery.filter-item3')<sup class="cars-number">6</sup></a>
-				<a href="#" class="nav-link">@lang('gallery.filter-item4')<sup class="cars-number">2</sup></a>
-				<a href="#" class="nav-link">@lang('gallery.filter-item5')<sup class="cars-number">1</sup></a>
-				<a href="#" class="nav-link">@lang('gallery.filter-item6')<sup class="cars-number">5</sup></a>
-				<a href="#" class="nav-link">@lang('gallery.filter-item7')<sup class="cars-number">8</sup></a>
+				<a href="#" class="nav-link">@lang('brands.all_brands')<sup class="cars-number">24</sup></a>
+				<a href="#" class="nav-link">@lang('brands.brand1')<sup class="cars-number">2</sup></a>
+				<a href="#" class="nav-link">@lang('brands.brand2')<sup class="cars-number">6</sup></a>
+				<a href="#" class="nav-link">@lang('brands.brand3')<sup class="cars-number">2</sup></a>
+				<a href="#" class="nav-link">@lang('brands.brand4')<sup class="cars-number">1</sup></a>
+				<a href="#" class="nav-link">@lang('brands.brand5')<sup class="cars-number">5</sup></a>
+				<a href="#" class="nav-link">@lang('brands.brand6')<sup class="cars-number">8</sup></a>
 			</nav>
 		</div>
 		{{-- car cards --}}
@@ -239,6 +239,3 @@
 		</div>
 	</div>
 </section>
-<div class="arrow-white">
-	@include('includes.arrow-up')
-</div>

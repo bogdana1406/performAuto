@@ -5,7 +5,9 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+require('./jquery-3.3.1.min.js');
 require('./bootstrap');
+require('./nouislider');
 require('./main');
 
 // window.Vue = require('vue');

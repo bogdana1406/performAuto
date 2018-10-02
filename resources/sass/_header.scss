@@ -77,32 +77,7 @@ header {
 			border: 1px solid rgba(225, 225, 225, .4);
 		}
 	}
-	.social {
-		a.rounded-circle {
-			width: 1.6rem;
-			height: 1.6rem;
-			background-color: white;
-			margin-right: 0.62rem;
-			transition: all .25s ease-out;
-			.fa {
-				line-height: 1.7rem;
-				color: #0f0f0f;
-			}
-			&:last-child {
-				margin-right: 0;
-			}
-			&:hover {
-				opacity: .6;
-			}
-		}
-	}
 	.top-bar{
-		.contacts {
-			.fa {
-				color: $red;
-				font-size: 1.37rem;
-			}
-		}
 		.dropdown-menu {
 			background-color: black;
 			box-shadow: 0 0 30px black;
