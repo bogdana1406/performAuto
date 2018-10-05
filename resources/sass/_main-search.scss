@@ -21,27 +21,24 @@
 
     .trackbar {
         @extend .form-group;
-
-        .noUi-horizontal {
-            border: 0 none;
-            height: 4px;
-            .noUi-handle {
-                height: 14px;
-                width: 14px;
-                background-color: $red;
-                border: 1px solid $main-black;
-                border-radius: 50%;
-                box-shadow: none;
-                top: -5px;
-                &::before,
-                &::after {
-                    display: none;
-                }
-
+        .slider-horizontal {
+            .slider-track {
+                height: 4px;
             }
-            .noUi-connect {
+            .slider-track-low,
+            .slider-track-high {
+                background-color: #494949;
+            }
+            .slider-selection {
+                background: $red;
+            }
+            .slider-handle {
+                width: 16px;
+                height: 16px;
+                top: -1;
                 background-color: $red;
-
+                border: 2px solid $main-black;
+                background-image: none;
             }
         }
     }

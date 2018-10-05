@@ -102,14 +102,10 @@ $(document).ready(function() {
 
     //price trackbar
 
-    var connectSlider = document.getElementById('slider-connect');
+    $("#priceBar").slider({ min: 0, max: 25000, range: true, value: [5000, 15000]});
 
-    noUiSlider.create(connectSlider, {
-        start: [4000, 8000],
-        range: {
-            'min': [2000],
-            'max': [10000]
-        }
-    });
+    // Call a method on the slider
+    //var value = mySlider.getValue();
+
 
 });

@@ -36,21 +36,7 @@
 				</div>
 			</div>
 			<div class="trackbar col">
-				<div id="slider-connect" class="noUi-target noUi-ltr noUi-horizontal">
-					<div class="noUi-base">
-						<div class="noUi-connects">
-							<div class="noUi-connect"></div>
-						</div>
-						<div class="noUi-origin" style="transform: translate(-75%, 0px); z-index: 5;">
-							<div class="noUi-handle noUi-handle-lower" data-handle="0" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="2000.0" aria-valuemax="7975.6" aria-valuenow="4512.2" aria-valuetext="4512.20">
-							</div>
-						</div>
-						<div class="noUi-origin">
-							<div class="noUi-handle noUi-handle-upper" data-handle="1" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="4512.2" aria-valuemax="10000.0" aria-valuenow="7975.6" aria-valuetext="7975.61">
-							</div>
-						</div>
-					</div>
-				</div>
+				<input id="priceBar" type="text"/>
 			</div>
 			<div class="col-auto">
 				<buton class="btn btn-search">search</buton>
