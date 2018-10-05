@@ -28,6 +28,9 @@
 			bottom: 0;
 			right: 0;
 		}
+		+ span {
+			flex: 1;
+		}
 	}
 	.count {
 		font-size: 2.62rem;
