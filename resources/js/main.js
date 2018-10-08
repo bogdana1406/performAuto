@@ -102,10 +102,13 @@ $(document).ready(function() {
 
     //price trackbar
 
-    $("#priceBar").slider({ min: 0, max: 25000, range: true, value: [5000, 15000]});
+    $("#priceBar").slider({ min: 5000, max: 25000, range: true, value: [7500, 15000]});
+    $("#priceBar").on("slide", function(slideEvt) {
+    $("#priceBarCurrentSliderVal").text(slideEvt.value);
+});
 
     // Call a method on the slider
-    //var value = mySlider.getValue();
+    // var value = priceBar.getValue();
 
 
 });

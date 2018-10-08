@@ -16,11 +16,13 @@
         border-color: #494949;
         color: white;
         height: auto;
-        padding: 0.87rem 1.1rem;
+        padding: .87rem 1.1rem;
     }
 
     .trackbar {
         @extend .form-group;
+        padding-top: .8rem;
+        padding-bottom: .8rem;
         .slider-horizontal {
             .slider-track {
                 height: 4px;
@@ -40,6 +42,32 @@
                 border: 2px solid $main-black;
                 background-image: none;
             }
+            .tooltip-main {
+                opacity: 1;
+                left: initial !important;
+                right: -70px;
+                &::before,
+                .tooltip-inner {
+                    background-color: transparent;
+                    color: $text-red;
+                    font-size: 1.12rem;
+                    font-family: 'Roboto', sans-serif;
+                    font-weight: 600;
+                    margin-bottom: 0;
+                }
+                &::before {
+                    content: "\f153";
+                    position: absolute;
+                    left: -5px;
+                    bottom: .2rem;
+                    font-family: FontAwesome;
+                }
+            }
+        }
+        .trackbar-title {
+            color: white;
+            text-transform: uppercase;
+            line-height: 2rem;
         }
     }
 

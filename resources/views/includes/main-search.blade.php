@@ -36,6 +36,7 @@
 				</div>
 			</div>
 			<div class="trackbar col">
+				<span class="trackbar-title">@lang('main_search.trackbar_title')</span>
 				<input id="priceBar" type="text"/>
 			</div>
 			<div class="col-auto">

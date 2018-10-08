@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 11);
+/******/ 	return __webpack_require__(__webpack_require__.s = 10);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -70,8 +70,8 @@
 "use strict";
 
 
-var bind = __webpack_require__(6);
-var isBuffer = __webpack_require__(20);
+var bind = __webpack_require__(5);
+var isBuffer = __webpack_require__(18);
 
 /*global toString:true*/
 
@@ -375,2706 +375,6 @@ module.exports = {
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(23);
-
-var DEFAULT_CONTENT_TYPE = {
-  'Content-Type': 'application/x-www-form-urlencoded'
-};
-
-function setContentTypeIfUnset(headers, value) {
-  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
-    headers['Content-Type'] = value;
-  }
-}
-
-function getDefaultAdapter() {
-  var adapter;
-  if (typeof XMLHttpRequest !== 'undefined') {
-    // For browsers use XHR adapter
-    adapter = __webpack_require__(7);
-  } else if (typeof process !== 'undefined') {
-    // For node use HTTP adapter
-    adapter = __webpack_require__(7);
-  }
-  return adapter;
-}
-
-var defaults = {
-  adapter: getDefaultAdapter(),
-
-  transformRequest: [function transformRequest(data, headers) {
-    normalizeHeaderName(headers, 'Content-Type');
-    if (utils.isFormData(data) ||
-      utils.isArrayBuffer(data) ||
-      utils.isBuffer(data) ||
-      utils.isStream(data) ||
-      utils.isFile(data) ||
-      utils.isBlob(data)
-    ) {
-      return data;
-    }
-    if (utils.isArrayBufferView(data)) {
-      return data.buffer;
-    }
-    if (utils.isURLSearchParams(data)) {
-      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
-      return data.toString();
-    }
-    if (utils.isObject(data)) {
-      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
-      return JSON.stringify(data);
-    }
-    return data;
-  }],
-
-  transformResponse: [function transformResponse(data) {
-    /*eslint no-param-reassign:0*/
-    if (typeof data === 'string') {
-      try {
-        data = JSON.parse(data);
-      } catch (e) { /* Ignore */ }
-    }
-    return data;
-  }],
-
-  /**
-   * A timeout in milliseconds to abort a request. If set to 0 (default) a
-   * timeout is not created.
-   */
-  timeout: 0,
-
-  xsrfCookieName: 'XSRF-TOKEN',
-  xsrfHeaderName: 'X-XSRF-TOKEN',
-
-  maxContentLength: -1,
-
-  validateStatus: function validateStatus(status) {
-    return status >= 200 && status < 300;
-  }
-};
-
-defaults.headers = {
-  common: {
-    'Accept': 'application/json, text/plain, */*'
-  }
-};
-
-utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
-  defaults.headers[method] = {};
-});
-
-utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
-  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
-});
-
-module.exports = defaults;
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(22)))
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-module.exports = function(module) {
-	if(!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if(!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function(global) {/**!
- * @fileOverview Kickass library to create and place poppers near their reference elements.
- * @version 1.14.4
- * @license
- * Copyright (c) 2016 Federico Zivolo and contributors
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
-var isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined';
-
-var longerTimeoutBrowsers = ['Edge', 'Trident', 'Firefox'];
-var timeoutDuration = 0;
-for (var i = 0; i < longerTimeoutBrowsers.length; i += 1) {
-  if (isBrowser && navigator.userAgent.indexOf(longerTimeoutBrowsers[i]) >= 0) {
-    timeoutDuration = 1;
-    break;
-  }
-}
-
-function microtaskDebounce(fn) {
-  var called = false;
-  return function () {
-    if (called) {
-      return;
-    }
-    called = true;
-    window.Promise.resolve().then(function () {
-      called = false;
-      fn();
-    });
-  };
-}
-
-function taskDebounce(fn) {
-  var scheduled = false;
-  return function () {
-    if (!scheduled) {
-      scheduled = true;
-      setTimeout(function () {
-        scheduled = false;
-        fn();
-      }, timeoutDuration);
-    }
-  };
-}
-
-var supportsMicroTasks = isBrowser && window.Promise;
-
-/**
-* Create a debounced version of a method, that's asynchronously deferred
-* but called in the minimum time possible.
-*
-* @method
-* @memberof Popper.Utils
-* @argument {Function} fn
-* @returns {Function}
-*/
-var debounce = supportsMicroTasks ? microtaskDebounce : taskDebounce;
-
-/**
- * Check if the given variable is a function
- * @method
- * @memberof Popper.Utils
- * @argument {Any} functionToCheck - variable to check
- * @returns {Boolean} answer to: is a function?
- */
-function isFunction(functionToCheck) {
-  var getType = {};
-  return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
-}
-
-/**
- * Get CSS computed property of the given element
- * @method
- * @memberof Popper.Utils
- * @argument {Eement} element
- * @argument {String} property
- */
-function getStyleComputedProperty(element, property) {
-  if (element.nodeType !== 1) {
-    return [];
-  }
-  // NOTE: 1 DOM access here
-  var css = getComputedStyle(element, null);
-  return property ? css[property] : css;
-}
-
-/**
- * Returns the parentNode or the host of the element
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element
- * @returns {Element} parent
- */
-function getParentNode(element) {
-  if (element.nodeName === 'HTML') {
-    return element;
-  }
-  return element.parentNode || element.host;
-}
-
-/**
- * Returns the scrolling parent of the given element
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element
- * @returns {Element} scroll parent
- */
-function getScrollParent(element) {
-  // Return body, `getScroll` will take care to get the correct `scrollTop` from it
-  if (!element) {
-    return document.body;
-  }
-
-  switch (element.nodeName) {
-    case 'HTML':
-    case 'BODY':
-      return element.ownerDocument.body;
-    case '#document':
-      return element.body;
-  }
-
-  // Firefox want us to check `-x` and `-y` variations as well
-
-  var _getStyleComputedProp = getStyleComputedProperty(element),
-      overflow = _getStyleComputedProp.overflow,
-      overflowX = _getStyleComputedProp.overflowX,
-      overflowY = _getStyleComputedProp.overflowY;
-
-  if (/(auto|scroll|overlay)/.test(overflow + overflowY + overflowX)) {
-    return element;
-  }
-
-  return getScrollParent(getParentNode(element));
-}
-
-var isIE11 = isBrowser && !!(window.MSInputMethodContext && document.documentMode);
-var isIE10 = isBrowser && /MSIE 10/.test(navigator.userAgent);
-
-/**
- * Determines if the browser is Internet Explorer
- * @method
- * @memberof Popper.Utils
- * @param {Number} version to check
- * @returns {Boolean} isIE
- */
-function isIE(version) {
-  if (version === 11) {
-    return isIE11;
-  }
-  if (version === 10) {
-    return isIE10;
-  }
-  return isIE11 || isIE10;
-}
-
-/**
- * Returns the offset parent of the given element
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element
- * @returns {Element} offset parent
- */
-function getOffsetParent(element) {
-  if (!element) {
-    return document.documentElement;
-  }
-
-  var noOffsetParent = isIE(10) ? document.body : null;
-
-  // NOTE: 1 DOM access here
-  var offsetParent = element.offsetParent;
-  // Skip hidden elements which don't have an offsetParent
-  while (offsetParent === noOffsetParent && element.nextElementSibling) {
-    offsetParent = (element = element.nextElementSibling).offsetParent;
-  }
-
-  var nodeName = offsetParent && offsetParent.nodeName;
-
-  if (!nodeName || nodeName === 'BODY' || nodeName === 'HTML') {
-    return element ? element.ownerDocument.documentElement : document.documentElement;
-  }
-
-  // .offsetParent will return the closest TD or TABLE in case
-  // no offsetParent is present, I hate this job...
-  if (['TD', 'TABLE'].indexOf(offsetParent.nodeName) !== -1 && getStyleComputedProperty(offsetParent, 'position') === 'static') {
-    return getOffsetParent(offsetParent);
-  }
-
-  return offsetParent;
-}
-
-function isOffsetContainer(element) {
-  var nodeName = element.nodeName;
-
-  if (nodeName === 'BODY') {
-    return false;
-  }
-  return nodeName === 'HTML' || getOffsetParent(element.firstElementChild) === element;
-}
-
-/**
- * Finds the root node (document, shadowDOM root) of the given element
- * @method
- * @memberof Popper.Utils
- * @argument {Element} node
- * @returns {Element} root node
- */
-function getRoot(node) {
-  if (node.parentNode !== null) {
-    return getRoot(node.parentNode);
-  }
-
-  return node;
-}
-
-/**
- * Finds the offset parent common to the two provided nodes
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element1
- * @argument {Element} element2
- * @returns {Element} common offset parent
- */
-function findCommonOffsetParent(element1, element2) {
-  // This check is needed to avoid errors in case one of the elements isn't defined for any reason
-  if (!element1 || !element1.nodeType || !element2 || !element2.nodeType) {
-    return document.documentElement;
-  }
-
-  // Here we make sure to give as "start" the element that comes first in the DOM
-  var order = element1.compareDocumentPosition(element2) & Node.DOCUMENT_POSITION_FOLLOWING;
-  var start = order ? element1 : element2;
-  var end = order ? element2 : element1;
-
-  // Get common ancestor container
-  var range = document.createRange();
-  range.setStart(start, 0);
-  range.setEnd(end, 0);
-  var commonAncestorContainer = range.commonAncestorContainer;
-
-  // Both nodes are inside #document
-
-  if (element1 !== commonAncestorContainer && element2 !== commonAncestorContainer || start.contains(end)) {
-    if (isOffsetContainer(commonAncestorContainer)) {
-      return commonAncestorContainer;
-    }
-
-    return getOffsetParent(commonAncestorContainer);
-  }
-
-  // one of the nodes is inside shadowDOM, find which one
-  var element1root = getRoot(element1);
-  if (element1root.host) {
-    return findCommonOffsetParent(element1root.host, element2);
-  } else {
-    return findCommonOffsetParent(element1, getRoot(element2).host);
-  }
-}
-
-/**
- * Gets the scroll value of the given element in the given side (top and left)
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element
- * @argument {String} side `top` or `left`
- * @returns {number} amount of scrolled pixels
- */
-function getScroll(element) {
-  var side = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'top';
-
-  var upperSide = side === 'top' ? 'scrollTop' : 'scrollLeft';
-  var nodeName = element.nodeName;
-
-  if (nodeName === 'BODY' || nodeName === 'HTML') {
-    var html = element.ownerDocument.documentElement;
-    var scrollingElement = element.ownerDocument.scrollingElement || html;
-    return scrollingElement[upperSide];
-  }
-
-  return element[upperSide];
-}
-
-/*
- * Sum or subtract the element scroll values (left and top) from a given rect object
- * @method
- * @memberof Popper.Utils
- * @param {Object} rect - Rect object you want to change
- * @param {HTMLElement} element - The element from the function reads the scroll values
- * @param {Boolean} subtract - set to true if you want to subtract the scroll values
- * @return {Object} rect - The modifier rect object
- */
-function includeScroll(rect, element) {
-  var subtract = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-  var scrollTop = getScroll(element, 'top');
-  var scrollLeft = getScroll(element, 'left');
-  var modifier = subtract ? -1 : 1;
-  rect.top += scrollTop * modifier;
-  rect.bottom += scrollTop * modifier;
-  rect.left += scrollLeft * modifier;
-  rect.right += scrollLeft * modifier;
-  return rect;
-}
-
-/*
- * Helper to detect borders of a given element
- * @method
- * @memberof Popper.Utils
- * @param {CSSStyleDeclaration} styles
- * Result of `getStyleComputedProperty` on the given element
- * @param {String} axis - `x` or `y`
- * @return {number} borders - The borders size of the given axis
- */
-
-function getBordersSize(styles, axis) {
-  var sideA = axis === 'x' ? 'Left' : 'Top';
-  var sideB = sideA === 'Left' ? 'Right' : 'Bottom';
-
-  return parseFloat(styles['border' + sideA + 'Width'], 10) + parseFloat(styles['border' + sideB + 'Width'], 10);
-}
-
-function getSize(axis, body, html, computedStyle) {
-  return Math.max(body['offset' + axis], body['scroll' + axis], html['client' + axis], html['offset' + axis], html['scroll' + axis], isIE(10) ? parseInt(html['offset' + axis]) + parseInt(computedStyle['margin' + (axis === 'Height' ? 'Top' : 'Left')]) + parseInt(computedStyle['margin' + (axis === 'Height' ? 'Bottom' : 'Right')]) : 0);
-}
-
-function getWindowSizes(document) {
-  var body = document.body;
-  var html = document.documentElement;
-  var computedStyle = isIE(10) && getComputedStyle(html);
-
-  return {
-    height: getSize('Height', body, html, computedStyle),
-    width: getSize('Width', body, html, computedStyle)
-  };
-}
-
-var classCallCheck = function (instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-};
-
-var createClass = function () {
-  function defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
-
-  return function (Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) defineProperties(Constructor, staticProps);
-    return Constructor;
-  };
-}();
-
-
-
-
-
-var defineProperty = function (obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-};
-
-var _extends = Object.assign || function (target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i];
-
-    for (var key in source) {
-      if (Object.prototype.hasOwnProperty.call(source, key)) {
-        target[key] = source[key];
-      }
-    }
-  }
-
-  return target;
-};
-
-/**
- * Given element offsets, generate an output similar to getBoundingClientRect
- * @method
- * @memberof Popper.Utils
- * @argument {Object} offsets
- * @returns {Object} ClientRect like output
- */
-function getClientRect(offsets) {
-  return _extends({}, offsets, {
-    right: offsets.left + offsets.width,
-    bottom: offsets.top + offsets.height
-  });
-}
-
-/**
- * Get bounding client rect of given element
- * @method
- * @memberof Popper.Utils
- * @param {HTMLElement} element
- * @return {Object} client rect
- */
-function getBoundingClientRect(element) {
-  var rect = {};
-
-  // IE10 10 FIX: Please, don't ask, the element isn't
-  // considered in DOM in some circumstances...
-  // This isn't reproducible in IE10 compatibility mode of IE11
-  try {
-    if (isIE(10)) {
-      rect = element.getBoundingClientRect();
-      var scrollTop = getScroll(element, 'top');
-      var scrollLeft = getScroll(element, 'left');
-      rect.top += scrollTop;
-      rect.left += scrollLeft;
-      rect.bottom += scrollTop;
-      rect.right += scrollLeft;
-    } else {
-      rect = element.getBoundingClientRect();
-    }
-  } catch (e) {}
-
-  var result = {
-    left: rect.left,
-    top: rect.top,
-    width: rect.right - rect.left,
-    height: rect.bottom - rect.top
-  };
-
-  // subtract scrollbar size from sizes
-  var sizes = element.nodeName === 'HTML' ? getWindowSizes(element.ownerDocument) : {};
-  var width = sizes.width || element.clientWidth || result.right - result.left;
-  var height = sizes.height || element.clientHeight || result.bottom - result.top;
-
-  var horizScrollbar = element.offsetWidth - width;
-  var vertScrollbar = element.offsetHeight - height;
-
-  // if an hypothetical scrollbar is detected, we must be sure it's not a `border`
-  // we make this check conditional for performance reasons
-  if (horizScrollbar || vertScrollbar) {
-    var styles = getStyleComputedProperty(element);
-    horizScrollbar -= getBordersSize(styles, 'x');
-    vertScrollbar -= getBordersSize(styles, 'y');
-
-    result.width -= horizScrollbar;
-    result.height -= vertScrollbar;
-  }
-
-  return getClientRect(result);
-}
-
-function getOffsetRectRelativeToArbitraryNode(children, parent) {
-  var fixedPosition = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-  var isIE10 = isIE(10);
-  var isHTML = parent.nodeName === 'HTML';
-  var childrenRect = getBoundingClientRect(children);
-  var parentRect = getBoundingClientRect(parent);
-  var scrollParent = getScrollParent(children);
-
-  var styles = getStyleComputedProperty(parent);
-  var borderTopWidth = parseFloat(styles.borderTopWidth, 10);
-  var borderLeftWidth = parseFloat(styles.borderLeftWidth, 10);
-
-  // In cases where the parent is fixed, we must ignore negative scroll in offset calc
-  if (fixedPosition && isHTML) {
-    parentRect.top = Math.max(parentRect.top, 0);
-    parentRect.left = Math.max(parentRect.left, 0);
-  }
-  var offsets = getClientRect({
-    top: childrenRect.top - parentRect.top - borderTopWidth,
-    left: childrenRect.left - parentRect.left - borderLeftWidth,
-    width: childrenRect.width,
-    height: childrenRect.height
-  });
-  offsets.marginTop = 0;
-  offsets.marginLeft = 0;
-
-  // Subtract margins of documentElement in case it's being used as parent
-  // we do this only on HTML because it's the only element that behaves
-  // differently when margins are applied to it. The margins are included in
-  // the box of the documentElement, in the other cases not.
-  if (!isIE10 && isHTML) {
-    var marginTop = parseFloat(styles.marginTop, 10);
-    var marginLeft = parseFloat(styles.marginLeft, 10);
-
-    offsets.top -= borderTopWidth - marginTop;
-    offsets.bottom -= borderTopWidth - marginTop;
-    offsets.left -= borderLeftWidth - marginLeft;
-    offsets.right -= borderLeftWidth - marginLeft;
-
-    // Attach marginTop and marginLeft because in some circumstances we may need them
-    offsets.marginTop = marginTop;
-    offsets.marginLeft = marginLeft;
-  }
-
-  if (isIE10 && !fixedPosition ? parent.contains(scrollParent) : parent === scrollParent && scrollParent.nodeName !== 'BODY') {
-    offsets = includeScroll(offsets, parent);
-  }
-
-  return offsets;
-}
-
-function getViewportOffsetRectRelativeToArtbitraryNode(element) {
-  var excludeScroll = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-  var html = element.ownerDocument.documentElement;
-  var relativeOffset = getOffsetRectRelativeToArbitraryNode(element, html);
-  var width = Math.max(html.clientWidth, window.innerWidth || 0);
-  var height = Math.max(html.clientHeight, window.innerHeight || 0);
-
-  var scrollTop = !excludeScroll ? getScroll(html) : 0;
-  var scrollLeft = !excludeScroll ? getScroll(html, 'left') : 0;
-
-  var offset = {
-    top: scrollTop - relativeOffset.top + relativeOffset.marginTop,
-    left: scrollLeft - relativeOffset.left + relativeOffset.marginLeft,
-    width: width,
-    height: height
-  };
-
-  return getClientRect(offset);
-}
-
-/**
- * Check if the given element is fixed or is inside a fixed parent
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element
- * @argument {Element} customContainer
- * @returns {Boolean} answer to "isFixed?"
- */
-function isFixed(element) {
-  var nodeName = element.nodeName;
-  if (nodeName === 'BODY' || nodeName === 'HTML') {
-    return false;
-  }
-  if (getStyleComputedProperty(element, 'position') === 'fixed') {
-    return true;
-  }
-  return isFixed(getParentNode(element));
-}
-
-/**
- * Finds the first parent of an element that has a transformed property defined
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element
- * @returns {Element} first transformed parent or documentElement
- */
-
-function getFixedPositionOffsetParent(element) {
-  // This check is needed to avoid errors in case one of the elements isn't defined for any reason
-  if (!element || !element.parentElement || isIE()) {
-    return document.documentElement;
-  }
-  var el = element.parentElement;
-  while (el && getStyleComputedProperty(el, 'transform') === 'none') {
-    el = el.parentElement;
-  }
-  return el || document.documentElement;
-}
-
-/**
- * Computed the boundaries limits and return them
- * @method
- * @memberof Popper.Utils
- * @param {HTMLElement} popper
- * @param {HTMLElement} reference
- * @param {number} padding
- * @param {HTMLElement} boundariesElement - Element used to define the boundaries
- * @param {Boolean} fixedPosition - Is in fixed position mode
- * @returns {Object} Coordinates of the boundaries
- */
-function getBoundaries(popper, reference, padding, boundariesElement) {
-  var fixedPosition = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
-
-  // NOTE: 1 DOM access here
-
-  var boundaries = { top: 0, left: 0 };
-  var offsetParent = fixedPosition ? getFixedPositionOffsetParent(popper) : findCommonOffsetParent(popper, reference);
-
-  // Handle viewport case
-  if (boundariesElement === 'viewport') {
-    boundaries = getViewportOffsetRectRelativeToArtbitraryNode(offsetParent, fixedPosition);
-  } else {
-    // Handle other cases based on DOM element used as boundaries
-    var boundariesNode = void 0;
-    if (boundariesElement === 'scrollParent') {
-      boundariesNode = getScrollParent(getParentNode(reference));
-      if (boundariesNode.nodeName === 'BODY') {
-        boundariesNode = popper.ownerDocument.documentElement;
-      }
-    } else if (boundariesElement === 'window') {
-      boundariesNode = popper.ownerDocument.documentElement;
-    } else {
-      boundariesNode = boundariesElement;
-    }
-
-    var offsets = getOffsetRectRelativeToArbitraryNode(boundariesNode, offsetParent, fixedPosition);
-
-    // In case of HTML, we need a different computation
-    if (boundariesNode.nodeName === 'HTML' && !isFixed(offsetParent)) {
-      var _getWindowSizes = getWindowSizes(popper.ownerDocument),
-          height = _getWindowSizes.height,
-          width = _getWindowSizes.width;
-
-      boundaries.top += offsets.top - offsets.marginTop;
-      boundaries.bottom = height + offsets.top;
-      boundaries.left += offsets.left - offsets.marginLeft;
-      boundaries.right = width + offsets.left;
-    } else {
-      // for all the other DOM elements, this one is good
-      boundaries = offsets;
-    }
-  }
-
-  // Add paddings
-  padding = padding || 0;
-  var isPaddingNumber = typeof padding === 'number';
-  boundaries.left += isPaddingNumber ? padding : padding.left || 0;
-  boundaries.top += isPaddingNumber ? padding : padding.top || 0;
-  boundaries.right -= isPaddingNumber ? padding : padding.right || 0;
-  boundaries.bottom -= isPaddingNumber ? padding : padding.bottom || 0;
-
-  return boundaries;
-}
-
-function getArea(_ref) {
-  var width = _ref.width,
-      height = _ref.height;
-
-  return width * height;
-}
-
-/**
- * Utility used to transform the `auto` placement to the placement with more
- * available space.
- * @method
- * @memberof Popper.Utils
- * @argument {Object} data - The data object generated by update method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function computeAutoPlacement(placement, refRect, popper, reference, boundariesElement) {
-  var padding = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
-
-  if (placement.indexOf('auto') === -1) {
-    return placement;
-  }
-
-  var boundaries = getBoundaries(popper, reference, padding, boundariesElement);
-
-  var rects = {
-    top: {
-      width: boundaries.width,
-      height: refRect.top - boundaries.top
-    },
-    right: {
-      width: boundaries.right - refRect.right,
-      height: boundaries.height
-    },
-    bottom: {
-      width: boundaries.width,
-      height: boundaries.bottom - refRect.bottom
-    },
-    left: {
-      width: refRect.left - boundaries.left,
-      height: boundaries.height
-    }
-  };
-
-  var sortedAreas = Object.keys(rects).map(function (key) {
-    return _extends({
-      key: key
-    }, rects[key], {
-      area: getArea(rects[key])
-    });
-  }).sort(function (a, b) {
-    return b.area - a.area;
-  });
-
-  var filteredAreas = sortedAreas.filter(function (_ref2) {
-    var width = _ref2.width,
-        height = _ref2.height;
-    return width >= popper.clientWidth && height >= popper.clientHeight;
-  });
-
-  var computedPlacement = filteredAreas.length > 0 ? filteredAreas[0].key : sortedAreas[0].key;
-
-  var variation = placement.split('-')[1];
-
-  return computedPlacement + (variation ? '-' + variation : '');
-}
-
-/**
- * Get offsets to the reference element
- * @method
- * @memberof Popper.Utils
- * @param {Object} state
- * @param {Element} popper - the popper element
- * @param {Element} reference - the reference element (the popper will be relative to this)
- * @param {Element} fixedPosition - is in fixed position mode
- * @returns {Object} An object containing the offsets which will be applied to the popper
- */
-function getReferenceOffsets(state, popper, reference) {
-  var fixedPosition = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-
-  var commonOffsetParent = fixedPosition ? getFixedPositionOffsetParent(popper) : findCommonOffsetParent(popper, reference);
-  return getOffsetRectRelativeToArbitraryNode(reference, commonOffsetParent, fixedPosition);
-}
-
-/**
- * Get the outer sizes of the given element (offset size + margins)
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element
- * @returns {Object} object containing width and height properties
- */
-function getOuterSizes(element) {
-  var styles = getComputedStyle(element);
-  var x = parseFloat(styles.marginTop) + parseFloat(styles.marginBottom);
-  var y = parseFloat(styles.marginLeft) + parseFloat(styles.marginRight);
-  var result = {
-    width: element.offsetWidth + y,
-    height: element.offsetHeight + x
-  };
-  return result;
-}
-
-/**
- * Get the opposite placement of the given one
- * @method
- * @memberof Popper.Utils
- * @argument {String} placement
- * @returns {String} flipped placement
- */
-function getOppositePlacement(placement) {
-  var hash = { left: 'right', right: 'left', bottom: 'top', top: 'bottom' };
-  return placement.replace(/left|right|bottom|top/g, function (matched) {
-    return hash[matched];
-  });
-}
-
-/**
- * Get offsets to the popper
- * @method
- * @memberof Popper.Utils
- * @param {Object} position - CSS position the Popper will get applied
- * @param {HTMLElement} popper - the popper element
- * @param {Object} referenceOffsets - the reference offsets (the popper will be relative to this)
- * @param {String} placement - one of the valid placement options
- * @returns {Object} popperOffsets - An object containing the offsets which will be applied to the popper
- */
-function getPopperOffsets(popper, referenceOffsets, placement) {
-  placement = placement.split('-')[0];
-
-  // Get popper node sizes
-  var popperRect = getOuterSizes(popper);
-
-  // Add position, width and height to our offsets object
-  var popperOffsets = {
-    width: popperRect.width,
-    height: popperRect.height
-  };
-
-  // depending by the popper placement we have to compute its offsets slightly differently
-  var isHoriz = ['right', 'left'].indexOf(placement) !== -1;
-  var mainSide = isHoriz ? 'top' : 'left';
-  var secondarySide = isHoriz ? 'left' : 'top';
-  var measurement = isHoriz ? 'height' : 'width';
-  var secondaryMeasurement = !isHoriz ? 'height' : 'width';
-
-  popperOffsets[mainSide] = referenceOffsets[mainSide] + referenceOffsets[measurement] / 2 - popperRect[measurement] / 2;
-  if (placement === secondarySide) {
-    popperOffsets[secondarySide] = referenceOffsets[secondarySide] - popperRect[secondaryMeasurement];
-  } else {
-    popperOffsets[secondarySide] = referenceOffsets[getOppositePlacement(secondarySide)];
-  }
-
-  return popperOffsets;
-}
-
-/**
- * Mimics the `find` method of Array
- * @method
- * @memberof Popper.Utils
- * @argument {Array} arr
- * @argument prop
- * @argument value
- * @returns index or -1
- */
-function find(arr, check) {
-  // use native find if supported
-  if (Array.prototype.find) {
-    return arr.find(check);
-  }
-
-  // use `filter` to obtain the same behavior of `find`
-  return arr.filter(check)[0];
-}
-
-/**
- * Return the index of the matching object
- * @method
- * @memberof Popper.Utils
- * @argument {Array} arr
- * @argument prop
- * @argument value
- * @returns index or -1
- */
-function findIndex(arr, prop, value) {
-  // use native findIndex if supported
-  if (Array.prototype.findIndex) {
-    return arr.findIndex(function (cur) {
-      return cur[prop] === value;
-    });
-  }
-
-  // use `find` + `indexOf` if `findIndex` isn't supported
-  var match = find(arr, function (obj) {
-    return obj[prop] === value;
-  });
-  return arr.indexOf(match);
-}
-
-/**
- * Loop trough the list of modifiers and run them in order,
- * each of them will then edit the data object.
- * @method
- * @memberof Popper.Utils
- * @param {dataObject} data
- * @param {Array} modifiers
- * @param {String} ends - Optional modifier name used as stopper
- * @returns {dataObject}
- */
-function runModifiers(modifiers, data, ends) {
-  var modifiersToRun = ends === undefined ? modifiers : modifiers.slice(0, findIndex(modifiers, 'name', ends));
-
-  modifiersToRun.forEach(function (modifier) {
-    if (modifier['function']) {
-      // eslint-disable-line dot-notation
-      console.warn('`modifier.function` is deprecated, use `modifier.fn`!');
-    }
-    var fn = modifier['function'] || modifier.fn; // eslint-disable-line dot-notation
-    if (modifier.enabled && isFunction(fn)) {
-      // Add properties to offsets to make them a complete clientRect object
-      // we do this before each modifier to make sure the previous one doesn't
-      // mess with these values
-      data.offsets.popper = getClientRect(data.offsets.popper);
-      data.offsets.reference = getClientRect(data.offsets.reference);
-
-      data = fn(data, modifier);
-    }
-  });
-
-  return data;
-}
-
-/**
- * Updates the position of the popper, computing the new offsets and applying
- * the new style.<br />
- * Prefer `scheduleUpdate` over `update` because of performance reasons.
- * @method
- * @memberof Popper
- */
-function update() {
-  // if popper is destroyed, don't perform any further update
-  if (this.state.isDestroyed) {
-    return;
-  }
-
-  var data = {
-    instance: this,
-    styles: {},
-    arrowStyles: {},
-    attributes: {},
-    flipped: false,
-    offsets: {}
-  };
-
-  // compute reference element offsets
-  data.offsets.reference = getReferenceOffsets(this.state, this.popper, this.reference, this.options.positionFixed);
-
-  // compute auto placement, store placement inside the data object,
-  // modifiers will be able to edit `placement` if needed
-  // and refer to originalPlacement to know the original value
-  data.placement = computeAutoPlacement(this.options.placement, data.offsets.reference, this.popper, this.reference, this.options.modifiers.flip.boundariesElement, this.options.modifiers.flip.padding);
-
-  // store the computed placement inside `originalPlacement`
-  data.originalPlacement = data.placement;
-
-  data.positionFixed = this.options.positionFixed;
-
-  // compute the popper offsets
-  data.offsets.popper = getPopperOffsets(this.popper, data.offsets.reference, data.placement);
-
-  data.offsets.popper.position = this.options.positionFixed ? 'fixed' : 'absolute';
-
-  // run the modifiers
-  data = runModifiers(this.modifiers, data);
-
-  // the first `update` will call `onCreate` callback
-  // the other ones will call `onUpdate` callback
-  if (!this.state.isCreated) {
-    this.state.isCreated = true;
-    this.options.onCreate(data);
-  } else {
-    this.options.onUpdate(data);
-  }
-}
-
-/**
- * Helper used to know if the given modifier is enabled.
- * @method
- * @memberof Popper.Utils
- * @returns {Boolean}
- */
-function isModifierEnabled(modifiers, modifierName) {
-  return modifiers.some(function (_ref) {
-    var name = _ref.name,
-        enabled = _ref.enabled;
-    return enabled && name === modifierName;
-  });
-}
-
-/**
- * Get the prefixed supported property name
- * @method
- * @memberof Popper.Utils
- * @argument {String} property (camelCase)
- * @returns {String} prefixed property (camelCase or PascalCase, depending on the vendor prefix)
- */
-function getSupportedPropertyName(property) {
-  var prefixes = [false, 'ms', 'Webkit', 'Moz', 'O'];
-  var upperProp = property.charAt(0).toUpperCase() + property.slice(1);
-
-  for (var i = 0; i < prefixes.length; i++) {
-    var prefix = prefixes[i];
-    var toCheck = prefix ? '' + prefix + upperProp : property;
-    if (typeof document.body.style[toCheck] !== 'undefined') {
-      return toCheck;
-    }
-  }
-  return null;
-}
-
-/**
- * Destroys the popper.
- * @method
- * @memberof Popper
- */
-function destroy() {
-  this.state.isDestroyed = true;
-
-  // touch DOM only if `applyStyle` modifier is enabled
-  if (isModifierEnabled(this.modifiers, 'applyStyle')) {
-    this.popper.removeAttribute('x-placement');
-    this.popper.style.position = '';
-    this.popper.style.top = '';
-    this.popper.style.left = '';
-    this.popper.style.right = '';
-    this.popper.style.bottom = '';
-    this.popper.style.willChange = '';
-    this.popper.style[getSupportedPropertyName('transform')] = '';
-  }
-
-  this.disableEventListeners();
-
-  // remove the popper if user explicity asked for the deletion on destroy
-  // do not use `remove` because IE11 doesn't support it
-  if (this.options.removeOnDestroy) {
-    this.popper.parentNode.removeChild(this.popper);
-  }
-  return this;
-}
-
-/**
- * Get the window associated with the element
- * @argument {Element} element
- * @returns {Window}
- */
-function getWindow(element) {
-  var ownerDocument = element.ownerDocument;
-  return ownerDocument ? ownerDocument.defaultView : window;
-}
-
-function attachToScrollParents(scrollParent, event, callback, scrollParents) {
-  var isBody = scrollParent.nodeName === 'BODY';
-  var target = isBody ? scrollParent.ownerDocument.defaultView : scrollParent;
-  target.addEventListener(event, callback, { passive: true });
-
-  if (!isBody) {
-    attachToScrollParents(getScrollParent(target.parentNode), event, callback, scrollParents);
-  }
-  scrollParents.push(target);
-}
-
-/**
- * Setup needed event listeners used to update the popper position
- * @method
- * @memberof Popper.Utils
- * @private
- */
-function setupEventListeners(reference, options, state, updateBound) {
-  // Resize event listener on window
-  state.updateBound = updateBound;
-  getWindow(reference).addEventListener('resize', state.updateBound, { passive: true });
-
-  // Scroll event listener on scroll parents
-  var scrollElement = getScrollParent(reference);
-  attachToScrollParents(scrollElement, 'scroll', state.updateBound, state.scrollParents);
-  state.scrollElement = scrollElement;
-  state.eventsEnabled = true;
-
-  return state;
-}
-
-/**
- * It will add resize/scroll events and start recalculating
- * position of the popper element when they are triggered.
- * @method
- * @memberof Popper
- */
-function enableEventListeners() {
-  if (!this.state.eventsEnabled) {
-    this.state = setupEventListeners(this.reference, this.options, this.state, this.scheduleUpdate);
-  }
-}
-
-/**
- * Remove event listeners used to update the popper position
- * @method
- * @memberof Popper.Utils
- * @private
- */
-function removeEventListeners(reference, state) {
-  // Remove resize event listener on window
-  getWindow(reference).removeEventListener('resize', state.updateBound);
-
-  // Remove scroll event listener on scroll parents
-  state.scrollParents.forEach(function (target) {
-    target.removeEventListener('scroll', state.updateBound);
-  });
-
-  // Reset state
-  state.updateBound = null;
-  state.scrollParents = [];
-  state.scrollElement = null;
-  state.eventsEnabled = false;
-  return state;
-}
-
-/**
- * It will remove resize/scroll events and won't recalculate popper position
- * when they are triggered. It also won't trigger `onUpdate` callback anymore,
- * unless you call `update` method manually.
- * @method
- * @memberof Popper
- */
-function disableEventListeners() {
-  if (this.state.eventsEnabled) {
-    cancelAnimationFrame(this.scheduleUpdate);
-    this.state = removeEventListeners(this.reference, this.state);
-  }
-}
-
-/**
- * Tells if a given input is a number
- * @method
- * @memberof Popper.Utils
- * @param {*} input to check
- * @return {Boolean}
- */
-function isNumeric(n) {
-  return n !== '' && !isNaN(parseFloat(n)) && isFinite(n);
-}
-
-/**
- * Set the style to the given popper
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element - Element to apply the style to
- * @argument {Object} styles
- * Object with a list of properties and values which will be applied to the element
- */
-function setStyles(element, styles) {
-  Object.keys(styles).forEach(function (prop) {
-    var unit = '';
-    // add unit if the value is numeric and is one of the following
-    if (['width', 'height', 'top', 'right', 'bottom', 'left'].indexOf(prop) !== -1 && isNumeric(styles[prop])) {
-      unit = 'px';
-    }
-    element.style[prop] = styles[prop] + unit;
-  });
-}
-
-/**
- * Set the attributes to the given popper
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element - Element to apply the attributes to
- * @argument {Object} styles
- * Object with a list of properties and values which will be applied to the element
- */
-function setAttributes(element, attributes) {
-  Object.keys(attributes).forEach(function (prop) {
-    var value = attributes[prop];
-    if (value !== false) {
-      element.setAttribute(prop, attributes[prop]);
-    } else {
-      element.removeAttribute(prop);
-    }
-  });
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by `update` method
- * @argument {Object} data.styles - List of style properties - values to apply to popper element
- * @argument {Object} data.attributes - List of attribute properties - values to apply to popper element
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The same data object
- */
-function applyStyle(data) {
-  // any property present in `data.styles` will be applied to the popper,
-  // in this way we can make the 3rd party modifiers add custom styles to it
-  // Be aware, modifiers could override the properties defined in the previous
-  // lines of this modifier!
-  setStyles(data.instance.popper, data.styles);
-
-  // any property present in `data.attributes` will be applied to the popper,
-  // they will be set as HTML attributes of the element
-  setAttributes(data.instance.popper, data.attributes);
-
-  // if arrowElement is defined and arrowStyles has some properties
-  if (data.arrowElement && Object.keys(data.arrowStyles).length) {
-    setStyles(data.arrowElement, data.arrowStyles);
-  }
-
-  return data;
-}
-
-/**
- * Set the x-placement attribute before everything else because it could be used
- * to add margins to the popper margins needs to be calculated to get the
- * correct popper offsets.
- * @method
- * @memberof Popper.modifiers
- * @param {HTMLElement} reference - The reference element used to position the popper
- * @param {HTMLElement} popper - The HTML element used as popper
- * @param {Object} options - Popper.js options
- */
-function applyStyleOnLoad(reference, popper, options, modifierOptions, state) {
-  // compute reference element offsets
-  var referenceOffsets = getReferenceOffsets(state, popper, reference, options.positionFixed);
-
-  // compute auto placement, store placement inside the data object,
-  // modifiers will be able to edit `placement` if needed
-  // and refer to originalPlacement to know the original value
-  var placement = computeAutoPlacement(options.placement, referenceOffsets, popper, reference, options.modifiers.flip.boundariesElement, options.modifiers.flip.padding);
-
-  popper.setAttribute('x-placement', placement);
-
-  // Apply `position` to popper before anything else because
-  // without the position applied we can't guarantee correct computations
-  setStyles(popper, { position: options.positionFixed ? 'fixed' : 'absolute' });
-
-  return options;
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by `update` method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function computeStyle(data, options) {
-  var x = options.x,
-      y = options.y;
-  var popper = data.offsets.popper;
-
-  // Remove this legacy support in Popper.js v2
-
-  var legacyGpuAccelerationOption = find(data.instance.modifiers, function (modifier) {
-    return modifier.name === 'applyStyle';
-  }).gpuAcceleration;
-  if (legacyGpuAccelerationOption !== undefined) {
-    console.warn('WARNING: `gpuAcceleration` option moved to `computeStyle` modifier and will not be supported in future versions of Popper.js!');
-  }
-  var gpuAcceleration = legacyGpuAccelerationOption !== undefined ? legacyGpuAccelerationOption : options.gpuAcceleration;
-
-  var offsetParent = getOffsetParent(data.instance.popper);
-  var offsetParentRect = getBoundingClientRect(offsetParent);
-
-  // Styles
-  var styles = {
-    position: popper.position
-  };
-
-  // Avoid blurry text by using full pixel integers.
-  // For pixel-perfect positioning, top/bottom prefers rounded
-  // values, while left/right prefers floored values.
-  var offsets = {
-    left: Math.floor(popper.left),
-    top: Math.round(popper.top),
-    bottom: Math.round(popper.bottom),
-    right: Math.floor(popper.right)
-  };
-
-  var sideA = x === 'bottom' ? 'top' : 'bottom';
-  var sideB = y === 'right' ? 'left' : 'right';
-
-  // if gpuAcceleration is set to `true` and transform is supported,
-  //  we use `translate3d` to apply the position to the popper we
-  // automatically use the supported prefixed version if needed
-  var prefixedProperty = getSupportedPropertyName('transform');
-
-  // now, let's make a step back and look at this code closely (wtf?)
-  // If the content of the popper grows once it's been positioned, it
-  // may happen that the popper gets misplaced because of the new content
-  // overflowing its reference element
-  // To avoid this problem, we provide two options (x and y), which allow
-  // the consumer to define the offset origin.
-  // If we position a popper on top of a reference element, we can set
-  // `x` to `top` to make the popper grow towards its top instead of
-  // its bottom.
-  var left = void 0,
-      top = void 0;
-  if (sideA === 'bottom') {
-    // when offsetParent is <html> the positioning is relative to the bottom of the screen (excluding the scrollbar)
-    // and not the bottom of the html element
-    if (offsetParent.nodeName === 'HTML') {
-      top = -offsetParent.clientHeight + offsets.bottom;
-    } else {
-      top = -offsetParentRect.height + offsets.bottom;
-    }
-  } else {
-    top = offsets.top;
-  }
-  if (sideB === 'right') {
-    if (offsetParent.nodeName === 'HTML') {
-      left = -offsetParent.clientWidth + offsets.right;
-    } else {
-      left = -offsetParentRect.width + offsets.right;
-    }
-  } else {
-    left = offsets.left;
-  }
-  if (gpuAcceleration && prefixedProperty) {
-    styles[prefixedProperty] = 'translate3d(' + left + 'px, ' + top + 'px, 0)';
-    styles[sideA] = 0;
-    styles[sideB] = 0;
-    styles.willChange = 'transform';
-  } else {
-    // othwerise, we use the standard `top`, `left`, `bottom` and `right` properties
-    var invertTop = sideA === 'bottom' ? -1 : 1;
-    var invertLeft = sideB === 'right' ? -1 : 1;
-    styles[sideA] = top * invertTop;
-    styles[sideB] = left * invertLeft;
-    styles.willChange = sideA + ', ' + sideB;
-  }
-
-  // Attributes
-  var attributes = {
-    'x-placement': data.placement
-  };
-
-  // Update `data` attributes, styles and arrowStyles
-  data.attributes = _extends({}, attributes, data.attributes);
-  data.styles = _extends({}, styles, data.styles);
-  data.arrowStyles = _extends({}, data.offsets.arrow, data.arrowStyles);
-
-  return data;
-}
-
-/**
- * Helper used to know if the given modifier depends from another one.<br />
- * It checks if the needed modifier is listed and enabled.
- * @method
- * @memberof Popper.Utils
- * @param {Array} modifiers - list of modifiers
- * @param {String} requestingName - name of requesting modifier
- * @param {String} requestedName - name of requested modifier
- * @returns {Boolean}
- */
-function isModifierRequired(modifiers, requestingName, requestedName) {
-  var requesting = find(modifiers, function (_ref) {
-    var name = _ref.name;
-    return name === requestingName;
-  });
-
-  var isRequired = !!requesting && modifiers.some(function (modifier) {
-    return modifier.name === requestedName && modifier.enabled && modifier.order < requesting.order;
-  });
-
-  if (!isRequired) {
-    var _requesting = '`' + requestingName + '`';
-    var requested = '`' + requestedName + '`';
-    console.warn(requested + ' modifier is required by ' + _requesting + ' modifier in order to work, be sure to include it before ' + _requesting + '!');
-  }
-  return isRequired;
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by update method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function arrow(data, options) {
-  var _data$offsets$arrow;
-
-  // arrow depends on keepTogether in order to work
-  if (!isModifierRequired(data.instance.modifiers, 'arrow', 'keepTogether')) {
-    return data;
-  }
-
-  var arrowElement = options.element;
-
-  // if arrowElement is a string, suppose it's a CSS selector
-  if (typeof arrowElement === 'string') {
-    arrowElement = data.instance.popper.querySelector(arrowElement);
-
-    // if arrowElement is not found, don't run the modifier
-    if (!arrowElement) {
-      return data;
-    }
-  } else {
-    // if the arrowElement isn't a query selector we must check that the
-    // provided DOM node is child of its popper node
-    if (!data.instance.popper.contains(arrowElement)) {
-      console.warn('WARNING: `arrow.element` must be child of its popper element!');
-      return data;
-    }
-  }
-
-  var placement = data.placement.split('-')[0];
-  var _data$offsets = data.offsets,
-      popper = _data$offsets.popper,
-      reference = _data$offsets.reference;
-
-  var isVertical = ['left', 'right'].indexOf(placement) !== -1;
-
-  var len = isVertical ? 'height' : 'width';
-  var sideCapitalized = isVertical ? 'Top' : 'Left';
-  var side = sideCapitalized.toLowerCase();
-  var altSide = isVertical ? 'left' : 'top';
-  var opSide = isVertical ? 'bottom' : 'right';
-  var arrowElementSize = getOuterSizes(arrowElement)[len];
-
-  //
-  // extends keepTogether behavior making sure the popper and its
-  // reference have enough pixels in conjunction
-  //
-
-  // top/left side
-  if (reference[opSide] - arrowElementSize < popper[side]) {
-    data.offsets.popper[side] -= popper[side] - (reference[opSide] - arrowElementSize);
-  }
-  // bottom/right side
-  if (reference[side] + arrowElementSize > popper[opSide]) {
-    data.offsets.popper[side] += reference[side] + arrowElementSize - popper[opSide];
-  }
-  data.offsets.popper = getClientRect(data.offsets.popper);
-
-  // compute center of the popper
-  var center = reference[side] + reference[len] / 2 - arrowElementSize / 2;
-
-  // Compute the sideValue using the updated popper offsets
-  // take popper margin in account because we don't have this info available
-  var css = getStyleComputedProperty(data.instance.popper);
-  var popperMarginSide = parseFloat(css['margin' + sideCapitalized], 10);
-  var popperBorderSide = parseFloat(css['border' + sideCapitalized + 'Width'], 10);
-  var sideValue = center - data.offsets.popper[side] - popperMarginSide - popperBorderSide;
-
-  // prevent arrowElement from being placed not contiguously to its popper
-  sideValue = Math.max(Math.min(popper[len] - arrowElementSize, sideValue), 0);
-
-  data.arrowElement = arrowElement;
-  data.offsets.arrow = (_data$offsets$arrow = {}, defineProperty(_data$offsets$arrow, side, Math.round(sideValue)), defineProperty(_data$offsets$arrow, altSide, ''), _data$offsets$arrow);
-
-  return data;
-}
-
-/**
- * Get the opposite placement variation of the given one
- * @method
- * @memberof Popper.Utils
- * @argument {String} placement variation
- * @returns {String} flipped placement variation
- */
-function getOppositeVariation(variation) {
-  if (variation === 'end') {
-    return 'start';
-  } else if (variation === 'start') {
-    return 'end';
-  }
-  return variation;
-}
-
-/**
- * List of accepted placements to use as values of the `placement` option.<br />
- * Valid placements are:
- * - `auto`
- * - `top`
- * - `right`
- * - `bottom`
- * - `left`
- *
- * Each placement can have a variation from this list:
- * - `-start`
- * - `-end`
- *
- * Variations are interpreted easily if you think of them as the left to right
- * written languages. Horizontally (`top` and `bottom`), `start` is left and `end`
- * is right.<br />
- * Vertically (`left` and `right`), `start` is top and `end` is bottom.
- *
- * Some valid examples are:
- * - `top-end` (on top of reference, right aligned)
- * - `right-start` (on right of reference, top aligned)
- * - `bottom` (on bottom, centered)
- * - `auto-end` (on the side with more space available, alignment depends by placement)
- *
- * @static
- * @type {Array}
- * @enum {String}
- * @readonly
- * @method placements
- * @memberof Popper
- */
-var placements = ['auto-start', 'auto', 'auto-end', 'top-start', 'top', 'top-end', 'right-start', 'right', 'right-end', 'bottom-end', 'bottom', 'bottom-start', 'left-end', 'left', 'left-start'];
-
-// Get rid of `auto` `auto-start` and `auto-end`
-var validPlacements = placements.slice(3);
-
-/**
- * Given an initial placement, returns all the subsequent placements
- * clockwise (or counter-clockwise).
- *
- * @method
- * @memberof Popper.Utils
- * @argument {String} placement - A valid placement (it accepts variations)
- * @argument {Boolean} counter - Set to true to walk the placements counterclockwise
- * @returns {Array} placements including their variations
- */
-function clockwise(placement) {
-  var counter = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-  var index = validPlacements.indexOf(placement);
-  var arr = validPlacements.slice(index + 1).concat(validPlacements.slice(0, index));
-  return counter ? arr.reverse() : arr;
-}
-
-var BEHAVIORS = {
-  FLIP: 'flip',
-  CLOCKWISE: 'clockwise',
-  COUNTERCLOCKWISE: 'counterclockwise'
-};
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by update method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function flip(data, options) {
-  // if `inner` modifier is enabled, we can't use the `flip` modifier
-  if (isModifierEnabled(data.instance.modifiers, 'inner')) {
-    return data;
-  }
-
-  if (data.flipped && data.placement === data.originalPlacement) {
-    // seems like flip is trying to loop, probably there's not enough space on any of the flippable sides
-    return data;
-  }
-
-  var boundaries = getBoundaries(data.instance.popper, data.instance.reference, options.padding, options.boundariesElement, data.positionFixed);
-
-  var placement = data.placement.split('-')[0];
-  var placementOpposite = getOppositePlacement(placement);
-  var variation = data.placement.split('-')[1] || '';
-
-  var flipOrder = [];
-
-  switch (options.behavior) {
-    case BEHAVIORS.FLIP:
-      flipOrder = [placement, placementOpposite];
-      break;
-    case BEHAVIORS.CLOCKWISE:
-      flipOrder = clockwise(placement);
-      break;
-    case BEHAVIORS.COUNTERCLOCKWISE:
-      flipOrder = clockwise(placement, true);
-      break;
-    default:
-      flipOrder = options.behavior;
-  }
-
-  flipOrder.forEach(function (step, index) {
-    if (placement !== step || flipOrder.length === index + 1) {
-      return data;
-    }
-
-    placement = data.placement.split('-')[0];
-    placementOpposite = getOppositePlacement(placement);
-
-    var popperOffsets = data.offsets.popper;
-    var refOffsets = data.offsets.reference;
-
-    // using floor because the reference offsets may contain decimals we are not going to consider here
-    var floor = Math.floor;
-    var overlapsRef = placement === 'left' && floor(popperOffsets.right) > floor(refOffsets.left) || placement === 'right' && floor(popperOffsets.left) < floor(refOffsets.right) || placement === 'top' && floor(popperOffsets.bottom) > floor(refOffsets.top) || placement === 'bottom' && floor(popperOffsets.top) < floor(refOffsets.bottom);
-
-    var overflowsLeft = floor(popperOffsets.left) < floor(boundaries.left);
-    var overflowsRight = floor(popperOffsets.right) > floor(boundaries.right);
-    var overflowsTop = floor(popperOffsets.top) < floor(boundaries.top);
-    var overflowsBottom = floor(popperOffsets.bottom) > floor(boundaries.bottom);
-
-    var overflowsBoundaries = placement === 'left' && overflowsLeft || placement === 'right' && overflowsRight || placement === 'top' && overflowsTop || placement === 'bottom' && overflowsBottom;
-
-    // flip the variation if required
-    var isVertical = ['top', 'bottom'].indexOf(placement) !== -1;
-    var flippedVariation = !!options.flipVariations && (isVertical && variation === 'start' && overflowsLeft || isVertical && variation === 'end' && overflowsRight || !isVertical && variation === 'start' && overflowsTop || !isVertical && variation === 'end' && overflowsBottom);
-
-    if (overlapsRef || overflowsBoundaries || flippedVariation) {
-      // this boolean to detect any flip loop
-      data.flipped = true;
-
-      if (overlapsRef || overflowsBoundaries) {
-        placement = flipOrder[index + 1];
-      }
-
-      if (flippedVariation) {
-        variation = getOppositeVariation(variation);
-      }
-
-      data.placement = placement + (variation ? '-' + variation : '');
-
-      // this object contains `position`, we want to preserve it along with
-      // any additional property we may add in the future
-      data.offsets.popper = _extends({}, data.offsets.popper, getPopperOffsets(data.instance.popper, data.offsets.reference, data.placement));
-
-      data = runModifiers(data.instance.modifiers, data, 'flip');
-    }
-  });
-  return data;
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by update method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function keepTogether(data) {
-  var _data$offsets = data.offsets,
-      popper = _data$offsets.popper,
-      reference = _data$offsets.reference;
-
-  var placement = data.placement.split('-')[0];
-  var floor = Math.floor;
-  var isVertical = ['top', 'bottom'].indexOf(placement) !== -1;
-  var side = isVertical ? 'right' : 'bottom';
-  var opSide = isVertical ? 'left' : 'top';
-  var measurement = isVertical ? 'width' : 'height';
-
-  if (popper[side] < floor(reference[opSide])) {
-    data.offsets.popper[opSide] = floor(reference[opSide]) - popper[measurement];
-  }
-  if (popper[opSide] > floor(reference[side])) {
-    data.offsets.popper[opSide] = floor(reference[side]);
-  }
-
-  return data;
-}
-
-/**
- * Converts a string containing value + unit into a px value number
- * @function
- * @memberof {modifiers~offset}
- * @private
- * @argument {String} str - Value + unit string
- * @argument {String} measurement - `height` or `width`
- * @argument {Object} popperOffsets
- * @argument {Object} referenceOffsets
- * @returns {Number|String}
- * Value in pixels, or original string if no values were extracted
- */
-function toValue(str, measurement, popperOffsets, referenceOffsets) {
-  // separate value from unit
-  var split = str.match(/((?:\-|\+)?\d*\.?\d*)(.*)/);
-  var value = +split[1];
-  var unit = split[2];
-
-  // If it's not a number it's an operator, I guess
-  if (!value) {
-    return str;
-  }
-
-  if (unit.indexOf('%') === 0) {
-    var element = void 0;
-    switch (unit) {
-      case '%p':
-        element = popperOffsets;
-        break;
-      case '%':
-      case '%r':
-      default:
-        element = referenceOffsets;
-    }
-
-    var rect = getClientRect(element);
-    return rect[measurement] / 100 * value;
-  } else if (unit === 'vh' || unit === 'vw') {
-    // if is a vh or vw, we calculate the size based on the viewport
-    var size = void 0;
-    if (unit === 'vh') {
-      size = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-    } else {
-      size = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-    }
-    return size / 100 * value;
-  } else {
-    // if is an explicit pixel unit, we get rid of the unit and keep the value
-    // if is an implicit unit, it's px, and we return just the value
-    return value;
-  }
-}
-
-/**
- * Parse an `offset` string to extrapolate `x` and `y` numeric offsets.
- * @function
- * @memberof {modifiers~offset}
- * @private
- * @argument {String} offset
- * @argument {Object} popperOffsets
- * @argument {Object} referenceOffsets
- * @argument {String} basePlacement
- * @returns {Array} a two cells array with x and y offsets in numbers
- */
-function parseOffset(offset, popperOffsets, referenceOffsets, basePlacement) {
-  var offsets = [0, 0];
-
-  // Use height if placement is left or right and index is 0 otherwise use width
-  // in this way the first offset will use an axis and the second one
-  // will use the other one
-  var useHeight = ['right', 'left'].indexOf(basePlacement) !== -1;
-
-  // Split the offset string to obtain a list of values and operands
-  // The regex addresses values with the plus or minus sign in front (+10, -20, etc)
-  var fragments = offset.split(/(\+|\-)/).map(function (frag) {
-    return frag.trim();
-  });
-
-  // Detect if the offset string contains a pair of values or a single one
-  // they could be separated by comma or space
-  var divider = fragments.indexOf(find(fragments, function (frag) {
-    return frag.search(/,|\s/) !== -1;
-  }));
-
-  if (fragments[divider] && fragments[divider].indexOf(',') === -1) {
-    console.warn('Offsets separated by white space(s) are deprecated, use a comma (,) instead.');
-  }
-
-  // If divider is found, we divide the list of values and operands to divide
-  // them by ofset X and Y.
-  var splitRegex = /\s*,\s*|\s+/;
-  var ops = divider !== -1 ? [fragments.slice(0, divider).concat([fragments[divider].split(splitRegex)[0]]), [fragments[divider].split(splitRegex)[1]].concat(fragments.slice(divider + 1))] : [fragments];
-
-  // Convert the values with units to absolute pixels to allow our computations
-  ops = ops.map(function (op, index) {
-    // Most of the units rely on the orientation of the popper
-    var measurement = (index === 1 ? !useHeight : useHeight) ? 'height' : 'width';
-    var mergeWithPrevious = false;
-    return op
-    // This aggregates any `+` or `-` sign that aren't considered operators
-    // e.g.: 10 + +5 => [10, +, +5]
-    .reduce(function (a, b) {
-      if (a[a.length - 1] === '' && ['+', '-'].indexOf(b) !== -1) {
-        a[a.length - 1] = b;
-        mergeWithPrevious = true;
-        return a;
-      } else if (mergeWithPrevious) {
-        a[a.length - 1] += b;
-        mergeWithPrevious = false;
-        return a;
-      } else {
-        return a.concat(b);
-      }
-    }, [])
-    // Here we convert the string values into number values (in px)
-    .map(function (str) {
-      return toValue(str, measurement, popperOffsets, referenceOffsets);
-    });
-  });
-
-  // Loop trough the offsets arrays and execute the operations
-  ops.forEach(function (op, index) {
-    op.forEach(function (frag, index2) {
-      if (isNumeric(frag)) {
-        offsets[index] += frag * (op[index2 - 1] === '-' ? -1 : 1);
-      }
-    });
-  });
-  return offsets;
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by update method
- * @argument {Object} options - Modifiers configuration and options
- * @argument {Number|String} options.offset=0
- * The offset value as described in the modifier description
- * @returns {Object} The data object, properly modified
- */
-function offset(data, _ref) {
-  var offset = _ref.offset;
-  var placement = data.placement,
-      _data$offsets = data.offsets,
-      popper = _data$offsets.popper,
-      reference = _data$offsets.reference;
-
-  var basePlacement = placement.split('-')[0];
-
-  var offsets = void 0;
-  if (isNumeric(+offset)) {
-    offsets = [+offset, 0];
-  } else {
-    offsets = parseOffset(offset, popper, reference, basePlacement);
-  }
-
-  if (basePlacement === 'left') {
-    popper.top += offsets[0];
-    popper.left -= offsets[1];
-  } else if (basePlacement === 'right') {
-    popper.top += offsets[0];
-    popper.left += offsets[1];
-  } else if (basePlacement === 'top') {
-    popper.left += offsets[0];
-    popper.top -= offsets[1];
-  } else if (basePlacement === 'bottom') {
-    popper.left += offsets[0];
-    popper.top += offsets[1];
-  }
-
-  data.popper = popper;
-  return data;
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by `update` method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function preventOverflow(data, options) {
-  var boundariesElement = options.boundariesElement || getOffsetParent(data.instance.popper);
-
-  // If offsetParent is the reference element, we really want to
-  // go one step up and use the next offsetParent as reference to
-  // avoid to make this modifier completely useless and look like broken
-  if (data.instance.reference === boundariesElement) {
-    boundariesElement = getOffsetParent(boundariesElement);
-  }
-
-  // NOTE: DOM access here
-  // resets the popper's position so that the document size can be calculated excluding
-  // the size of the popper element itself
-  var transformProp = getSupportedPropertyName('transform');
-  var popperStyles = data.instance.popper.style; // assignment to help minification
-  var top = popperStyles.top,
-      left = popperStyles.left,
-      transform = popperStyles[transformProp];
-
-  popperStyles.top = '';
-  popperStyles.left = '';
-  popperStyles[transformProp] = '';
-
-  var boundaries = getBoundaries(data.instance.popper, data.instance.reference, options.padding, boundariesElement, data.positionFixed);
-
-  // NOTE: DOM access here
-  // restores the original style properties after the offsets have been computed
-  popperStyles.top = top;
-  popperStyles.left = left;
-  popperStyles[transformProp] = transform;
-
-  options.boundaries = boundaries;
-
-  var order = options.priority;
-  var popper = data.offsets.popper;
-
-  var check = {
-    primary: function primary(placement) {
-      var value = popper[placement];
-      if (popper[placement] < boundaries[placement] && !options.escapeWithReference) {
-        value = Math.max(popper[placement], boundaries[placement]);
-      }
-      return defineProperty({}, placement, value);
-    },
-    secondary: function secondary(placement) {
-      var mainSide = placement === 'right' ? 'left' : 'top';
-      var value = popper[mainSide];
-      if (popper[placement] > boundaries[placement] && !options.escapeWithReference) {
-        value = Math.min(popper[mainSide], boundaries[placement] - (placement === 'right' ? popper.width : popper.height));
-      }
-      return defineProperty({}, mainSide, value);
-    }
-  };
-
-  order.forEach(function (placement) {
-    var side = ['left', 'top'].indexOf(placement) !== -1 ? 'primary' : 'secondary';
-    popper = _extends({}, popper, check[side](placement));
-  });
-
-  data.offsets.popper = popper;
-
-  return data;
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by `update` method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function shift(data) {
-  var placement = data.placement;
-  var basePlacement = placement.split('-')[0];
-  var shiftvariation = placement.split('-')[1];
-
-  // if shift shiftvariation is specified, run the modifier
-  if (shiftvariation) {
-    var _data$offsets = data.offsets,
-        reference = _data$offsets.reference,
-        popper = _data$offsets.popper;
-
-    var isVertical = ['bottom', 'top'].indexOf(basePlacement) !== -1;
-    var side = isVertical ? 'left' : 'top';
-    var measurement = isVertical ? 'width' : 'height';
-
-    var shiftOffsets = {
-      start: defineProperty({}, side, reference[side]),
-      end: defineProperty({}, side, reference[side] + reference[measurement] - popper[measurement])
-    };
-
-    data.offsets.popper = _extends({}, popper, shiftOffsets[shiftvariation]);
-  }
-
-  return data;
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by update method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function hide(data) {
-  if (!isModifierRequired(data.instance.modifiers, 'hide', 'preventOverflow')) {
-    return data;
-  }
-
-  var refRect = data.offsets.reference;
-  var bound = find(data.instance.modifiers, function (modifier) {
-    return modifier.name === 'preventOverflow';
-  }).boundaries;
-
-  if (refRect.bottom < bound.top || refRect.left > bound.right || refRect.top > bound.bottom || refRect.right < bound.left) {
-    // Avoid unnecessary DOM access if visibility hasn't changed
-    if (data.hide === true) {
-      return data;
-    }
-
-    data.hide = true;
-    data.attributes['x-out-of-boundaries'] = '';
-  } else {
-    // Avoid unnecessary DOM access if visibility hasn't changed
-    if (data.hide === false) {
-      return data;
-    }
-
-    data.hide = false;
-    data.attributes['x-out-of-boundaries'] = false;
-  }
-
-  return data;
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by `update` method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function inner(data) {
-  var placement = data.placement;
-  var basePlacement = placement.split('-')[0];
-  var _data$offsets = data.offsets,
-      popper = _data$offsets.popper,
-      reference = _data$offsets.reference;
-
-  var isHoriz = ['left', 'right'].indexOf(basePlacement) !== -1;
-
-  var subtractLength = ['top', 'left'].indexOf(basePlacement) === -1;
-
-  popper[isHoriz ? 'left' : 'top'] = reference[basePlacement] - (subtractLength ? popper[isHoriz ? 'width' : 'height'] : 0);
-
-  data.placement = getOppositePlacement(placement);
-  data.offsets.popper = getClientRect(popper);
-
-  return data;
-}
-
-/**
- * Modifier function, each modifier can have a function of this type assigned
- * to its `fn` property.<br />
- * These functions will be called on each update, this means that you must
- * make sure they are performant enough to avoid performance bottlenecks.
- *
- * @function ModifierFn
- * @argument {dataObject} data - The data object generated by `update` method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {dataObject} The data object, properly modified
- */
-
-/**
- * Modifiers are plugins used to alter the behavior of your poppers.<br />
- * Popper.js uses a set of 9 modifiers to provide all the basic functionalities
- * needed by the library.
- *
- * Usually you don't want to override the `order`, `fn` and `onLoad` props.
- * All the other properties are configurations that could be tweaked.
- * @namespace modifiers
- */
-var modifiers = {
-  /**
-   * Modifier used to shift the popper on the start or end of its reference
-   * element.<br />
-   * It will read the variation of the `placement` property.<br />
-   * It can be one either `-end` or `-start`.
-   * @memberof modifiers
-   * @inner
-   */
-  shift: {
-    /** @prop {number} order=100 - Index used to define the order of execution */
-    order: 100,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: shift
-  },
-
-  /**
-   * The `offset` modifier can shift your popper on both its axis.
-   *
-   * It accepts the following units:
-   * - `px` or unit-less, interpreted as pixels
-   * - `%` or `%r`, percentage relative to the length of the reference element
-   * - `%p`, percentage relative to the length of the popper element
-   * - `vw`, CSS viewport width unit
-   * - `vh`, CSS viewport height unit
-   *
-   * For length is intended the main axis relative to the placement of the popper.<br />
-   * This means that if the placement is `top` or `bottom`, the length will be the
-   * `width`. In case of `left` or `right`, it will be the `height`.
-   *
-   * You can provide a single value (as `Number` or `String`), or a pair of values
-   * as `String` divided by a comma or one (or more) white spaces.<br />
-   * The latter is a deprecated method because it leads to confusion and will be
-   * removed in v2.<br />
-   * Additionally, it accepts additions and subtractions between different units.
-   * Note that multiplications and divisions aren't supported.
-   *
-   * Valid examples are:
-   * ```
-   * 10
-   * '10%'
-   * '10, 10'
-   * '10%, 10'
-   * '10 + 10%'
-   * '10 - 5vh + 3%'
-   * '-10px + 5vh, 5px - 6%'
-   * ```
-   * > **NB**: If you desire to apply offsets to your poppers in a way that may make them overlap
-   * > with their reference element, unfortunately, you will have to disable the `flip` modifier.
-   * > You can read more on this at this [issue](https://github.com/FezVrasta/popper.js/issues/373).
-   *
-   * @memberof modifiers
-   * @inner
-   */
-  offset: {
-    /** @prop {number} order=200 - Index used to define the order of execution */
-    order: 200,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: offset,
-    /** @prop {Number|String} offset=0
-     * The offset value as described in the modifier description
-     */
-    offset: 0
-  },
-
-  /**
-   * Modifier used to prevent the popper from being positioned outside the boundary.
-   *
-   * A scenario exists where the reference itself is not within the boundaries.<br />
-   * We can say it has "escaped the boundaries" — or just "escaped".<br />
-   * In this case we need to decide whether the popper should either:
-   *
-   * - detach from the reference and remain "trapped" in the boundaries, or
-   * - if it should ignore the boundary and "escape with its reference"
-   *
-   * When `escapeWithReference` is set to`true` and reference is completely
-   * outside its boundaries, the popper will overflow (or completely leave)
-   * the boundaries in order to remain attached to the edge of the reference.
-   *
-   * @memberof modifiers
-   * @inner
-   */
-  preventOverflow: {
-    /** @prop {number} order=300 - Index used to define the order of execution */
-    order: 300,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: preventOverflow,
-    /**
-     * @prop {Array} [priority=['left','right','top','bottom']]
-     * Popper will try to prevent overflow following these priorities by default,
-     * then, it could overflow on the left and on top of the `boundariesElement`
-     */
-    priority: ['left', 'right', 'top', 'bottom'],
-    /**
-     * @prop {number} padding=5
-     * Amount of pixel used to define a minimum distance between the boundaries
-     * and the popper. This makes sure the popper always has a little padding
-     * between the edges of its container
-     */
-    padding: 5,
-    /**
-     * @prop {String|HTMLElement} boundariesElement='scrollParent'
-     * Boundaries used by the modifier. Can be `scrollParent`, `window`,
-     * `viewport` or any DOM element.
-     */
-    boundariesElement: 'scrollParent'
-  },
-
-  /**
-   * Modifier used to make sure the reference and its popper stay near each other
-   * without leaving any gap between the two. Especially useful when the arrow is
-   * enabled and you want to ensure that it points to its reference element.
-   * It cares only about the first axis. You can still have poppers with margin
-   * between the popper and its reference element.
-   * @memberof modifiers
-   * @inner
-   */
-  keepTogether: {
-    /** @prop {number} order=400 - Index used to define the order of execution */
-    order: 400,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: keepTogether
-  },
-
-  /**
-   * This modifier is used to move the `arrowElement` of the popper to make
-   * sure it is positioned between the reference element and its popper element.
-   * It will read the outer size of the `arrowElement` node to detect how many
-   * pixels of conjunction are needed.
-   *
-   * It has no effect if no `arrowElement` is provided.
-   * @memberof modifiers
-   * @inner
-   */
-  arrow: {
-    /** @prop {number} order=500 - Index used to define the order of execution */
-    order: 500,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: arrow,
-    /** @prop {String|HTMLElement} element='[x-arrow]' - Selector or node used as arrow */
-    element: '[x-arrow]'
-  },
-
-  /**
-   * Modifier used to flip the popper's placement when it starts to overlap its
-   * reference element.
-   *
-   * Requires the `preventOverflow` modifier before it in order to work.
-   *
-   * **NOTE:** this modifier will interrupt the current update cycle and will
-   * restart it if it detects the need to flip the placement.
-   * @memberof modifiers
-   * @inner
-   */
-  flip: {
-    /** @prop {number} order=600 - Index used to define the order of execution */
-    order: 600,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: flip,
-    /**
-     * @prop {String|Array} behavior='flip'
-     * The behavior used to change the popper's placement. It can be one of
-     * `flip`, `clockwise`, `counterclockwise` or an array with a list of valid
-     * placements (with optional variations)
-     */
-    behavior: 'flip',
-    /**
-     * @prop {number} padding=5
-     * The popper will flip if it hits the edges of the `boundariesElement`
-     */
-    padding: 5,
-    /**
-     * @prop {String|HTMLElement} boundariesElement='viewport'
-     * The element which will define the boundaries of the popper position.
-     * The popper will never be placed outside of the defined boundaries
-     * (except if `keepTogether` is enabled)
-     */
-    boundariesElement: 'viewport'
-  },
-
-  /**
-   * Modifier used to make the popper flow toward the inner of the reference element.
-   * By default, when this modifier is disabled, the popper will be placed outside
-   * the reference element.
-   * @memberof modifiers
-   * @inner
-   */
-  inner: {
-    /** @prop {number} order=700 - Index used to define the order of execution */
-    order: 700,
-    /** @prop {Boolean} enabled=false - Whether the modifier is enabled or not */
-    enabled: false,
-    /** @prop {ModifierFn} */
-    fn: inner
-  },
-
-  /**
-   * Modifier used to hide the popper when its reference element is outside of the
-   * popper boundaries. It will set a `x-out-of-boundaries` attribute which can
-   * be used to hide with a CSS selector the popper when its reference is
-   * out of boundaries.
-   *
-   * Requires the `preventOverflow` modifier before it in order to work.
-   * @memberof modifiers
-   * @inner
-   */
-  hide: {
-    /** @prop {number} order=800 - Index used to define the order of execution */
-    order: 800,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: hide
-  },
-
-  /**
-   * Computes the style that will be applied to the popper element to gets
-   * properly positioned.
-   *
-   * Note that this modifier will not touch the DOM, it just prepares the styles
-   * so that `applyStyle` modifier can apply it. This separation is useful
-   * in case you need to replace `applyStyle` with a custom implementation.
-   *
-   * This modifier has `850` as `order` value to maintain backward compatibility
-   * with previous versions of Popper.js. Expect the modifiers ordering method
-   * to change in future major versions of the library.
-   *
-   * @memberof modifiers
-   * @inner
-   */
-  computeStyle: {
-    /** @prop {number} order=850 - Index used to define the order of execution */
-    order: 850,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: computeStyle,
-    /**
-     * @prop {Boolean} gpuAcceleration=true
-     * If true, it uses the CSS 3D transformation to position the popper.
-     * Otherwise, it will use the `top` and `left` properties
-     */
-    gpuAcceleration: true,
-    /**
-     * @prop {string} [x='bottom']
-     * Where to anchor the X axis (`bottom` or `top`). AKA X offset origin.
-     * Change this if your popper should grow in a direction different from `bottom`
-     */
-    x: 'bottom',
-    /**
-     * @prop {string} [x='left']
-     * Where to anchor the Y axis (`left` or `right`). AKA Y offset origin.
-     * Change this if your popper should grow in a direction different from `right`
-     */
-    y: 'right'
-  },
-
-  /**
-   * Applies the computed styles to the popper element.
-   *
-   * All the DOM manipulations are limited to this modifier. This is useful in case
-   * you want to integrate Popper.js inside a framework or view library and you
-   * want to delegate all the DOM manipulations to it.
-   *
-   * Note that if you disable this modifier, you must make sure the popper element
-   * has its position set to `absolute` before Popper.js can do its work!
-   *
-   * Just disable this modifier and define your own to achieve the desired effect.
-   *
-   * @memberof modifiers
-   * @inner
-   */
-  applyStyle: {
-    /** @prop {number} order=900 - Index used to define the order of execution */
-    order: 900,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: applyStyle,
-    /** @prop {Function} */
-    onLoad: applyStyleOnLoad,
-    /**
-     * @deprecated since version 1.10.0, the property moved to `computeStyle` modifier
-     * @prop {Boolean} gpuAcceleration=true
-     * If true, it uses the CSS 3D transformation to position the popper.
-     * Otherwise, it will use the `top` and `left` properties
-     */
-    gpuAcceleration: undefined
-  }
-};
-
-/**
- * The `dataObject` is an object containing all the information used by Popper.js.
- * This object is passed to modifiers and to the `onCreate` and `onUpdate` callbacks.
- * @name dataObject
- * @property {Object} data.instance The Popper.js instance
- * @property {String} data.placement Placement applied to popper
- * @property {String} data.originalPlacement Placement originally defined on init
- * @property {Boolean} data.flipped True if popper has been flipped by flip modifier
- * @property {Boolean} data.hide True if the reference element is out of boundaries, useful to know when to hide the popper
- * @property {HTMLElement} data.arrowElement Node used as arrow by arrow modifier
- * @property {Object} data.styles Any CSS property defined here will be applied to the popper. It expects the JavaScript nomenclature (eg. `marginBottom`)
- * @property {Object} data.arrowStyles Any CSS property defined here will be applied to the popper arrow. It expects the JavaScript nomenclature (eg. `marginBottom`)
- * @property {Object} data.boundaries Offsets of the popper boundaries
- * @property {Object} data.offsets The measurements of popper, reference and arrow elements
- * @property {Object} data.offsets.popper `top`, `left`, `width`, `height` values
- * @property {Object} data.offsets.reference `top`, `left`, `width`, `height` values
- * @property {Object} data.offsets.arrow] `top` and `left` offsets, only one of them will be different from 0
- */
-
-/**
- * Default options provided to Popper.js constructor.<br />
- * These can be overridden using the `options` argument of Popper.js.<br />
- * To override an option, simply pass an object with the same
- * structure of the `options` object, as the 3rd argument. For example:
- * ```
- * new Popper(ref, pop, {
- *   modifiers: {
- *     preventOverflow: { enabled: false }
- *   }
- * })
- * ```
- * @type {Object}
- * @static
- * @memberof Popper
- */
-var Defaults = {
-  /**
-   * Popper's placement.
-   * @prop {Popper.placements} placement='bottom'
-   */
-  placement: 'bottom',
-
-  /**
-   * Set this to true if you want popper to position it self in 'fixed' mode
-   * @prop {Boolean} positionFixed=false
-   */
-  positionFixed: false,
-
-  /**
-   * Whether events (resize, scroll) are initially enabled.
-   * @prop {Boolean} eventsEnabled=true
-   */
-  eventsEnabled: true,
-
-  /**
-   * Set to true if you want to automatically remove the popper when
-   * you call the `destroy` method.
-   * @prop {Boolean} removeOnDestroy=false
-   */
-  removeOnDestroy: false,
-
-  /**
-   * Callback called when the popper is created.<br />
-   * By default, it is set to no-op.<br />
-   * Access Popper.js instance with `data.instance`.
-   * @prop {onCreate}
-   */
-  onCreate: function onCreate() {},
-
-  /**
-   * Callback called when the popper is updated. This callback is not called
-   * on the initialization/creation of the popper, but only on subsequent
-   * updates.<br />
-   * By default, it is set to no-op.<br />
-   * Access Popper.js instance with `data.instance`.
-   * @prop {onUpdate}
-   */
-  onUpdate: function onUpdate() {},
-
-  /**
-   * List of modifiers used to modify the offsets before they are applied to the popper.
-   * They provide most of the functionalities of Popper.js.
-   * @prop {modifiers}
-   */
-  modifiers: modifiers
-};
-
-/**
- * @callback onCreate
- * @param {dataObject} data
- */
-
-/**
- * @callback onUpdate
- * @param {dataObject} data
- */
-
-// Utils
-// Methods
-var Popper = function () {
-  /**
-   * Creates a new Popper.js instance.
-   * @class Popper
-   * @param {HTMLElement|referenceObject} reference - The reference element used to position the popper
-   * @param {HTMLElement} popper - The HTML element used as the popper
-   * @param {Object} options - Your custom options to override the ones defined in [Defaults](#defaults)
-   * @return {Object} instance - The generated Popper.js instance
-   */
-  function Popper(reference, popper) {
-    var _this = this;
-
-    var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-    classCallCheck(this, Popper);
-
-    this.scheduleUpdate = function () {
-      return requestAnimationFrame(_this.update);
-    };
-
-    // make update() debounced, so that it only runs at most once-per-tick
-    this.update = debounce(this.update.bind(this));
-
-    // with {} we create a new object with the options inside it
-    this.options = _extends({}, Popper.Defaults, options);
-
-    // init state
-    this.state = {
-      isDestroyed: false,
-      isCreated: false,
-      scrollParents: []
-    };
-
-    // get reference and popper elements (allow jQuery wrappers)
-    this.reference = reference && reference.jquery ? reference[0] : reference;
-    this.popper = popper && popper.jquery ? popper[0] : popper;
-
-    // Deep merge modifiers options
-    this.options.modifiers = {};
-    Object.keys(_extends({}, Popper.Defaults.modifiers, options.modifiers)).forEach(function (name) {
-      _this.options.modifiers[name] = _extends({}, Popper.Defaults.modifiers[name] || {}, options.modifiers ? options.modifiers[name] : {});
-    });
-
-    // Refactoring modifiers' list (Object => Array)
-    this.modifiers = Object.keys(this.options.modifiers).map(function (name) {
-      return _extends({
-        name: name
-      }, _this.options.modifiers[name]);
-    })
-    // sort the modifiers by order
-    .sort(function (a, b) {
-      return a.order - b.order;
-    });
-
-    // modifiers have the ability to execute arbitrary code when Popper.js get inited
-    // such code is executed in the same order of its modifier
-    // they could add new properties to their options configuration
-    // BE AWARE: don't add options to `options.modifiers.name` but to `modifierOptions`!
-    this.modifiers.forEach(function (modifierOptions) {
-      if (modifierOptions.enabled && isFunction(modifierOptions.onLoad)) {
-        modifierOptions.onLoad(_this.reference, _this.popper, _this.options, modifierOptions, _this.state);
-      }
-    });
-
-    // fire the first update to position the popper in the right place
-    this.update();
-
-    var eventsEnabled = this.options.eventsEnabled;
-    if (eventsEnabled) {
-      // setup event listeners, they will take care of update the position in specific situations
-      this.enableEventListeners();
-    }
-
-    this.state.eventsEnabled = eventsEnabled;
-  }
-
-  // We can't use class properties because they don't get listed in the
-  // class prototype and break stuff like Sinon stubs
-
-
-  createClass(Popper, [{
-    key: 'update',
-    value: function update$$1() {
-      return update.call(this);
-    }
-  }, {
-    key: 'destroy',
-    value: function destroy$$1() {
-      return destroy.call(this);
-    }
-  }, {
-    key: 'enableEventListeners',
-    value: function enableEventListeners$$1() {
-      return enableEventListeners.call(this);
-    }
-  }, {
-    key: 'disableEventListeners',
-    value: function disableEventListeners$$1() {
-      return disableEventListeners.call(this);
-    }
-
-    /**
-     * Schedules an update. It will run on the next UI update available.
-     * @method scheduleUpdate
-     * @memberof Popper
-     */
-
-
-    /**
-     * Collection of utilities useful when writing custom modifiers.
-     * Starting from version 1.7, this method is available only if you
-     * include `popper-utils.js` before `popper.js`.
-     *
-     * **DEPRECATION**: This way to access PopperUtils is deprecated
-     * and will be removed in v2! Use the PopperUtils module directly instead.
-     * Due to the high instability of the methods contained in Utils, we can't
-     * guarantee them to follow semver. Use them at your own risk!
-     * @static
-     * @private
-     * @type {Object}
-     * @deprecated since version 1.8
-     * @member Utils
-     * @memberof Popper
-     */
-
-  }]);
-  return Popper;
-}();
-
-/**
- * The `referenceObject` is an object that provides an interface compatible with Popper.js
- * and lets you use it as replacement of a real DOM node.<br />
- * You can use this method to position a popper relatively to a set of coordinates
- * in case you don't have a DOM node to use as reference.
- *
- * ```
- * new Popper(referenceObject, popperNode);
- * ```
- *
- * NB: This feature isn't supported in Internet Explorer 10.
- * @name referenceObject
- * @property {Function} data.getBoundingClientRect
- * A function that returns a set of coordinates compatible with the native `getBoundingClientRect` method.
- * @property {number} data.clientWidth
- * An ES6 getter that will return the width of the virtual reference element.
- * @property {number} data.clientHeight
- * An ES6 getter that will return the height of the virtual reference element.
- */
-
-
-Popper.Utils = (typeof window !== 'undefined' ? window : global).PopperUtils;
-Popper.placements = placements;
-Popper.Defaults = Defaults;
-
-/* harmony default export */ __webpack_exports__["default"] = (Popper);
-//# sourceMappingURL=popper.js.map
-
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(3)))
-
-/***/ }),
-/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -13445,7 +10745,2679 @@ return jQuery;
 
 
 /***/ }),
-/* 6 */
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+var utils = __webpack_require__(0);
+var normalizeHeaderName = __webpack_require__(21);
+
+var DEFAULT_CONTENT_TYPE = {
+  'Content-Type': 'application/x-www-form-urlencoded'
+};
+
+function setContentTypeIfUnset(headers, value) {
+  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
+    headers['Content-Type'] = value;
+  }
+}
+
+function getDefaultAdapter() {
+  var adapter;
+  if (typeof XMLHttpRequest !== 'undefined') {
+    // For browsers use XHR adapter
+    adapter = __webpack_require__(6);
+  } else if (typeof process !== 'undefined') {
+    // For node use HTTP adapter
+    adapter = __webpack_require__(6);
+  }
+  return adapter;
+}
+
+var defaults = {
+  adapter: getDefaultAdapter(),
+
+  transformRequest: [function transformRequest(data, headers) {
+    normalizeHeaderName(headers, 'Content-Type');
+    if (utils.isFormData(data) ||
+      utils.isArrayBuffer(data) ||
+      utils.isBuffer(data) ||
+      utils.isStream(data) ||
+      utils.isFile(data) ||
+      utils.isBlob(data)
+    ) {
+      return data;
+    }
+    if (utils.isArrayBufferView(data)) {
+      return data.buffer;
+    }
+    if (utils.isURLSearchParams(data)) {
+      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
+      return data.toString();
+    }
+    if (utils.isObject(data)) {
+      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
+      return JSON.stringify(data);
+    }
+    return data;
+  }],
+
+  transformResponse: [function transformResponse(data) {
+    /*eslint no-param-reassign:0*/
+    if (typeof data === 'string') {
+      try {
+        data = JSON.parse(data);
+      } catch (e) { /* Ignore */ }
+    }
+    return data;
+  }],
+
+  /**
+   * A timeout in milliseconds to abort a request. If set to 0 (default) a
+   * timeout is not created.
+   */
+  timeout: 0,
+
+  xsrfCookieName: 'XSRF-TOKEN',
+  xsrfHeaderName: 'X-XSRF-TOKEN',
+
+  maxContentLength: -1,
+
+  validateStatus: function validateStatus(status) {
+    return status >= 200 && status < 300;
+  }
+};
+
+defaults.headers = {
+  common: {
+    'Accept': 'application/json, text/plain, */*'
+  }
+};
+
+utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
+  defaults.headers[method] = {};
+});
+
+utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
+});
+
+module.exports = defaults;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(20)))
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* WEBPACK VAR INJECTION */(function(global) {/**!
+ * @fileOverview Kickass library to create and place poppers near their reference elements.
+ * @version 1.14.4
+ * @license
+ * Copyright (c) 2016 Federico Zivolo and contributors
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+var isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined';
+
+var longerTimeoutBrowsers = ['Edge', 'Trident', 'Firefox'];
+var timeoutDuration = 0;
+for (var i = 0; i < longerTimeoutBrowsers.length; i += 1) {
+  if (isBrowser && navigator.userAgent.indexOf(longerTimeoutBrowsers[i]) >= 0) {
+    timeoutDuration = 1;
+    break;
+  }
+}
+
+function microtaskDebounce(fn) {
+  var called = false;
+  return function () {
+    if (called) {
+      return;
+    }
+    called = true;
+    window.Promise.resolve().then(function () {
+      called = false;
+      fn();
+    });
+  };
+}
+
+function taskDebounce(fn) {
+  var scheduled = false;
+  return function () {
+    if (!scheduled) {
+      scheduled = true;
+      setTimeout(function () {
+        scheduled = false;
+        fn();
+      }, timeoutDuration);
+    }
+  };
+}
+
+var supportsMicroTasks = isBrowser && window.Promise;
+
+/**
+* Create a debounced version of a method, that's asynchronously deferred
+* but called in the minimum time possible.
+*
+* @method
+* @memberof Popper.Utils
+* @argument {Function} fn
+* @returns {Function}
+*/
+var debounce = supportsMicroTasks ? microtaskDebounce : taskDebounce;
+
+/**
+ * Check if the given variable is a function
+ * @method
+ * @memberof Popper.Utils
+ * @argument {Any} functionToCheck - variable to check
+ * @returns {Boolean} answer to: is a function?
+ */
+function isFunction(functionToCheck) {
+  var getType = {};
+  return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
+}
+
+/**
+ * Get CSS computed property of the given element
+ * @method
+ * @memberof Popper.Utils
+ * @argument {Eement} element
+ * @argument {String} property
+ */
+function getStyleComputedProperty(element, property) {
+  if (element.nodeType !== 1) {
+    return [];
+  }
+  // NOTE: 1 DOM access here
+  var css = getComputedStyle(element, null);
+  return property ? css[property] : css;
+}
+
+/**
+ * Returns the parentNode or the host of the element
+ * @method
+ * @memberof Popper.Utils
+ * @argument {Element} element
+ * @returns {Element} parent
+ */
+function getParentNode(element) {
+  if (element.nodeName === 'HTML') {
+    return element;
+  }
+  return element.parentNode || element.host;
+}
+
+/**
+ * Returns the scrolling parent of the given element
+ * @method
+ * @memberof Popper.Utils
+ * @argument {Element} element
+ * @returns {Element} scroll parent
+ */
+function getScrollParent(element) {
+  // Return body, `getScroll` will take care to get the correct `scrollTop` from it
+  if (!element) {
+    return document.body;
+  }
+
+  switch (element.nodeName) {
+    case 'HTML':
+    case 'BODY':
+      return element.ownerDocument.body;
+    case '#document':
+      return element.body;
+  }
+
+  // Firefox want us to check `-x` and `-y` variations as well
+
+  var _getStyleComputedProp = getStyleComputedProperty(element),
+      overflow = _getStyleComputedProp.overflow,
+      overflowX = _getStyleComputedProp.overflowX,
+      overflowY = _getStyleComputedProp.overflowY;
+
+  if (/(auto|scroll|overlay)/.test(overflow + overflowY + overflowX)) {
+    return element;
+  }
+
+  return getScrollParent(getParentNode(element));
+}
+
+var isIE11 = isBrowser && !!(window.MSInputMethodContext && document.documentMode);
+var isIE10 = isBrowser && /MSIE 10/.test(navigator.userAgent);
+
+/**
+ * Determines if the browser is Internet Explorer
+ * @method
+ * @memberof Popper.Utils
+ * @param {Number} version to check
+ * @returns {Boolean} isIE
+ */
+function isIE(version) {
+  if (version === 11) {
+    return isIE11;
+  }
+  if (version === 10) {
+    return isIE10;
+  }
+  return isIE11 || isIE10;
+}
+
+/**
+ * Returns the offset parent of the given element
+ * @method
+ * @memberof Popper.Utils
+ * @argument {Element} element
+ * @returns {Element} offset parent
+ */
+function getOffsetParent(element) {
+  if (!element) {
+    return document.documentElement;
+  }
+
+  var noOffsetParent = isIE(10) ? document.body : null;
+
+  // NOTE: 1 DOM access here
+  var offsetParent = element.offsetParent;
+  // Skip hidden elements which don't have an offsetParent
+  while (offsetParent === noOffsetParent && element.nextElementSibling) {
+    offsetParent = (element = element.nextElementSibling).offsetParent;
+  }
+
+  var nodeName = offsetParent && offsetParent.nodeName;
+
+  if (!nodeName || nodeName === 'BODY' || nodeName === 'HTML') {
+    return element ? element.ownerDocument.documentElement : document.documentElement;
+  }
+
+  // .offsetParent will return the closest TD or TABLE in case
+  // no offsetParent is present, I hate this job...
+  if (['TD', 'TABLE'].indexOf(offsetParent.nodeName) !== -1 && getStyleComputedProperty(offsetParent, 'position') === 'static') {
+    return getOffsetParent(offsetParent);
+  }
+
+  return offsetParent;
+}
+
+function isOffsetContainer(element) {
+  var nodeName = element.nodeName;
+
+  if (nodeName === 'BODY') {
+    return false;
+  }
+  return nodeName === 'HTML' || getOffsetParent(element.firstElementChild) === element;
+}
+
+/**
+ * Finds the root node (document, shadowDOM root) of the given element
+ * @method
+ * @memberof Popper.Utils
+ * @argument {Element} node
+ * @returns {Element} root node
+ */
+function getRoot(node) {
+  if (node.parentNode !== null) {
+    return getRoot(node.parentNode);
+  }
+
+  return node;
+}
+
+/**
+ * Finds the offset parent common to the two provided nodes
+ * @method
+ * @memberof Popper.Utils
+ * @argument {Element} element1
+ * @argument {Element} element2
+ * @returns {Element} common offset parent
+ */
+function findCommonOffsetParent(element1, element2) {
+  // This check is needed to avoid errors in case one of the elements isn't defined for any reason
+  if (!element1 || !element1.nodeType || !element2 || !element2.nodeType) {
+    return document.documentElement;
+  }
+
+  // Here we make sure to give as "start" the element that comes first in the DOM
+  var order = element1.compareDocumentPosition(element2) & Node.DOCUMENT_POSITION_FOLLOWING;
+  var start = order ? element1 : element2;
+  var end = order ? element2 : element1;
+
+  // Get common ancestor container
+  var range = document.createRange();
+  range.setStart(start, 0);
+  range.setEnd(end, 0);
+  var commonAncestorContainer = range.commonAncestorContainer;
+
+  // Both nodes are inside #document
+
+  if (element1 !== commonAncestorContainer && element2 !== commonAncestorContainer || start.contains(end)) {
+    if (isOffsetContainer(commonAncestorContainer)) {
+      return commonAncestorContainer;
+    }
+
+    return getOffsetParent(commonAncestorContainer);
+  }
+
+  // one of the nodes is inside shadowDOM, find which one
+  var element1root = getRoot(element1);
+  if (element1root.host) {
+    return findCommonOffsetParent(element1root.host, element2);
+  } else {
+    return findCommonOffsetParent(element1, getRoot(element2).host);
+  }
+}
+
+/**
+ * Gets the scroll value of the given element in the given side (top and left)
+ * @method
+ * @memberof Popper.Utils
+ * @argument {Element} element
+ * @argument {String} side `top` or `left`
+ * @returns {number} amount of scrolled pixels
+ */
+function getScroll(element) {
+  var side = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'top';
+
+  var upperSide = side === 'top' ? 'scrollTop' : 'scrollLeft';
+  var nodeName = element.nodeName;
+
+  if (nodeName === 'BODY' || nodeName === 'HTML') {
+    var html = element.ownerDocument.documentElement;
+    var scrollingElement = element.ownerDocument.scrollingElement || html;
+    return scrollingElement[upperSide];
+  }
+
+  return element[upperSide];
+}
+
+/*
+ * Sum or subtract the element scroll values (left and top) from a given rect object
+ * @method
+ * @memberof Popper.Utils
+ * @param {Object} rect - Rect object you want to change
+ * @param {HTMLElement} element - The element from the function reads the scroll values
+ * @param {Boolean} subtract - set to true if you want to subtract the scroll values
+ * @return {Object} rect - The modifier rect object
+ */
+function includeScroll(rect, element) {
+  var subtract = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+  var scrollTop = getScroll(element, 'top');
+  var scrollLeft = getScroll(element, 'left');
+  var modifier = subtract ? -1 : 1;
+  rect.top += scrollTop * modifier;
+  rect.bottom += scrollTop * modifier;
+  rect.left += scrollLeft * modifier;
+  rect.right += scrollLeft * modifier;
+  return rect;
+}
+
+/*
+ * Helper to detect borders of a given element
+ * @method
+ * @memberof Popper.Utils
+ * @param {CSSStyleDeclaration} styles
+ * Result of `getStyleComputedProperty` on the given element
+ * @param {String} axis - `x` or `y`
+ * @return {number} borders - The borders size of the given axis
+ */
+
+function getBordersSize(styles, axis) {
+  var sideA = axis === 'x' ? 'Left' : 'Top';
+  var sideB = sideA === 'Left' ? 'Right' : 'Bottom';
+
+  return parseFloat(styles['border' + sideA + 'Width'], 10) + parseFloat(styles['border' + sideB + 'Width'], 10);
+}
+
+function getSize(axis, body, html, computedStyle) {
+  return Math.max(body['offset' + axis], body['scroll' + axis], html['client' + axis], html['offset' + axis], html['scroll' + axis], isIE(10) ? parseInt(html['offset' + axis]) + parseInt(computedStyle['margin' + (axis === 'Height' ? 'Top' : 'Left')]) + parseInt(computedStyle['margin' + (axis === 'Height' ? 'Bottom' : 'Right')]) : 0);
+}
+
+function getWindowSizes(document) {
+  var body = document.body;
+  var html = document.documentElement;
+  var computedStyle = isIE(10) && getComputedStyle(html);
+
+  return {
+    height: getSize('Height', body, html, computedStyle),
+    width: getSize('Width', body, html, computedStyle)
+  };
+}
+
+var classCallCheck = function (instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+};
+
+var createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
+
+
+
+
+
+var defineProperty = function (obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+};
+
+var _extends = Object.assign || function (target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];
+
+    for (var key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        target[key] = source[key];
+      }
+    }
+  }
+
+  return target;
+};
+
+/**
+ * Given element offsets, generate an output similar to getBoundingClientRect
+ * @method
+ * @memberof Popper.Utils
+ * @argument {Object} offsets
+ * @returns {Object} ClientRect like output
+ */
+function getClientRect(offsets) {
+  return _extends({}, offsets, {
+    right: offsets.left + offsets.width,
+    bottom: offsets.top + offsets.height
+  });
+}
+
+/**
+ * Get bounding client rect of given element
+ * @method
+ * @memberof Popper.Utils
+ * @param {HTMLElement} element
+ * @return {Object} client rect
+ */
+function getBoundingClientRect(element) {
+  var rect = {};
+
+  // IE10 10 FIX: Please, don't ask, the element isn't
+  // considered in DOM in some circumstances...
+  // This isn't reproducible in IE10 compatibility mode of IE11
+  try {
+    if (isIE(10)) {
+      rect = element.getBoundingClientRect();
+      var scrollTop = getScroll(element, 'top');
+      var scrollLeft = getScroll(element, 'left');
+      rect.top += scrollTop;
+      rect.left += scrollLeft;
+      rect.bottom += scrollTop;
+      rect.right += scrollLeft;
+    } else {
+      rect = element.getBoundingClientRect();
+    }
+  } catch (e) {}
+
+  var result = {
+    left: rect.left,
+    top: rect.top,
+    width: rect.right - rect.left,
+    height: rect.bottom - rect.top
+  };
+
+  // subtract scrollbar size from sizes
+  var sizes = element.nodeName === 'HTML' ? getWindowSizes(element.ownerDocument) : {};
+  var width = sizes.width || element.clientWidth || result.right - result.left;
+  var height = sizes.height || element.clientHeight || result.bottom - result.top;
+
+  var horizScrollbar = element.offsetWidth - width;
+  var vertScrollbar = element.offsetHeight - height;
+
+  // if an hypothetical scrollbar is detected, we must be sure it's not a `border`
+  // we make this check conditional for performance reasons
+  if (horizScrollbar || vertScrollbar) {
+    var styles = getStyleComputedProperty(element);
+    horizScrollbar -= getBordersSize(styles, 'x');
+    vertScrollbar -= getBordersSize(styles, 'y');
+
+    result.width -= horizScrollbar;
+    result.height -= vertScrollbar;
+  }
+
+  return getClientRect(result);
+}
+
+function getOffsetRectRelativeToArbitraryNode(children, parent) {
+  var fixedPosition = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+  var isIE10 = isIE(10);
+  var isHTML = parent.nodeName === 'HTML';
+  var childrenRect = getBoundingClientRect(children);
+  var parentRect = getBoundingClientRect(parent);
+  var scrollParent = getScrollParent(children);
+
+  var styles = getStyleComputedProperty(parent);
+  var borderTopWidth = parseFloat(styles.borderTopWidth, 10);
+  var borderLeftWidth = parseFloat(styles.borderLeftWidth, 10);
+
+  // In cases where the parent is fixed, we must ignore negative scroll in offset calc
+  if (fixedPosition && isHTML) {
+    parentRect.top = Math.max(parentRect.top, 0);
+    parentRect.left = Math.max(parentRect.left, 0);
+  }
+  var offsets = getClientRect({
+    top: childrenRect.top - parentRect.top - borderTopWidth,
+    left: childrenRect.left - parentRect.left - borderLeftWidth,
+    width: childrenRect.width,
+    height: childrenRect.height
+  });
+  offsets.marginTop = 0;
+  offsets.marginLeft = 0;
+
+  // Subtract margins of documentElement in case it's being used as parent
+  // we do this only on HTML because it's the only element that behaves
+  // differently when margins are applied to it. The margins are included in
+  // the box of the documentElement, in the other cases not.
+  if (!isIE10 && isHTML) {
+    var marginTop = parseFloat(styles.marginTop, 10);
+    var marginLeft = parseFloat(styles.marginLeft, 10);
+
+    offsets.top -= borderTopWidth - marginTop;
+    offsets.bottom -= borderTopWidth - marginTop;
+    offsets.left -= borderLeftWidth - marginLeft;
+    offsets.right -= borderLeftWidth - marginLeft;
+
+    // Attach marginTop and marginLeft because in some circumstances we may need them
+    offsets.marginTop = marginTop;
+    offsets.marginLeft = marginLeft;
+  }
+
+  if (isIE10 && !fixedPosition ? parent.contains(scrollParent) : parent === scrollParent && scrollParent.nodeName !== 'BODY') {
+    offsets = includeScroll(offsets, parent);
+  }
+
+  return offsets;
+}
+
+function getViewportOffsetRectRelativeToArtbitraryNode(element) {
+  var excludeScroll = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+  var html = element.ownerDocument.documentElement;
+  var relativeOffset = getOffsetRectRelativeToArbitraryNode(element, html);
+  var width = Math.max(html.clientWidth, window.innerWidth || 0);
+  var height = Math.max(html.clientHeight, window.innerHeight || 0);
+
+  var scrollTop = !excludeScroll ? getScroll(html) : 0;
+  var scrollLeft = !excludeScroll ? getScroll(html, 'left') : 0;
+
+  var offset = {
+    top: scrollTop - relativeOffset.top + relativeOffset.marginTop,
+    left: scrollLeft - relativeOffset.left + relativeOffset.marginLeft,
+    width: width,
+    height: height
+  };
+
+  return getClientRect(offset);
+}
+
+/**
+ * Check if the given element is fixed or is inside a fixed parent
+ * @method
+ * @memberof Popper.Utils
+ * @argument {Element} element
+ * @argument {Element} customContainer
+ * @returns {Boolean} answer to "isFixed?"
+ */
+function isFixed(element) {
+  var nodeName = element.nodeName;
+  if (nodeName === 'BODY' || nodeName === 'HTML') {
+    return false;
+  }
+  if (getStyleComputedProperty(element, 'position') === 'fixed') {
+    return true;
+  }
+  return isFixed(getParentNode(element));
+}
+
+/**
+ * Finds the first parent of an element that has a transformed property defined
+ * @method
+ * @memberof Popper.Utils
+ * @argument {Element} element
+ * @returns {Element} first transformed parent or documentElement
+ */
+
+function getFixedPositionOffsetParent(element) {
+  // This check is needed to avoid errors in case one of the elements isn't defined for any reason
+  if (!element || !element.parentElement || isIE()) {
+    return document.documentElement;
+  }
+  var el = element.parentElement;
+  while (el && getStyleComputedProperty(el, 'transform') === 'none') {
+    el = el.parentElement;
+  }
+  return el || document.documentElement;
+}
+
+/**
+ * Computed the boundaries limits and return them
+ * @method
+ * @memberof Popper.Utils
+ * @param {HTMLElement} popper
+ * @param {HTMLElement} reference
+ * @param {number} padding
+ * @param {HTMLElement} boundariesElement - Element used to define the boundaries
+ * @param {Boolean} fixedPosition - Is in fixed position mode
+ * @returns {Object} Coordinates of the boundaries
+ */
+function getBoundaries(popper, reference, padding, boundariesElement) {
+  var fixedPosition = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
+
+  // NOTE: 1 DOM access here
+
+  var boundaries = { top: 0, left: 0 };
+  var offsetParent = fixedPosition ? getFixedPositionOffsetParent(popper) : findCommonOffsetParent(popper, reference);
+
+  // Handle viewport case
+  if (boundariesElement === 'viewport') {
+    boundaries = getViewportOffsetRectRelativeToArtbitraryNode(offsetParent, fixedPosition);
+  } else {
+    // Handle other cases based on DOM element used as boundaries
+    var boundariesNode = void 0;
+    if (boundariesElement === 'scrollParent') {
+      boundariesNode = getScrollParent(getParentNode(reference));
+      if (boundariesNode.nodeName === 'BODY') {
+        boundariesNode = popper.ownerDocument.documentElement;
+      }
+    } else if (boundariesElement === 'window') {
+      boundariesNode = popper.ownerDocument.documentElement;
+    } else {
+      boundariesNode = boundariesElement;
+    }
+
+    var offsets = getOffsetRectRelativeToArbitraryNode(boundariesNode, offsetParent, fixedPosition);
+
+    // In case of HTML, we need a different computation
+    if (boundariesNode.nodeName === 'HTML' && !isFixed(offsetParent)) {
+      var _getWindowSizes = getWindowSizes(popper.ownerDocument),
+          height = _getWindowSizes.height,
+          width = _getWindowSizes.width;
+
+      boundaries.top += offsets.top - offsets.marginTop;
+      boundaries.bottom = height + offsets.top;
+      boundaries.left += offsets.left - offsets.marginLeft;
+      boundaries.right = width + offsets.left;
+    } else {
+      // for all the other DOM elements, this one is good
+      boundaries = offsets;
+    }
+  }
+
+  // Add paddings
+  padding = padding || 0;
+  var isPaddingNumber = typeof padding === 'number';
+  boundaries.left += isPaddingNumber ? padding : padding.left || 0;
+  boundaries.top += isPaddingNumber ? padding : padding.top || 0;
+  boundaries.right -= isPaddingNumber ? padding : padding.right || 0;
+  boundaries.bottom -= isPaddingNumber ? padding : padding.bottom || 0;
+
+  return boundaries;
+}
+
+function getArea(_ref) {
+  var width = _ref.width,
+      height = _ref.height;
+
+  return width * height;
+}
+
+/**
+ * Utility used to transform the `auto` placement to the placement with more
+ * available space.
+ * @method
+ * @memberof Popper.Utils
+ * @argument {Object} data - The data object generated by update method
+ * @argument {Object} options - Modifiers configuration and options
+ * @returns {Object} The data object, properly modified
+ */
+function computeAutoPlacement(placement, refRect, popper, reference, boundariesElement) {
+  var padding = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
+
+  if (placement.indexOf('auto') === -1) {
+    return placement;
+  }
+
+  var boundaries = getBoundaries(popper, reference, padding, boundariesElement);
+
+  var rects = {
+    top: {
+      width: boundaries.width,
+      height: refRect.top - boundaries.top
+    },
+    right: {
+      width: boundaries.right - refRect.right,
+      height: boundaries.height
+    },
+    bottom: {
+      width: boundaries.width,
+      height: boundaries.bottom - refRect.bottom
+    },
+    left: {
+      width: refRect.left - boundaries.left,
+      height: boundaries.height
+    }
+  };
+
+  var sortedAreas = Object.keys(rects).map(function (key) {
+    return _extends({
+      key: key
+    }, rects[key], {
+      area: getArea(rects[key])
+    });
+  }).sort(function (a, b) {
+    return b.area - a.area;
+  });
+
+  var filteredAreas = sortedAreas.filter(function (_ref2) {
+    var width = _ref2.width,
+        height = _ref2.height;
+    return width >= popper.clientWidth && height >= popper.clientHeight;
+  });
+
+  var computedPlacement = filteredAreas.length > 0 ? filteredAreas[0].key : sortedAreas[0].key;
+
+  var variation = placement.split('-')[1];
+
+  return computedPlacement + (variation ? '-' + variation : '');
+}
+
+/**
+ * Get offsets to the reference element
+ * @method
+ * @memberof Popper.Utils
+ * @param {Object} state
+ * @param {Element} popper - the popper element
+ * @param {Element} reference - the reference element (the popper will be relative to this)
+ * @param {Element} fixedPosition - is in fixed position mode
+ * @returns {Object} An object containing the offsets which will be applied to the popper
+ */
+function getReferenceOffsets(state, popper, reference) {
+  var fixedPosition = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+
+  var commonOffsetParent = fixedPosition ? getFixedPositionOffsetParent(popper) : findCommonOffsetParent(popper, reference);
+  return getOffsetRectRelativeToArbitraryNode(reference, commonOffsetParent, fixedPosition);
+}
+
+/**
+ * Get the outer sizes of the given element (offset size + margins)
+ * @method
+ * @memberof Popper.Utils
+ * @argument {Element} element
+ * @returns {Object} object containing width and height properties
+ */
+function getOuterSizes(element) {
+  var styles = getComputedStyle(element);
+  var x = parseFloat(styles.marginTop) + parseFloat(styles.marginBottom);
+  var y = parseFloat(styles.marginLeft) + parseFloat(styles.marginRight);
+  var result = {
+    width: element.offsetWidth + y,
+    height: element.offsetHeight + x
+  };
+  return result;
+}
+
+/**
+ * Get the opposite placement of the given one
+ * @method
+ * @memberof Popper.Utils
+ * @argument {String} placement
+ * @returns {String} flipped placement
+ */
+function getOppositePlacement(placement) {
+  var hash = { left: 'right', right: 'left', bottom: 'top', top: 'bottom' };
+  return placement.replace(/left|right|bottom|top/g, function (matched) {
+    return hash[matched];
+  });
+}
+
+/**
+ * Get offsets to the popper
+ * @method
+ * @memberof Popper.Utils
+ * @param {Object} position - CSS position the Popper will get applied
+ * @param {HTMLElement} popper - the popper element
+ * @param {Object} referenceOffsets - the reference offsets (the popper will be relative to this)
+ * @param {String} placement - one of the valid placement options
+ * @returns {Object} popperOffsets - An object containing the offsets which will be applied to the popper
+ */
+function getPopperOffsets(popper, referenceOffsets, placement) {
+  placement = placement.split('-')[0];
+
+  // Get popper node sizes
+  var popperRect = getOuterSizes(popper);
+
+  // Add position, width and height to our offsets object
+  var popperOffsets = {
+    width: popperRect.width,
+    height: popperRect.height
+  };
+
+  // depending by the popper placement we have to compute its offsets slightly differently
+  var isHoriz = ['right', 'left'].indexOf(placement) !== -1;
+  var mainSide = isHoriz ? 'top' : 'left';
+  var secondarySide = isHoriz ? 'left' : 'top';
+  var measurement = isHoriz ? 'height' : 'width';
+  var secondaryMeasurement = !isHoriz ? 'height' : 'width';
+
+  popperOffsets[mainSide] = referenceOffsets[mainSide] + referenceOffsets[measurement] / 2 - popperRect[measurement] / 2;
+  if (placement === secondarySide) {
+    popperOffsets[secondarySide] = referenceOffsets[secondarySide] - popperRect[secondaryMeasurement];
+  } else {
+    popperOffsets[secondarySide] = referenceOffsets[getOppositePlacement(secondarySide)];
+  }
+
+  return popperOffsets;
+}
+
+/**
+ * Mimics the `find` method of Array
+ * @method
+ * @memberof Popper.Utils
+ * @argument {Array} arr
+ * @argument prop
+ * @argument value
+ * @returns index or -1
+ */
+function find(arr, check) {
+  // use native find if supported
+  if (Array.prototype.find) {
+    return arr.find(check);
+  }
+
+  // use `filter` to obtain the same behavior of `find`
+  return arr.filter(check)[0];
+}
+
+/**
+ * Return the index of the matching object
+ * @method
+ * @memberof Popper.Utils
+ * @argument {Array} arr
+ * @argument prop
+ * @argument value
+ * @returns index or -1
+ */
+function findIndex(arr, prop, value) {
+  // use native findIndex if supported
+  if (Array.prototype.findIndex) {
+    return arr.findIndex(function (cur) {
+      return cur[prop] === value;
+    });
+  }
+
+  // use `find` + `indexOf` if `findIndex` isn't supported
+  var match = find(arr, function (obj) {
+    return obj[prop] === value;
+  });
+  return arr.indexOf(match);
+}
+
+/**
+ * Loop trough the list of modifiers and run them in order,
+ * each of them will then edit the data object.
+ * @method
+ * @memberof Popper.Utils
+ * @param {dataObject} data
+ * @param {Array} modifiers
+ * @param {String} ends - Optional modifier name used as stopper
+ * @returns {dataObject}
+ */
+function runModifiers(modifiers, data, ends) {
+  var modifiersToRun = ends === undefined ? modifiers : modifiers.slice(0, findIndex(modifiers, 'name', ends));
+
+  modifiersToRun.forEach(function (modifier) {
+    if (modifier['function']) {
+      // eslint-disable-line dot-notation
+      console.warn('`modifier.function` is deprecated, use `modifier.fn`!');
+    }
+    var fn = modifier['function'] || modifier.fn; // eslint-disable-line dot-notation
+    if (modifier.enabled && isFunction(fn)) {
+      // Add properties to offsets to make them a complete clientRect object
+      // we do this before each modifier to make sure the previous one doesn't
+      // mess with these values
+      data.offsets.popper = getClientRect(data.offsets.popper);
+      data.offsets.reference = getClientRect(data.offsets.reference);
+
+      data = fn(data, modifier);
+    }
+  });
+
+  return data;
+}
+
+/**
+ * Updates the position of the popper, computing the new offsets and applying
+ * the new style.<br />
+ * Prefer `scheduleUpdate` over `update` because of performance reasons.
+ * @method
+ * @memberof Popper
+ */
+function update() {
+  // if popper is destroyed, don't perform any further update
+  if (this.state.isDestroyed) {
+    return;
+  }
+
+  var data = {
+    instance: this,
+    styles: {},
+    arrowStyles: {},
+    attributes: {},
+    flipped: false,
+    offsets: {}
+  };
+
+  // compute reference element offsets
+  data.offsets.reference = getReferenceOffsets(this.state, this.popper, this.reference, this.options.positionFixed);
+
+  // compute auto placement, store placement inside the data object,
+  // modifiers will be able to edit `placement` if needed
+  // and refer to originalPlacement to know the original value
+  data.placement = computeAutoPlacement(this.options.placement, data.offsets.reference, this.popper, this.reference, this.options.modifiers.flip.boundariesElement, this.options.modifiers.flip.padding);
+
+  // store the computed placement inside `originalPlacement`
+  data.originalPlacement = data.placement;
+
+  data.positionFixed = this.options.positionFixed;
+
+  // compute the popper offsets
+  data.offsets.popper = getPopperOffsets(this.popper, data.offsets.reference, data.placement);
+
+  data.offsets.popper.position = this.options.positionFixed ? 'fixed' : 'absolute';
+
+  // run the modifiers
+  data = runModifiers(this.modifiers, data);
+
+  // the first `update` will call `onCreate` callback
+  // the other ones will call `onUpdate` callback
+  if (!this.state.isCreated) {
+    this.state.isCreated = true;
+    this.options.onCreate(data);
+  } else {
+    this.options.onUpdate(data);
+  }
+}
+
+/**
+ * Helper used to know if the given modifier is enabled.
+ * @method
+ * @memberof Popper.Utils
+ * @returns {Boolean}
+ */
+function isModifierEnabled(modifiers, modifierName) {
+  return modifiers.some(function (_ref) {
+    var name = _ref.name,
+        enabled = _ref.enabled;
+    return enabled && name === modifierName;
+  });
+}
+
+/**
+ * Get the prefixed supported property name
+ * @method
+ * @memberof Popper.Utils
+ * @argument {String} property (camelCase)
+ * @returns {String} prefixed property (camelCase or PascalCase, depending on the vendor prefix)
+ */
+function getSupportedPropertyName(property) {
+  var prefixes = [false, 'ms', 'Webkit', 'Moz', 'O'];
+  var upperProp = property.charAt(0).toUpperCase() + property.slice(1);
+
+  for (var i = 0; i < prefixes.length; i++) {
+    var prefix = prefixes[i];
+    var toCheck = prefix ? '' + prefix + upperProp : property;
+    if (typeof document.body.style[toCheck] !== 'undefined') {
+      return toCheck;
+    }
+  }
+  return null;
+}
+
+/**
+ * Destroys the popper.
+ * @method
+ * @memberof Popper
+ */
+function destroy() {
+  this.state.isDestroyed = true;
+
+  // touch DOM only if `applyStyle` modifier is enabled
+  if (isModifierEnabled(this.modifiers, 'applyStyle')) {
+    this.popper.removeAttribute('x-placement');
+    this.popper.style.position = '';
+    this.popper.style.top = '';
+    this.popper.style.left = '';
+    this.popper.style.right = '';
+    this.popper.style.bottom = '';
+    this.popper.style.willChange = '';
+    this.popper.style[getSupportedPropertyName('transform')] = '';
+  }
+
+  this.disableEventListeners();
+
+  // remove the popper if user explicity asked for the deletion on destroy
+  // do not use `remove` because IE11 doesn't support it
+  if (this.options.removeOnDestroy) {
+    this.popper.parentNode.removeChild(this.popper);
+  }
+  return this;
+}
+
+/**
+ * Get the window associated with the element
+ * @argument {Element} element
+ * @returns {Window}
+ */
+function getWindow(element) {
+  var ownerDocument = element.ownerDocument;
+  return ownerDocument ? ownerDocument.defaultView : window;
+}
+
+function attachToScrollParents(scrollParent, event, callback, scrollParents) {
+  var isBody = scrollParent.nodeName === 'BODY';
+  var target = isBody ? scrollParent.ownerDocument.defaultView : scrollParent;
+  target.addEventListener(event, callback, { passive: true });
+
+  if (!isBody) {
+    attachToScrollParents(getScrollParent(target.parentNode), event, callback, scrollParents);
+  }
+  scrollParents.push(target);
+}
+
+/**
+ * Setup needed event listeners used to update the popper position
+ * @method
+ * @memberof Popper.Utils
+ * @private
+ */
+function setupEventListeners(reference, options, state, updateBound) {
+  // Resize event listener on window
+  state.updateBound = updateBound;
+  getWindow(reference).addEventListener('resize', state.updateBound, { passive: true });
+
+  // Scroll event listener on scroll parents
+  var scrollElement = getScrollParent(reference);
+  attachToScrollParents(scrollElement, 'scroll', state.updateBound, state.scrollParents);
+  state.scrollElement = scrollElement;
+  state.eventsEnabled = true;
+
+  return state;
+}
+
+/**
+ * It will add resize/scroll events and start recalculating
+ * position of the popper element when they are triggered.
+ * @method
+ * @memberof Popper
+ */
+function enableEventListeners() {
+  if (!this.state.eventsEnabled) {
+    this.state = setupEventListeners(this.reference, this.options, this.state, this.scheduleUpdate);
+  }
+}
+
+/**
+ * Remove event listeners used to update the popper position
+ * @method
+ * @memberof Popper.Utils
+ * @private
+ */
+function removeEventListeners(reference, state) {
+  // Remove resize event listener on window
+  getWindow(reference).removeEventListener('resize', state.updateBound);
+
+  // Remove scroll event listener on scroll parents
+  state.scrollParents.forEach(function (target) {
+    target.removeEventListener('scroll', state.updateBound);
+  });
+
+  // Reset state
+  state.updateBound = null;
+  state.scrollParents = [];
+  state.scrollElement = null;
+  state.eventsEnabled = false;
+  return state;
+}
+
+/**
+ * It will remove resize/scroll events and won't recalculate popper position
+ * when they are triggered. It also won't trigger `onUpdate` callback anymore,
+ * unless you call `update` method manually.
+ * @method
+ * @memberof Popper
+ */
+function disableEventListeners() {
+  if (this.state.eventsEnabled) {
+    cancelAnimationFrame(this.scheduleUpdate);
+    this.state = removeEventListeners(this.reference, this.state);
+  }
+}
+
+/**
+ * Tells if a given input is a number
+ * @method
+ * @memberof Popper.Utils
+ * @param {*} input to check
+ * @return {Boolean}
+ */
+function isNumeric(n) {
+  return n !== '' && !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+/**
+ * Set the style to the given popper
+ * @method
+ * @memberof Popper.Utils
+ * @argument {Element} element - Element to apply the style to
+ * @argument {Object} styles
+ * Object with a list of properties and values which will be applied to the element
+ */
+function setStyles(element, styles) {
+  Object.keys(styles).forEach(function (prop) {
+    var unit = '';
+    // add unit if the value is numeric and is one of the following
+    if (['width', 'height', 'top', 'right', 'bottom', 'left'].indexOf(prop) !== -1 && isNumeric(styles[prop])) {
+      unit = 'px';
+    }
+    element.style[prop] = styles[prop] + unit;
+  });
+}
+
+/**
+ * Set the attributes to the given popper
+ * @method
+ * @memberof Popper.Utils
+ * @argument {Element} element - Element to apply the attributes to
+ * @argument {Object} styles
+ * Object with a list of properties and values which will be applied to the element
+ */
+function setAttributes(element, attributes) {
+  Object.keys(attributes).forEach(function (prop) {
+    var value = attributes[prop];
+    if (value !== false) {
+      element.setAttribute(prop, attributes[prop]);
+    } else {
+      element.removeAttribute(prop);
+    }
+  });
+}
+
+/**
+ * @function
+ * @memberof Modifiers
+ * @argument {Object} data - The data object generated by `update` method
+ * @argument {Object} data.styles - List of style properties - values to apply to popper element
+ * @argument {Object} data.attributes - List of attribute properties - values to apply to popper element
+ * @argument {Object} options - Modifiers configuration and options
+ * @returns {Object} The same data object
+ */
+function applyStyle(data) {
+  // any property present in `data.styles` will be applied to the popper,
+  // in this way we can make the 3rd party modifiers add custom styles to it
+  // Be aware, modifiers could override the properties defined in the previous
+  // lines of this modifier!
+  setStyles(data.instance.popper, data.styles);
+
+  // any property present in `data.attributes` will be applied to the popper,
+  // they will be set as HTML attributes of the element
+  setAttributes(data.instance.popper, data.attributes);
+
+  // if arrowElement is defined and arrowStyles has some properties
+  if (data.arrowElement && Object.keys(data.arrowStyles).length) {
+    setStyles(data.arrowElement, data.arrowStyles);
+  }
+
+  return data;
+}
+
+/**
+ * Set the x-placement attribute before everything else because it could be used
+ * to add margins to the popper margins needs to be calculated to get the
+ * correct popper offsets.
+ * @method
+ * @memberof Popper.modifiers
+ * @param {HTMLElement} reference - The reference element used to position the popper
+ * @param {HTMLElement} popper - The HTML element used as popper
+ * @param {Object} options - Popper.js options
+ */
+function applyStyleOnLoad(reference, popper, options, modifierOptions, state) {
+  // compute reference element offsets
+  var referenceOffsets = getReferenceOffsets(state, popper, reference, options.positionFixed);
+
+  // compute auto placement, store placement inside the data object,
+  // modifiers will be able to edit `placement` if needed
+  // and refer to originalPlacement to know the original value
+  var placement = computeAutoPlacement(options.placement, referenceOffsets, popper, reference, options.modifiers.flip.boundariesElement, options.modifiers.flip.padding);
+
+  popper.setAttribute('x-placement', placement);
+
+  // Apply `position` to popper before anything else because
+  // without the position applied we can't guarantee correct computations
+  setStyles(popper, { position: options.positionFixed ? 'fixed' : 'absolute' });
+
+  return options;
+}
+
+/**
+ * @function
+ * @memberof Modifiers
+ * @argument {Object} data - The data object generated by `update` method
+ * @argument {Object} options - Modifiers configuration and options
+ * @returns {Object} The data object, properly modified
+ */
+function computeStyle(data, options) {
+  var x = options.x,
+      y = options.y;
+  var popper = data.offsets.popper;
+
+  // Remove this legacy support in Popper.js v2
+
+  var legacyGpuAccelerationOption = find(data.instance.modifiers, function (modifier) {
+    return modifier.name === 'applyStyle';
+  }).gpuAcceleration;
+  if (legacyGpuAccelerationOption !== undefined) {
+    console.warn('WARNING: `gpuAcceleration` option moved to `computeStyle` modifier and will not be supported in future versions of Popper.js!');
+  }
+  var gpuAcceleration = legacyGpuAccelerationOption !== undefined ? legacyGpuAccelerationOption : options.gpuAcceleration;
+
+  var offsetParent = getOffsetParent(data.instance.popper);
+  var offsetParentRect = getBoundingClientRect(offsetParent);
+
+  // Styles
+  var styles = {
+    position: popper.position
+  };
+
+  // Avoid blurry text by using full pixel integers.
+  // For pixel-perfect positioning, top/bottom prefers rounded
+  // values, while left/right prefers floored values.
+  var offsets = {
+    left: Math.floor(popper.left),
+    top: Math.round(popper.top),
+    bottom: Math.round(popper.bottom),
+    right: Math.floor(popper.right)
+  };
+
+  var sideA = x === 'bottom' ? 'top' : 'bottom';
+  var sideB = y === 'right' ? 'left' : 'right';
+
+  // if gpuAcceleration is set to `true` and transform is supported,
+  //  we use `translate3d` to apply the position to the popper we
+  // automatically use the supported prefixed version if needed
+  var prefixedProperty = getSupportedPropertyName('transform');
+
+  // now, let's make a step back and look at this code closely (wtf?)
+  // If the content of the popper grows once it's been positioned, it
+  // may happen that the popper gets misplaced because of the new content
+  // overflowing its reference element
+  // To avoid this problem, we provide two options (x and y), which allow
+  // the consumer to define the offset origin.
+  // If we position a popper on top of a reference element, we can set
+  // `x` to `top` to make the popper grow towards its top instead of
+  // its bottom.
+  var left = void 0,
+      top = void 0;
+  if (sideA === 'bottom') {
+    // when offsetParent is <html> the positioning is relative to the bottom of the screen (excluding the scrollbar)
+    // and not the bottom of the html element
+    if (offsetParent.nodeName === 'HTML') {
+      top = -offsetParent.clientHeight + offsets.bottom;
+    } else {
+      top = -offsetParentRect.height + offsets.bottom;
+    }
+  } else {
+    top = offsets.top;
+  }
+  if (sideB === 'right') {
+    if (offsetParent.nodeName === 'HTML') {
+      left = -offsetParent.clientWidth + offsets.right;
+    } else {
+      left = -offsetParentRect.width + offsets.right;
+    }
+  } else {
+    left = offsets.left;
+  }
+  if (gpuAcceleration && prefixedProperty) {
+    styles[prefixedProperty] = 'translate3d(' + left + 'px, ' + top + 'px, 0)';
+    styles[sideA] = 0;
+    styles[sideB] = 0;
+    styles.willChange = 'transform';
+  } else {
+    // othwerise, we use the standard `top`, `left`, `bottom` and `right` properties
+    var invertTop = sideA === 'bottom' ? -1 : 1;
+    var invertLeft = sideB === 'right' ? -1 : 1;
+    styles[sideA] = top * invertTop;
+    styles[sideB] = left * invertLeft;
+    styles.willChange = sideA + ', ' + sideB;
+  }
+
+  // Attributes
+  var attributes = {
+    'x-placement': data.placement
+  };
+
+  // Update `data` attributes, styles and arrowStyles
+  data.attributes = _extends({}, attributes, data.attributes);
+  data.styles = _extends({}, styles, data.styles);
+  data.arrowStyles = _extends({}, data.offsets.arrow, data.arrowStyles);
+
+  return data;
+}
+
+/**
+ * Helper used to know if the given modifier depends from another one.<br />
+ * It checks if the needed modifier is listed and enabled.
+ * @method
+ * @memberof Popper.Utils
+ * @param {Array} modifiers - list of modifiers
+ * @param {String} requestingName - name of requesting modifier
+ * @param {String} requestedName - name of requested modifier
+ * @returns {Boolean}
+ */
+function isModifierRequired(modifiers, requestingName, requestedName) {
+  var requesting = find(modifiers, function (_ref) {
+    var name = _ref.name;
+    return name === requestingName;
+  });
+
+  var isRequired = !!requesting && modifiers.some(function (modifier) {
+    return modifier.name === requestedName && modifier.enabled && modifier.order < requesting.order;
+  });
+
+  if (!isRequired) {
+    var _requesting = '`' + requestingName + '`';
+    var requested = '`' + requestedName + '`';
+    console.warn(requested + ' modifier is required by ' + _requesting + ' modifier in order to work, be sure to include it before ' + _requesting + '!');
+  }
+  return isRequired;
+}
+
+/**
+ * @function
+ * @memberof Modifiers
+ * @argument {Object} data - The data object generated by update method
+ * @argument {Object} options - Modifiers configuration and options
+ * @returns {Object} The data object, properly modified
+ */
+function arrow(data, options) {
+  var _data$offsets$arrow;
+
+  // arrow depends on keepTogether in order to work
+  if (!isModifierRequired(data.instance.modifiers, 'arrow', 'keepTogether')) {
+    return data;
+  }
+
+  var arrowElement = options.element;
+
+  // if arrowElement is a string, suppose it's a CSS selector
+  if (typeof arrowElement === 'string') {
+    arrowElement = data.instance.popper.querySelector(arrowElement);
+
+    // if arrowElement is not found, don't run the modifier
+    if (!arrowElement) {
+      return data;
+    }
+  } else {
+    // if the arrowElement isn't a query selector we must check that the
+    // provided DOM node is child of its popper node
+    if (!data.instance.popper.contains(arrowElement)) {
+      console.warn('WARNING: `arrow.element` must be child of its popper element!');
+      return data;
+    }
+  }
+
+  var placement = data.placement.split('-')[0];
+  var _data$offsets = data.offsets,
+      popper = _data$offsets.popper,
+      reference = _data$offsets.reference;
+
+  var isVertical = ['left', 'right'].indexOf(placement) !== -1;
+
+  var len = isVertical ? 'height' : 'width';
+  var sideCapitalized = isVertical ? 'Top' : 'Left';
+  var side = sideCapitalized.toLowerCase();
+  var altSide = isVertical ? 'left' : 'top';
+  var opSide = isVertical ? 'bottom' : 'right';
+  var arrowElementSize = getOuterSizes(arrowElement)[len];
+
+  //
+  // extends keepTogether behavior making sure the popper and its
+  // reference have enough pixels in conjunction
+  //
+
+  // top/left side
+  if (reference[opSide] - arrowElementSize < popper[side]) {
+    data.offsets.popper[side] -= popper[side] - (reference[opSide] - arrowElementSize);
+  }
+  // bottom/right side
+  if (reference[side] + arrowElementSize > popper[opSide]) {
+    data.offsets.popper[side] += reference[side] + arrowElementSize - popper[opSide];
+  }
+  data.offsets.popper = getClientRect(data.offsets.popper);
+
+  // compute center of the popper
+  var center = reference[side] + reference[len] / 2 - arrowElementSize / 2;
+
+  // Compute the sideValue using the updated popper offsets
+  // take popper margin in account because we don't have this info available
+  var css = getStyleComputedProperty(data.instance.popper);
+  var popperMarginSide = parseFloat(css['margin' + sideCapitalized], 10);
+  var popperBorderSide = parseFloat(css['border' + sideCapitalized + 'Width'], 10);
+  var sideValue = center - data.offsets.popper[side] - popperMarginSide - popperBorderSide;
+
+  // prevent arrowElement from being placed not contiguously to its popper
+  sideValue = Math.max(Math.min(popper[len] - arrowElementSize, sideValue), 0);
+
+  data.arrowElement = arrowElement;
+  data.offsets.arrow = (_data$offsets$arrow = {}, defineProperty(_data$offsets$arrow, side, Math.round(sideValue)), defineProperty(_data$offsets$arrow, altSide, ''), _data$offsets$arrow);
+
+  return data;
+}
+
+/**
+ * Get the opposite placement variation of the given one
+ * @method
+ * @memberof Popper.Utils
+ * @argument {String} placement variation
+ * @returns {String} flipped placement variation
+ */
+function getOppositeVariation(variation) {
+  if (variation === 'end') {
+    return 'start';
+  } else if (variation === 'start') {
+    return 'end';
+  }
+  return variation;
+}
+
+/**
+ * List of accepted placements to use as values of the `placement` option.<br />
+ * Valid placements are:
+ * - `auto`
+ * - `top`
+ * - `right`
+ * - `bottom`
+ * - `left`
+ *
+ * Each placement can have a variation from this list:
+ * - `-start`
+ * - `-end`
+ *
+ * Variations are interpreted easily if you think of them as the left to right
+ * written languages. Horizontally (`top` and `bottom`), `start` is left and `end`
+ * is right.<br />
+ * Vertically (`left` and `right`), `start` is top and `end` is bottom.
+ *
+ * Some valid examples are:
+ * - `top-end` (on top of reference, right aligned)
+ * - `right-start` (on right of reference, top aligned)
+ * - `bottom` (on bottom, centered)
+ * - `auto-end` (on the side with more space available, alignment depends by placement)
+ *
+ * @static
+ * @type {Array}
+ * @enum {String}
+ * @readonly
+ * @method placements
+ * @memberof Popper
+ */
+var placements = ['auto-start', 'auto', 'auto-end', 'top-start', 'top', 'top-end', 'right-start', 'right', 'right-end', 'bottom-end', 'bottom', 'bottom-start', 'left-end', 'left', 'left-start'];
+
+// Get rid of `auto` `auto-start` and `auto-end`
+var validPlacements = placements.slice(3);
+
+/**
+ * Given an initial placement, returns all the subsequent placements
+ * clockwise (or counter-clockwise).
+ *
+ * @method
+ * @memberof Popper.Utils
+ * @argument {String} placement - A valid placement (it accepts variations)
+ * @argument {Boolean} counter - Set to true to walk the placements counterclockwise
+ * @returns {Array} placements including their variations
+ */
+function clockwise(placement) {
+  var counter = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+  var index = validPlacements.indexOf(placement);
+  var arr = validPlacements.slice(index + 1).concat(validPlacements.slice(0, index));
+  return counter ? arr.reverse() : arr;
+}
+
+var BEHAVIORS = {
+  FLIP: 'flip',
+  CLOCKWISE: 'clockwise',
+  COUNTERCLOCKWISE: 'counterclockwise'
+};
+
+/**
+ * @function
+ * @memberof Modifiers
+ * @argument {Object} data - The data object generated by update method
+ * @argument {Object} options - Modifiers configuration and options
+ * @returns {Object} The data object, properly modified
+ */
+function flip(data, options) {
+  // if `inner` modifier is enabled, we can't use the `flip` modifier
+  if (isModifierEnabled(data.instance.modifiers, 'inner')) {
+    return data;
+  }
+
+  if (data.flipped && data.placement === data.originalPlacement) {
+    // seems like flip is trying to loop, probably there's not enough space on any of the flippable sides
+    return data;
+  }
+
+  var boundaries = getBoundaries(data.instance.popper, data.instance.reference, options.padding, options.boundariesElement, data.positionFixed);
+
+  var placement = data.placement.split('-')[0];
+  var placementOpposite = getOppositePlacement(placement);
+  var variation = data.placement.split('-')[1] || '';
+
+  var flipOrder = [];
+
+  switch (options.behavior) {
+    case BEHAVIORS.FLIP:
+      flipOrder = [placement, placementOpposite];
+      break;
+    case BEHAVIORS.CLOCKWISE:
+      flipOrder = clockwise(placement);
+      break;
+    case BEHAVIORS.COUNTERCLOCKWISE:
+      flipOrder = clockwise(placement, true);
+      break;
+    default:
+      flipOrder = options.behavior;
+  }
+
+  flipOrder.forEach(function (step, index) {
+    if (placement !== step || flipOrder.length === index + 1) {
+      return data;
+    }
+
+    placement = data.placement.split('-')[0];
+    placementOpposite = getOppositePlacement(placement);
+
+    var popperOffsets = data.offsets.popper;
+    var refOffsets = data.offsets.reference;
+
+    // using floor because the reference offsets may contain decimals we are not going to consider here
+    var floor = Math.floor;
+    var overlapsRef = placement === 'left' && floor(popperOffsets.right) > floor(refOffsets.left) || placement === 'right' && floor(popperOffsets.left) < floor(refOffsets.right) || placement === 'top' && floor(popperOffsets.bottom) > floor(refOffsets.top) || placement === 'bottom' && floor(popperOffsets.top) < floor(refOffsets.bottom);
+
+    var overflowsLeft = floor(popperOffsets.left) < floor(boundaries.left);
+    var overflowsRight = floor(popperOffsets.right) > floor(boundaries.right);
+    var overflowsTop = floor(popperOffsets.top) < floor(boundaries.top);
+    var overflowsBottom = floor(popperOffsets.bottom) > floor(boundaries.bottom);
+
+    var overflowsBoundaries = placement === 'left' && overflowsLeft || placement === 'right' && overflowsRight || placement === 'top' && overflowsTop || placement === 'bottom' && overflowsBottom;
+
+    // flip the variation if required
+    var isVertical = ['top', 'bottom'].indexOf(placement) !== -1;
+    var flippedVariation = !!options.flipVariations && (isVertical && variation === 'start' && overflowsLeft || isVertical && variation === 'end' && overflowsRight || !isVertical && variation === 'start' && overflowsTop || !isVertical && variation === 'end' && overflowsBottom);
+
+    if (overlapsRef || overflowsBoundaries || flippedVariation) {
+      // this boolean to detect any flip loop
+      data.flipped = true;
+
+      if (overlapsRef || overflowsBoundaries) {
+        placement = flipOrder[index + 1];
+      }
+
+      if (flippedVariation) {
+        variation = getOppositeVariation(variation);
+      }
+
+      data.placement = placement + (variation ? '-' + variation : '');
+
+      // this object contains `position`, we want to preserve it along with
+      // any additional property we may add in the future
+      data.offsets.popper = _extends({}, data.offsets.popper, getPopperOffsets(data.instance.popper, data.offsets.reference, data.placement));
+
+      data = runModifiers(data.instance.modifiers, data, 'flip');
+    }
+  });
+  return data;
+}
+
+/**
+ * @function
+ * @memberof Modifiers
+ * @argument {Object} data - The data object generated by update method
+ * @argument {Object} options - Modifiers configuration and options
+ * @returns {Object} The data object, properly modified
+ */
+function keepTogether(data) {
+  var _data$offsets = data.offsets,
+      popper = _data$offsets.popper,
+      reference = _data$offsets.reference;
+
+  var placement = data.placement.split('-')[0];
+  var floor = Math.floor;
+  var isVertical = ['top', 'bottom'].indexOf(placement) !== -1;
+  var side = isVertical ? 'right' : 'bottom';
+  var opSide = isVertical ? 'left' : 'top';
+  var measurement = isVertical ? 'width' : 'height';
+
+  if (popper[side] < floor(reference[opSide])) {
+    data.offsets.popper[opSide] = floor(reference[opSide]) - popper[measurement];
+  }
+  if (popper[opSide] > floor(reference[side])) {
+    data.offsets.popper[opSide] = floor(reference[side]);
+  }
+
+  return data;
+}
+
+/**
+ * Converts a string containing value + unit into a px value number
+ * @function
+ * @memberof {modifiers~offset}
+ * @private
+ * @argument {String} str - Value + unit string
+ * @argument {String} measurement - `height` or `width`
+ * @argument {Object} popperOffsets
+ * @argument {Object} referenceOffsets
+ * @returns {Number|String}
+ * Value in pixels, or original string if no values were extracted
+ */
+function toValue(str, measurement, popperOffsets, referenceOffsets) {
+  // separate value from unit
+  var split = str.match(/((?:\-|\+)?\d*\.?\d*)(.*)/);
+  var value = +split[1];
+  var unit = split[2];
+
+  // If it's not a number it's an operator, I guess
+  if (!value) {
+    return str;
+  }
+
+  if (unit.indexOf('%') === 0) {
+    var element = void 0;
+    switch (unit) {
+      case '%p':
+        element = popperOffsets;
+        break;
+      case '%':
+      case '%r':
+      default:
+        element = referenceOffsets;
+    }
+
+    var rect = getClientRect(element);
+    return rect[measurement] / 100 * value;
+  } else if (unit === 'vh' || unit === 'vw') {
+    // if is a vh or vw, we calculate the size based on the viewport
+    var size = void 0;
+    if (unit === 'vh') {
+      size = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    } else {
+      size = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    }
+    return size / 100 * value;
+  } else {
+    // if is an explicit pixel unit, we get rid of the unit and keep the value
+    // if is an implicit unit, it's px, and we return just the value
+    return value;
+  }
+}
+
+/**
+ * Parse an `offset` string to extrapolate `x` and `y` numeric offsets.
+ * @function
+ * @memberof {modifiers~offset}
+ * @private
+ * @argument {String} offset
+ * @argument {Object} popperOffsets
+ * @argument {Object} referenceOffsets
+ * @argument {String} basePlacement
+ * @returns {Array} a two cells array with x and y offsets in numbers
+ */
+function parseOffset(offset, popperOffsets, referenceOffsets, basePlacement) {
+  var offsets = [0, 0];
+
+  // Use height if placement is left or right and index is 0 otherwise use width
+  // in this way the first offset will use an axis and the second one
+  // will use the other one
+  var useHeight = ['right', 'left'].indexOf(basePlacement) !== -1;
+
+  // Split the offset string to obtain a list of values and operands
+  // The regex addresses values with the plus or minus sign in front (+10, -20, etc)
+  var fragments = offset.split(/(\+|\-)/).map(function (frag) {
+    return frag.trim();
+  });
+
+  // Detect if the offset string contains a pair of values or a single one
+  // they could be separated by comma or space
+  var divider = fragments.indexOf(find(fragments, function (frag) {
+    return frag.search(/,|\s/) !== -1;
+  }));
+
+  if (fragments[divider] && fragments[divider].indexOf(',') === -1) {
+    console.warn('Offsets separated by white space(s) are deprecated, use a comma (,) instead.');
+  }
+
+  // If divider is found, we divide the list of values and operands to divide
+  // them by ofset X and Y.
+  var splitRegex = /\s*,\s*|\s+/;
+  var ops = divider !== -1 ? [fragments.slice(0, divider).concat([fragments[divider].split(splitRegex)[0]]), [fragments[divider].split(splitRegex)[1]].concat(fragments.slice(divider + 1))] : [fragments];
+
+  // Convert the values with units to absolute pixels to allow our computations
+  ops = ops.map(function (op, index) {
+    // Most of the units rely on the orientation of the popper
+    var measurement = (index === 1 ? !useHeight : useHeight) ? 'height' : 'width';
+    var mergeWithPrevious = false;
+    return op
+    // This aggregates any `+` or `-` sign that aren't considered operators
+    // e.g.: 10 + +5 => [10, +, +5]
+    .reduce(function (a, b) {
+      if (a[a.length - 1] === '' && ['+', '-'].indexOf(b) !== -1) {
+        a[a.length - 1] = b;
+        mergeWithPrevious = true;
+        return a;
+      } else if (mergeWithPrevious) {
+        a[a.length - 1] += b;
+        mergeWithPrevious = false;
+        return a;
+      } else {
+        return a.concat(b);
+      }
+    }, [])
+    // Here we convert the string values into number values (in px)
+    .map(function (str) {
+      return toValue(str, measurement, popperOffsets, referenceOffsets);
+    });
+  });
+
+  // Loop trough the offsets arrays and execute the operations
+  ops.forEach(function (op, index) {
+    op.forEach(function (frag, index2) {
+      if (isNumeric(frag)) {
+        offsets[index] += frag * (op[index2 - 1] === '-' ? -1 : 1);
+      }
+    });
+  });
+  return offsets;
+}
+
+/**
+ * @function
+ * @memberof Modifiers
+ * @argument {Object} data - The data object generated by update method
+ * @argument {Object} options - Modifiers configuration and options
+ * @argument {Number|String} options.offset=0
+ * The offset value as described in the modifier description
+ * @returns {Object} The data object, properly modified
+ */
+function offset(data, _ref) {
+  var offset = _ref.offset;
+  var placement = data.placement,
+      _data$offsets = data.offsets,
+      popper = _data$offsets.popper,
+      reference = _data$offsets.reference;
+
+  var basePlacement = placement.split('-')[0];
+
+  var offsets = void 0;
+  if (isNumeric(+offset)) {
+    offsets = [+offset, 0];
+  } else {
+    offsets = parseOffset(offset, popper, reference, basePlacement);
+  }
+
+  if (basePlacement === 'left') {
+    popper.top += offsets[0];
+    popper.left -= offsets[1];
+  } else if (basePlacement === 'right') {
+    popper.top += offsets[0];
+    popper.left += offsets[1];
+  } else if (basePlacement === 'top') {
+    popper.left += offsets[0];
+    popper.top -= offsets[1];
+  } else if (basePlacement === 'bottom') {
+    popper.left += offsets[0];
+    popper.top += offsets[1];
+  }
+
+  data.popper = popper;
+  return data;
+}
+
+/**
+ * @function
+ * @memberof Modifiers
+ * @argument {Object} data - The data object generated by `update` method
+ * @argument {Object} options - Modifiers configuration and options
+ * @returns {Object} The data object, properly modified
+ */
+function preventOverflow(data, options) {
+  var boundariesElement = options.boundariesElement || getOffsetParent(data.instance.popper);
+
+  // If offsetParent is the reference element, we really want to
+  // go one step up and use the next offsetParent as reference to
+  // avoid to make this modifier completely useless and look like broken
+  if (data.instance.reference === boundariesElement) {
+    boundariesElement = getOffsetParent(boundariesElement);
+  }
+
+  // NOTE: DOM access here
+  // resets the popper's position so that the document size can be calculated excluding
+  // the size of the popper element itself
+  var transformProp = getSupportedPropertyName('transform');
+  var popperStyles = data.instance.popper.style; // assignment to help minification
+  var top = popperStyles.top,
+      left = popperStyles.left,
+      transform = popperStyles[transformProp];
+
+  popperStyles.top = '';
+  popperStyles.left = '';
+  popperStyles[transformProp] = '';
+
+  var boundaries = getBoundaries(data.instance.popper, data.instance.reference, options.padding, boundariesElement, data.positionFixed);
+
+  // NOTE: DOM access here
+  // restores the original style properties after the offsets have been computed
+  popperStyles.top = top;
+  popperStyles.left = left;
+  popperStyles[transformProp] = transform;
+
+  options.boundaries = boundaries;
+
+  var order = options.priority;
+  var popper = data.offsets.popper;
+
+  var check = {
+    primary: function primary(placement) {
+      var value = popper[placement];
+      if (popper[placement] < boundaries[placement] && !options.escapeWithReference) {
+        value = Math.max(popper[placement], boundaries[placement]);
+      }
+      return defineProperty({}, placement, value);
+    },
+    secondary: function secondary(placement) {
+      var mainSide = placement === 'right' ? 'left' : 'top';
+      var value = popper[mainSide];
+      if (popper[placement] > boundaries[placement] && !options.escapeWithReference) {
+        value = Math.min(popper[mainSide], boundaries[placement] - (placement === 'right' ? popper.width : popper.height));
+      }
+      return defineProperty({}, mainSide, value);
+    }
+  };
+
+  order.forEach(function (placement) {
+    var side = ['left', 'top'].indexOf(placement) !== -1 ? 'primary' : 'secondary';
+    popper = _extends({}, popper, check[side](placement));
+  });
+
+  data.offsets.popper = popper;
+
+  return data;
+}
+
+/**
+ * @function
+ * @memberof Modifiers
+ * @argument {Object} data - The data object generated by `update` method
+ * @argument {Object} options - Modifiers configuration and options
+ * @returns {Object} The data object, properly modified
+ */
+function shift(data) {
+  var placement = data.placement;
+  var basePlacement = placement.split('-')[0];
+  var shiftvariation = placement.split('-')[1];
+
+  // if shift shiftvariation is specified, run the modifier
+  if (shiftvariation) {
+    var _data$offsets = data.offsets,
+        reference = _data$offsets.reference,
+        popper = _data$offsets.popper;
+
+    var isVertical = ['bottom', 'top'].indexOf(basePlacement) !== -1;
+    var side = isVertical ? 'left' : 'top';
+    var measurement = isVertical ? 'width' : 'height';
+
+    var shiftOffsets = {
+      start: defineProperty({}, side, reference[side]),
+      end: defineProperty({}, side, reference[side] + reference[measurement] - popper[measurement])
+    };
+
+    data.offsets.popper = _extends({}, popper, shiftOffsets[shiftvariation]);
+  }
+
+  return data;
+}
+
+/**
+ * @function
+ * @memberof Modifiers
+ * @argument {Object} data - The data object generated by update method
+ * @argument {Object} options - Modifiers configuration and options
+ * @returns {Object} The data object, properly modified
+ */
+function hide(data) {
+  if (!isModifierRequired(data.instance.modifiers, 'hide', 'preventOverflow')) {
+    return data;
+  }
+
+  var refRect = data.offsets.reference;
+  var bound = find(data.instance.modifiers, function (modifier) {
+    return modifier.name === 'preventOverflow';
+  }).boundaries;
+
+  if (refRect.bottom < bound.top || refRect.left > bound.right || refRect.top > bound.bottom || refRect.right < bound.left) {
+    // Avoid unnecessary DOM access if visibility hasn't changed
+    if (data.hide === true) {
+      return data;
+    }
+
+    data.hide = true;
+    data.attributes['x-out-of-boundaries'] = '';
+  } else {
+    // Avoid unnecessary DOM access if visibility hasn't changed
+    if (data.hide === false) {
+      return data;
+    }
+
+    data.hide = false;
+    data.attributes['x-out-of-boundaries'] = false;
+  }
+
+  return data;
+}
+
+/**
+ * @function
+ * @memberof Modifiers
+ * @argument {Object} data - The data object generated by `update` method
+ * @argument {Object} options - Modifiers configuration and options
+ * @returns {Object} The data object, properly modified
+ */
+function inner(data) {
+  var placement = data.placement;
+  var basePlacement = placement.split('-')[0];
+  var _data$offsets = data.offsets,
+      popper = _data$offsets.popper,
+      reference = _data$offsets.reference;
+
+  var isHoriz = ['left', 'right'].indexOf(basePlacement) !== -1;
+
+  var subtractLength = ['top', 'left'].indexOf(basePlacement) === -1;
+
+  popper[isHoriz ? 'left' : 'top'] = reference[basePlacement] - (subtractLength ? popper[isHoriz ? 'width' : 'height'] : 0);
+
+  data.placement = getOppositePlacement(placement);
+  data.offsets.popper = getClientRect(popper);
+
+  return data;
+}
+
+/**
+ * Modifier function, each modifier can have a function of this type assigned
+ * to its `fn` property.<br />
+ * These functions will be called on each update, this means that you must
+ * make sure they are performant enough to avoid performance bottlenecks.
+ *
+ * @function ModifierFn
+ * @argument {dataObject} data - The data object generated by `update` method
+ * @argument {Object} options - Modifiers configuration and options
+ * @returns {dataObject} The data object, properly modified
+ */
+
+/**
+ * Modifiers are plugins used to alter the behavior of your poppers.<br />
+ * Popper.js uses a set of 9 modifiers to provide all the basic functionalities
+ * needed by the library.
+ *
+ * Usually you don't want to override the `order`, `fn` and `onLoad` props.
+ * All the other properties are configurations that could be tweaked.
+ * @namespace modifiers
+ */
+var modifiers = {
+  /**
+   * Modifier used to shift the popper on the start or end of its reference
+   * element.<br />
+   * It will read the variation of the `placement` property.<br />
+   * It can be one either `-end` or `-start`.
+   * @memberof modifiers
+   * @inner
+   */
+  shift: {
+    /** @prop {number} order=100 - Index used to define the order of execution */
+    order: 100,
+    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
+    enabled: true,
+    /** @prop {ModifierFn} */
+    fn: shift
+  },
+
+  /**
+   * The `offset` modifier can shift your popper on both its axis.
+   *
+   * It accepts the following units:
+   * - `px` or unit-less, interpreted as pixels
+   * - `%` or `%r`, percentage relative to the length of the reference element
+   * - `%p`, percentage relative to the length of the popper element
+   * - `vw`, CSS viewport width unit
+   * - `vh`, CSS viewport height unit
+   *
+   * For length is intended the main axis relative to the placement of the popper.<br />
+   * This means that if the placement is `top` or `bottom`, the length will be the
+   * `width`. In case of `left` or `right`, it will be the `height`.
+   *
+   * You can provide a single value (as `Number` or `String`), or a pair of values
+   * as `String` divided by a comma or one (or more) white spaces.<br />
+   * The latter is a deprecated method because it leads to confusion and will be
+   * removed in v2.<br />
+   * Additionally, it accepts additions and subtractions between different units.
+   * Note that multiplications and divisions aren't supported.
+   *
+   * Valid examples are:
+   * ```
+   * 10
+   * '10%'
+   * '10, 10'
+   * '10%, 10'
+   * '10 + 10%'
+   * '10 - 5vh + 3%'
+   * '-10px + 5vh, 5px - 6%'
+   * ```
+   * > **NB**: If you desire to apply offsets to your poppers in a way that may make them overlap
+   * > with their reference element, unfortunately, you will have to disable the `flip` modifier.
+   * > You can read more on this at this [issue](https://github.com/FezVrasta/popper.js/issues/373).
+   *
+   * @memberof modifiers
+   * @inner
+   */
+  offset: {
+    /** @prop {number} order=200 - Index used to define the order of execution */
+    order: 200,
+    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
+    enabled: true,
+    /** @prop {ModifierFn} */
+    fn: offset,
+    /** @prop {Number|String} offset=0
+     * The offset value as described in the modifier description
+     */
+    offset: 0
+  },
+
+  /**
+   * Modifier used to prevent the popper from being positioned outside the boundary.
+   *
+   * A scenario exists where the reference itself is not within the boundaries.<br />
+   * We can say it has "escaped the boundaries" — or just "escaped".<br />
+   * In this case we need to decide whether the popper should either:
+   *
+   * - detach from the reference and remain "trapped" in the boundaries, or
+   * - if it should ignore the boundary and "escape with its reference"
+   *
+   * When `escapeWithReference` is set to`true` and reference is completely
+   * outside its boundaries, the popper will overflow (or completely leave)
+   * the boundaries in order to remain attached to the edge of the reference.
+   *
+   * @memberof modifiers
+   * @inner
+   */
+  preventOverflow: {
+    /** @prop {number} order=300 - Index used to define the order of execution */
+    order: 300,
+    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
+    enabled: true,
+    /** @prop {ModifierFn} */
+    fn: preventOverflow,
+    /**
+     * @prop {Array} [priority=['left','right','top','bottom']]
+     * Popper will try to prevent overflow following these priorities by default,
+     * then, it could overflow on the left and on top of the `boundariesElement`
+     */
+    priority: ['left', 'right', 'top', 'bottom'],
+    /**
+     * @prop {number} padding=5
+     * Amount of pixel used to define a minimum distance between the boundaries
+     * and the popper. This makes sure the popper always has a little padding
+     * between the edges of its container
+     */
+    padding: 5,
+    /**
+     * @prop {String|HTMLElement} boundariesElement='scrollParent'
+     * Boundaries used by the modifier. Can be `scrollParent`, `window`,
+     * `viewport` or any DOM element.
+     */
+    boundariesElement: 'scrollParent'
+  },
+
+  /**
+   * Modifier used to make sure the reference and its popper stay near each other
+   * without leaving any gap between the two. Especially useful when the arrow is
+   * enabled and you want to ensure that it points to its reference element.
+   * It cares only about the first axis. You can still have poppers with margin
+   * between the popper and its reference element.
+   * @memberof modifiers
+   * @inner
+   */
+  keepTogether: {
+    /** @prop {number} order=400 - Index used to define the order of execution */
+    order: 400,
+    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
+    enabled: true,
+    /** @prop {ModifierFn} */
+    fn: keepTogether
+  },
+
+  /**
+   * This modifier is used to move the `arrowElement` of the popper to make
+   * sure it is positioned between the reference element and its popper element.
+   * It will read the outer size of the `arrowElement` node to detect how many
+   * pixels of conjunction are needed.
+   *
+   * It has no effect if no `arrowElement` is provided.
+   * @memberof modifiers
+   * @inner
+   */
+  arrow: {
+    /** @prop {number} order=500 - Index used to define the order of execution */
+    order: 500,
+    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
+    enabled: true,
+    /** @prop {ModifierFn} */
+    fn: arrow,
+    /** @prop {String|HTMLElement} element='[x-arrow]' - Selector or node used as arrow */
+    element: '[x-arrow]'
+  },
+
+  /**
+   * Modifier used to flip the popper's placement when it starts to overlap its
+   * reference element.
+   *
+   * Requires the `preventOverflow` modifier before it in order to work.
+   *
+   * **NOTE:** this modifier will interrupt the current update cycle and will
+   * restart it if it detects the need to flip the placement.
+   * @memberof modifiers
+   * @inner
+   */
+  flip: {
+    /** @prop {number} order=600 - Index used to define the order of execution */
+    order: 600,
+    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
+    enabled: true,
+    /** @prop {ModifierFn} */
+    fn: flip,
+    /**
+     * @prop {String|Array} behavior='flip'
+     * The behavior used to change the popper's placement. It can be one of
+     * `flip`, `clockwise`, `counterclockwise` or an array with a list of valid
+     * placements (with optional variations)
+     */
+    behavior: 'flip',
+    /**
+     * @prop {number} padding=5
+     * The popper will flip if it hits the edges of the `boundariesElement`
+     */
+    padding: 5,
+    /**
+     * @prop {String|HTMLElement} boundariesElement='viewport'
+     * The element which will define the boundaries of the popper position.
+     * The popper will never be placed outside of the defined boundaries
+     * (except if `keepTogether` is enabled)
+     */
+    boundariesElement: 'viewport'
+  },
+
+  /**
+   * Modifier used to make the popper flow toward the inner of the reference element.
+   * By default, when this modifier is disabled, the popper will be placed outside
+   * the reference element.
+   * @memberof modifiers
+   * @inner
+   */
+  inner: {
+    /** @prop {number} order=700 - Index used to define the order of execution */
+    order: 700,
+    /** @prop {Boolean} enabled=false - Whether the modifier is enabled or not */
+    enabled: false,
+    /** @prop {ModifierFn} */
+    fn: inner
+  },
+
+  /**
+   * Modifier used to hide the popper when its reference element is outside of the
+   * popper boundaries. It will set a `x-out-of-boundaries` attribute which can
+   * be used to hide with a CSS selector the popper when its reference is
+   * out of boundaries.
+   *
+   * Requires the `preventOverflow` modifier before it in order to work.
+   * @memberof modifiers
+   * @inner
+   */
+  hide: {
+    /** @prop {number} order=800 - Index used to define the order of execution */
+    order: 800,
+    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
+    enabled: true,
+    /** @prop {ModifierFn} */
+    fn: hide
+  },
+
+  /**
+   * Computes the style that will be applied to the popper element to gets
+   * properly positioned.
+   *
+   * Note that this modifier will not touch the DOM, it just prepares the styles
+   * so that `applyStyle` modifier can apply it. This separation is useful
+   * in case you need to replace `applyStyle` with a custom implementation.
+   *
+   * This modifier has `850` as `order` value to maintain backward compatibility
+   * with previous versions of Popper.js. Expect the modifiers ordering method
+   * to change in future major versions of the library.
+   *
+   * @memberof modifiers
+   * @inner
+   */
+  computeStyle: {
+    /** @prop {number} order=850 - Index used to define the order of execution */
+    order: 850,
+    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
+    enabled: true,
+    /** @prop {ModifierFn} */
+    fn: computeStyle,
+    /**
+     * @prop {Boolean} gpuAcceleration=true
+     * If true, it uses the CSS 3D transformation to position the popper.
+     * Otherwise, it will use the `top` and `left` properties
+     */
+    gpuAcceleration: true,
+    /**
+     * @prop {string} [x='bottom']
+     * Where to anchor the X axis (`bottom` or `top`). AKA X offset origin.
+     * Change this if your popper should grow in a direction different from `bottom`
+     */
+    x: 'bottom',
+    /**
+     * @prop {string} [x='left']
+     * Where to anchor the Y axis (`left` or `right`). AKA Y offset origin.
+     * Change this if your popper should grow in a direction different from `right`
+     */
+    y: 'right'
+  },
+
+  /**
+   * Applies the computed styles to the popper element.
+   *
+   * All the DOM manipulations are limited to this modifier. This is useful in case
+   * you want to integrate Popper.js inside a framework or view library and you
+   * want to delegate all the DOM manipulations to it.
+   *
+   * Note that if you disable this modifier, you must make sure the popper element
+   * has its position set to `absolute` before Popper.js can do its work!
+   *
+   * Just disable this modifier and define your own to achieve the desired effect.
+   *
+   * @memberof modifiers
+   * @inner
+   */
+  applyStyle: {
+    /** @prop {number} order=900 - Index used to define the order of execution */
+    order: 900,
+    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
+    enabled: true,
+    /** @prop {ModifierFn} */
+    fn: applyStyle,
+    /** @prop {Function} */
+    onLoad: applyStyleOnLoad,
+    /**
+     * @deprecated since version 1.10.0, the property moved to `computeStyle` modifier
+     * @prop {Boolean} gpuAcceleration=true
+     * If true, it uses the CSS 3D transformation to position the popper.
+     * Otherwise, it will use the `top` and `left` properties
+     */
+    gpuAcceleration: undefined
+  }
+};
+
+/**
+ * The `dataObject` is an object containing all the information used by Popper.js.
+ * This object is passed to modifiers and to the `onCreate` and `onUpdate` callbacks.
+ * @name dataObject
+ * @property {Object} data.instance The Popper.js instance
+ * @property {String} data.placement Placement applied to popper
+ * @property {String} data.originalPlacement Placement originally defined on init
+ * @property {Boolean} data.flipped True if popper has been flipped by flip modifier
+ * @property {Boolean} data.hide True if the reference element is out of boundaries, useful to know when to hide the popper
+ * @property {HTMLElement} data.arrowElement Node used as arrow by arrow modifier
+ * @property {Object} data.styles Any CSS property defined here will be applied to the popper. It expects the JavaScript nomenclature (eg. `marginBottom`)
+ * @property {Object} data.arrowStyles Any CSS property defined here will be applied to the popper arrow. It expects the JavaScript nomenclature (eg. `marginBottom`)
+ * @property {Object} data.boundaries Offsets of the popper boundaries
+ * @property {Object} data.offsets The measurements of popper, reference and arrow elements
+ * @property {Object} data.offsets.popper `top`, `left`, `width`, `height` values
+ * @property {Object} data.offsets.reference `top`, `left`, `width`, `height` values
+ * @property {Object} data.offsets.arrow] `top` and `left` offsets, only one of them will be different from 0
+ */
+
+/**
+ * Default options provided to Popper.js constructor.<br />
+ * These can be overridden using the `options` argument of Popper.js.<br />
+ * To override an option, simply pass an object with the same
+ * structure of the `options` object, as the 3rd argument. For example:
+ * ```
+ * new Popper(ref, pop, {
+ *   modifiers: {
+ *     preventOverflow: { enabled: false }
+ *   }
+ * })
+ * ```
+ * @type {Object}
+ * @static
+ * @memberof Popper
+ */
+var Defaults = {
+  /**
+   * Popper's placement.
+   * @prop {Popper.placements} placement='bottom'
+   */
+  placement: 'bottom',
+
+  /**
+   * Set this to true if you want popper to position it self in 'fixed' mode
+   * @prop {Boolean} positionFixed=false
+   */
+  positionFixed: false,
+
+  /**
+   * Whether events (resize, scroll) are initially enabled.
+   * @prop {Boolean} eventsEnabled=true
+   */
+  eventsEnabled: true,
+
+  /**
+   * Set to true if you want to automatically remove the popper when
+   * you call the `destroy` method.
+   * @prop {Boolean} removeOnDestroy=false
+   */
+  removeOnDestroy: false,
+
+  /**
+   * Callback called when the popper is created.<br />
+   * By default, it is set to no-op.<br />
+   * Access Popper.js instance with `data.instance`.
+   * @prop {onCreate}
+   */
+  onCreate: function onCreate() {},
+
+  /**
+   * Callback called when the popper is updated. This callback is not called
+   * on the initialization/creation of the popper, but only on subsequent
+   * updates.<br />
+   * By default, it is set to no-op.<br />
+   * Access Popper.js instance with `data.instance`.
+   * @prop {onUpdate}
+   */
+  onUpdate: function onUpdate() {},
+
+  /**
+   * List of modifiers used to modify the offsets before they are applied to the popper.
+   * They provide most of the functionalities of Popper.js.
+   * @prop {modifiers}
+   */
+  modifiers: modifiers
+};
+
+/**
+ * @callback onCreate
+ * @param {dataObject} data
+ */
+
+/**
+ * @callback onUpdate
+ * @param {dataObject} data
+ */
+
+// Utils
+// Methods
+var Popper = function () {
+  /**
+   * Creates a new Popper.js instance.
+   * @class Popper
+   * @param {HTMLElement|referenceObject} reference - The reference element used to position the popper
+   * @param {HTMLElement} popper - The HTML element used as the popper
+   * @param {Object} options - Your custom options to override the ones defined in [Defaults](#defaults)
+   * @return {Object} instance - The generated Popper.js instance
+   */
+  function Popper(reference, popper) {
+    var _this = this;
+
+    var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+    classCallCheck(this, Popper);
+
+    this.scheduleUpdate = function () {
+      return requestAnimationFrame(_this.update);
+    };
+
+    // make update() debounced, so that it only runs at most once-per-tick
+    this.update = debounce(this.update.bind(this));
+
+    // with {} we create a new object with the options inside it
+    this.options = _extends({}, Popper.Defaults, options);
+
+    // init state
+    this.state = {
+      isDestroyed: false,
+      isCreated: false,
+      scrollParents: []
+    };
+
+    // get reference and popper elements (allow jQuery wrappers)
+    this.reference = reference && reference.jquery ? reference[0] : reference;
+    this.popper = popper && popper.jquery ? popper[0] : popper;
+
+    // Deep merge modifiers options
+    this.options.modifiers = {};
+    Object.keys(_extends({}, Popper.Defaults.modifiers, options.modifiers)).forEach(function (name) {
+      _this.options.modifiers[name] = _extends({}, Popper.Defaults.modifiers[name] || {}, options.modifiers ? options.modifiers[name] : {});
+    });
+
+    // Refactoring modifiers' list (Object => Array)
+    this.modifiers = Object.keys(this.options.modifiers).map(function (name) {
+      return _extends({
+        name: name
+      }, _this.options.modifiers[name]);
+    })
+    // sort the modifiers by order
+    .sort(function (a, b) {
+      return a.order - b.order;
+    });
+
+    // modifiers have the ability to execute arbitrary code when Popper.js get inited
+    // such code is executed in the same order of its modifier
+    // they could add new properties to their options configuration
+    // BE AWARE: don't add options to `options.modifiers.name` but to `modifierOptions`!
+    this.modifiers.forEach(function (modifierOptions) {
+      if (modifierOptions.enabled && isFunction(modifierOptions.onLoad)) {
+        modifierOptions.onLoad(_this.reference, _this.popper, _this.options, modifierOptions, _this.state);
+      }
+    });
+
+    // fire the first update to position the popper in the right place
+    this.update();
+
+    var eventsEnabled = this.options.eventsEnabled;
+    if (eventsEnabled) {
+      // setup event listeners, they will take care of update the position in specific situations
+      this.enableEventListeners();
+    }
+
+    this.state.eventsEnabled = eventsEnabled;
+  }
+
+  // We can't use class properties because they don't get listed in the
+  // class prototype and break stuff like Sinon stubs
+
+
+  createClass(Popper, [{
+    key: 'update',
+    value: function update$$1() {
+      return update.call(this);
+    }
+  }, {
+    key: 'destroy',
+    value: function destroy$$1() {
+      return destroy.call(this);
+    }
+  }, {
+    key: 'enableEventListeners',
+    value: function enableEventListeners$$1() {
+      return enableEventListeners.call(this);
+    }
+  }, {
+    key: 'disableEventListeners',
+    value: function disableEventListeners$$1() {
+      return disableEventListeners.call(this);
+    }
+
+    /**
+     * Schedules an update. It will run on the next UI update available.
+     * @method scheduleUpdate
+     * @memberof Popper
+     */
+
+
+    /**
+     * Collection of utilities useful when writing custom modifiers.
+     * Starting from version 1.7, this method is available only if you
+     * include `popper-utils.js` before `popper.js`.
+     *
+     * **DEPRECATION**: This way to access PopperUtils is deprecated
+     * and will be removed in v2! Use the PopperUtils module directly instead.
+     * Due to the high instability of the methods contained in Utils, we can't
+     * guarantee them to follow semver. Use them at your own risk!
+     * @static
+     * @private
+     * @type {Object}
+     * @deprecated since version 1.8
+     * @member Utils
+     * @memberof Popper
+     */
+
+  }]);
+  return Popper;
+}();
+
+/**
+ * The `referenceObject` is an object that provides an interface compatible with Popper.js
+ * and lets you use it as replacement of a real DOM node.<br />
+ * You can use this method to position a popper relatively to a set of coordinates
+ * in case you don't have a DOM node to use as reference.
+ *
+ * ```
+ * new Popper(referenceObject, popperNode);
+ * ```
+ *
+ * NB: This feature isn't supported in Internet Explorer 10.
+ * @name referenceObject
+ * @property {Function} data.getBoundingClientRect
+ * A function that returns a set of coordinates compatible with the native `getBoundingClientRect` method.
+ * @property {number} data.clientWidth
+ * An ES6 getter that will return the width of the virtual reference element.
+ * @property {number} data.clientHeight
+ * An ES6 getter that will return the height of the virtual reference element.
+ */
+
+
+Popper.Utils = (typeof window !== 'undefined' ? window : global).PopperUtils;
+Popper.placements = placements;
+Popper.Defaults = Defaults;
+
+/* harmony default export */ __webpack_exports__["default"] = (Popper);
+//# sourceMappingURL=popper.js.map
+
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(3)))
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13463,19 +13435,19 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var settle = __webpack_require__(24);
-var buildURL = __webpack_require__(26);
-var parseHeaders = __webpack_require__(27);
-var isURLSameOrigin = __webpack_require__(28);
-var createError = __webpack_require__(8);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(29);
+var settle = __webpack_require__(22);
+var buildURL = __webpack_require__(24);
+var parseHeaders = __webpack_require__(25);
+var isURLSameOrigin = __webpack_require__(26);
+var createError = __webpack_require__(7);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(27);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -13572,7 +13544,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(30);
+      var cookies = __webpack_require__(28);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -13650,13 +13622,13 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var enhanceError = __webpack_require__(25);
+var enhanceError = __webpack_require__(23);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -13675,7 +13647,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 9 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13687,7 +13659,7 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13713,15 +13685,15 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(12);
-module.exports = __webpack_require__(40);
+__webpack_require__(11);
+module.exports = __webpack_require__(38);
 
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -13731,10 +13703,9 @@ module.exports = __webpack_require__(40);
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-__webpack_require__(13);
-__webpack_require__(15);
-__webpack_require__(38);
-__webpack_require__(39);
+__webpack_require__(12);
+__webpack_require__(36);
+__webpack_require__(37);
 
 // window.Vue = require('vue');
 
@@ -13751,2316 +13722,11 @@ __webpack_require__(39);
 // });
 
 /***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(module) {var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-/*! jQuery v3.3.1 | (c) JS Foundation and other contributors | jquery.org/license */
-!function (e, t) {
-  "use strict";
-  "object" == ( false ? "undefined" : _typeof(module)) && "object" == _typeof(module.exports) ? module.exports = e.document ? t(e, !0) : function (e) {
-    if (!e.document) throw new Error("jQuery requires a window with a document");return t(e);
-  } : t(e);
-}("undefined" != typeof window ? window : this, function (e, t) {
-  "use strict";
-  var n = [],
-      r = e.document,
-      i = Object.getPrototypeOf,
-      o = n.slice,
-      a = n.concat,
-      s = n.push,
-      u = n.indexOf,
-      l = {},
-      c = l.toString,
-      f = l.hasOwnProperty,
-      p = f.toString,
-      d = p.call(Object),
-      h = {},
-      g = function e(t) {
-    return "function" == typeof t && "number" != typeof t.nodeType;
-  },
-      y = function e(t) {
-    return null != t && t === t.window;
-  },
-      v = { type: !0, src: !0, noModule: !0 };function m(e, t, n) {
-    var i,
-        o = (t = t || r).createElement("script");if (o.text = e, n) for (i in v) {
-      n[i] && (o[i] = n[i]);
-    }t.head.appendChild(o).parentNode.removeChild(o);
-  }function x(e) {
-    return null == e ? e + "" : "object" == (typeof e === "undefined" ? "undefined" : _typeof(e)) || "function" == typeof e ? l[c.call(e)] || "object" : typeof e === "undefined" ? "undefined" : _typeof(e);
-  }var b = "3.3.1",
-      w = function w(e, t) {
-    return new w.fn.init(e, t);
-  },
-      T = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;w.fn = w.prototype = { jquery: "3.3.1", constructor: w, length: 0, toArray: function toArray() {
-      return o.call(this);
-    }, get: function get(e) {
-      return null == e ? o.call(this) : e < 0 ? this[e + this.length] : this[e];
-    }, pushStack: function pushStack(e) {
-      var t = w.merge(this.constructor(), e);return t.prevObject = this, t;
-    }, each: function each(e) {
-      return w.each(this, e);
-    }, map: function map(e) {
-      return this.pushStack(w.map(this, function (t, n) {
-        return e.call(t, n, t);
-      }));
-    }, slice: function slice() {
-      return this.pushStack(o.apply(this, arguments));
-    }, first: function first() {
-      return this.eq(0);
-    }, last: function last() {
-      return this.eq(-1);
-    }, eq: function eq(e) {
-      var t = this.length,
-          n = +e + (e < 0 ? t : 0);return this.pushStack(n >= 0 && n < t ? [this[n]] : []);
-    }, end: function end() {
-      return this.prevObject || this.constructor();
-    }, push: s, sort: n.sort, splice: n.splice }, w.extend = w.fn.extend = function () {
-    var e,
-        t,
-        n,
-        r,
-        i,
-        o,
-        a = arguments[0] || {},
-        s = 1,
-        u = arguments.length,
-        l = !1;for ("boolean" == typeof a && (l = a, a = arguments[s] || {}, s++), "object" == (typeof a === "undefined" ? "undefined" : _typeof(a)) || g(a) || (a = {}), s === u && (a = this, s--); s < u; s++) {
-      if (null != (e = arguments[s])) for (t in e) {
-        n = a[t], a !== (r = e[t]) && (l && r && (w.isPlainObject(r) || (i = Array.isArray(r))) ? (i ? (i = !1, o = n && Array.isArray(n) ? n : []) : o = n && w.isPlainObject(n) ? n : {}, a[t] = w.extend(l, o, r)) : void 0 !== r && (a[t] = r));
-      }
-    }return a;
-  }, w.extend({ expando: "jQuery" + ("3.3.1" + Math.random()).replace(/\D/g, ""), isReady: !0, error: function error(e) {
-      throw new Error(e);
-    }, noop: function noop() {}, isPlainObject: function isPlainObject(e) {
-      var t, n;return !(!e || "[object Object]" !== c.call(e)) && (!(t = i(e)) || "function" == typeof (n = f.call(t, "constructor") && t.constructor) && p.call(n) === d);
-    }, isEmptyObject: function isEmptyObject(e) {
-      var t;for (t in e) {
-        return !1;
-      }return !0;
-    }, globalEval: function globalEval(e) {
-      m(e);
-    }, each: function each(e, t) {
-      var n,
-          r = 0;if (C(e)) {
-        for (n = e.length; r < n; r++) {
-          if (!1 === t.call(e[r], r, e[r])) break;
-        }
-      } else for (r in e) {
-        if (!1 === t.call(e[r], r, e[r])) break;
-      }return e;
-    }, trim: function trim(e) {
-      return null == e ? "" : (e + "").replace(T, "");
-    }, makeArray: function makeArray(e, t) {
-      var n = t || [];return null != e && (C(Object(e)) ? w.merge(n, "string" == typeof e ? [e] : e) : s.call(n, e)), n;
-    }, inArray: function inArray(e, t, n) {
-      return null == t ? -1 : u.call(t, e, n);
-    }, merge: function merge(e, t) {
-      for (var n = +t.length, r = 0, i = e.length; r < n; r++) {
-        e[i++] = t[r];
-      }return e.length = i, e;
-    }, grep: function grep(e, t, n) {
-      for (var r, i = [], o = 0, a = e.length, s = !n; o < a; o++) {
-        (r = !t(e[o], o)) !== s && i.push(e[o]);
-      }return i;
-    }, map: function map(e, t, n) {
-      var r,
-          i,
-          o = 0,
-          s = [];if (C(e)) for (r = e.length; o < r; o++) {
-        null != (i = t(e[o], o, n)) && s.push(i);
-      } else for (o in e) {
-        null != (i = t(e[o], o, n)) && s.push(i);
-      }return a.apply([], s);
-    }, guid: 1, support: h }), "function" == typeof Symbol && (w.fn[Symbol.iterator] = n[Symbol.iterator]), w.each("Boolean Number String Function Array Date RegExp Object Error Symbol".split(" "), function (e, t) {
-    l["[object " + t + "]"] = t.toLowerCase();
-  });function C(e) {
-    var t = !!e && "length" in e && e.length,
-        n = x(e);return !g(e) && !y(e) && ("array" === n || 0 === t || "number" == typeof t && t > 0 && t - 1 in e);
-  }var E = function (e) {
-    var t,
-        n,
-        r,
-        i,
-        o,
-        a,
-        s,
-        u,
-        l,
-        c,
-        f,
-        p,
-        d,
-        h,
-        g,
-        y,
-        v,
-        m,
-        x,
-        b = "sizzle" + 1 * new Date(),
-        w = e.document,
-        T = 0,
-        C = 0,
-        E = ae(),
-        k = ae(),
-        S = ae(),
-        D = function D(e, t) {
-      return e === t && (f = !0), 0;
-    },
-        N = {}.hasOwnProperty,
-        A = [],
-        j = A.pop,
-        q = A.push,
-        L = A.push,
-        H = A.slice,
-        O = function O(e, t) {
-      for (var n = 0, r = e.length; n < r; n++) {
-        if (e[n] === t) return n;
-      }return -1;
-    },
-        P = "checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped",
-        M = "[\\x20\\t\\r\\n\\f]",
-        R = "(?:\\\\.|[\\w-]|[^\0-\\xa0])+",
-        I = "\\[" + M + "*(" + R + ")(?:" + M + "*([*^$|!~]?=)" + M + "*(?:'((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\"|(" + R + "))|)" + M + "*\\]",
-        W = ":(" + R + ")(?:\\((('((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\")|((?:\\\\.|[^\\\\()[\\]]|" + I + ")*)|.*)\\)|)",
-        $ = new RegExp(M + "+", "g"),
-        B = new RegExp("^" + M + "+|((?:^|[^\\\\])(?:\\\\.)*)" + M + "+$", "g"),
-        F = new RegExp("^" + M + "*," + M + "*"),
-        _ = new RegExp("^" + M + "*([>+~]|" + M + ")" + M + "*"),
-        z = new RegExp("=" + M + "*([^\\]'\"]*?)" + M + "*\\]", "g"),
-        X = new RegExp(W),
-        U = new RegExp("^" + R + "$"),
-        V = { ID: new RegExp("^#(" + R + ")"), CLASS: new RegExp("^\\.(" + R + ")"), TAG: new RegExp("^(" + R + "|[*])"), ATTR: new RegExp("^" + I), PSEUDO: new RegExp("^" + W), CHILD: new RegExp("^:(only|first|last|nth|nth-last)-(child|of-type)(?:\\(" + M + "*(even|odd|(([+-]|)(\\d*)n|)" + M + "*(?:([+-]|)" + M + "*(\\d+)|))" + M + "*\\)|)", "i"), bool: new RegExp("^(?:" + P + ")$", "i"), needsContext: new RegExp("^" + M + "*[>+~]|:(even|odd|eq|gt|lt|nth|first|last)(?:\\(" + M + "*((?:-\\d)?\\d*)" + M + "*\\)|)(?=[^-]|$)", "i") },
-        G = /^(?:input|select|textarea|button)$/i,
-        Y = /^h\d$/i,
-        Q = /^[^{]+\{\s*\[native \w/,
-        J = /^(?:#([\w-]+)|(\w+)|\.([\w-]+))$/,
-        K = /[+~]/,
-        Z = new RegExp("\\\\([\\da-f]{1,6}" + M + "?|(" + M + ")|.)", "ig"),
-        ee = function ee(e, t, n) {
-      var r = "0x" + t - 65536;return r !== r || n ? t : r < 0 ? String.fromCharCode(r + 65536) : String.fromCharCode(r >> 10 | 55296, 1023 & r | 56320);
-    },
-        te = /([\0-\x1f\x7f]|^-?\d)|^-$|[^\0-\x1f\x7f-\uFFFF\w-]/g,
-        ne = function ne(e, t) {
-      return t ? "\0" === e ? "\uFFFD" : e.slice(0, -1) + "\\" + e.charCodeAt(e.length - 1).toString(16) + " " : "\\" + e;
-    },
-        re = function re() {
-      p();
-    },
-        ie = me(function (e) {
-      return !0 === e.disabled && ("form" in e || "label" in e);
-    }, { dir: "parentNode", next: "legend" });try {
-      L.apply(A = H.call(w.childNodes), w.childNodes), A[w.childNodes.length].nodeType;
-    } catch (e) {
-      L = { apply: A.length ? function (e, t) {
-          q.apply(e, H.call(t));
-        } : function (e, t) {
-          var n = e.length,
-              r = 0;while (e[n++] = t[r++]) {}e.length = n - 1;
-        } };
-    }function oe(e, t, r, i) {
-      var o,
-          s,
-          l,
-          c,
-          f,
-          h,
-          v,
-          m = t && t.ownerDocument,
-          T = t ? t.nodeType : 9;if (r = r || [], "string" != typeof e || !e || 1 !== T && 9 !== T && 11 !== T) return r;if (!i && ((t ? t.ownerDocument || t : w) !== d && p(t), t = t || d, g)) {
-        if (11 !== T && (f = J.exec(e))) if (o = f[1]) {
-          if (9 === T) {
-            if (!(l = t.getElementById(o))) return r;if (l.id === o) return r.push(l), r;
-          } else if (m && (l = m.getElementById(o)) && x(t, l) && l.id === o) return r.push(l), r;
-        } else {
-          if (f[2]) return L.apply(r, t.getElementsByTagName(e)), r;if ((o = f[3]) && n.getElementsByClassName && t.getElementsByClassName) return L.apply(r, t.getElementsByClassName(o)), r;
-        }if (n.qsa && !S[e + " "] && (!y || !y.test(e))) {
-          if (1 !== T) m = t, v = e;else if ("object" !== t.nodeName.toLowerCase()) {
-            (c = t.getAttribute("id")) ? c = c.replace(te, ne) : t.setAttribute("id", c = b), s = (h = a(e)).length;while (s--) {
-              h[s] = "#" + c + " " + ve(h[s]);
-            }v = h.join(","), m = K.test(e) && ge(t.parentNode) || t;
-          }if (v) try {
-            return L.apply(r, m.querySelectorAll(v)), r;
-          } catch (e) {} finally {
-            c === b && t.removeAttribute("id");
-          }
-        }
-      }return u(e.replace(B, "$1"), t, r, i);
-    }function ae() {
-      var e = [];function t(n, i) {
-        return e.push(n + " ") > r.cacheLength && delete t[e.shift()], t[n + " "] = i;
-      }return t;
-    }function se(e) {
-      return e[b] = !0, e;
-    }function ue(e) {
-      var t = d.createElement("fieldset");try {
-        return !!e(t);
-      } catch (e) {
-        return !1;
-      } finally {
-        t.parentNode && t.parentNode.removeChild(t), t = null;
-      }
-    }function le(e, t) {
-      var n = e.split("|"),
-          i = n.length;while (i--) {
-        r.attrHandle[n[i]] = t;
-      }
-    }function ce(e, t) {
-      var n = t && e,
-          r = n && 1 === e.nodeType && 1 === t.nodeType && e.sourceIndex - t.sourceIndex;if (r) return r;if (n) while (n = n.nextSibling) {
-        if (n === t) return -1;
-      }return e ? 1 : -1;
-    }function fe(e) {
-      return function (t) {
-        return "input" === t.nodeName.toLowerCase() && t.type === e;
-      };
-    }function pe(e) {
-      return function (t) {
-        var n = t.nodeName.toLowerCase();return ("input" === n || "button" === n) && t.type === e;
-      };
-    }function de(e) {
-      return function (t) {
-        return "form" in t ? t.parentNode && !1 === t.disabled ? "label" in t ? "label" in t.parentNode ? t.parentNode.disabled === e : t.disabled === e : t.isDisabled === e || t.isDisabled !== !e && ie(t) === e : t.disabled === e : "label" in t && t.disabled === e;
-      };
-    }function he(e) {
-      return se(function (t) {
-        return t = +t, se(function (n, r) {
-          var i,
-              o = e([], n.length, t),
-              a = o.length;while (a--) {
-            n[i = o[a]] && (n[i] = !(r[i] = n[i]));
-          }
-        });
-      });
-    }function ge(e) {
-      return e && "undefined" != typeof e.getElementsByTagName && e;
-    }n = oe.support = {}, o = oe.isXML = function (e) {
-      var t = e && (e.ownerDocument || e).documentElement;return !!t && "HTML" !== t.nodeName;
-    }, p = oe.setDocument = function (e) {
-      var t,
-          i,
-          a = e ? e.ownerDocument || e : w;return a !== d && 9 === a.nodeType && a.documentElement ? (d = a, h = d.documentElement, g = !o(d), w !== d && (i = d.defaultView) && i.top !== i && (i.addEventListener ? i.addEventListener("unload", re, !1) : i.attachEvent && i.attachEvent("onunload", re)), n.attributes = ue(function (e) {
-        return e.className = "i", !e.getAttribute("className");
-      }), n.getElementsByTagName = ue(function (e) {
-        return e.appendChild(d.createComment("")), !e.getElementsByTagName("*").length;
-      }), n.getElementsByClassName = Q.test(d.getElementsByClassName), n.getById = ue(function (e) {
-        return h.appendChild(e).id = b, !d.getElementsByName || !d.getElementsByName(b).length;
-      }), n.getById ? (r.filter.ID = function (e) {
-        var t = e.replace(Z, ee);return function (e) {
-          return e.getAttribute("id") === t;
-        };
-      }, r.find.ID = function (e, t) {
-        if ("undefined" != typeof t.getElementById && g) {
-          var n = t.getElementById(e);return n ? [n] : [];
-        }
-      }) : (r.filter.ID = function (e) {
-        var t = e.replace(Z, ee);return function (e) {
-          var n = "undefined" != typeof e.getAttributeNode && e.getAttributeNode("id");return n && n.value === t;
-        };
-      }, r.find.ID = function (e, t) {
-        if ("undefined" != typeof t.getElementById && g) {
-          var n,
-              r,
-              i,
-              o = t.getElementById(e);if (o) {
-            if ((n = o.getAttributeNode("id")) && n.value === e) return [o];i = t.getElementsByName(e), r = 0;while (o = i[r++]) {
-              if ((n = o.getAttributeNode("id")) && n.value === e) return [o];
-            }
-          }return [];
-        }
-      }), r.find.TAG = n.getElementsByTagName ? function (e, t) {
-        return "undefined" != typeof t.getElementsByTagName ? t.getElementsByTagName(e) : n.qsa ? t.querySelectorAll(e) : void 0;
-      } : function (e, t) {
-        var n,
-            r = [],
-            i = 0,
-            o = t.getElementsByTagName(e);if ("*" === e) {
-          while (n = o[i++]) {
-            1 === n.nodeType && r.push(n);
-          }return r;
-        }return o;
-      }, r.find.CLASS = n.getElementsByClassName && function (e, t) {
-        if ("undefined" != typeof t.getElementsByClassName && g) return t.getElementsByClassName(e);
-      }, v = [], y = [], (n.qsa = Q.test(d.querySelectorAll)) && (ue(function (e) {
-        h.appendChild(e).innerHTML = "<a id='" + b + "'></a><select id='" + b + "-\r\\' msallowcapture=''><option selected=''></option></select>", e.querySelectorAll("[msallowcapture^='']").length && y.push("[*^$]=" + M + "*(?:''|\"\")"), e.querySelectorAll("[selected]").length || y.push("\\[" + M + "*(?:value|" + P + ")"), e.querySelectorAll("[id~=" + b + "-]").length || y.push("~="), e.querySelectorAll(":checked").length || y.push(":checked"), e.querySelectorAll("a#" + b + "+*").length || y.push(".#.+[+~]");
-      }), ue(function (e) {
-        e.innerHTML = "<a href='' disabled='disabled'></a><select disabled='disabled'><option/></select>";var t = d.createElement("input");t.setAttribute("type", "hidden"), e.appendChild(t).setAttribute("name", "D"), e.querySelectorAll("[name=d]").length && y.push("name" + M + "*[*^$|!~]?="), 2 !== e.querySelectorAll(":enabled").length && y.push(":enabled", ":disabled"), h.appendChild(e).disabled = !0, 2 !== e.querySelectorAll(":disabled").length && y.push(":enabled", ":disabled"), e.querySelectorAll("*,:x"), y.push(",.*:");
-      })), (n.matchesSelector = Q.test(m = h.matches || h.webkitMatchesSelector || h.mozMatchesSelector || h.oMatchesSelector || h.msMatchesSelector)) && ue(function (e) {
-        n.disconnectedMatch = m.call(e, "*"), m.call(e, "[s!='']:x"), v.push("!=", W);
-      }), y = y.length && new RegExp(y.join("|")), v = v.length && new RegExp(v.join("|")), t = Q.test(h.compareDocumentPosition), x = t || Q.test(h.contains) ? function (e, t) {
-        var n = 9 === e.nodeType ? e.documentElement : e,
-            r = t && t.parentNode;return e === r || !(!r || 1 !== r.nodeType || !(n.contains ? n.contains(r) : e.compareDocumentPosition && 16 & e.compareDocumentPosition(r)));
-      } : function (e, t) {
-        if (t) while (t = t.parentNode) {
-          if (t === e) return !0;
-        }return !1;
-      }, D = t ? function (e, t) {
-        if (e === t) return f = !0, 0;var r = !e.compareDocumentPosition - !t.compareDocumentPosition;return r || (1 & (r = (e.ownerDocument || e) === (t.ownerDocument || t) ? e.compareDocumentPosition(t) : 1) || !n.sortDetached && t.compareDocumentPosition(e) === r ? e === d || e.ownerDocument === w && x(w, e) ? -1 : t === d || t.ownerDocument === w && x(w, t) ? 1 : c ? O(c, e) - O(c, t) : 0 : 4 & r ? -1 : 1);
-      } : function (e, t) {
-        if (e === t) return f = !0, 0;var n,
-            r = 0,
-            i = e.parentNode,
-            o = t.parentNode,
-            a = [e],
-            s = [t];if (!i || !o) return e === d ? -1 : t === d ? 1 : i ? -1 : o ? 1 : c ? O(c, e) - O(c, t) : 0;if (i === o) return ce(e, t);n = e;while (n = n.parentNode) {
-          a.unshift(n);
-        }n = t;while (n = n.parentNode) {
-          s.unshift(n);
-        }while (a[r] === s[r]) {
-          r++;
-        }return r ? ce(a[r], s[r]) : a[r] === w ? -1 : s[r] === w ? 1 : 0;
-      }, d) : d;
-    }, oe.matches = function (e, t) {
-      return oe(e, null, null, t);
-    }, oe.matchesSelector = function (e, t) {
-      if ((e.ownerDocument || e) !== d && p(e), t = t.replace(z, "='$1']"), n.matchesSelector && g && !S[t + " "] && (!v || !v.test(t)) && (!y || !y.test(t))) try {
-        var r = m.call(e, t);if (r || n.disconnectedMatch || e.document && 11 !== e.document.nodeType) return r;
-      } catch (e) {}return oe(t, d, null, [e]).length > 0;
-    }, oe.contains = function (e, t) {
-      return (e.ownerDocument || e) !== d && p(e), x(e, t);
-    }, oe.attr = function (e, t) {
-      (e.ownerDocument || e) !== d && p(e);var i = r.attrHandle[t.toLowerCase()],
-          o = i && N.call(r.attrHandle, t.toLowerCase()) ? i(e, t, !g) : void 0;return void 0 !== o ? o : n.attributes || !g ? e.getAttribute(t) : (o = e.getAttributeNode(t)) && o.specified ? o.value : null;
-    }, oe.escape = function (e) {
-      return (e + "").replace(te, ne);
-    }, oe.error = function (e) {
-      throw new Error("Syntax error, unrecognized expression: " + e);
-    }, oe.uniqueSort = function (e) {
-      var t,
-          r = [],
-          i = 0,
-          o = 0;if (f = !n.detectDuplicates, c = !n.sortStable && e.slice(0), e.sort(D), f) {
-        while (t = e[o++]) {
-          t === e[o] && (i = r.push(o));
-        }while (i--) {
-          e.splice(r[i], 1);
-        }
-      }return c = null, e;
-    }, i = oe.getText = function (e) {
-      var t,
-          n = "",
-          r = 0,
-          o = e.nodeType;if (o) {
-        if (1 === o || 9 === o || 11 === o) {
-          if ("string" == typeof e.textContent) return e.textContent;for (e = e.firstChild; e; e = e.nextSibling) {
-            n += i(e);
-          }
-        } else if (3 === o || 4 === o) return e.nodeValue;
-      } else while (t = e[r++]) {
-        n += i(t);
-      }return n;
-    }, (r = oe.selectors = { cacheLength: 50, createPseudo: se, match: V, attrHandle: {}, find: {}, relative: { ">": { dir: "parentNode", first: !0 }, " ": { dir: "parentNode" }, "+": { dir: "previousSibling", first: !0 }, "~": { dir: "previousSibling" } }, preFilter: { ATTR: function ATTR(e) {
-          return e[1] = e[1].replace(Z, ee), e[3] = (e[3] || e[4] || e[5] || "").replace(Z, ee), "~=" === e[2] && (e[3] = " " + e[3] + " "), e.slice(0, 4);
-        }, CHILD: function CHILD(e) {
-          return e[1] = e[1].toLowerCase(), "nth" === e[1].slice(0, 3) ? (e[3] || oe.error(e[0]), e[4] = +(e[4] ? e[5] + (e[6] || 1) : 2 * ("even" === e[3] || "odd" === e[3])), e[5] = +(e[7] + e[8] || "odd" === e[3])) : e[3] && oe.error(e[0]), e;
-        }, PSEUDO: function PSEUDO(e) {
-          var t,
-              n = !e[6] && e[2];return V.CHILD.test(e[0]) ? null : (e[3] ? e[2] = e[4] || e[5] || "" : n && X.test(n) && (t = a(n, !0)) && (t = n.indexOf(")", n.length - t) - n.length) && (e[0] = e[0].slice(0, t), e[2] = n.slice(0, t)), e.slice(0, 3));
-        } }, filter: { TAG: function TAG(e) {
-          var t = e.replace(Z, ee).toLowerCase();return "*" === e ? function () {
-            return !0;
-          } : function (e) {
-            return e.nodeName && e.nodeName.toLowerCase() === t;
-          };
-        }, CLASS: function CLASS(e) {
-          var t = E[e + " "];return t || (t = new RegExp("(^|" + M + ")" + e + "(" + M + "|$)")) && E(e, function (e) {
-            return t.test("string" == typeof e.className && e.className || "undefined" != typeof e.getAttribute && e.getAttribute("class") || "");
-          });
-        }, ATTR: function ATTR(e, t, n) {
-          return function (r) {
-            var i = oe.attr(r, e);return null == i ? "!=" === t : !t || (i += "", "=" === t ? i === n : "!=" === t ? i !== n : "^=" === t ? n && 0 === i.indexOf(n) : "*=" === t ? n && i.indexOf(n) > -1 : "$=" === t ? n && i.slice(-n.length) === n : "~=" === t ? (" " + i.replace($, " ") + " ").indexOf(n) > -1 : "|=" === t && (i === n || i.slice(0, n.length + 1) === n + "-"));
-          };
-        }, CHILD: function CHILD(e, t, n, r, i) {
-          var o = "nth" !== e.slice(0, 3),
-              a = "last" !== e.slice(-4),
-              s = "of-type" === t;return 1 === r && 0 === i ? function (e) {
-            return !!e.parentNode;
-          } : function (t, n, u) {
-            var l,
-                c,
-                f,
-                p,
-                d,
-                h,
-                g = o !== a ? "nextSibling" : "previousSibling",
-                y = t.parentNode,
-                v = s && t.nodeName.toLowerCase(),
-                m = !u && !s,
-                x = !1;if (y) {
-              if (o) {
-                while (g) {
-                  p = t;while (p = p[g]) {
-                    if (s ? p.nodeName.toLowerCase() === v : 1 === p.nodeType) return !1;
-                  }h = g = "only" === e && !h && "nextSibling";
-                }return !0;
-              }if (h = [a ? y.firstChild : y.lastChild], a && m) {
-                x = (d = (l = (c = (f = (p = y)[b] || (p[b] = {}))[p.uniqueID] || (f[p.uniqueID] = {}))[e] || [])[0] === T && l[1]) && l[2], p = d && y.childNodes[d];while (p = ++d && p && p[g] || (x = d = 0) || h.pop()) {
-                  if (1 === p.nodeType && ++x && p === t) {
-                    c[e] = [T, d, x];break;
-                  }
-                }
-              } else if (m && (x = d = (l = (c = (f = (p = t)[b] || (p[b] = {}))[p.uniqueID] || (f[p.uniqueID] = {}))[e] || [])[0] === T && l[1]), !1 === x) while (p = ++d && p && p[g] || (x = d = 0) || h.pop()) {
-                if ((s ? p.nodeName.toLowerCase() === v : 1 === p.nodeType) && ++x && (m && ((c = (f = p[b] || (p[b] = {}))[p.uniqueID] || (f[p.uniqueID] = {}))[e] = [T, x]), p === t)) break;
-              }return (x -= i) === r || x % r == 0 && x / r >= 0;
-            }
-          };
-        }, PSEUDO: function PSEUDO(e, t) {
-          var n,
-              i = r.pseudos[e] || r.setFilters[e.toLowerCase()] || oe.error("unsupported pseudo: " + e);return i[b] ? i(t) : i.length > 1 ? (n = [e, e, "", t], r.setFilters.hasOwnProperty(e.toLowerCase()) ? se(function (e, n) {
-            var r,
-                o = i(e, t),
-                a = o.length;while (a--) {
-              e[r = O(e, o[a])] = !(n[r] = o[a]);
-            }
-          }) : function (e) {
-            return i(e, 0, n);
-          }) : i;
-        } }, pseudos: { not: se(function (e) {
-          var t = [],
-              n = [],
-              r = s(e.replace(B, "$1"));return r[b] ? se(function (e, t, n, i) {
-            var o,
-                a = r(e, null, i, []),
-                s = e.length;while (s--) {
-              (o = a[s]) && (e[s] = !(t[s] = o));
-            }
-          }) : function (e, i, o) {
-            return t[0] = e, r(t, null, o, n), t[0] = null, !n.pop();
-          };
-        }), has: se(function (e) {
-          return function (t) {
-            return oe(e, t).length > 0;
-          };
-        }), contains: se(function (e) {
-          return e = e.replace(Z, ee), function (t) {
-            return (t.textContent || t.innerText || i(t)).indexOf(e) > -1;
-          };
-        }), lang: se(function (e) {
-          return U.test(e || "") || oe.error("unsupported lang: " + e), e = e.replace(Z, ee).toLowerCase(), function (t) {
-            var n;do {
-              if (n = g ? t.lang : t.getAttribute("xml:lang") || t.getAttribute("lang")) return (n = n.toLowerCase()) === e || 0 === n.indexOf(e + "-");
-            } while ((t = t.parentNode) && 1 === t.nodeType);return !1;
-          };
-        }), target: function target(t) {
-          var n = e.location && e.location.hash;return n && n.slice(1) === t.id;
-        }, root: function root(e) {
-          return e === h;
-        }, focus: function focus(e) {
-          return e === d.activeElement && (!d.hasFocus || d.hasFocus()) && !!(e.type || e.href || ~e.tabIndex);
-        }, enabled: de(!1), disabled: de(!0), checked: function checked(e) {
-          var t = e.nodeName.toLowerCase();return "input" === t && !!e.checked || "option" === t && !!e.selected;
-        }, selected: function selected(e) {
-          return e.parentNode && e.parentNode.selectedIndex, !0 === e.selected;
-        }, empty: function empty(e) {
-          for (e = e.firstChild; e; e = e.nextSibling) {
-            if (e.nodeType < 6) return !1;
-          }return !0;
-        }, parent: function parent(e) {
-          return !r.pseudos.empty(e);
-        }, header: function header(e) {
-          return Y.test(e.nodeName);
-        }, input: function input(e) {
-          return G.test(e.nodeName);
-        }, button: function button(e) {
-          var t = e.nodeName.toLowerCase();return "input" === t && "button" === e.type || "button" === t;
-        }, text: function text(e) {
-          var t;return "input" === e.nodeName.toLowerCase() && "text" === e.type && (null == (t = e.getAttribute("type")) || "text" === t.toLowerCase());
-        }, first: he(function () {
-          return [0];
-        }), last: he(function (e, t) {
-          return [t - 1];
-        }), eq: he(function (e, t, n) {
-          return [n < 0 ? n + t : n];
-        }), even: he(function (e, t) {
-          for (var n = 0; n < t; n += 2) {
-            e.push(n);
-          }return e;
-        }), odd: he(function (e, t) {
-          for (var n = 1; n < t; n += 2) {
-            e.push(n);
-          }return e;
-        }), lt: he(function (e, t, n) {
-          for (var r = n < 0 ? n + t : n; --r >= 0;) {
-            e.push(r);
-          }return e;
-        }), gt: he(function (e, t, n) {
-          for (var r = n < 0 ? n + t : n; ++r < t;) {
-            e.push(r);
-          }return e;
-        }) } }).pseudos.nth = r.pseudos.eq;for (t in { radio: !0, checkbox: !0, file: !0, password: !0, image: !0 }) {
-      r.pseudos[t] = fe(t);
-    }for (t in { submit: !0, reset: !0 }) {
-      r.pseudos[t] = pe(t);
-    }function ye() {}ye.prototype = r.filters = r.pseudos, r.setFilters = new ye(), a = oe.tokenize = function (e, t) {
-      var n,
-          i,
-          o,
-          a,
-          s,
-          u,
-          l,
-          c = k[e + " "];if (c) return t ? 0 : c.slice(0);s = e, u = [], l = r.preFilter;while (s) {
-        n && !(i = F.exec(s)) || (i && (s = s.slice(i[0].length) || s), u.push(o = [])), n = !1, (i = _.exec(s)) && (n = i.shift(), o.push({ value: n, type: i[0].replace(B, " ") }), s = s.slice(n.length));for (a in r.filter) {
-          !(i = V[a].exec(s)) || l[a] && !(i = l[a](i)) || (n = i.shift(), o.push({ value: n, type: a, matches: i }), s = s.slice(n.length));
-        }if (!n) break;
-      }return t ? s.length : s ? oe.error(e) : k(e, u).slice(0);
-    };function ve(e) {
-      for (var t = 0, n = e.length, r = ""; t < n; t++) {
-        r += e[t].value;
-      }return r;
-    }function me(e, t, n) {
-      var r = t.dir,
-          i = t.next,
-          o = i || r,
-          a = n && "parentNode" === o,
-          s = C++;return t.first ? function (t, n, i) {
-        while (t = t[r]) {
-          if (1 === t.nodeType || a) return e(t, n, i);
-        }return !1;
-      } : function (t, n, u) {
-        var l,
-            c,
-            f,
-            p = [T, s];if (u) {
-          while (t = t[r]) {
-            if ((1 === t.nodeType || a) && e(t, n, u)) return !0;
-          }
-        } else while (t = t[r]) {
-          if (1 === t.nodeType || a) if (f = t[b] || (t[b] = {}), c = f[t.uniqueID] || (f[t.uniqueID] = {}), i && i === t.nodeName.toLowerCase()) t = t[r] || t;else {
-            if ((l = c[o]) && l[0] === T && l[1] === s) return p[2] = l[2];if (c[o] = p, p[2] = e(t, n, u)) return !0;
-          }
-        }return !1;
-      };
-    }function xe(e) {
-      return e.length > 1 ? function (t, n, r) {
-        var i = e.length;while (i--) {
-          if (!e[i](t, n, r)) return !1;
-        }return !0;
-      } : e[0];
-    }function be(e, t, n) {
-      for (var r = 0, i = t.length; r < i; r++) {
-        oe(e, t[r], n);
-      }return n;
-    }function we(e, t, n, r, i) {
-      for (var o, a = [], s = 0, u = e.length, l = null != t; s < u; s++) {
-        (o = e[s]) && (n && !n(o, r, i) || (a.push(o), l && t.push(s)));
-      }return a;
-    }function Te(e, t, n, r, i, o) {
-      return r && !r[b] && (r = Te(r)), i && !i[b] && (i = Te(i, o)), se(function (o, a, s, u) {
-        var l,
-            c,
-            f,
-            p = [],
-            d = [],
-            h = a.length,
-            g = o || be(t || "*", s.nodeType ? [s] : s, []),
-            y = !e || !o && t ? g : we(g, p, e, s, u),
-            v = n ? i || (o ? e : h || r) ? [] : a : y;if (n && n(y, v, s, u), r) {
-          l = we(v, d), r(l, [], s, u), c = l.length;while (c--) {
-            (f = l[c]) && (v[d[c]] = !(y[d[c]] = f));
-          }
-        }if (o) {
-          if (i || e) {
-            if (i) {
-              l = [], c = v.length;while (c--) {
-                (f = v[c]) && l.push(y[c] = f);
-              }i(null, v = [], l, u);
-            }c = v.length;while (c--) {
-              (f = v[c]) && (l = i ? O(o, f) : p[c]) > -1 && (o[l] = !(a[l] = f));
-            }
-          }
-        } else v = we(v === a ? v.splice(h, v.length) : v), i ? i(null, a, v, u) : L.apply(a, v);
-      });
-    }function Ce(e) {
-      for (var t, n, i, o = e.length, a = r.relative[e[0].type], s = a || r.relative[" "], u = a ? 1 : 0, c = me(function (e) {
-        return e === t;
-      }, s, !0), f = me(function (e) {
-        return O(t, e) > -1;
-      }, s, !0), p = [function (e, n, r) {
-        var i = !a && (r || n !== l) || ((t = n).nodeType ? c(e, n, r) : f(e, n, r));return t = null, i;
-      }]; u < o; u++) {
-        if (n = r.relative[e[u].type]) p = [me(xe(p), n)];else {
-          if ((n = r.filter[e[u].type].apply(null, e[u].matches))[b]) {
-            for (i = ++u; i < o; i++) {
-              if (r.relative[e[i].type]) break;
-            }return Te(u > 1 && xe(p), u > 1 && ve(e.slice(0, u - 1).concat({ value: " " === e[u - 2].type ? "*" : "" })).replace(B, "$1"), n, u < i && Ce(e.slice(u, i)), i < o && Ce(e = e.slice(i)), i < o && ve(e));
-          }p.push(n);
-        }
-      }return xe(p);
-    }function Ee(e, t) {
-      var n = t.length > 0,
-          i = e.length > 0,
-          o = function o(_o, a, s, u, c) {
-        var f,
-            h,
-            y,
-            v = 0,
-            m = "0",
-            x = _o && [],
-            b = [],
-            w = l,
-            C = _o || i && r.find.TAG("*", c),
-            E = T += null == w ? 1 : Math.random() || .1,
-            k = C.length;for (c && (l = a === d || a || c); m !== k && null != (f = C[m]); m++) {
-          if (i && f) {
-            h = 0, a || f.ownerDocument === d || (p(f), s = !g);while (y = e[h++]) {
-              if (y(f, a || d, s)) {
-                u.push(f);break;
-              }
-            }c && (T = E);
-          }n && ((f = !y && f) && v--, _o && x.push(f));
-        }if (v += m, n && m !== v) {
-          h = 0;while (y = t[h++]) {
-            y(x, b, a, s);
-          }if (_o) {
-            if (v > 0) while (m--) {
-              x[m] || b[m] || (b[m] = j.call(u));
-            }b = we(b);
-          }L.apply(u, b), c && !_o && b.length > 0 && v + t.length > 1 && oe.uniqueSort(u);
-        }return c && (T = E, l = w), x;
-      };return n ? se(o) : o;
-    }return s = oe.compile = function (e, t) {
-      var n,
-          r = [],
-          i = [],
-          o = S[e + " "];if (!o) {
-        t || (t = a(e)), n = t.length;while (n--) {
-          (o = Ce(t[n]))[b] ? r.push(o) : i.push(o);
-        }(o = S(e, Ee(i, r))).selector = e;
-      }return o;
-    }, u = oe.select = function (e, t, n, i) {
-      var o,
-          u,
-          l,
-          c,
-          f,
-          p = "function" == typeof e && e,
-          d = !i && a(e = p.selector || e);if (n = n || [], 1 === d.length) {
-        if ((u = d[0] = d[0].slice(0)).length > 2 && "ID" === (l = u[0]).type && 9 === t.nodeType && g && r.relative[u[1].type]) {
-          if (!(t = (r.find.ID(l.matches[0].replace(Z, ee), t) || [])[0])) return n;p && (t = t.parentNode), e = e.slice(u.shift().value.length);
-        }o = V.needsContext.test(e) ? 0 : u.length;while (o--) {
-          if (l = u[o], r.relative[c = l.type]) break;if ((f = r.find[c]) && (i = f(l.matches[0].replace(Z, ee), K.test(u[0].type) && ge(t.parentNode) || t))) {
-            if (u.splice(o, 1), !(e = i.length && ve(u))) return L.apply(n, i), n;break;
-          }
-        }
-      }return (p || s(e, d))(i, t, !g, n, !t || K.test(e) && ge(t.parentNode) || t), n;
-    }, n.sortStable = b.split("").sort(D).join("") === b, n.detectDuplicates = !!f, p(), n.sortDetached = ue(function (e) {
-      return 1 & e.compareDocumentPosition(d.createElement("fieldset"));
-    }), ue(function (e) {
-      return e.innerHTML = "<a href='#'></a>", "#" === e.firstChild.getAttribute("href");
-    }) || le("type|href|height|width", function (e, t, n) {
-      if (!n) return e.getAttribute(t, "type" === t.toLowerCase() ? 1 : 2);
-    }), n.attributes && ue(function (e) {
-      return e.innerHTML = "<input/>", e.firstChild.setAttribute("value", ""), "" === e.firstChild.getAttribute("value");
-    }) || le("value", function (e, t, n) {
-      if (!n && "input" === e.nodeName.toLowerCase()) return e.defaultValue;
-    }), ue(function (e) {
-      return null == e.getAttribute("disabled");
-    }) || le(P, function (e, t, n) {
-      var r;if (!n) return !0 === e[t] ? t.toLowerCase() : (r = e.getAttributeNode(t)) && r.specified ? r.value : null;
-    }), oe;
-  }(e);w.find = E, w.expr = E.selectors, w.expr[":"] = w.expr.pseudos, w.uniqueSort = w.unique = E.uniqueSort, w.text = E.getText, w.isXMLDoc = E.isXML, w.contains = E.contains, w.escapeSelector = E.escape;var k = function k(e, t, n) {
-    var r = [],
-        i = void 0 !== n;while ((e = e[t]) && 9 !== e.nodeType) {
-      if (1 === e.nodeType) {
-        if (i && w(e).is(n)) break;r.push(e);
-      }
-    }return r;
-  },
-      S = function S(e, t) {
-    for (var n = []; e; e = e.nextSibling) {
-      1 === e.nodeType && e !== t && n.push(e);
-    }return n;
-  },
-      D = w.expr.match.needsContext;function N(e, t) {
-    return e.nodeName && e.nodeName.toLowerCase() === t.toLowerCase();
-  }var A = /^<([a-z][^\/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>(?:<\/\1>|)$/i;function j(e, t, n) {
-    return g(t) ? w.grep(e, function (e, r) {
-      return !!t.call(e, r, e) !== n;
-    }) : t.nodeType ? w.grep(e, function (e) {
-      return e === t !== n;
-    }) : "string" != typeof t ? w.grep(e, function (e) {
-      return u.call(t, e) > -1 !== n;
-    }) : w.filter(t, e, n);
-  }w.filter = function (e, t, n) {
-    var r = t[0];return n && (e = ":not(" + e + ")"), 1 === t.length && 1 === r.nodeType ? w.find.matchesSelector(r, e) ? [r] : [] : w.find.matches(e, w.grep(t, function (e) {
-      return 1 === e.nodeType;
-    }));
-  }, w.fn.extend({ find: function find(e) {
-      var t,
-          n,
-          r = this.length,
-          i = this;if ("string" != typeof e) return this.pushStack(w(e).filter(function () {
-        for (t = 0; t < r; t++) {
-          if (w.contains(i[t], this)) return !0;
-        }
-      }));for (n = this.pushStack([]), t = 0; t < r; t++) {
-        w.find(e, i[t], n);
-      }return r > 1 ? w.uniqueSort(n) : n;
-    }, filter: function filter(e) {
-      return this.pushStack(j(this, e || [], !1));
-    }, not: function not(e) {
-      return this.pushStack(j(this, e || [], !0));
-    }, is: function is(e) {
-      return !!j(this, "string" == typeof e && D.test(e) ? w(e) : e || [], !1).length;
-    } });var q,
-      L = /^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]+))$/;(w.fn.init = function (e, t, n) {
-    var i, o;if (!e) return this;if (n = n || q, "string" == typeof e) {
-      if (!(i = "<" === e[0] && ">" === e[e.length - 1] && e.length >= 3 ? [null, e, null] : L.exec(e)) || !i[1] && t) return !t || t.jquery ? (t || n).find(e) : this.constructor(t).find(e);if (i[1]) {
-        if (t = t instanceof w ? t[0] : t, w.merge(this, w.parseHTML(i[1], t && t.nodeType ? t.ownerDocument || t : r, !0)), A.test(i[1]) && w.isPlainObject(t)) for (i in t) {
-          g(this[i]) ? this[i](t[i]) : this.attr(i, t[i]);
-        }return this;
-      }return (o = r.getElementById(i[2])) && (this[0] = o, this.length = 1), this;
-    }return e.nodeType ? (this[0] = e, this.length = 1, this) : g(e) ? void 0 !== n.ready ? n.ready(e) : e(w) : w.makeArray(e, this);
-  }).prototype = w.fn, q = w(r);var H = /^(?:parents|prev(?:Until|All))/,
-      O = { children: !0, contents: !0, next: !0, prev: !0 };w.fn.extend({ has: function has(e) {
-      var t = w(e, this),
-          n = t.length;return this.filter(function () {
-        for (var e = 0; e < n; e++) {
-          if (w.contains(this, t[e])) return !0;
-        }
-      });
-    }, closest: function closest(e, t) {
-      var n,
-          r = 0,
-          i = this.length,
-          o = [],
-          a = "string" != typeof e && w(e);if (!D.test(e)) for (; r < i; r++) {
-        for (n = this[r]; n && n !== t; n = n.parentNode) {
-          if (n.nodeType < 11 && (a ? a.index(n) > -1 : 1 === n.nodeType && w.find.matchesSelector(n, e))) {
-            o.push(n);break;
-          }
-        }
-      }return this.pushStack(o.length > 1 ? w.uniqueSort(o) : o);
-    }, index: function index(e) {
-      return e ? "string" == typeof e ? u.call(w(e), this[0]) : u.call(this, e.jquery ? e[0] : e) : this[0] && this[0].parentNode ? this.first().prevAll().length : -1;
-    }, add: function add(e, t) {
-      return this.pushStack(w.uniqueSort(w.merge(this.get(), w(e, t))));
-    }, addBack: function addBack(e) {
-      return this.add(null == e ? this.prevObject : this.prevObject.filter(e));
-    } });function P(e, t) {
-    while ((e = e[t]) && 1 !== e.nodeType) {}return e;
-  }w.each({ parent: function parent(e) {
-      var t = e.parentNode;return t && 11 !== t.nodeType ? t : null;
-    }, parents: function parents(e) {
-      return k(e, "parentNode");
-    }, parentsUntil: function parentsUntil(e, t, n) {
-      return k(e, "parentNode", n);
-    }, next: function next(e) {
-      return P(e, "nextSibling");
-    }, prev: function prev(e) {
-      return P(e, "previousSibling");
-    }, nextAll: function nextAll(e) {
-      return k(e, "nextSibling");
-    }, prevAll: function prevAll(e) {
-      return k(e, "previousSibling");
-    }, nextUntil: function nextUntil(e, t, n) {
-      return k(e, "nextSibling", n);
-    }, prevUntil: function prevUntil(e, t, n) {
-      return k(e, "previousSibling", n);
-    }, siblings: function siblings(e) {
-      return S((e.parentNode || {}).firstChild, e);
-    }, children: function children(e) {
-      return S(e.firstChild);
-    }, contents: function contents(e) {
-      return N(e, "iframe") ? e.contentDocument : (N(e, "template") && (e = e.content || e), w.merge([], e.childNodes));
-    } }, function (e, t) {
-    w.fn[e] = function (n, r) {
-      var i = w.map(this, t, n);return "Until" !== e.slice(-5) && (r = n), r && "string" == typeof r && (i = w.filter(r, i)), this.length > 1 && (O[e] || w.uniqueSort(i), H.test(e) && i.reverse()), this.pushStack(i);
-    };
-  });var M = /[^\x20\t\r\n\f]+/g;function R(e) {
-    var t = {};return w.each(e.match(M) || [], function (e, n) {
-      t[n] = !0;
-    }), t;
-  }w.Callbacks = function (e) {
-    e = "string" == typeof e ? R(e) : w.extend({}, e);var t,
-        n,
-        r,
-        i,
-        o = [],
-        a = [],
-        s = -1,
-        u = function u() {
-      for (i = i || e.once, r = t = !0; a.length; s = -1) {
-        n = a.shift();while (++s < o.length) {
-          !1 === o[s].apply(n[0], n[1]) && e.stopOnFalse && (s = o.length, n = !1);
-        }
-      }e.memory || (n = !1), t = !1, i && (o = n ? [] : "");
-    },
-        l = { add: function add() {
-        return o && (n && !t && (s = o.length - 1, a.push(n)), function t(n) {
-          w.each(n, function (n, r) {
-            g(r) ? e.unique && l.has(r) || o.push(r) : r && r.length && "string" !== x(r) && t(r);
-          });
-        }(arguments), n && !t && u()), this;
-      }, remove: function remove() {
-        return w.each(arguments, function (e, t) {
-          var n;while ((n = w.inArray(t, o, n)) > -1) {
-            o.splice(n, 1), n <= s && s--;
-          }
-        }), this;
-      }, has: function has(e) {
-        return e ? w.inArray(e, o) > -1 : o.length > 0;
-      }, empty: function empty() {
-        return o && (o = []), this;
-      }, disable: function disable() {
-        return i = a = [], o = n = "", this;
-      }, disabled: function disabled() {
-        return !o;
-      }, lock: function lock() {
-        return i = a = [], n || t || (o = n = ""), this;
-      }, locked: function locked() {
-        return !!i;
-      }, fireWith: function fireWith(e, n) {
-        return i || (n = [e, (n = n || []).slice ? n.slice() : n], a.push(n), t || u()), this;
-      }, fire: function fire() {
-        return l.fireWith(this, arguments), this;
-      }, fired: function fired() {
-        return !!r;
-      } };return l;
-  };function I(e) {
-    return e;
-  }function W(e) {
-    throw e;
-  }function $(e, t, n, r) {
-    var i;try {
-      e && g(i = e.promise) ? i.call(e).done(t).fail(n) : e && g(i = e.then) ? i.call(e, t, n) : t.apply(void 0, [e].slice(r));
-    } catch (e) {
-      n.apply(void 0, [e]);
-    }
-  }w.extend({ Deferred: function Deferred(t) {
-      var n = [["notify", "progress", w.Callbacks("memory"), w.Callbacks("memory"), 2], ["resolve", "done", w.Callbacks("once memory"), w.Callbacks("once memory"), 0, "resolved"], ["reject", "fail", w.Callbacks("once memory"), w.Callbacks("once memory"), 1, "rejected"]],
-          r = "pending",
-          i = { state: function state() {
-          return r;
-        }, always: function always() {
-          return o.done(arguments).fail(arguments), this;
-        }, "catch": function _catch(e) {
-          return i.then(null, e);
-        }, pipe: function pipe() {
-          var e = arguments;return w.Deferred(function (t) {
-            w.each(n, function (n, r) {
-              var i = g(e[r[4]]) && e[r[4]];o[r[1]](function () {
-                var e = i && i.apply(this, arguments);e && g(e.promise) ? e.promise().progress(t.notify).done(t.resolve).fail(t.reject) : t[r[0] + "With"](this, i ? [e] : arguments);
-              });
-            }), e = null;
-          }).promise();
-        }, then: function then(t, r, i) {
-          var o = 0;function a(t, n, r, i) {
-            return function () {
-              var s = this,
-                  u = arguments,
-                  l = function l() {
-                var e, l;if (!(t < o)) {
-                  if ((e = r.apply(s, u)) === n.promise()) throw new TypeError("Thenable self-resolution");l = e && ("object" == (typeof e === "undefined" ? "undefined" : _typeof(e)) || "function" == typeof e) && e.then, g(l) ? i ? l.call(e, a(o, n, I, i), a(o, n, W, i)) : (o++, l.call(e, a(o, n, I, i), a(o, n, W, i), a(o, n, I, n.notifyWith))) : (r !== I && (s = void 0, u = [e]), (i || n.resolveWith)(s, u));
-                }
-              },
-                  c = i ? l : function () {
-                try {
-                  l();
-                } catch (e) {
-                  w.Deferred.exceptionHook && w.Deferred.exceptionHook(e, c.stackTrace), t + 1 >= o && (r !== W && (s = void 0, u = [e]), n.rejectWith(s, u));
-                }
-              };t ? c() : (w.Deferred.getStackHook && (c.stackTrace = w.Deferred.getStackHook()), e.setTimeout(c));
-            };
-          }return w.Deferred(function (e) {
-            n[0][3].add(a(0, e, g(i) ? i : I, e.notifyWith)), n[1][3].add(a(0, e, g(t) ? t : I)), n[2][3].add(a(0, e, g(r) ? r : W));
-          }).promise();
-        }, promise: function promise(e) {
-          return null != e ? w.extend(e, i) : i;
-        } },
-          o = {};return w.each(n, function (e, t) {
-        var a = t[2],
-            s = t[5];i[t[1]] = a.add, s && a.add(function () {
-          r = s;
-        }, n[3 - e][2].disable, n[3 - e][3].disable, n[0][2].lock, n[0][3].lock), a.add(t[3].fire), o[t[0]] = function () {
-          return o[t[0] + "With"](this === o ? void 0 : this, arguments), this;
-        }, o[t[0] + "With"] = a.fireWith;
-      }), i.promise(o), t && t.call(o, o), o;
-    }, when: function when(e) {
-      var t = arguments.length,
-          n = t,
-          r = Array(n),
-          i = o.call(arguments),
-          a = w.Deferred(),
-          s = function s(e) {
-        return function (n) {
-          r[e] = this, i[e] = arguments.length > 1 ? o.call(arguments) : n, --t || a.resolveWith(r, i);
-        };
-      };if (t <= 1 && ($(e, a.done(s(n)).resolve, a.reject, !t), "pending" === a.state() || g(i[n] && i[n].then))) return a.then();while (n--) {
-        $(i[n], s(n), a.reject);
-      }return a.promise();
-    } });var B = /^(Eval|Internal|Range|Reference|Syntax|Type|URI)Error$/;w.Deferred.exceptionHook = function (t, n) {
-    e.console && e.console.warn && t && B.test(t.name) && e.console.warn("jQuery.Deferred exception: " + t.message, t.stack, n);
-  }, w.readyException = function (t) {
-    e.setTimeout(function () {
-      throw t;
-    });
-  };var F = w.Deferred();w.fn.ready = function (e) {
-    return F.then(e)["catch"](function (e) {
-      w.readyException(e);
-    }), this;
-  }, w.extend({ isReady: !1, readyWait: 1, ready: function ready(e) {
-      (!0 === e ? --w.readyWait : w.isReady) || (w.isReady = !0, !0 !== e && --w.readyWait > 0 || F.resolveWith(r, [w]));
-    } }), w.ready.then = F.then;function _() {
-    r.removeEventListener("DOMContentLoaded", _), e.removeEventListener("load", _), w.ready();
-  }"complete" === r.readyState || "loading" !== r.readyState && !r.documentElement.doScroll ? e.setTimeout(w.ready) : (r.addEventListener("DOMContentLoaded", _), e.addEventListener("load", _));var z = function z(e, t, n, r, i, o, a) {
-    var s = 0,
-        u = e.length,
-        l = null == n;if ("object" === x(n)) {
-      i = !0;for (s in n) {
-        z(e, t, s, n[s], !0, o, a);
-      }
-    } else if (void 0 !== r && (i = !0, g(r) || (a = !0), l && (a ? (t.call(e, r), t = null) : (l = t, t = function t(e, _t2, n) {
-      return l.call(w(e), n);
-    })), t)) for (; s < u; s++) {
-      t(e[s], n, a ? r : r.call(e[s], s, t(e[s], n)));
-    }return i ? e : l ? t.call(e) : u ? t(e[0], n) : o;
-  },
-      X = /^-ms-/,
-      U = /-([a-z])/g;function V(e, t) {
-    return t.toUpperCase();
-  }function G(e) {
-    return e.replace(X, "ms-").replace(U, V);
-  }var Y = function Y(e) {
-    return 1 === e.nodeType || 9 === e.nodeType || !+e.nodeType;
-  };function Q() {
-    this.expando = w.expando + Q.uid++;
-  }Q.uid = 1, Q.prototype = { cache: function cache(e) {
-      var t = e[this.expando];return t || (t = {}, Y(e) && (e.nodeType ? e[this.expando] = t : Object.defineProperty(e, this.expando, { value: t, configurable: !0 }))), t;
-    }, set: function set(e, t, n) {
-      var r,
-          i = this.cache(e);if ("string" == typeof t) i[G(t)] = n;else for (r in t) {
-        i[G(r)] = t[r];
-      }return i;
-    }, get: function get(e, t) {
-      return void 0 === t ? this.cache(e) : e[this.expando] && e[this.expando][G(t)];
-    }, access: function access(e, t, n) {
-      return void 0 === t || t && "string" == typeof t && void 0 === n ? this.get(e, t) : (this.set(e, t, n), void 0 !== n ? n : t);
-    }, remove: function remove(e, t) {
-      var n,
-          r = e[this.expando];if (void 0 !== r) {
-        if (void 0 !== t) {
-          n = (t = Array.isArray(t) ? t.map(G) : (t = G(t)) in r ? [t] : t.match(M) || []).length;while (n--) {
-            delete r[t[n]];
-          }
-        }(void 0 === t || w.isEmptyObject(r)) && (e.nodeType ? e[this.expando] = void 0 : delete e[this.expando]);
-      }
-    }, hasData: function hasData(e) {
-      var t = e[this.expando];return void 0 !== t && !w.isEmptyObject(t);
-    } };var J = new Q(),
-      K = new Q(),
-      Z = /^(?:\{[\w\W]*\}|\[[\w\W]*\])$/,
-      ee = /[A-Z]/g;function te(e) {
-    return "true" === e || "false" !== e && ("null" === e ? null : e === +e + "" ? +e : Z.test(e) ? JSON.parse(e) : e);
-  }function ne(e, t, n) {
-    var r;if (void 0 === n && 1 === e.nodeType) if (r = "data-" + t.replace(ee, "-$&").toLowerCase(), "string" == typeof (n = e.getAttribute(r))) {
-      try {
-        n = te(n);
-      } catch (e) {}K.set(e, t, n);
-    } else n = void 0;return n;
-  }w.extend({ hasData: function hasData(e) {
-      return K.hasData(e) || J.hasData(e);
-    }, data: function data(e, t, n) {
-      return K.access(e, t, n);
-    }, removeData: function removeData(e, t) {
-      K.remove(e, t);
-    }, _data: function _data(e, t, n) {
-      return J.access(e, t, n);
-    }, _removeData: function _removeData(e, t) {
-      J.remove(e, t);
-    } }), w.fn.extend({ data: function data(e, t) {
-      var n,
-          r,
-          i,
-          o = this[0],
-          a = o && o.attributes;if (void 0 === e) {
-        if (this.length && (i = K.get(o), 1 === o.nodeType && !J.get(o, "hasDataAttrs"))) {
-          n = a.length;while (n--) {
-            a[n] && 0 === (r = a[n].name).indexOf("data-") && (r = G(r.slice(5)), ne(o, r, i[r]));
-          }J.set(o, "hasDataAttrs", !0);
-        }return i;
-      }return "object" == (typeof e === "undefined" ? "undefined" : _typeof(e)) ? this.each(function () {
-        K.set(this, e);
-      }) : z(this, function (t) {
-        var n;if (o && void 0 === t) {
-          if (void 0 !== (n = K.get(o, e))) return n;if (void 0 !== (n = ne(o, e))) return n;
-        } else this.each(function () {
-          K.set(this, e, t);
-        });
-      }, null, t, arguments.length > 1, null, !0);
-    }, removeData: function removeData(e) {
-      return this.each(function () {
-        K.remove(this, e);
-      });
-    } }), w.extend({ queue: function queue(e, t, n) {
-      var r;if (e) return t = (t || "fx") + "queue", r = J.get(e, t), n && (!r || Array.isArray(n) ? r = J.access(e, t, w.makeArray(n)) : r.push(n)), r || [];
-    }, dequeue: function dequeue(e, t) {
-      t = t || "fx";var n = w.queue(e, t),
-          r = n.length,
-          i = n.shift(),
-          o = w._queueHooks(e, t),
-          a = function a() {
-        w.dequeue(e, t);
-      };"inprogress" === i && (i = n.shift(), r--), i && ("fx" === t && n.unshift("inprogress"), delete o.stop, i.call(e, a, o)), !r && o && o.empty.fire();
-    }, _queueHooks: function _queueHooks(e, t) {
-      var n = t + "queueHooks";return J.get(e, n) || J.access(e, n, { empty: w.Callbacks("once memory").add(function () {
-          J.remove(e, [t + "queue", n]);
-        }) });
-    } }), w.fn.extend({ queue: function queue(e, t) {
-      var n = 2;return "string" != typeof e && (t = e, e = "fx", n--), arguments.length < n ? w.queue(this[0], e) : void 0 === t ? this : this.each(function () {
-        var n = w.queue(this, e, t);w._queueHooks(this, e), "fx" === e && "inprogress" !== n[0] && w.dequeue(this, e);
-      });
-    }, dequeue: function dequeue(e) {
-      return this.each(function () {
-        w.dequeue(this, e);
-      });
-    }, clearQueue: function clearQueue(e) {
-      return this.queue(e || "fx", []);
-    }, promise: function promise(e, t) {
-      var n,
-          r = 1,
-          i = w.Deferred(),
-          o = this,
-          a = this.length,
-          s = function s() {
-        --r || i.resolveWith(o, [o]);
-      };"string" != typeof e && (t = e, e = void 0), e = e || "fx";while (a--) {
-        (n = J.get(o[a], e + "queueHooks")) && n.empty && (r++, n.empty.add(s));
-      }return s(), i.promise(t);
-    } });var re = /[+-]?(?:\d*\.|)\d+(?:[eE][+-]?\d+|)/.source,
-      ie = new RegExp("^(?:([+-])=|)(" + re + ")([a-z%]*)$", "i"),
-      oe = ["Top", "Right", "Bottom", "Left"],
-      ae = function ae(e, t) {
-    return "none" === (e = t || e).style.display || "" === e.style.display && w.contains(e.ownerDocument, e) && "none" === w.css(e, "display");
-  },
-      se = function se(e, t, n, r) {
-    var i,
-        o,
-        a = {};for (o in t) {
-      a[o] = e.style[o], e.style[o] = t[o];
-    }i = n.apply(e, r || []);for (o in t) {
-      e.style[o] = a[o];
-    }return i;
-  };function ue(e, t, n, r) {
-    var i,
-        o,
-        a = 20,
-        s = r ? function () {
-      return r.cur();
-    } : function () {
-      return w.css(e, t, "");
-    },
-        u = s(),
-        l = n && n[3] || (w.cssNumber[t] ? "" : "px"),
-        c = (w.cssNumber[t] || "px" !== l && +u) && ie.exec(w.css(e, t));if (c && c[3] !== l) {
-      u /= 2, l = l || c[3], c = +u || 1;while (a--) {
-        w.style(e, t, c + l), (1 - o) * (1 - (o = s() / u || .5)) <= 0 && (a = 0), c /= o;
-      }c *= 2, w.style(e, t, c + l), n = n || [];
-    }return n && (c = +c || +u || 0, i = n[1] ? c + (n[1] + 1) * n[2] : +n[2], r && (r.unit = l, r.start = c, r.end = i)), i;
-  }var le = {};function ce(e) {
-    var t,
-        n = e.ownerDocument,
-        r = e.nodeName,
-        i = le[r];return i || (t = n.body.appendChild(n.createElement(r)), i = w.css(t, "display"), t.parentNode.removeChild(t), "none" === i && (i = "block"), le[r] = i, i);
-  }function fe(e, t) {
-    for (var n, r, i = [], o = 0, a = e.length; o < a; o++) {
-      (r = e[o]).style && (n = r.style.display, t ? ("none" === n && (i[o] = J.get(r, "display") || null, i[o] || (r.style.display = "")), "" === r.style.display && ae(r) && (i[o] = ce(r))) : "none" !== n && (i[o] = "none", J.set(r, "display", n)));
-    }for (o = 0; o < a; o++) {
-      null != i[o] && (e[o].style.display = i[o]);
-    }return e;
-  }w.fn.extend({ show: function show() {
-      return fe(this, !0);
-    }, hide: function hide() {
-      return fe(this);
-    }, toggle: function toggle(e) {
-      return "boolean" == typeof e ? e ? this.show() : this.hide() : this.each(function () {
-        ae(this) ? w(this).show() : w(this).hide();
-      });
-    } });var pe = /^(?:checkbox|radio)$/i,
-      de = /<([a-z][^\/\0>\x20\t\r\n\f]+)/i,
-      he = /^$|^module$|\/(?:java|ecma)script/i,
-      ge = { option: [1, "<select multiple='multiple'>", "</select>"], thead: [1, "<table>", "</table>"], col: [2, "<table><colgroup>", "</colgroup></table>"], tr: [2, "<table><tbody>", "</tbody></table>"], td: [3, "<table><tbody><tr>", "</tr></tbody></table>"], _default: [0, "", ""] };ge.optgroup = ge.option, ge.tbody = ge.tfoot = ge.colgroup = ge.caption = ge.thead, ge.th = ge.td;function ye(e, t) {
-    var n;return n = "undefined" != typeof e.getElementsByTagName ? e.getElementsByTagName(t || "*") : "undefined" != typeof e.querySelectorAll ? e.querySelectorAll(t || "*") : [], void 0 === t || t && N(e, t) ? w.merge([e], n) : n;
-  }function ve(e, t) {
-    for (var n = 0, r = e.length; n < r; n++) {
-      J.set(e[n], "globalEval", !t || J.get(t[n], "globalEval"));
-    }
-  }var me = /<|&#?\w+;/;function xe(e, t, n, r, i) {
-    for (var o, a, s, u, l, c, f = t.createDocumentFragment(), p = [], d = 0, h = e.length; d < h; d++) {
-      if ((o = e[d]) || 0 === o) if ("object" === x(o)) w.merge(p, o.nodeType ? [o] : o);else if (me.test(o)) {
-        a = a || f.appendChild(t.createElement("div")), s = (de.exec(o) || ["", ""])[1].toLowerCase(), u = ge[s] || ge._default, a.innerHTML = u[1] + w.htmlPrefilter(o) + u[2], c = u[0];while (c--) {
-          a = a.lastChild;
-        }w.merge(p, a.childNodes), (a = f.firstChild).textContent = "";
-      } else p.push(t.createTextNode(o));
-    }f.textContent = "", d = 0;while (o = p[d++]) {
-      if (r && w.inArray(o, r) > -1) i && i.push(o);else if (l = w.contains(o.ownerDocument, o), a = ye(f.appendChild(o), "script"), l && ve(a), n) {
-        c = 0;while (o = a[c++]) {
-          he.test(o.type || "") && n.push(o);
-        }
-      }
-    }return f;
-  }!function () {
-    var e = r.createDocumentFragment().appendChild(r.createElement("div")),
-        t = r.createElement("input");t.setAttribute("type", "radio"), t.setAttribute("checked", "checked"), t.setAttribute("name", "t"), e.appendChild(t), h.checkClone = e.cloneNode(!0).cloneNode(!0).lastChild.checked, e.innerHTML = "<textarea>x</textarea>", h.noCloneChecked = !!e.cloneNode(!0).lastChild.defaultValue;
-  }();var be = r.documentElement,
-      we = /^key/,
-      Te = /^(?:mouse|pointer|contextmenu|drag|drop)|click/,
-      Ce = /^([^.]*)(?:\.(.+)|)/;function Ee() {
-    return !0;
-  }function ke() {
-    return !1;
-  }function Se() {
-    try {
-      return r.activeElement;
-    } catch (e) {}
-  }function De(e, t, n, r, i, o) {
-    var a, s;if ("object" == (typeof t === "undefined" ? "undefined" : _typeof(t))) {
-      "string" != typeof n && (r = r || n, n = void 0);for (s in t) {
-        De(e, s, n, r, t[s], o);
-      }return e;
-    }if (null == r && null == i ? (i = n, r = n = void 0) : null == i && ("string" == typeof n ? (i = r, r = void 0) : (i = r, r = n, n = void 0)), !1 === i) i = ke;else if (!i) return e;return 1 === o && (a = i, (i = function i(e) {
-      return w().off(e), a.apply(this, arguments);
-    }).guid = a.guid || (a.guid = w.guid++)), e.each(function () {
-      w.event.add(this, t, i, r, n);
-    });
-  }w.event = { global: {}, add: function add(e, t, n, r, i) {
-      var o,
-          a,
-          s,
-          u,
-          l,
-          c,
-          f,
-          p,
-          d,
-          h,
-          g,
-          y = J.get(e);if (y) {
-        n.handler && (n = (o = n).handler, i = o.selector), i && w.find.matchesSelector(be, i), n.guid || (n.guid = w.guid++), (u = y.events) || (u = y.events = {}), (a = y.handle) || (a = y.handle = function (t) {
-          return "undefined" != typeof w && w.event.triggered !== t.type ? w.event.dispatch.apply(e, arguments) : void 0;
-        }), l = (t = (t || "").match(M) || [""]).length;while (l--) {
-          d = g = (s = Ce.exec(t[l]) || [])[1], h = (s[2] || "").split(".").sort(), d && (f = w.event.special[d] || {}, d = (i ? f.delegateType : f.bindType) || d, f = w.event.special[d] || {}, c = w.extend({ type: d, origType: g, data: r, handler: n, guid: n.guid, selector: i, needsContext: i && w.expr.match.needsContext.test(i), namespace: h.join(".") }, o), (p = u[d]) || ((p = u[d] = []).delegateCount = 0, f.setup && !1 !== f.setup.call(e, r, h, a) || e.addEventListener && e.addEventListener(d, a)), f.add && (f.add.call(e, c), c.handler.guid || (c.handler.guid = n.guid)), i ? p.splice(p.delegateCount++, 0, c) : p.push(c), w.event.global[d] = !0);
-        }
-      }
-    }, remove: function remove(e, t, n, r, i) {
-      var o,
-          a,
-          s,
-          u,
-          l,
-          c,
-          f,
-          p,
-          d,
-          h,
-          g,
-          y = J.hasData(e) && J.get(e);if (y && (u = y.events)) {
-        l = (t = (t || "").match(M) || [""]).length;while (l--) {
-          if (s = Ce.exec(t[l]) || [], d = g = s[1], h = (s[2] || "").split(".").sort(), d) {
-            f = w.event.special[d] || {}, p = u[d = (r ? f.delegateType : f.bindType) || d] || [], s = s[2] && new RegExp("(^|\\.)" + h.join("\\.(?:.*\\.|)") + "(\\.|$)"), a = o = p.length;while (o--) {
-              c = p[o], !i && g !== c.origType || n && n.guid !== c.guid || s && !s.test(c.namespace) || r && r !== c.selector && ("**" !== r || !c.selector) || (p.splice(o, 1), c.selector && p.delegateCount--, f.remove && f.remove.call(e, c));
-            }a && !p.length && (f.teardown && !1 !== f.teardown.call(e, h, y.handle) || w.removeEvent(e, d, y.handle), delete u[d]);
-          } else for (d in u) {
-            w.event.remove(e, d + t[l], n, r, !0);
-          }
-        }w.isEmptyObject(u) && J.remove(e, "handle events");
-      }
-    }, dispatch: function dispatch(e) {
-      var t = w.event.fix(e),
-          n,
-          r,
-          i,
-          o,
-          a,
-          s,
-          u = new Array(arguments.length),
-          l = (J.get(this, "events") || {})[t.type] || [],
-          c = w.event.special[t.type] || {};for (u[0] = t, n = 1; n < arguments.length; n++) {
-        u[n] = arguments[n];
-      }if (t.delegateTarget = this, !c.preDispatch || !1 !== c.preDispatch.call(this, t)) {
-        s = w.event.handlers.call(this, t, l), n = 0;while ((o = s[n++]) && !t.isPropagationStopped()) {
-          t.currentTarget = o.elem, r = 0;while ((a = o.handlers[r++]) && !t.isImmediatePropagationStopped()) {
-            t.rnamespace && !t.rnamespace.test(a.namespace) || (t.handleObj = a, t.data = a.data, void 0 !== (i = ((w.event.special[a.origType] || {}).handle || a.handler).apply(o.elem, u)) && !1 === (t.result = i) && (t.preventDefault(), t.stopPropagation()));
-          }
-        }return c.postDispatch && c.postDispatch.call(this, t), t.result;
-      }
-    }, handlers: function handlers(e, t) {
-      var n,
-          r,
-          i,
-          o,
-          a,
-          s = [],
-          u = t.delegateCount,
-          l = e.target;if (u && l.nodeType && !("click" === e.type && e.button >= 1)) for (; l !== this; l = l.parentNode || this) {
-        if (1 === l.nodeType && ("click" !== e.type || !0 !== l.disabled)) {
-          for (o = [], a = {}, n = 0; n < u; n++) {
-            void 0 === a[i = (r = t[n]).selector + " "] && (a[i] = r.needsContext ? w(i, this).index(l) > -1 : w.find(i, this, null, [l]).length), a[i] && o.push(r);
-          }o.length && s.push({ elem: l, handlers: o });
-        }
-      }return l = this, u < t.length && s.push({ elem: l, handlers: t.slice(u) }), s;
-    }, addProp: function addProp(e, t) {
-      Object.defineProperty(w.Event.prototype, e, { enumerable: !0, configurable: !0, get: g(t) ? function () {
-          if (this.originalEvent) return t(this.originalEvent);
-        } : function () {
-          if (this.originalEvent) return this.originalEvent[e];
-        }, set: function set(t) {
-          Object.defineProperty(this, e, { enumerable: !0, configurable: !0, writable: !0, value: t });
-        } });
-    }, fix: function fix(e) {
-      return e[w.expando] ? e : new w.Event(e);
-    }, special: { load: { noBubble: !0 }, focus: { trigger: function trigger() {
-          if (this !== Se() && this.focus) return this.focus(), !1;
-        }, delegateType: "focusin" }, blur: { trigger: function trigger() {
-          if (this === Se() && this.blur) return this.blur(), !1;
-        }, delegateType: "focusout" }, click: { trigger: function trigger() {
-          if ("checkbox" === this.type && this.click && N(this, "input")) return this.click(), !1;
-        }, _default: function _default(e) {
-          return N(e.target, "a");
-        } }, beforeunload: { postDispatch: function postDispatch(e) {
-          void 0 !== e.result && e.originalEvent && (e.originalEvent.returnValue = e.result);
-        } } } }, w.removeEvent = function (e, t, n) {
-    e.removeEventListener && e.removeEventListener(t, n);
-  }, w.Event = function (e, t) {
-    if (!(this instanceof w.Event)) return new w.Event(e, t);e && e.type ? (this.originalEvent = e, this.type = e.type, this.isDefaultPrevented = e.defaultPrevented || void 0 === e.defaultPrevented && !1 === e.returnValue ? Ee : ke, this.target = e.target && 3 === e.target.nodeType ? e.target.parentNode : e.target, this.currentTarget = e.currentTarget, this.relatedTarget = e.relatedTarget) : this.type = e, t && w.extend(this, t), this.timeStamp = e && e.timeStamp || Date.now(), this[w.expando] = !0;
-  }, w.Event.prototype = { constructor: w.Event, isDefaultPrevented: ke, isPropagationStopped: ke, isImmediatePropagationStopped: ke, isSimulated: !1, preventDefault: function preventDefault() {
-      var e = this.originalEvent;this.isDefaultPrevented = Ee, e && !this.isSimulated && e.preventDefault();
-    }, stopPropagation: function stopPropagation() {
-      var e = this.originalEvent;this.isPropagationStopped = Ee, e && !this.isSimulated && e.stopPropagation();
-    }, stopImmediatePropagation: function stopImmediatePropagation() {
-      var e = this.originalEvent;this.isImmediatePropagationStopped = Ee, e && !this.isSimulated && e.stopImmediatePropagation(), this.stopPropagation();
-    } }, w.each({ altKey: !0, bubbles: !0, cancelable: !0, changedTouches: !0, ctrlKey: !0, detail: !0, eventPhase: !0, metaKey: !0, pageX: !0, pageY: !0, shiftKey: !0, view: !0, "char": !0, charCode: !0, key: !0, keyCode: !0, button: !0, buttons: !0, clientX: !0, clientY: !0, offsetX: !0, offsetY: !0, pointerId: !0, pointerType: !0, screenX: !0, screenY: !0, targetTouches: !0, toElement: !0, touches: !0, which: function which(e) {
-      var t = e.button;return null == e.which && we.test(e.type) ? null != e.charCode ? e.charCode : e.keyCode : !e.which && void 0 !== t && Te.test(e.type) ? 1 & t ? 1 : 2 & t ? 3 : 4 & t ? 2 : 0 : e.which;
-    } }, w.event.addProp), w.each({ mouseenter: "mouseover", mouseleave: "mouseout", pointerenter: "pointerover", pointerleave: "pointerout" }, function (e, t) {
-    w.event.special[e] = { delegateType: t, bindType: t, handle: function handle(e) {
-        var n,
-            r = this,
-            i = e.relatedTarget,
-            o = e.handleObj;return i && (i === r || w.contains(r, i)) || (e.type = o.origType, n = o.handler.apply(this, arguments), e.type = t), n;
-      } };
-  }), w.fn.extend({ on: function on(e, t, n, r) {
-      return De(this, e, t, n, r);
-    }, one: function one(e, t, n, r) {
-      return De(this, e, t, n, r, 1);
-    }, off: function off(e, t, n) {
-      var r, i;if (e && e.preventDefault && e.handleObj) return r = e.handleObj, w(e.delegateTarget).off(r.namespace ? r.origType + "." + r.namespace : r.origType, r.selector, r.handler), this;if ("object" == (typeof e === "undefined" ? "undefined" : _typeof(e))) {
-        for (i in e) {
-          this.off(i, t, e[i]);
-        }return this;
-      }return !1 !== t && "function" != typeof t || (n = t, t = void 0), !1 === n && (n = ke), this.each(function () {
-        w.event.remove(this, e, n, t);
-      });
-    } });var Ne = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([a-z][^\/\0>\x20\t\r\n\f]*)[^>]*)\/>/gi,
-      Ae = /<script|<style|<link/i,
-      je = /checked\s*(?:[^=]|=\s*.checked.)/i,
-      qe = /^\s*<!(?:\[CDATA\[|--)|(?:\]\]|--)>\s*$/g;function Le(e, t) {
-    return N(e, "table") && N(11 !== t.nodeType ? t : t.firstChild, "tr") ? w(e).children("tbody")[0] || e : e;
-  }function He(e) {
-    return e.type = (null !== e.getAttribute("type")) + "/" + e.type, e;
-  }function Oe(e) {
-    return "true/" === (e.type || "").slice(0, 5) ? e.type = e.type.slice(5) : e.removeAttribute("type"), e;
-  }function Pe(e, t) {
-    var n, r, i, o, a, s, u, l;if (1 === t.nodeType) {
-      if (J.hasData(e) && (o = J.access(e), a = J.set(t, o), l = o.events)) {
-        delete a.handle, a.events = {};for (i in l) {
-          for (n = 0, r = l[i].length; n < r; n++) {
-            w.event.add(t, i, l[i][n]);
-          }
-        }
-      }K.hasData(e) && (s = K.access(e), u = w.extend({}, s), K.set(t, u));
-    }
-  }function Me(e, t) {
-    var n = t.nodeName.toLowerCase();"input" === n && pe.test(e.type) ? t.checked = e.checked : "input" !== n && "textarea" !== n || (t.defaultValue = e.defaultValue);
-  }function Re(e, t, n, r) {
-    t = a.apply([], t);var i,
-        o,
-        s,
-        u,
-        l,
-        c,
-        f = 0,
-        p = e.length,
-        d = p - 1,
-        y = t[0],
-        v = g(y);if (v || p > 1 && "string" == typeof y && !h.checkClone && je.test(y)) return e.each(function (i) {
-      var o = e.eq(i);v && (t[0] = y.call(this, i, o.html())), Re(o, t, n, r);
-    });if (p && (i = xe(t, e[0].ownerDocument, !1, e, r), o = i.firstChild, 1 === i.childNodes.length && (i = o), o || r)) {
-      for (u = (s = w.map(ye(i, "script"), He)).length; f < p; f++) {
-        l = i, f !== d && (l = w.clone(l, !0, !0), u && w.merge(s, ye(l, "script"))), n.call(e[f], l, f);
-      }if (u) for (c = s[s.length - 1].ownerDocument, w.map(s, Oe), f = 0; f < u; f++) {
-        l = s[f], he.test(l.type || "") && !J.access(l, "globalEval") && w.contains(c, l) && (l.src && "module" !== (l.type || "").toLowerCase() ? w._evalUrl && w._evalUrl(l.src) : m(l.textContent.replace(qe, ""), c, l));
-      }
-    }return e;
-  }function Ie(e, t, n) {
-    for (var r, i = t ? w.filter(t, e) : e, o = 0; null != (r = i[o]); o++) {
-      n || 1 !== r.nodeType || w.cleanData(ye(r)), r.parentNode && (n && w.contains(r.ownerDocument, r) && ve(ye(r, "script")), r.parentNode.removeChild(r));
-    }return e;
-  }w.extend({ htmlPrefilter: function htmlPrefilter(e) {
-      return e.replace(Ne, "<$1></$2>");
-    }, clone: function clone(e, t, n) {
-      var r,
-          i,
-          o,
-          a,
-          s = e.cloneNode(!0),
-          u = w.contains(e.ownerDocument, e);if (!(h.noCloneChecked || 1 !== e.nodeType && 11 !== e.nodeType || w.isXMLDoc(e))) for (a = ye(s), r = 0, i = (o = ye(e)).length; r < i; r++) {
-        Me(o[r], a[r]);
-      }if (t) if (n) for (o = o || ye(e), a = a || ye(s), r = 0, i = o.length; r < i; r++) {
-        Pe(o[r], a[r]);
-      } else Pe(e, s);return (a = ye(s, "script")).length > 0 && ve(a, !u && ye(e, "script")), s;
-    }, cleanData: function cleanData(e) {
-      for (var t, n, r, i = w.event.special, o = 0; void 0 !== (n = e[o]); o++) {
-        if (Y(n)) {
-          if (t = n[J.expando]) {
-            if (t.events) for (r in t.events) {
-              i[r] ? w.event.remove(n, r) : w.removeEvent(n, r, t.handle);
-            }n[J.expando] = void 0;
-          }n[K.expando] && (n[K.expando] = void 0);
-        }
-      }
-    } }), w.fn.extend({ detach: function detach(e) {
-      return Ie(this, e, !0);
-    }, remove: function remove(e) {
-      return Ie(this, e);
-    }, text: function text(e) {
-      return z(this, function (e) {
-        return void 0 === e ? w.text(this) : this.empty().each(function () {
-          1 !== this.nodeType && 11 !== this.nodeType && 9 !== this.nodeType || (this.textContent = e);
-        });
-      }, null, e, arguments.length);
-    }, append: function append() {
-      return Re(this, arguments, function (e) {
-        1 !== this.nodeType && 11 !== this.nodeType && 9 !== this.nodeType || Le(this, e).appendChild(e);
-      });
-    }, prepend: function prepend() {
-      return Re(this, arguments, function (e) {
-        if (1 === this.nodeType || 11 === this.nodeType || 9 === this.nodeType) {
-          var t = Le(this, e);t.insertBefore(e, t.firstChild);
-        }
-      });
-    }, before: function before() {
-      return Re(this, arguments, function (e) {
-        this.parentNode && this.parentNode.insertBefore(e, this);
-      });
-    }, after: function after() {
-      return Re(this, arguments, function (e) {
-        this.parentNode && this.parentNode.insertBefore(e, this.nextSibling);
-      });
-    }, empty: function empty() {
-      for (var e, t = 0; null != (e = this[t]); t++) {
-        1 === e.nodeType && (w.cleanData(ye(e, !1)), e.textContent = "");
-      }return this;
-    }, clone: function clone(e, t) {
-      return e = null != e && e, t = null == t ? e : t, this.map(function () {
-        return w.clone(this, e, t);
-      });
-    }, html: function html(e) {
-      return z(this, function (e) {
-        var t = this[0] || {},
-            n = 0,
-            r = this.length;if (void 0 === e && 1 === t.nodeType) return t.innerHTML;if ("string" == typeof e && !Ae.test(e) && !ge[(de.exec(e) || ["", ""])[1].toLowerCase()]) {
-          e = w.htmlPrefilter(e);try {
-            for (; n < r; n++) {
-              1 === (t = this[n] || {}).nodeType && (w.cleanData(ye(t, !1)), t.innerHTML = e);
-            }t = 0;
-          } catch (e) {}
-        }t && this.empty().append(e);
-      }, null, e, arguments.length);
-    }, replaceWith: function replaceWith() {
-      var e = [];return Re(this, arguments, function (t) {
-        var n = this.parentNode;w.inArray(this, e) < 0 && (w.cleanData(ye(this)), n && n.replaceChild(t, this));
-      }, e);
-    } }), w.each({ appendTo: "append", prependTo: "prepend", insertBefore: "before", insertAfter: "after", replaceAll: "replaceWith" }, function (e, t) {
-    w.fn[e] = function (e) {
-      for (var n, r = [], i = w(e), o = i.length - 1, a = 0; a <= o; a++) {
-        n = a === o ? this : this.clone(!0), w(i[a])[t](n), s.apply(r, n.get());
-      }return this.pushStack(r);
-    };
-  });var We = new RegExp("^(" + re + ")(?!px)[a-z%]+$", "i"),
-      $e = function $e(t) {
-    var n = t.ownerDocument.defaultView;return n && n.opener || (n = e), n.getComputedStyle(t);
-  },
-      Be = new RegExp(oe.join("|"), "i");!function () {
-    function t() {
-      if (c) {
-        l.style.cssText = "position:absolute;left:-11111px;width:60px;margin-top:1px;padding:0;border:0", c.style.cssText = "position:relative;display:block;box-sizing:border-box;overflow:scroll;margin:auto;border:1px;padding:1px;width:60%;top:1%", be.appendChild(l).appendChild(c);var t = e.getComputedStyle(c);i = "1%" !== t.top, u = 12 === n(t.marginLeft), c.style.right = "60%", s = 36 === n(t.right), o = 36 === n(t.width), c.style.position = "absolute", a = 36 === c.offsetWidth || "absolute", be.removeChild(l), c = null;
-      }
-    }function n(e) {
-      return Math.round(parseFloat(e));
-    }var i,
-        o,
-        a,
-        s,
-        u,
-        l = r.createElement("div"),
-        c = r.createElement("div");c.style && (c.style.backgroundClip = "content-box", c.cloneNode(!0).style.backgroundClip = "", h.clearCloneStyle = "content-box" === c.style.backgroundClip, w.extend(h, { boxSizingReliable: function boxSizingReliable() {
-        return t(), o;
-      }, pixelBoxStyles: function pixelBoxStyles() {
-        return t(), s;
-      }, pixelPosition: function pixelPosition() {
-        return t(), i;
-      }, reliableMarginLeft: function reliableMarginLeft() {
-        return t(), u;
-      }, scrollboxSize: function scrollboxSize() {
-        return t(), a;
-      } }));
-  }();function Fe(e, t, n) {
-    var r,
-        i,
-        o,
-        a,
-        s = e.style;return (n = n || $e(e)) && ("" !== (a = n.getPropertyValue(t) || n[t]) || w.contains(e.ownerDocument, e) || (a = w.style(e, t)), !h.pixelBoxStyles() && We.test(a) && Be.test(t) && (r = s.width, i = s.minWidth, o = s.maxWidth, s.minWidth = s.maxWidth = s.width = a, a = n.width, s.width = r, s.minWidth = i, s.maxWidth = o)), void 0 !== a ? a + "" : a;
-  }function _e(e, t) {
-    return { get: function get() {
-        if (!e()) return (this.get = t).apply(this, arguments);delete this.get;
-      } };
-  }var ze = /^(none|table(?!-c[ea]).+)/,
-      Xe = /^--/,
-      Ue = { position: "absolute", visibility: "hidden", display: "block" },
-      Ve = { letterSpacing: "0", fontWeight: "400" },
-      Ge = ["Webkit", "Moz", "ms"],
-      Ye = r.createElement("div").style;function Qe(e) {
-    if (e in Ye) return e;var t = e[0].toUpperCase() + e.slice(1),
-        n = Ge.length;while (n--) {
-      if ((e = Ge[n] + t) in Ye) return e;
-    }
-  }function Je(e) {
-    var t = w.cssProps[e];return t || (t = w.cssProps[e] = Qe(e) || e), t;
-  }function Ke(e, t, n) {
-    var r = ie.exec(t);return r ? Math.max(0, r[2] - (n || 0)) + (r[3] || "px") : t;
-  }function Ze(e, t, n, r, i, o) {
-    var a = "width" === t ? 1 : 0,
-        s = 0,
-        u = 0;if (n === (r ? "border" : "content")) return 0;for (; a < 4; a += 2) {
-      "margin" === n && (u += w.css(e, n + oe[a], !0, i)), r ? ("content" === n && (u -= w.css(e, "padding" + oe[a], !0, i)), "margin" !== n && (u -= w.css(e, "border" + oe[a] + "Width", !0, i))) : (u += w.css(e, "padding" + oe[a], !0, i), "padding" !== n ? u += w.css(e, "border" + oe[a] + "Width", !0, i) : s += w.css(e, "border" + oe[a] + "Width", !0, i));
-    }return !r && o >= 0 && (u += Math.max(0, Math.ceil(e["offset" + t[0].toUpperCase() + t.slice(1)] - o - u - s - .5))), u;
-  }function et(e, t, n) {
-    var r = $e(e),
-        i = Fe(e, t, r),
-        o = "border-box" === w.css(e, "boxSizing", !1, r),
-        a = o;if (We.test(i)) {
-      if (!n) return i;i = "auto";
-    }return a = a && (h.boxSizingReliable() || i === e.style[t]), ("auto" === i || !parseFloat(i) && "inline" === w.css(e, "display", !1, r)) && (i = e["offset" + t[0].toUpperCase() + t.slice(1)], a = !0), (i = parseFloat(i) || 0) + Ze(e, t, n || (o ? "border" : "content"), a, r, i) + "px";
-  }w.extend({ cssHooks: { opacity: { get: function get(e, t) {
-          if (t) {
-            var n = Fe(e, "opacity");return "" === n ? "1" : n;
-          }
-        } } }, cssNumber: { animationIterationCount: !0, columnCount: !0, fillOpacity: !0, flexGrow: !0, flexShrink: !0, fontWeight: !0, lineHeight: !0, opacity: !0, order: !0, orphans: !0, widows: !0, zIndex: !0, zoom: !0 }, cssProps: {}, style: function style(e, t, n, r) {
-      if (e && 3 !== e.nodeType && 8 !== e.nodeType && e.style) {
-        var i,
-            o,
-            a,
-            s = G(t),
-            u = Xe.test(t),
-            l = e.style;if (u || (t = Je(s)), a = w.cssHooks[t] || w.cssHooks[s], void 0 === n) return a && "get" in a && void 0 !== (i = a.get(e, !1, r)) ? i : l[t];"string" == (o = typeof n === "undefined" ? "undefined" : _typeof(n)) && (i = ie.exec(n)) && i[1] && (n = ue(e, t, i), o = "number"), null != n && n === n && ("number" === o && (n += i && i[3] || (w.cssNumber[s] ? "" : "px")), h.clearCloneStyle || "" !== n || 0 !== t.indexOf("background") || (l[t] = "inherit"), a && "set" in a && void 0 === (n = a.set(e, n, r)) || (u ? l.setProperty(t, n) : l[t] = n));
-      }
-    }, css: function css(e, t, n, r) {
-      var i,
-          o,
-          a,
-          s = G(t);return Xe.test(t) || (t = Je(s)), (a = w.cssHooks[t] || w.cssHooks[s]) && "get" in a && (i = a.get(e, !0, n)), void 0 === i && (i = Fe(e, t, r)), "normal" === i && t in Ve && (i = Ve[t]), "" === n || n ? (o = parseFloat(i), !0 === n || isFinite(o) ? o || 0 : i) : i;
-    } }), w.each(["height", "width"], function (e, t) {
-    w.cssHooks[t] = { get: function get(e, n, r) {
-        if (n) return !ze.test(w.css(e, "display")) || e.getClientRects().length && e.getBoundingClientRect().width ? et(e, t, r) : se(e, Ue, function () {
-          return et(e, t, r);
-        });
-      }, set: function set(e, n, r) {
-        var i,
-            o = $e(e),
-            a = "border-box" === w.css(e, "boxSizing", !1, o),
-            s = r && Ze(e, t, r, a, o);return a && h.scrollboxSize() === o.position && (s -= Math.ceil(e["offset" + t[0].toUpperCase() + t.slice(1)] - parseFloat(o[t]) - Ze(e, t, "border", !1, o) - .5)), s && (i = ie.exec(n)) && "px" !== (i[3] || "px") && (e.style[t] = n, n = w.css(e, t)), Ke(e, n, s);
-      } };
-  }), w.cssHooks.marginLeft = _e(h.reliableMarginLeft, function (e, t) {
-    if (t) return (parseFloat(Fe(e, "marginLeft")) || e.getBoundingClientRect().left - se(e, { marginLeft: 0 }, function () {
-      return e.getBoundingClientRect().left;
-    })) + "px";
-  }), w.each({ margin: "", padding: "", border: "Width" }, function (e, t) {
-    w.cssHooks[e + t] = { expand: function expand(n) {
-        for (var r = 0, i = {}, o = "string" == typeof n ? n.split(" ") : [n]; r < 4; r++) {
-          i[e + oe[r] + t] = o[r] || o[r - 2] || o[0];
-        }return i;
-      } }, "margin" !== e && (w.cssHooks[e + t].set = Ke);
-  }), w.fn.extend({ css: function css(e, t) {
-      return z(this, function (e, t, n) {
-        var r,
-            i,
-            o = {},
-            a = 0;if (Array.isArray(t)) {
-          for (r = $e(e), i = t.length; a < i; a++) {
-            o[t[a]] = w.css(e, t[a], !1, r);
-          }return o;
-        }return void 0 !== n ? w.style(e, t, n) : w.css(e, t);
-      }, e, t, arguments.length > 1);
-    } });function tt(e, t, n, r, i) {
-    return new tt.prototype.init(e, t, n, r, i);
-  }w.Tween = tt, tt.prototype = { constructor: tt, init: function init(e, t, n, r, i, o) {
-      this.elem = e, this.prop = n, this.easing = i || w.easing._default, this.options = t, this.start = this.now = this.cur(), this.end = r, this.unit = o || (w.cssNumber[n] ? "" : "px");
-    }, cur: function cur() {
-      var e = tt.propHooks[this.prop];return e && e.get ? e.get(this) : tt.propHooks._default.get(this);
-    }, run: function run(e) {
-      var t,
-          n = tt.propHooks[this.prop];return this.options.duration ? this.pos = t = w.easing[this.easing](e, this.options.duration * e, 0, 1, this.options.duration) : this.pos = t = e, this.now = (this.end - this.start) * t + this.start, this.options.step && this.options.step.call(this.elem, this.now, this), n && n.set ? n.set(this) : tt.propHooks._default.set(this), this;
-    } }, tt.prototype.init.prototype = tt.prototype, tt.propHooks = { _default: { get: function get(e) {
-        var t;return 1 !== e.elem.nodeType || null != e.elem[e.prop] && null == e.elem.style[e.prop] ? e.elem[e.prop] : (t = w.css(e.elem, e.prop, "")) && "auto" !== t ? t : 0;
-      }, set: function set(e) {
-        w.fx.step[e.prop] ? w.fx.step[e.prop](e) : 1 !== e.elem.nodeType || null == e.elem.style[w.cssProps[e.prop]] && !w.cssHooks[e.prop] ? e.elem[e.prop] = e.now : w.style(e.elem, e.prop, e.now + e.unit);
-      } } }, tt.propHooks.scrollTop = tt.propHooks.scrollLeft = { set: function set(e) {
-      e.elem.nodeType && e.elem.parentNode && (e.elem[e.prop] = e.now);
-    } }, w.easing = { linear: function linear(e) {
-      return e;
-    }, swing: function swing(e) {
-      return .5 - Math.cos(e * Math.PI) / 2;
-    }, _default: "swing" }, w.fx = tt.prototype.init, w.fx.step = {};var nt,
-      rt,
-      it = /^(?:toggle|show|hide)$/,
-      ot = /queueHooks$/;function at() {
-    rt && (!1 === r.hidden && e.requestAnimationFrame ? e.requestAnimationFrame(at) : e.setTimeout(at, w.fx.interval), w.fx.tick());
-  }function st() {
-    return e.setTimeout(function () {
-      nt = void 0;
-    }), nt = Date.now();
-  }function ut(e, t) {
-    var n,
-        r = 0,
-        i = { height: e };for (t = t ? 1 : 0; r < 4; r += 2 - t) {
-      i["margin" + (n = oe[r])] = i["padding" + n] = e;
-    }return t && (i.opacity = i.width = e), i;
-  }function lt(e, t, n) {
-    for (var r, i = (pt.tweeners[t] || []).concat(pt.tweeners["*"]), o = 0, a = i.length; o < a; o++) {
-      if (r = i[o].call(n, t, e)) return r;
-    }
-  }function ct(e, t, n) {
-    var r,
-        i,
-        o,
-        a,
-        s,
-        u,
-        l,
-        c,
-        f = "width" in t || "height" in t,
-        p = this,
-        d = {},
-        h = e.style,
-        g = e.nodeType && ae(e),
-        y = J.get(e, "fxshow");n.queue || (null == (a = w._queueHooks(e, "fx")).unqueued && (a.unqueued = 0, s = a.empty.fire, a.empty.fire = function () {
-      a.unqueued || s();
-    }), a.unqueued++, p.always(function () {
-      p.always(function () {
-        a.unqueued--, w.queue(e, "fx").length || a.empty.fire();
-      });
-    }));for (r in t) {
-      if (i = t[r], it.test(i)) {
-        if (delete t[r], o = o || "toggle" === i, i === (g ? "hide" : "show")) {
-          if ("show" !== i || !y || void 0 === y[r]) continue;g = !0;
-        }d[r] = y && y[r] || w.style(e, r);
-      }
-    }if ((u = !w.isEmptyObject(t)) || !w.isEmptyObject(d)) {
-      f && 1 === e.nodeType && (n.overflow = [h.overflow, h.overflowX, h.overflowY], null == (l = y && y.display) && (l = J.get(e, "display")), "none" === (c = w.css(e, "display")) && (l ? c = l : (fe([e], !0), l = e.style.display || l, c = w.css(e, "display"), fe([e]))), ("inline" === c || "inline-block" === c && null != l) && "none" === w.css(e, "float") && (u || (p.done(function () {
-        h.display = l;
-      }), null == l && (c = h.display, l = "none" === c ? "" : c)), h.display = "inline-block")), n.overflow && (h.overflow = "hidden", p.always(function () {
-        h.overflow = n.overflow[0], h.overflowX = n.overflow[1], h.overflowY = n.overflow[2];
-      })), u = !1;for (r in d) {
-        u || (y ? "hidden" in y && (g = y.hidden) : y = J.access(e, "fxshow", { display: l }), o && (y.hidden = !g), g && fe([e], !0), p.done(function () {
-          g || fe([e]), J.remove(e, "fxshow");for (r in d) {
-            w.style(e, r, d[r]);
-          }
-        })), u = lt(g ? y[r] : 0, r, p), r in y || (y[r] = u.start, g && (u.end = u.start, u.start = 0));
-      }
-    }
-  }function ft(e, t) {
-    var n, r, i, o, a;for (n in e) {
-      if (r = G(n), i = t[r], o = e[n], Array.isArray(o) && (i = o[1], o = e[n] = o[0]), n !== r && (e[r] = o, delete e[n]), (a = w.cssHooks[r]) && "expand" in a) {
-        o = a.expand(o), delete e[r];for (n in o) {
-          n in e || (e[n] = o[n], t[n] = i);
-        }
-      } else t[r] = i;
-    }
-  }function pt(e, t, n) {
-    var r,
-        i,
-        o = 0,
-        a = pt.prefilters.length,
-        s = w.Deferred().always(function () {
-      delete u.elem;
-    }),
-        u = function u() {
-      if (i) return !1;for (var t = nt || st(), n = Math.max(0, l.startTime + l.duration - t), r = 1 - (n / l.duration || 0), o = 0, a = l.tweens.length; o < a; o++) {
-        l.tweens[o].run(r);
-      }return s.notifyWith(e, [l, r, n]), r < 1 && a ? n : (a || s.notifyWith(e, [l, 1, 0]), s.resolveWith(e, [l]), !1);
-    },
-        l = s.promise({ elem: e, props: w.extend({}, t), opts: w.extend(!0, { specialEasing: {}, easing: w.easing._default }, n), originalProperties: t, originalOptions: n, startTime: nt || st(), duration: n.duration, tweens: [], createTween: function createTween(t, n) {
-        var r = w.Tween(e, l.opts, t, n, l.opts.specialEasing[t] || l.opts.easing);return l.tweens.push(r), r;
-      }, stop: function stop(t) {
-        var n = 0,
-            r = t ? l.tweens.length : 0;if (i) return this;for (i = !0; n < r; n++) {
-          l.tweens[n].run(1);
-        }return t ? (s.notifyWith(e, [l, 1, 0]), s.resolveWith(e, [l, t])) : s.rejectWith(e, [l, t]), this;
-      } }),
-        c = l.props;for (ft(c, l.opts.specialEasing); o < a; o++) {
-      if (r = pt.prefilters[o].call(l, e, c, l.opts)) return g(r.stop) && (w._queueHooks(l.elem, l.opts.queue).stop = r.stop.bind(r)), r;
-    }return w.map(c, lt, l), g(l.opts.start) && l.opts.start.call(e, l), l.progress(l.opts.progress).done(l.opts.done, l.opts.complete).fail(l.opts.fail).always(l.opts.always), w.fx.timer(w.extend(u, { elem: e, anim: l, queue: l.opts.queue })), l;
-  }w.Animation = w.extend(pt, { tweeners: { "*": [function (e, t) {
-        var n = this.createTween(e, t);return ue(n.elem, e, ie.exec(t), n), n;
-      }] }, tweener: function tweener(e, t) {
-      g(e) ? (t = e, e = ["*"]) : e = e.match(M);for (var n, r = 0, i = e.length; r < i; r++) {
-        n = e[r], pt.tweeners[n] = pt.tweeners[n] || [], pt.tweeners[n].unshift(t);
-      }
-    }, prefilters: [ct], prefilter: function prefilter(e, t) {
-      t ? pt.prefilters.unshift(e) : pt.prefilters.push(e);
-    } }), w.speed = function (e, t, n) {
-    var r = e && "object" == (typeof e === "undefined" ? "undefined" : _typeof(e)) ? w.extend({}, e) : { complete: n || !n && t || g(e) && e, duration: e, easing: n && t || t && !g(t) && t };return w.fx.off ? r.duration = 0 : "number" != typeof r.duration && (r.duration in w.fx.speeds ? r.duration = w.fx.speeds[r.duration] : r.duration = w.fx.speeds._default), null != r.queue && !0 !== r.queue || (r.queue = "fx"), r.old = r.complete, r.complete = function () {
-      g(r.old) && r.old.call(this), r.queue && w.dequeue(this, r.queue);
-    }, r;
-  }, w.fn.extend({ fadeTo: function fadeTo(e, t, n, r) {
-      return this.filter(ae).css("opacity", 0).show().end().animate({ opacity: t }, e, n, r);
-    }, animate: function animate(e, t, n, r) {
-      var i = w.isEmptyObject(e),
-          o = w.speed(t, n, r),
-          a = function a() {
-        var t = pt(this, w.extend({}, e), o);(i || J.get(this, "finish")) && t.stop(!0);
-      };return a.finish = a, i || !1 === o.queue ? this.each(a) : this.queue(o.queue, a);
-    }, stop: function stop(e, t, n) {
-      var r = function r(e) {
-        var t = e.stop;delete e.stop, t(n);
-      };return "string" != typeof e && (n = t, t = e, e = void 0), t && !1 !== e && this.queue(e || "fx", []), this.each(function () {
-        var t = !0,
-            i = null != e && e + "queueHooks",
-            o = w.timers,
-            a = J.get(this);if (i) a[i] && a[i].stop && r(a[i]);else for (i in a) {
-          a[i] && a[i].stop && ot.test(i) && r(a[i]);
-        }for (i = o.length; i--;) {
-          o[i].elem !== this || null != e && o[i].queue !== e || (o[i].anim.stop(n), t = !1, o.splice(i, 1));
-        }!t && n || w.dequeue(this, e);
-      });
-    }, finish: function finish(e) {
-      return !1 !== e && (e = e || "fx"), this.each(function () {
-        var t,
-            n = J.get(this),
-            r = n[e + "queue"],
-            i = n[e + "queueHooks"],
-            o = w.timers,
-            a = r ? r.length : 0;for (n.finish = !0, w.queue(this, e, []), i && i.stop && i.stop.call(this, !0), t = o.length; t--;) {
-          o[t].elem === this && o[t].queue === e && (o[t].anim.stop(!0), o.splice(t, 1));
-        }for (t = 0; t < a; t++) {
-          r[t] && r[t].finish && r[t].finish.call(this);
-        }delete n.finish;
-      });
-    } }), w.each(["toggle", "show", "hide"], function (e, t) {
-    var n = w.fn[t];w.fn[t] = function (e, r, i) {
-      return null == e || "boolean" == typeof e ? n.apply(this, arguments) : this.animate(ut(t, !0), e, r, i);
-    };
-  }), w.each({ slideDown: ut("show"), slideUp: ut("hide"), slideToggle: ut("toggle"), fadeIn: { opacity: "show" }, fadeOut: { opacity: "hide" }, fadeToggle: { opacity: "toggle" } }, function (e, t) {
-    w.fn[e] = function (e, n, r) {
-      return this.animate(t, e, n, r);
-    };
-  }), w.timers = [], w.fx.tick = function () {
-    var e,
-        t = 0,
-        n = w.timers;for (nt = Date.now(); t < n.length; t++) {
-      (e = n[t])() || n[t] !== e || n.splice(t--, 1);
-    }n.length || w.fx.stop(), nt = void 0;
-  }, w.fx.timer = function (e) {
-    w.timers.push(e), w.fx.start();
-  }, w.fx.interval = 13, w.fx.start = function () {
-    rt || (rt = !0, at());
-  }, w.fx.stop = function () {
-    rt = null;
-  }, w.fx.speeds = { slow: 600, fast: 200, _default: 400 }, w.fn.delay = function (t, n) {
-    return t = w.fx ? w.fx.speeds[t] || t : t, n = n || "fx", this.queue(n, function (n, r) {
-      var i = e.setTimeout(n, t);r.stop = function () {
-        e.clearTimeout(i);
-      };
-    });
-  }, function () {
-    var e = r.createElement("input"),
-        t = r.createElement("select").appendChild(r.createElement("option"));e.type = "checkbox", h.checkOn = "" !== e.value, h.optSelected = t.selected, (e = r.createElement("input")).value = "t", e.type = "radio", h.radioValue = "t" === e.value;
-  }();var dt,
-      ht = w.expr.attrHandle;w.fn.extend({ attr: function attr(e, t) {
-      return z(this, w.attr, e, t, arguments.length > 1);
-    }, removeAttr: function removeAttr(e) {
-      return this.each(function () {
-        w.removeAttr(this, e);
-      });
-    } }), w.extend({ attr: function attr(e, t, n) {
-      var r,
-          i,
-          o = e.nodeType;if (3 !== o && 8 !== o && 2 !== o) return "undefined" == typeof e.getAttribute ? w.prop(e, t, n) : (1 === o && w.isXMLDoc(e) || (i = w.attrHooks[t.toLowerCase()] || (w.expr.match.bool.test(t) ? dt : void 0)), void 0 !== n ? null === n ? void w.removeAttr(e, t) : i && "set" in i && void 0 !== (r = i.set(e, n, t)) ? r : (e.setAttribute(t, n + ""), n) : i && "get" in i && null !== (r = i.get(e, t)) ? r : null == (r = w.find.attr(e, t)) ? void 0 : r);
-    }, attrHooks: { type: { set: function set(e, t) {
-          if (!h.radioValue && "radio" === t && N(e, "input")) {
-            var n = e.value;return e.setAttribute("type", t), n && (e.value = n), t;
-          }
-        } } }, removeAttr: function removeAttr(e, t) {
-      var n,
-          r = 0,
-          i = t && t.match(M);if (i && 1 === e.nodeType) while (n = i[r++]) {
-        e.removeAttribute(n);
-      }
-    } }), dt = { set: function set(e, t, n) {
-      return !1 === t ? w.removeAttr(e, n) : e.setAttribute(n, n), n;
-    } }, w.each(w.expr.match.bool.source.match(/\w+/g), function (e, t) {
-    var n = ht[t] || w.find.attr;ht[t] = function (e, t, r) {
-      var i,
-          o,
-          a = t.toLowerCase();return r || (o = ht[a], ht[a] = i, i = null != n(e, t, r) ? a : null, ht[a] = o), i;
-    };
-  });var gt = /^(?:input|select|textarea|button)$/i,
-      yt = /^(?:a|area)$/i;w.fn.extend({ prop: function prop(e, t) {
-      return z(this, w.prop, e, t, arguments.length > 1);
-    }, removeProp: function removeProp(e) {
-      return this.each(function () {
-        delete this[w.propFix[e] || e];
-      });
-    } }), w.extend({ prop: function prop(e, t, n) {
-      var r,
-          i,
-          o = e.nodeType;if (3 !== o && 8 !== o && 2 !== o) return 1 === o && w.isXMLDoc(e) || (t = w.propFix[t] || t, i = w.propHooks[t]), void 0 !== n ? i && "set" in i && void 0 !== (r = i.set(e, n, t)) ? r : e[t] = n : i && "get" in i && null !== (r = i.get(e, t)) ? r : e[t];
-    }, propHooks: { tabIndex: { get: function get(e) {
-          var t = w.find.attr(e, "tabindex");return t ? parseInt(t, 10) : gt.test(e.nodeName) || yt.test(e.nodeName) && e.href ? 0 : -1;
-        } } }, propFix: { "for": "htmlFor", "class": "className" } }), h.optSelected || (w.propHooks.selected = { get: function get(e) {
-      var t = e.parentNode;return t && t.parentNode && t.parentNode.selectedIndex, null;
-    }, set: function set(e) {
-      var t = e.parentNode;t && (t.selectedIndex, t.parentNode && t.parentNode.selectedIndex);
-    } }), w.each(["tabIndex", "readOnly", "maxLength", "cellSpacing", "cellPadding", "rowSpan", "colSpan", "useMap", "frameBorder", "contentEditable"], function () {
-    w.propFix[this.toLowerCase()] = this;
-  });function vt(e) {
-    return (e.match(M) || []).join(" ");
-  }function mt(e) {
-    return e.getAttribute && e.getAttribute("class") || "";
-  }function xt(e) {
-    return Array.isArray(e) ? e : "string" == typeof e ? e.match(M) || [] : [];
-  }w.fn.extend({ addClass: function addClass(e) {
-      var t,
-          n,
-          r,
-          i,
-          o,
-          a,
-          s,
-          u = 0;if (g(e)) return this.each(function (t) {
-        w(this).addClass(e.call(this, t, mt(this)));
-      });if ((t = xt(e)).length) while (n = this[u++]) {
-        if (i = mt(n), r = 1 === n.nodeType && " " + vt(i) + " ") {
-          a = 0;while (o = t[a++]) {
-            r.indexOf(" " + o + " ") < 0 && (r += o + " ");
-          }i !== (s = vt(r)) && n.setAttribute("class", s);
-        }
-      }return this;
-    }, removeClass: function removeClass(e) {
-      var t,
-          n,
-          r,
-          i,
-          o,
-          a,
-          s,
-          u = 0;if (g(e)) return this.each(function (t) {
-        w(this).removeClass(e.call(this, t, mt(this)));
-      });if (!arguments.length) return this.attr("class", "");if ((t = xt(e)).length) while (n = this[u++]) {
-        if (i = mt(n), r = 1 === n.nodeType && " " + vt(i) + " ") {
-          a = 0;while (o = t[a++]) {
-            while (r.indexOf(" " + o + " ") > -1) {
-              r = r.replace(" " + o + " ", " ");
-            }
-          }i !== (s = vt(r)) && n.setAttribute("class", s);
-        }
-      }return this;
-    }, toggleClass: function toggleClass(e, t) {
-      var n = typeof e === "undefined" ? "undefined" : _typeof(e),
-          r = "string" === n || Array.isArray(e);return "boolean" == typeof t && r ? t ? this.addClass(e) : this.removeClass(e) : g(e) ? this.each(function (n) {
-        w(this).toggleClass(e.call(this, n, mt(this), t), t);
-      }) : this.each(function () {
-        var t, i, o, a;if (r) {
-          i = 0, o = w(this), a = xt(e);while (t = a[i++]) {
-            o.hasClass(t) ? o.removeClass(t) : o.addClass(t);
-          }
-        } else void 0 !== e && "boolean" !== n || ((t = mt(this)) && J.set(this, "__className__", t), this.setAttribute && this.setAttribute("class", t || !1 === e ? "" : J.get(this, "__className__") || ""));
-      });
-    }, hasClass: function hasClass(e) {
-      var t,
-          n,
-          r = 0;t = " " + e + " ";while (n = this[r++]) {
-        if (1 === n.nodeType && (" " + vt(mt(n)) + " ").indexOf(t) > -1) return !0;
-      }return !1;
-    } });var bt = /\r/g;w.fn.extend({ val: function val(e) {
-      var t,
-          n,
-          r,
-          i = this[0];{
-        if (arguments.length) return r = g(e), this.each(function (n) {
-          var i;1 === this.nodeType && (null == (i = r ? e.call(this, n, w(this).val()) : e) ? i = "" : "number" == typeof i ? i += "" : Array.isArray(i) && (i = w.map(i, function (e) {
-            return null == e ? "" : e + "";
-          })), (t = w.valHooks[this.type] || w.valHooks[this.nodeName.toLowerCase()]) && "set" in t && void 0 !== t.set(this, i, "value") || (this.value = i));
-        });if (i) return (t = w.valHooks[i.type] || w.valHooks[i.nodeName.toLowerCase()]) && "get" in t && void 0 !== (n = t.get(i, "value")) ? n : "string" == typeof (n = i.value) ? n.replace(bt, "") : null == n ? "" : n;
-      }
-    } }), w.extend({ valHooks: { option: { get: function get(e) {
-          var t = w.find.attr(e, "value");return null != t ? t : vt(w.text(e));
-        } }, select: { get: function get(e) {
-          var t,
-              n,
-              r,
-              i = e.options,
-              o = e.selectedIndex,
-              a = "select-one" === e.type,
-              s = a ? null : [],
-              u = a ? o + 1 : i.length;for (r = o < 0 ? u : a ? o : 0; r < u; r++) {
-            if (((n = i[r]).selected || r === o) && !n.disabled && (!n.parentNode.disabled || !N(n.parentNode, "optgroup"))) {
-              if (t = w(n).val(), a) return t;s.push(t);
-            }
-          }return s;
-        }, set: function set(e, t) {
-          var n,
-              r,
-              i = e.options,
-              o = w.makeArray(t),
-              a = i.length;while (a--) {
-            ((r = i[a]).selected = w.inArray(w.valHooks.option.get(r), o) > -1) && (n = !0);
-          }return n || (e.selectedIndex = -1), o;
-        } } } }), w.each(["radio", "checkbox"], function () {
-    w.valHooks[this] = { set: function set(e, t) {
-        if (Array.isArray(t)) return e.checked = w.inArray(w(e).val(), t) > -1;
-      } }, h.checkOn || (w.valHooks[this].get = function (e) {
-      return null === e.getAttribute("value") ? "on" : e.value;
-    });
-  }), h.focusin = "onfocusin" in e;var wt = /^(?:focusinfocus|focusoutblur)$/,
-      Tt = function Tt(e) {
-    e.stopPropagation();
-  };w.extend(w.event, { trigger: function trigger(t, n, i, o) {
-      var a,
-          s,
-          u,
-          l,
-          c,
-          p,
-          d,
-          h,
-          v = [i || r],
-          m = f.call(t, "type") ? t.type : t,
-          x = f.call(t, "namespace") ? t.namespace.split(".") : [];if (s = h = u = i = i || r, 3 !== i.nodeType && 8 !== i.nodeType && !wt.test(m + w.event.triggered) && (m.indexOf(".") > -1 && (m = (x = m.split(".")).shift(), x.sort()), c = m.indexOf(":") < 0 && "on" + m, t = t[w.expando] ? t : new w.Event(m, "object" == (typeof t === "undefined" ? "undefined" : _typeof(t)) && t), t.isTrigger = o ? 2 : 3, t.namespace = x.join("."), t.rnamespace = t.namespace ? new RegExp("(^|\\.)" + x.join("\\.(?:.*\\.|)") + "(\\.|$)") : null, t.result = void 0, t.target || (t.target = i), n = null == n ? [t] : w.makeArray(n, [t]), d = w.event.special[m] || {}, o || !d.trigger || !1 !== d.trigger.apply(i, n))) {
-        if (!o && !d.noBubble && !y(i)) {
-          for (l = d.delegateType || m, wt.test(l + m) || (s = s.parentNode); s; s = s.parentNode) {
-            v.push(s), u = s;
-          }u === (i.ownerDocument || r) && v.push(u.defaultView || u.parentWindow || e);
-        }a = 0;while ((s = v[a++]) && !t.isPropagationStopped()) {
-          h = s, t.type = a > 1 ? l : d.bindType || m, (p = (J.get(s, "events") || {})[t.type] && J.get(s, "handle")) && p.apply(s, n), (p = c && s[c]) && p.apply && Y(s) && (t.result = p.apply(s, n), !1 === t.result && t.preventDefault());
-        }return t.type = m, o || t.isDefaultPrevented() || d._default && !1 !== d._default.apply(v.pop(), n) || !Y(i) || c && g(i[m]) && !y(i) && ((u = i[c]) && (i[c] = null), w.event.triggered = m, t.isPropagationStopped() && h.addEventListener(m, Tt), i[m](), t.isPropagationStopped() && h.removeEventListener(m, Tt), w.event.triggered = void 0, u && (i[c] = u)), t.result;
-      }
-    }, simulate: function simulate(e, t, n) {
-      var r = w.extend(new w.Event(), n, { type: e, isSimulated: !0 });w.event.trigger(r, null, t);
-    } }), w.fn.extend({ trigger: function trigger(e, t) {
-      return this.each(function () {
-        w.event.trigger(e, t, this);
-      });
-    }, triggerHandler: function triggerHandler(e, t) {
-      var n = this[0];if (n) return w.event.trigger(e, t, n, !0);
-    } }), h.focusin || w.each({ focus: "focusin", blur: "focusout" }, function (e, t) {
-    var n = function n(e) {
-      w.event.simulate(t, e.target, w.event.fix(e));
-    };w.event.special[t] = { setup: function setup() {
-        var r = this.ownerDocument || this,
-            i = J.access(r, t);i || r.addEventListener(e, n, !0), J.access(r, t, (i || 0) + 1);
-      }, teardown: function teardown() {
-        var r = this.ownerDocument || this,
-            i = J.access(r, t) - 1;i ? J.access(r, t, i) : (r.removeEventListener(e, n, !0), J.remove(r, t));
-      } };
-  });var Ct = e.location,
-      Et = Date.now(),
-      kt = /\?/;w.parseXML = function (t) {
-    var n;if (!t || "string" != typeof t) return null;try {
-      n = new e.DOMParser().parseFromString(t, "text/xml");
-    } catch (e) {
-      n = void 0;
-    }return n && !n.getElementsByTagName("parsererror").length || w.error("Invalid XML: " + t), n;
-  };var St = /\[\]$/,
-      Dt = /\r?\n/g,
-      Nt = /^(?:submit|button|image|reset|file)$/i,
-      At = /^(?:input|select|textarea|keygen)/i;function jt(e, t, n, r) {
-    var i;if (Array.isArray(t)) w.each(t, function (t, i) {
-      n || St.test(e) ? r(e, i) : jt(e + "[" + ("object" == (typeof i === "undefined" ? "undefined" : _typeof(i)) && null != i ? t : "") + "]", i, n, r);
-    });else if (n || "object" !== x(t)) r(e, t);else for (i in t) {
-      jt(e + "[" + i + "]", t[i], n, r);
-    }
-  }w.param = function (e, t) {
-    var n,
-        r = [],
-        i = function i(e, t) {
-      var n = g(t) ? t() : t;r[r.length] = encodeURIComponent(e) + "=" + encodeURIComponent(null == n ? "" : n);
-    };if (Array.isArray(e) || e.jquery && !w.isPlainObject(e)) w.each(e, function () {
-      i(this.name, this.value);
-    });else for (n in e) {
-      jt(n, e[n], t, i);
-    }return r.join("&");
-  }, w.fn.extend({ serialize: function serialize() {
-      return w.param(this.serializeArray());
-    }, serializeArray: function serializeArray() {
-      return this.map(function () {
-        var e = w.prop(this, "elements");return e ? w.makeArray(e) : this;
-      }).filter(function () {
-        var e = this.type;return this.name && !w(this).is(":disabled") && At.test(this.nodeName) && !Nt.test(e) && (this.checked || !pe.test(e));
-      }).map(function (e, t) {
-        var n = w(this).val();return null == n ? null : Array.isArray(n) ? w.map(n, function (e) {
-          return { name: t.name, value: e.replace(Dt, "\r\n") };
-        }) : { name: t.name, value: n.replace(Dt, "\r\n") };
-      }).get();
-    } });var qt = /%20/g,
-      Lt = /#.*$/,
-      Ht = /([?&])_=[^&]*/,
-      Ot = /^(.*?):[ \t]*([^\r\n]*)$/gm,
-      Pt = /^(?:about|app|app-storage|.+-extension|file|res|widget):$/,
-      Mt = /^(?:GET|HEAD)$/,
-      Rt = /^\/\//,
-      It = {},
-      Wt = {},
-      $t = "*/".concat("*"),
-      Bt = r.createElement("a");Bt.href = Ct.href;function Ft(e) {
-    return function (t, n) {
-      "string" != typeof t && (n = t, t = "*");var r,
-          i = 0,
-          o = t.toLowerCase().match(M) || [];if (g(n)) while (r = o[i++]) {
-        "+" === r[0] ? (r = r.slice(1) || "*", (e[r] = e[r] || []).unshift(n)) : (e[r] = e[r] || []).push(n);
-      }
-    };
-  }function _t(e, t, n, r) {
-    var i = {},
-        o = e === Wt;function a(s) {
-      var u;return i[s] = !0, w.each(e[s] || [], function (e, s) {
-        var l = s(t, n, r);return "string" != typeof l || o || i[l] ? o ? !(u = l) : void 0 : (t.dataTypes.unshift(l), a(l), !1);
-      }), u;
-    }return a(t.dataTypes[0]) || !i["*"] && a("*");
-  }function zt(e, t) {
-    var n,
-        r,
-        i = w.ajaxSettings.flatOptions || {};for (n in t) {
-      void 0 !== t[n] && ((i[n] ? e : r || (r = {}))[n] = t[n]);
-    }return r && w.extend(!0, e, r), e;
-  }function Xt(e, t, n) {
-    var r,
-        i,
-        o,
-        a,
-        s = e.contents,
-        u = e.dataTypes;while ("*" === u[0]) {
-      u.shift(), void 0 === r && (r = e.mimeType || t.getResponseHeader("Content-Type"));
-    }if (r) for (i in s) {
-      if (s[i] && s[i].test(r)) {
-        u.unshift(i);break;
-      }
-    }if (u[0] in n) o = u[0];else {
-      for (i in n) {
-        if (!u[0] || e.converters[i + " " + u[0]]) {
-          o = i;break;
-        }a || (a = i);
-      }o = o || a;
-    }if (o) return o !== u[0] && u.unshift(o), n[o];
-  }function Ut(e, t, n, r) {
-    var i,
-        o,
-        a,
-        s,
-        u,
-        l = {},
-        c = e.dataTypes.slice();if (c[1]) for (a in e.converters) {
-      l[a.toLowerCase()] = e.converters[a];
-    }o = c.shift();while (o) {
-      if (e.responseFields[o] && (n[e.responseFields[o]] = t), !u && r && e.dataFilter && (t = e.dataFilter(t, e.dataType)), u = o, o = c.shift()) if ("*" === o) o = u;else if ("*" !== u && u !== o) {
-        if (!(a = l[u + " " + o] || l["* " + o])) for (i in l) {
-          if ((s = i.split(" "))[1] === o && (a = l[u + " " + s[0]] || l["* " + s[0]])) {
-            !0 === a ? a = l[i] : !0 !== l[i] && (o = s[0], c.unshift(s[1]));break;
-          }
-        }if (!0 !== a) if (a && e["throws"]) t = a(t);else try {
-          t = a(t);
-        } catch (e) {
-          return { state: "parsererror", error: a ? e : "No conversion from " + u + " to " + o };
-        }
-      }
-    }return { state: "success", data: t };
-  }w.extend({ active: 0, lastModified: {}, etag: {}, ajaxSettings: { url: Ct.href, type: "GET", isLocal: Pt.test(Ct.protocol), global: !0, processData: !0, async: !0, contentType: "application/x-www-form-urlencoded; charset=UTF-8", accepts: { "*": $t, text: "text/plain", html: "text/html", xml: "application/xml, text/xml", json: "application/json, text/javascript" }, contents: { xml: /\bxml\b/, html: /\bhtml/, json: /\bjson\b/ }, responseFields: { xml: "responseXML", text: "responseText", json: "responseJSON" }, converters: { "* text": String, "text html": !0, "text json": JSON.parse, "text xml": w.parseXML }, flatOptions: { url: !0, context: !0 } }, ajaxSetup: function ajaxSetup(e, t) {
-      return t ? zt(zt(e, w.ajaxSettings), t) : zt(w.ajaxSettings, e);
-    }, ajaxPrefilter: Ft(It), ajaxTransport: Ft(Wt), ajax: function ajax(t, n) {
-      "object" == (typeof t === "undefined" ? "undefined" : _typeof(t)) && (n = t, t = void 0), n = n || {};var i,
-          o,
-          a,
-          s,
-          u,
-          l,
-          c,
-          f,
-          p,
-          d,
-          h = w.ajaxSetup({}, n),
-          g = h.context || h,
-          y = h.context && (g.nodeType || g.jquery) ? w(g) : w.event,
-          v = w.Deferred(),
-          m = w.Callbacks("once memory"),
-          x = h.statusCode || {},
-          b = {},
-          T = {},
-          C = "canceled",
-          E = { readyState: 0, getResponseHeader: function getResponseHeader(e) {
-          var t;if (c) {
-            if (!s) {
-              s = {};while (t = Ot.exec(a)) {
-                s[t[1].toLowerCase()] = t[2];
-              }
-            }t = s[e.toLowerCase()];
-          }return null == t ? null : t;
-        }, getAllResponseHeaders: function getAllResponseHeaders() {
-          return c ? a : null;
-        }, setRequestHeader: function setRequestHeader(e, t) {
-          return null == c && (e = T[e.toLowerCase()] = T[e.toLowerCase()] || e, b[e] = t), this;
-        }, overrideMimeType: function overrideMimeType(e) {
-          return null == c && (h.mimeType = e), this;
-        }, statusCode: function statusCode(e) {
-          var t;if (e) if (c) E.always(e[E.status]);else for (t in e) {
-            x[t] = [x[t], e[t]];
-          }return this;
-        }, abort: function abort(e) {
-          var t = e || C;return i && i.abort(t), k(0, t), this;
-        } };if (v.promise(E), h.url = ((t || h.url || Ct.href) + "").replace(Rt, Ct.protocol + "//"), h.type = n.method || n.type || h.method || h.type, h.dataTypes = (h.dataType || "*").toLowerCase().match(M) || [""], null == h.crossDomain) {
-        l = r.createElement("a");try {
-          l.href = h.url, l.href = l.href, h.crossDomain = Bt.protocol + "//" + Bt.host != l.protocol + "//" + l.host;
-        } catch (e) {
-          h.crossDomain = !0;
-        }
-      }if (h.data && h.processData && "string" != typeof h.data && (h.data = w.param(h.data, h.traditional)), _t(It, h, n, E), c) return E;(f = w.event && h.global) && 0 == w.active++ && w.event.trigger("ajaxStart"), h.type = h.type.toUpperCase(), h.hasContent = !Mt.test(h.type), o = h.url.replace(Lt, ""), h.hasContent ? h.data && h.processData && 0 === (h.contentType || "").indexOf("application/x-www-form-urlencoded") && (h.data = h.data.replace(qt, "+")) : (d = h.url.slice(o.length), h.data && (h.processData || "string" == typeof h.data) && (o += (kt.test(o) ? "&" : "?") + h.data, delete h.data), !1 === h.cache && (o = o.replace(Ht, "$1"), d = (kt.test(o) ? "&" : "?") + "_=" + Et++ + d), h.url = o + d), h.ifModified && (w.lastModified[o] && E.setRequestHeader("If-Modified-Since", w.lastModified[o]), w.etag[o] && E.setRequestHeader("If-None-Match", w.etag[o])), (h.data && h.hasContent && !1 !== h.contentType || n.contentType) && E.setRequestHeader("Content-Type", h.contentType), E.setRequestHeader("Accept", h.dataTypes[0] && h.accepts[h.dataTypes[0]] ? h.accepts[h.dataTypes[0]] + ("*" !== h.dataTypes[0] ? ", " + $t + "; q=0.01" : "") : h.accepts["*"]);for (p in h.headers) {
-        E.setRequestHeader(p, h.headers[p]);
-      }if (h.beforeSend && (!1 === h.beforeSend.call(g, E, h) || c)) return E.abort();if (C = "abort", m.add(h.complete), E.done(h.success), E.fail(h.error), i = _t(Wt, h, n, E)) {
-        if (E.readyState = 1, f && y.trigger("ajaxSend", [E, h]), c) return E;h.async && h.timeout > 0 && (u = e.setTimeout(function () {
-          E.abort("timeout");
-        }, h.timeout));try {
-          c = !1, i.send(b, k);
-        } catch (e) {
-          if (c) throw e;k(-1, e);
-        }
-      } else k(-1, "No Transport");function k(t, n, r, s) {
-        var l,
-            p,
-            d,
-            b,
-            T,
-            C = n;c || (c = !0, u && e.clearTimeout(u), i = void 0, a = s || "", E.readyState = t > 0 ? 4 : 0, l = t >= 200 && t < 300 || 304 === t, r && (b = Xt(h, E, r)), b = Ut(h, b, E, l), l ? (h.ifModified && ((T = E.getResponseHeader("Last-Modified")) && (w.lastModified[o] = T), (T = E.getResponseHeader("etag")) && (w.etag[o] = T)), 204 === t || "HEAD" === h.type ? C = "nocontent" : 304 === t ? C = "notmodified" : (C = b.state, p = b.data, l = !(d = b.error))) : (d = C, !t && C || (C = "error", t < 0 && (t = 0))), E.status = t, E.statusText = (n || C) + "", l ? v.resolveWith(g, [p, C, E]) : v.rejectWith(g, [E, C, d]), E.statusCode(x), x = void 0, f && y.trigger(l ? "ajaxSuccess" : "ajaxError", [E, h, l ? p : d]), m.fireWith(g, [E, C]), f && (y.trigger("ajaxComplete", [E, h]), --w.active || w.event.trigger("ajaxStop")));
-      }return E;
-    }, getJSON: function getJSON(e, t, n) {
-      return w.get(e, t, n, "json");
-    }, getScript: function getScript(e, t) {
-      return w.get(e, void 0, t, "script");
-    } }), w.each(["get", "post"], function (e, t) {
-    w[t] = function (e, n, r, i) {
-      return g(n) && (i = i || r, r = n, n = void 0), w.ajax(w.extend({ url: e, type: t, dataType: i, data: n, success: r }, w.isPlainObject(e) && e));
-    };
-  }), w._evalUrl = function (e) {
-    return w.ajax({ url: e, type: "GET", dataType: "script", cache: !0, async: !1, global: !1, "throws": !0 });
-  }, w.fn.extend({ wrapAll: function wrapAll(e) {
-      var t;return this[0] && (g(e) && (e = e.call(this[0])), t = w(e, this[0].ownerDocument).eq(0).clone(!0), this[0].parentNode && t.insertBefore(this[0]), t.map(function () {
-        var e = this;while (e.firstElementChild) {
-          e = e.firstElementChild;
-        }return e;
-      }).append(this)), this;
-    }, wrapInner: function wrapInner(e) {
-      return g(e) ? this.each(function (t) {
-        w(this).wrapInner(e.call(this, t));
-      }) : this.each(function () {
-        var t = w(this),
-            n = t.contents();n.length ? n.wrapAll(e) : t.append(e);
-      });
-    }, wrap: function wrap(e) {
-      var t = g(e);return this.each(function (n) {
-        w(this).wrapAll(t ? e.call(this, n) : e);
-      });
-    }, unwrap: function unwrap(e) {
-      return this.parent(e).not("body").each(function () {
-        w(this).replaceWith(this.childNodes);
-      }), this;
-    } }), w.expr.pseudos.hidden = function (e) {
-    return !w.expr.pseudos.visible(e);
-  }, w.expr.pseudos.visible = function (e) {
-    return !!(e.offsetWidth || e.offsetHeight || e.getClientRects().length);
-  }, w.ajaxSettings.xhr = function () {
-    try {
-      return new e.XMLHttpRequest();
-    } catch (e) {}
-  };var Vt = { 0: 200, 1223: 204 },
-      Gt = w.ajaxSettings.xhr();h.cors = !!Gt && "withCredentials" in Gt, h.ajax = Gt = !!Gt, w.ajaxTransport(function (t) {
-    var _n, r;if (h.cors || Gt && !t.crossDomain) return { send: function send(i, o) {
-        var a,
-            s = t.xhr();if (s.open(t.type, t.url, t.async, t.username, t.password), t.xhrFields) for (a in t.xhrFields) {
-          s[a] = t.xhrFields[a];
-        }t.mimeType && s.overrideMimeType && s.overrideMimeType(t.mimeType), t.crossDomain || i["X-Requested-With"] || (i["X-Requested-With"] = "XMLHttpRequest");for (a in i) {
-          s.setRequestHeader(a, i[a]);
-        }_n = function n(e) {
-          return function () {
-            _n && (_n = r = s.onload = s.onerror = s.onabort = s.ontimeout = s.onreadystatechange = null, "abort" === e ? s.abort() : "error" === e ? "number" != typeof s.status ? o(0, "error") : o(s.status, s.statusText) : o(Vt[s.status] || s.status, s.statusText, "text" !== (s.responseType || "text") || "string" != typeof s.responseText ? { binary: s.response } : { text: s.responseText }, s.getAllResponseHeaders()));
-          };
-        }, s.onload = _n(), r = s.onerror = s.ontimeout = _n("error"), void 0 !== s.onabort ? s.onabort = r : s.onreadystatechange = function () {
-          4 === s.readyState && e.setTimeout(function () {
-            _n && r();
-          });
-        }, _n = _n("abort");try {
-          s.send(t.hasContent && t.data || null);
-        } catch (e) {
-          if (_n) throw e;
-        }
-      }, abort: function abort() {
-        _n && _n();
-      } };
-  }), w.ajaxPrefilter(function (e) {
-    e.crossDomain && (e.contents.script = !1);
-  }), w.ajaxSetup({ accepts: { script: "text/javascript, application/javascript, application/ecmascript, application/x-ecmascript" }, contents: { script: /\b(?:java|ecma)script\b/ }, converters: { "text script": function textScript(e) {
-        return w.globalEval(e), e;
-      } } }), w.ajaxPrefilter("script", function (e) {
-    void 0 === e.cache && (e.cache = !1), e.crossDomain && (e.type = "GET");
-  }), w.ajaxTransport("script", function (e) {
-    if (e.crossDomain) {
-      var t, _n2;return { send: function send(i, o) {
-          t = w("<script>").prop({ charset: e.scriptCharset, src: e.url }).on("load error", _n2 = function n(e) {
-            t.remove(), _n2 = null, e && o("error" === e.type ? 404 : 200, e.type);
-          }), r.head.appendChild(t[0]);
-        }, abort: function abort() {
-          _n2 && _n2();
-        } };
-    }
-  });var Yt = [],
-      Qt = /(=)\?(?=&|$)|\?\?/;w.ajaxSetup({ jsonp: "callback", jsonpCallback: function jsonpCallback() {
-      var e = Yt.pop() || w.expando + "_" + Et++;return this[e] = !0, e;
-    } }), w.ajaxPrefilter("json jsonp", function (t, n, r) {
-    var i,
-        o,
-        a,
-        s = !1 !== t.jsonp && (Qt.test(t.url) ? "url" : "string" == typeof t.data && 0 === (t.contentType || "").indexOf("application/x-www-form-urlencoded") && Qt.test(t.data) && "data");if (s || "jsonp" === t.dataTypes[0]) return i = t.jsonpCallback = g(t.jsonpCallback) ? t.jsonpCallback() : t.jsonpCallback, s ? t[s] = t[s].replace(Qt, "$1" + i) : !1 !== t.jsonp && (t.url += (kt.test(t.url) ? "&" : "?") + t.jsonp + "=" + i), t.converters["script json"] = function () {
-      return a || w.error(i + " was not called"), a[0];
-    }, t.dataTypes[0] = "json", o = e[i], e[i] = function () {
-      a = arguments;
-    }, r.always(function () {
-      void 0 === o ? w(e).removeProp(i) : e[i] = o, t[i] && (t.jsonpCallback = n.jsonpCallback, Yt.push(i)), a && g(o) && o(a[0]), a = o = void 0;
-    }), "script";
-  }), h.createHTMLDocument = function () {
-    var e = r.implementation.createHTMLDocument("").body;return e.innerHTML = "<form></form><form></form>", 2 === e.childNodes.length;
-  }(), w.parseHTML = function (e, t, n) {
-    if ("string" != typeof e) return [];"boolean" == typeof t && (n = t, t = !1);var i, o, a;return t || (h.createHTMLDocument ? ((i = (t = r.implementation.createHTMLDocument("")).createElement("base")).href = r.location.href, t.head.appendChild(i)) : t = r), o = A.exec(e), a = !n && [], o ? [t.createElement(o[1])] : (o = xe([e], t, a), a && a.length && w(a).remove(), w.merge([], o.childNodes));
-  }, w.fn.load = function (e, t, n) {
-    var r,
-        i,
-        o,
-        a = this,
-        s = e.indexOf(" ");return s > -1 && (r = vt(e.slice(s)), e = e.slice(0, s)), g(t) ? (n = t, t = void 0) : t && "object" == (typeof t === "undefined" ? "undefined" : _typeof(t)) && (i = "POST"), a.length > 0 && w.ajax({ url: e, type: i || "GET", dataType: "html", data: t }).done(function (e) {
-      o = arguments, a.html(r ? w("<div>").append(w.parseHTML(e)).find(r) : e);
-    }).always(n && function (e, t) {
-      a.each(function () {
-        n.apply(this, o || [e.responseText, t, e]);
-      });
-    }), this;
-  }, w.each(["ajaxStart", "ajaxStop", "ajaxComplete", "ajaxError", "ajaxSuccess", "ajaxSend"], function (e, t) {
-    w.fn[t] = function (e) {
-      return this.on(t, e);
-    };
-  }), w.expr.pseudos.animated = function (e) {
-    return w.grep(w.timers, function (t) {
-      return e === t.elem;
-    }).length;
-  }, w.offset = { setOffset: function setOffset(e, t, n) {
-      var r,
-          i,
-          o,
-          a,
-          s,
-          u,
-          l,
-          c = w.css(e, "position"),
-          f = w(e),
-          p = {};"static" === c && (e.style.position = "relative"), s = f.offset(), o = w.css(e, "top"), u = w.css(e, "left"), (l = ("absolute" === c || "fixed" === c) && (o + u).indexOf("auto") > -1) ? (a = (r = f.position()).top, i = r.left) : (a = parseFloat(o) || 0, i = parseFloat(u) || 0), g(t) && (t = t.call(e, n, w.extend({}, s))), null != t.top && (p.top = t.top - s.top + a), null != t.left && (p.left = t.left - s.left + i), "using" in t ? t.using.call(e, p) : f.css(p);
-    } }, w.fn.extend({ offset: function offset(e) {
-      if (arguments.length) return void 0 === e ? this : this.each(function (t) {
-        w.offset.setOffset(this, e, t);
-      });var t,
-          n,
-          r = this[0];if (r) return r.getClientRects().length ? (t = r.getBoundingClientRect(), n = r.ownerDocument.defaultView, { top: t.top + n.pageYOffset, left: t.left + n.pageXOffset }) : { top: 0, left: 0 };
-    }, position: function position() {
-      if (this[0]) {
-        var e,
-            t,
-            n,
-            r = this[0],
-            i = { top: 0, left: 0 };if ("fixed" === w.css(r, "position")) t = r.getBoundingClientRect();else {
-          t = this.offset(), n = r.ownerDocument, e = r.offsetParent || n.documentElement;while (e && (e === n.body || e === n.documentElement) && "static" === w.css(e, "position")) {
-            e = e.parentNode;
-          }e && e !== r && 1 === e.nodeType && ((i = w(e).offset()).top += w.css(e, "borderTopWidth", !0), i.left += w.css(e, "borderLeftWidth", !0));
-        }return { top: t.top - i.top - w.css(r, "marginTop", !0), left: t.left - i.left - w.css(r, "marginLeft", !0) };
-      }
-    }, offsetParent: function offsetParent() {
-      return this.map(function () {
-        var e = this.offsetParent;while (e && "static" === w.css(e, "position")) {
-          e = e.offsetParent;
-        }return e || be;
-      });
-    } }), w.each({ scrollLeft: "pageXOffset", scrollTop: "pageYOffset" }, function (e, t) {
-    var n = "pageYOffset" === t;w.fn[e] = function (r) {
-      return z(this, function (e, r, i) {
-        var o;if (y(e) ? o = e : 9 === e.nodeType && (o = e.defaultView), void 0 === i) return o ? o[t] : e[r];o ? o.scrollTo(n ? o.pageXOffset : i, n ? i : o.pageYOffset) : e[r] = i;
-      }, e, r, arguments.length);
-    };
-  }), w.each(["top", "left"], function (e, t) {
-    w.cssHooks[t] = _e(h.pixelPosition, function (e, n) {
-      if (n) return n = Fe(e, t), We.test(n) ? w(e).position()[t] + "px" : n;
-    });
-  }), w.each({ Height: "height", Width: "width" }, function (e, t) {
-    w.each({ padding: "inner" + e, content: t, "": "outer" + e }, function (n, r) {
-      w.fn[r] = function (i, o) {
-        var a = arguments.length && (n || "boolean" != typeof i),
-            s = n || (!0 === i || !0 === o ? "margin" : "border");return z(this, function (t, n, i) {
-          var o;return y(t) ? 0 === r.indexOf("outer") ? t["inner" + e] : t.document.documentElement["client" + e] : 9 === t.nodeType ? (o = t.documentElement, Math.max(t.body["scroll" + e], o["scroll" + e], t.body["offset" + e], o["offset" + e], o["client" + e])) : void 0 === i ? w.css(t, n, s) : w.style(t, n, i, s);
-        }, t, a ? i : void 0, a);
-      };
-    });
-  }), w.each("blur focus focusin focusout resize scroll click dblclick mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave change select submit keydown keypress keyup contextmenu".split(" "), function (e, t) {
-    w.fn[t] = function (e, n) {
-      return arguments.length > 0 ? this.on(t, null, e, n) : this.trigger(t);
-    };
-  }), w.fn.extend({ hover: function hover(e, t) {
-      return this.mouseenter(e).mouseleave(t || e);
-    } }), w.fn.extend({ bind: function bind(e, t, n) {
-      return this.on(e, null, t, n);
-    }, unbind: function unbind(e, t) {
-      return this.off(e, null, t);
-    }, delegate: function delegate(e, t, n, r) {
-      return this.on(t, e, n, r);
-    }, undelegate: function undelegate(e, t, n) {
-      return 1 === arguments.length ? this.off(e, "**") : this.off(t, e || "**", n);
-    } }), w.proxy = function (e, t) {
-    var n, r, i;if ("string" == typeof t && (n = e[t], t = e, e = n), g(e)) return r = o.call(arguments, 2), i = function i() {
-      return e.apply(t || this, r.concat(o.call(arguments)));
-    }, i.guid = e.guid = e.guid || w.guid++, i;
-  }, w.holdReady = function (e) {
-    e ? w.readyWait++ : w.ready(!0);
-  }, w.isArray = Array.isArray, w.parseJSON = JSON.parse, w.nodeName = N, w.isFunction = g, w.isWindow = y, w.camelCase = G, w.type = x, w.now = Date.now, w.isNumeric = function (e) {
-    var t = w.type(e);return ("number" === t || "string" === t) && !isNaN(e - parseFloat(e));
-  }, "function" == "function" && __webpack_require__(14) && !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
-    return w;
-  }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));var Jt = e.jQuery,
-      Kt = e.$;return w.noConflict = function (t) {
-    return e.$ === w && (e.$ = Kt), t && e.jQuery === w && (e.jQuery = Jt), w;
-  }, t || (e.jQuery = e.$ = w), w;
-});
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports) {
-
-/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {/* globals __webpack_amd_options__ */
-module.exports = __webpack_amd_options__;
-
-/* WEBPACK VAR INJECTION */}.call(exports, {}))
-
-/***/ }),
-/* 15 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(16);
+window._ = __webpack_require__(13);
 window.Popper = __webpack_require__(4).default;
 
 /**
@@ -16070,9 +13736,9 @@ window.Popper = __webpack_require__(4).default;
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(5);
+  window.$ = window.jQuery = __webpack_require__(1);
 
-  __webpack_require__(17);
+  __webpack_require__(15);
 } catch (e) {}
 
 /**
@@ -16081,7 +13747,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(18);
+window.axios = __webpack_require__(16);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -16117,7 +13783,7 @@ if (token) {
 // });
 
 /***/ }),
-/* 16 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -33227,10 +30893,38 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(2)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(14)(module)))
 
 /***/ }),
-/* 17 */
+/* 14 */
+/***/ (function(module, exports) {
+
+module.exports = function(module) {
+	if(!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if(!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+
+/***/ }),
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -33239,7 +30933,7 @@ if (token) {
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-   true ? factory(exports, __webpack_require__(5), __webpack_require__(4)) :
+   true ? factory(exports, __webpack_require__(1), __webpack_require__(4)) :
   typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
   (factory((global.bootstrap = {}),global.jQuery,global.Popper));
 }(this, (function (exports,$,Popper) { 'use strict';
@@ -37180,22 +34874,22 @@ if (token) {
 
 
 /***/ }),
-/* 18 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(19);
+module.exports = __webpack_require__(17);
 
 /***/ }),
-/* 19 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var bind = __webpack_require__(6);
-var Axios = __webpack_require__(21);
-var defaults = __webpack_require__(1);
+var bind = __webpack_require__(5);
+var Axios = __webpack_require__(19);
+var defaults = __webpack_require__(2);
 
 /**
  * Create an instance of Axios
@@ -37228,15 +34922,15 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(10);
-axios.CancelToken = __webpack_require__(36);
-axios.isCancel = __webpack_require__(9);
+axios.Cancel = __webpack_require__(9);
+axios.CancelToken = __webpack_require__(34);
+axios.isCancel = __webpack_require__(8);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(37);
+axios.spread = __webpack_require__(35);
 
 module.exports = axios;
 
@@ -37245,7 +34939,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 20 */
+/* 18 */
 /***/ (function(module, exports) {
 
 /*!
@@ -37272,16 +34966,16 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
-/* 21 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var defaults = __webpack_require__(1);
+var defaults = __webpack_require__(2);
 var utils = __webpack_require__(0);
-var InterceptorManager = __webpack_require__(31);
-var dispatchRequest = __webpack_require__(32);
+var InterceptorManager = __webpack_require__(29);
+var dispatchRequest = __webpack_require__(30);
 
 /**
  * Create a new instance of Axios
@@ -37358,7 +35052,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 22 */
+/* 20 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -37548,7 +35242,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 23 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37567,13 +35261,13 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 24 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var createError = __webpack_require__(8);
+var createError = __webpack_require__(7);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -37600,7 +35294,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 25 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37628,7 +35322,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 26 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37701,7 +35395,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 27 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37761,7 +35455,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 28 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37836,7 +35530,7 @@ module.exports = (
 
 
 /***/ }),
-/* 29 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37879,7 +35573,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 30 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37939,7 +35633,7 @@ module.exports = (
 
 
 /***/ }),
-/* 31 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37998,18 +35692,18 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 32 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var transformData = __webpack_require__(33);
-var isCancel = __webpack_require__(9);
-var defaults = __webpack_require__(1);
-var isAbsoluteURL = __webpack_require__(34);
-var combineURLs = __webpack_require__(35);
+var transformData = __webpack_require__(31);
+var isCancel = __webpack_require__(8);
+var defaults = __webpack_require__(2);
+var isAbsoluteURL = __webpack_require__(32);
+var combineURLs = __webpack_require__(33);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -38091,7 +35785,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 33 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38118,7 +35812,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 34 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38139,7 +35833,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 35 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38160,13 +35854,13 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 36 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Cancel = __webpack_require__(10);
+var Cancel = __webpack_require__(9);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -38224,7 +35918,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 37 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38258,2254 +35952,1902 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 38 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+"use strict";
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! =======================================================
+                      VERSION  10.2.1              
+========================================================= */
 
-/*! nouislider - 12.0.0 - 9/14/2018 */
+
+var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _typeof = typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol" ? function (obj) {
+	return typeof obj === "undefined" ? "undefined" : _typeof2(obj);
+} : function (obj) {
+	return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof2(obj);
+};
+
+/*! =========================================================
+ * bootstrap-slider.js
+ *
+ * Maintainers:
+ *		Kyle Kemp
+ *			- Twitter: @seiyria
+ *			- Github:  seiyria
+ *		Rohit Kalkur
+ *			- Twitter: @Rovolutionary
+ *			- Github:  rovolution
+ *
+ * =========================================================
+ *
+ * bootstrap-slider is released under the MIT License
+ * Copyright (c) 2017 Kyle Kemp, Rohit Kalkur, and contributors
+ *
+ * Permission is hereby granted, free of charge, to any person
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without
+ * restriction, including without limitation the rights to use,
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following
+ * conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ * OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * ========================================================= */
+
+/**
+ * Bridget makes jQuery widgets
+ * v1.0.1
+ * MIT license
+ */
+var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(window)) === "object";
+
 (function (factory) {
-    if (true) {
-        // AMD. Register as an anonymous module.
-        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+	if (true) {
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(1)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-    } else if ((typeof exports === "undefined" ? "undefined" : _typeof(exports)) === "object") {
-        // Node/CommonJS
-        module.exports = factory();
-    } else {
-        // Browser globals
-        window.noUiSlider = factory();
-    }
-})(function () {
-    "use strict";
-
-    var VERSION = "12.0.0";
-
-    function isValidFormatter(entry) {
-        return (typeof entry === "undefined" ? "undefined" : _typeof(entry)) === "object" && typeof entry.to === "function" && typeof entry.from === "function";
-    }
-
-    function removeElement(el) {
-        el.parentElement.removeChild(el);
-    }
-
-    function isSet(value) {
-        return value !== null && value !== undefined;
-    }
-
-    // Bindable version
-    function preventDefault(e) {
-        e.preventDefault();
-    }
-
-    // Removes duplicates from an array.
-    function unique(array) {
-        return array.filter(function (a) {
-            return !this[a] ? this[a] = true : false;
-        }, {});
-    }
-
-    // Round a value to the closest 'to'.
-    function closest(value, to) {
-        return Math.round(value / to) * to;
-    }
-
-    // Current position of an element relative to the document.
-    function offset(elem, orientation) {
-        var rect = elem.getBoundingClientRect();
-        var doc = elem.ownerDocument;
-        var docElem = doc.documentElement;
-        var pageOffset = getPageOffset(doc);
-
-        // getBoundingClientRect contains left scroll in Chrome on Android.
-        // I haven't found a feature detection that proves this. Worst case
-        // scenario on mis-match: the 'tap' feature on horizontal sliders breaks.
-        if (/webkit.*Chrome.*Mobile/i.test(navigator.userAgent)) {
-            pageOffset.x = 0;
-        }
-
-        return orientation ? rect.top + pageOffset.y - docElem.clientTop : rect.left + pageOffset.x - docElem.clientLeft;
-    }
-
-    // Checks whether a value is numerical.
-    function isNumeric(a) {
-        return typeof a === "number" && !isNaN(a) && isFinite(a);
-    }
-
-    // Sets a class and removes it after [duration] ms.
-    function addClassFor(element, className, duration) {
-        if (duration > 0) {
-            addClass(element, className);
-            setTimeout(function () {
-                removeClass(element, className);
-            }, duration);
-        }
-    }
-
-    // Limits a value to 0 - 100
-    function limit(a) {
-        return Math.max(Math.min(a, 100), 0);
-    }
-
-    // Wraps a variable as an array, if it isn't one yet.
-    // Note that an input array is returned by reference!
-    function asArray(a) {
-        return Array.isArray(a) ? a : [a];
-    }
-
-    // Counts decimals
-    function countDecimals(numStr) {
-        numStr = String(numStr);
-        var pieces = numStr.split(".");
-        return pieces.length > 1 ? pieces[1].length : 0;
-    }
-
-    // http://youmightnotneedjquery.com/#add_class
-    function addClass(el, className) {
-        if (el.classList) {
-            el.classList.add(className);
-        } else {
-            el.className += " " + className;
-        }
-    }
-
-    // http://youmightnotneedjquery.com/#remove_class
-    function removeClass(el, className) {
-        if (el.classList) {
-            el.classList.remove(className);
-        } else {
-            el.className = el.className.replace(new RegExp("(^|\\b)" + className.split(" ").join("|") + "(\\b|$)", "gi"), " ");
-        }
-    }
-
-    // https://plainjs.com/javascript/attributes/adding-removing-and-testing-for-classes-9/
-    function hasClass(el, className) {
-        return el.classList ? el.classList.contains(className) : new RegExp("\\b" + className + "\\b").test(el.className);
-    }
-
-    // https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollY#Notes
-    function getPageOffset(doc) {
-        var supportPageOffset = window.pageXOffset !== undefined;
-        var isCSS1Compat = (doc.compatMode || "") === "CSS1Compat";
-        var x = supportPageOffset ? window.pageXOffset : isCSS1Compat ? doc.documentElement.scrollLeft : doc.body.scrollLeft;
-        var y = supportPageOffset ? window.pageYOffset : isCSS1Compat ? doc.documentElement.scrollTop : doc.body.scrollTop;
-
-        return {
-            x: x,
-            y: y
-        };
-    }
-
-    // we provide a function to compute constants instead
-    // of accessing window.* as soon as the module needs it
-    // so that we do not compute anything if not needed
-    function getActions() {
-        // Determine the events to bind. IE11 implements pointerEvents without
-        // a prefix, which breaks compatibility with the IE10 implementation.
-        return window.navigator.pointerEnabled ? {
-            start: "pointerdown",
-            move: "pointermove",
-            end: "pointerup"
-        } : window.navigator.msPointerEnabled ? {
-            start: "MSPointerDown",
-            move: "MSPointerMove",
-            end: "MSPointerUp"
-        } : {
-            start: "mousedown touchstart",
-            move: "mousemove touchmove",
-            end: "mouseup touchend"
-        };
-    }
-
-    // https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md
-    // Issue #785
-    function getSupportsPassive() {
-        var supportsPassive = false;
-
-        /* eslint-disable */
-        try {
-            var opts = Object.defineProperty({}, "passive", {
-                get: function get() {
-                    supportsPassive = true;
-                }
-            });
-
-            window.addEventListener("test", null, opts);
-        } catch (e) {}
-        /* eslint-enable */
-
-        return supportsPassive;
-    }
-
-    function getSupportsTouchActionNone() {
-        return window.CSS && CSS.supports && CSS.supports("touch-action", "none");
-    }
-
-    // Value calculation
-
-    // Determine the size of a sub-range in relation to a full range.
-    function subRangeRatio(pa, pb) {
-        return 100 / (pb - pa);
-    }
-
-    // (percentage) How many percent is this value of this range?
-    function fromPercentage(range, value) {
-        return value * 100 / (range[1] - range[0]);
-    }
-
-    // (percentage) Where is this value on this range?
-    function toPercentage(range, value) {
-        return fromPercentage(range, range[0] < 0 ? value + Math.abs(range[0]) : value - range[0]);
-    }
-
-    // (value) How much is this percentage on this range?
-    function isPercentage(range, value) {
-        return value * (range[1] - range[0]) / 100 + range[0];
-    }
-
-    // Range conversion
-
-    function getJ(value, arr) {
-        var j = 1;
-
-        while (value >= arr[j]) {
-            j += 1;
-        }
-
-        return j;
-    }
-
-    // (percentage) Input a value, find where, on a scale of 0-100, it applies.
-    function toStepping(xVal, xPct, value) {
-        if (value >= xVal.slice(-1)[0]) {
-            return 100;
-        }
-
-        var j = getJ(value, xVal);
-        var va = xVal[j - 1];
-        var vb = xVal[j];
-        var pa = xPct[j - 1];
-        var pb = xPct[j];
-
-        return pa + toPercentage([va, vb], value) / subRangeRatio(pa, pb);
-    }
-
-    // (value) Input a percentage, find where it is on the specified range.
-    function fromStepping(xVal, xPct, value) {
-        // There is no range group that fits 100
-        if (value >= 100) {
-            return xVal.slice(-1)[0];
-        }
-
-        var j = getJ(value, xPct);
-        var va = xVal[j - 1];
-        var vb = xVal[j];
-        var pa = xPct[j - 1];
-        var pb = xPct[j];
-
-        return isPercentage([va, vb], (value - pa) * subRangeRatio(pa, pb));
-    }
-
-    // (percentage) Get the step that applies at a certain value.
-    function getStep(xPct, xSteps, snap, value) {
-        if (value === 100) {
-            return value;
-        }
-
-        var j = getJ(value, xPct);
-        var a = xPct[j - 1];
-        var b = xPct[j];
-
-        // If 'snap' is set, steps are used as fixed points on the slider.
-        if (snap) {
-            // Find the closest position, a or b.
-            if (value - a > (b - a) / 2) {
-                return b;
-            }
-
-            return a;
-        }
-
-        if (!xSteps[j - 1]) {
-            return value;
-        }
-
-        return xPct[j - 1] + closest(value - xPct[j - 1], xSteps[j - 1]);
-    }
-
-    // Entry parsing
-
-    function handleEntryPoint(index, value, that) {
-        var percentage;
-
-        // Wrap numerical input in an array.
-        if (typeof value === "number") {
-            value = [value];
-        }
-
-        // Reject any invalid input, by testing whether value is an array.
-        if (!Array.isArray(value)) {
-            throw new Error("noUiSlider (" + VERSION + "): 'range' contains invalid value.");
-        }
-
-        // Covert min/max syntax to 0 and 100.
-        if (index === "min") {
-            percentage = 0;
-        } else if (index === "max") {
-            percentage = 100;
-        } else {
-            percentage = parseFloat(index);
-        }
-
-        // Check for correct input.
-        if (!isNumeric(percentage) || !isNumeric(value[0])) {
-            throw new Error("noUiSlider (" + VERSION + "): 'range' value isn't numeric.");
-        }
-
-        // Store values.
-        that.xPct.push(percentage);
-        that.xVal.push(value[0]);
-
-        // NaN will evaluate to false too, but to keep
-        // logging clear, set step explicitly. Make sure
-        // not to override the 'step' setting with false.
-        if (!percentage) {
-            if (!isNaN(value[1])) {
-                that.xSteps[0] = value[1];
-            }
-        } else {
-            that.xSteps.push(isNaN(value[1]) ? false : value[1]);
-        }
-
-        that.xHighestCompleteStep.push(0);
-    }
-
-    function handleStepPoint(i, n, that) {
-        // Ignore 'false' stepping.
-        if (!n) {
-            return true;
-        }
-
-        // Factor to range ratio
-        that.xSteps[i] = fromPercentage([that.xVal[i], that.xVal[i + 1]], n) / subRangeRatio(that.xPct[i], that.xPct[i + 1]);
-
-        var totalSteps = (that.xVal[i + 1] - that.xVal[i]) / that.xNumSteps[i];
-        var highestStep = Math.ceil(Number(totalSteps.toFixed(3)) - 1);
-        var step = that.xVal[i] + that.xNumSteps[i] * highestStep;
-
-        that.xHighestCompleteStep[i] = step;
-    }
-
-    // Interface
-
-    function Spectrum(entry, snap, singleStep) {
-        this.xPct = [];
-        this.xVal = [];
-        this.xSteps = [singleStep || false];
-        this.xNumSteps = [false];
-        this.xHighestCompleteStep = [];
-
-        this.snap = snap;
-
-        var index;
-        var ordered = []; // [0, 'min'], [1, '50%'], [2, 'max']
-
-        // Map the object keys to an array.
-        for (index in entry) {
-            if (entry.hasOwnProperty(index)) {
-                ordered.push([entry[index], index]);
-            }
-        }
-
-        // Sort all entries by value (numeric sort).
-        if (ordered.length && _typeof(ordered[0][0]) === "object") {
-            ordered.sort(function (a, b) {
-                return a[0][0] - b[0][0];
-            });
-        } else {
-            ordered.sort(function (a, b) {
-                return a[0] - b[0];
-            });
-        }
-
-        // Convert all entries to subranges.
-        for (index = 0; index < ordered.length; index++) {
-            handleEntryPoint(ordered[index][1], ordered[index][0], this);
-        }
-
-        // Store the actual step values.
-        // xSteps is sorted in the same order as xPct and xVal.
-        this.xNumSteps = this.xSteps.slice(0);
-
-        // Convert all numeric steps to the percentage of the subrange they represent.
-        for (index = 0; index < this.xNumSteps.length; index++) {
-            handleStepPoint(index, this.xNumSteps[index], this);
-        }
-    }
-
-    Spectrum.prototype.getMargin = function (value) {
-        var step = this.xNumSteps[0];
-
-        if (step && value / step % 1 !== 0) {
-            throw new Error("noUiSlider (" + VERSION + "): 'limit', 'margin' and 'padding' must be divisible by step.");
-        }
-
-        return this.xPct.length === 2 ? fromPercentage(this.xVal, value) : false;
-    };
-
-    Spectrum.prototype.toStepping = function (value) {
-        value = toStepping(this.xVal, this.xPct, value);
-
-        return value;
-    };
-
-    Spectrum.prototype.fromStepping = function (value) {
-        return fromStepping(this.xVal, this.xPct, value);
-    };
-
-    Spectrum.prototype.getStep = function (value) {
-        value = getStep(this.xPct, this.xSteps, this.snap, value);
-
-        return value;
-    };
-
-    Spectrum.prototype.getNearbySteps = function (value) {
-        var j = getJ(value, this.xPct);
-
-        return {
-            stepBefore: {
-                startValue: this.xVal[j - 2],
-                step: this.xNumSteps[j - 2],
-                highestStep: this.xHighestCompleteStep[j - 2]
-            },
-            thisStep: {
-                startValue: this.xVal[j - 1],
-                step: this.xNumSteps[j - 1],
-                highestStep: this.xHighestCompleteStep[j - 1]
-            },
-            stepAfter: {
-                startValue: this.xVal[j],
-                step: this.xNumSteps[j],
-                highestStep: this.xHighestCompleteStep[j]
-            }
-        };
-    };
-
-    Spectrum.prototype.countStepDecimals = function () {
-        var stepDecimals = this.xNumSteps.map(countDecimals);
-        return Math.max.apply(null, stepDecimals);
-    };
-
-    // Outside testing
-    Spectrum.prototype.convert = function (value) {
-        return this.getStep(this.toStepping(value));
-    };
-
-    /*	Every input option is tested and parsed. This'll prevent
-        endless validation in internal methods. These tests are
-        structured with an item for every option available. An
-        option can be marked as required by setting the 'r' flag.
-        The testing function is provided with three arguments:
-            - The provided value for the option;
-            - A reference to the options object;
-            - The name for the option;
-         The testing function returns false when an error is detected,
-        or true when everything is OK. It can also modify the option
-        object, to make sure all values can be correctly looped elsewhere. */
-
-    var defaultFormatter = {
-        to: function to(value) {
-            return value !== undefined && value.toFixed(2);
-        },
-        from: Number
-    };
-
-    function validateFormat(entry) {
-        // Any object with a to and from method is supported.
-        if (isValidFormatter(entry)) {
-            return true;
-        }
-
-        throw new Error("noUiSlider (" + VERSION + "): 'format' requires 'to' and 'from' methods.");
-    }
-
-    function testStep(parsed, entry) {
-        if (!isNumeric(entry)) {
-            throw new Error("noUiSlider (" + VERSION + "): 'step' is not numeric.");
-        }
-
-        // The step option can still be used to set stepping
-        // for linear sliders. Overwritten if set in 'range'.
-        parsed.singleStep = entry;
-    }
-
-    function testRange(parsed, entry) {
-        // Filter incorrect input.
-        if ((typeof entry === "undefined" ? "undefined" : _typeof(entry)) !== "object" || Array.isArray(entry)) {
-            throw new Error("noUiSlider (" + VERSION + "): 'range' is not an object.");
-        }
-
-        // Catch missing start or end.
-        if (entry.min === undefined || entry.max === undefined) {
-            throw new Error("noUiSlider (" + VERSION + "): Missing 'min' or 'max' in 'range'.");
-        }
-
-        // Catch equal start or end.
-        if (entry.min === entry.max) {
-            throw new Error("noUiSlider (" + VERSION + "): 'range' 'min' and 'max' cannot be equal.");
-        }
-
-        parsed.spectrum = new Spectrum(entry, parsed.snap, parsed.singleStep);
-    }
-
-    function testStart(parsed, entry) {
-        entry = asArray(entry);
-
-        // Validate input. Values aren't tested, as the public .val method
-        // will always provide a valid location.
-        if (!Array.isArray(entry) || !entry.length) {
-            throw new Error("noUiSlider (" + VERSION + "): 'start' option is incorrect.");
-        }
-
-        // Store the number of handles.
-        parsed.handles = entry.length;
-
-        // When the slider is initialized, the .val method will
-        // be called with the start options.
-        parsed.start = entry;
-    }
-
-    function testSnap(parsed, entry) {
-        // Enforce 100% stepping within subranges.
-        parsed.snap = entry;
-
-        if (typeof entry !== "boolean") {
-            throw new Error("noUiSlider (" + VERSION + "): 'snap' option must be a boolean.");
-        }
-    }
-
-    function testAnimate(parsed, entry) {
-        // Enforce 100% stepping within subranges.
-        parsed.animate = entry;
-
-        if (typeof entry !== "boolean") {
-            throw new Error("noUiSlider (" + VERSION + "): 'animate' option must be a boolean.");
-        }
-    }
-
-    function testAnimationDuration(parsed, entry) {
-        parsed.animationDuration = entry;
-
-        if (typeof entry !== "number") {
-            throw new Error("noUiSlider (" + VERSION + "): 'animationDuration' option must be a number.");
-        }
-    }
-
-    function testConnect(parsed, entry) {
-        var connect = [false];
-        var i;
-
-        // Map legacy options
-        if (entry === "lower") {
-            entry = [true, false];
-        } else if (entry === "upper") {
-            entry = [false, true];
-        }
-
-        // Handle boolean options
-        if (entry === true || entry === false) {
-            for (i = 1; i < parsed.handles; i++) {
-                connect.push(entry);
-            }
-
-            connect.push(false);
-        }
-
-        // Reject invalid input
-        else if (!Array.isArray(entry) || !entry.length || entry.length !== parsed.handles + 1) {
-                throw new Error("noUiSlider (" + VERSION + "): 'connect' option doesn't match handle count.");
-            } else {
-                connect = entry;
-            }
-
-        parsed.connect = connect;
-    }
-
-    function testOrientation(parsed, entry) {
-        // Set orientation to an a numerical value for easy
-        // array selection.
-        switch (entry) {
-            case "horizontal":
-                parsed.ort = 0;
-                break;
-            case "vertical":
-                parsed.ort = 1;
-                break;
-            default:
-                throw new Error("noUiSlider (" + VERSION + "): 'orientation' option is invalid.");
-        }
-    }
-
-    function testMargin(parsed, entry) {
-        if (!isNumeric(entry)) {
-            throw new Error("noUiSlider (" + VERSION + "): 'margin' option must be numeric.");
-        }
-
-        // Issue #582
-        if (entry === 0) {
-            return;
-        }
-
-        parsed.margin = parsed.spectrum.getMargin(entry);
-
-        if (!parsed.margin) {
-            throw new Error("noUiSlider (" + VERSION + "): 'margin' option is only supported on linear sliders.");
-        }
-    }
-
-    function testLimit(parsed, entry) {
-        if (!isNumeric(entry)) {
-            throw new Error("noUiSlider (" + VERSION + "): 'limit' option must be numeric.");
-        }
-
-        parsed.limit = parsed.spectrum.getMargin(entry);
-
-        if (!parsed.limit || parsed.handles < 2) {
-            throw new Error("noUiSlider (" + VERSION + "): 'limit' option is only supported on linear sliders with 2 or more handles.");
-        }
-    }
-
-    function testPadding(parsed, entry) {
-        if (!isNumeric(entry) && !Array.isArray(entry)) {
-            throw new Error("noUiSlider (" + VERSION + "): 'padding' option must be numeric or array of exactly 2 numbers.");
-        }
-
-        if (Array.isArray(entry) && !(entry.length === 2 || isNumeric(entry[0]) || isNumeric(entry[1]))) {
-            throw new Error("noUiSlider (" + VERSION + "): 'padding' option must be numeric or array of exactly 2 numbers.");
-        }
-
-        if (entry === 0) {
-            return;
-        }
-
-        if (!Array.isArray(entry)) {
-            entry = [entry, entry];
-        }
-
-        // 'getMargin' returns false for invalid values.
-        parsed.padding = [parsed.spectrum.getMargin(entry[0]), parsed.spectrum.getMargin(entry[1])];
-
-        if (parsed.padding[0] === false || parsed.padding[1] === false) {
-            throw new Error("noUiSlider (" + VERSION + "): 'padding' option is only supported on linear sliders.");
-        }
-
-        if (parsed.padding[0] < 0 || parsed.padding[1] < 0) {
-            throw new Error("noUiSlider (" + VERSION + "): 'padding' option must be a positive number(s).");
-        }
-
-        if (parsed.padding[0] + parsed.padding[1] >= 100) {
-            throw new Error("noUiSlider (" + VERSION + "): 'padding' option must not exceed 100% of the range.");
-        }
-    }
-
-    function testDirection(parsed, entry) {
-        // Set direction as a numerical value for easy parsing.
-        // Invert connection for RTL sliders, so that the proper
-        // handles get the connect/background classes.
-        switch (entry) {
-            case "ltr":
-                parsed.dir = 0;
-                break;
-            case "rtl":
-                parsed.dir = 1;
-                break;
-            default:
-                throw new Error("noUiSlider (" + VERSION + "): 'direction' option was not recognized.");
-        }
-    }
-
-    function testBehaviour(parsed, entry) {
-        // Make sure the input is a string.
-        if (typeof entry !== "string") {
-            throw new Error("noUiSlider (" + VERSION + "): 'behaviour' must be a string containing options.");
-        }
-
-        // Check if the string contains any keywords.
-        // None are required.
-        var tap = entry.indexOf("tap") >= 0;
-        var drag = entry.indexOf("drag") >= 0;
-        var fixed = entry.indexOf("fixed") >= 0;
-        var snap = entry.indexOf("snap") >= 0;
-        var hover = entry.indexOf("hover") >= 0;
-
-        if (fixed) {
-            if (parsed.handles !== 2) {
-                throw new Error("noUiSlider (" + VERSION + "): 'fixed' behaviour must be used with 2 handles");
-            }
-
-            // Use margin to enforce fixed state
-            testMargin(parsed, parsed.start[1] - parsed.start[0]);
-        }
-
-        parsed.events = {
-            tap: tap || snap,
-            drag: drag,
-            fixed: fixed,
-            snap: snap,
-            hover: hover
-        };
-    }
-
-    function testTooltips(parsed, entry) {
-        if (entry === false) {
-            return;
-        }
-
-        if (entry === true) {
-            parsed.tooltips = [];
-
-            for (var i = 0; i < parsed.handles; i++) {
-                parsed.tooltips.push(true);
-            }
-        } else {
-            parsed.tooltips = asArray(entry);
-
-            if (parsed.tooltips.length !== parsed.handles) {
-                throw new Error("noUiSlider (" + VERSION + "): must pass a formatter for all handles.");
-            }
-
-            parsed.tooltips.forEach(function (formatter) {
-                if (typeof formatter !== "boolean" && ((typeof formatter === "undefined" ? "undefined" : _typeof(formatter)) !== "object" || typeof formatter.to !== "function")) {
-                    throw new Error("noUiSlider (" + VERSION + "): 'tooltips' must be passed a formatter or 'false'.");
-                }
-            });
-        }
-    }
-
-    function testAriaFormat(parsed, entry) {
-        parsed.ariaFormat = entry;
-        validateFormat(entry);
-    }
-
-    function testFormat(parsed, entry) {
-        parsed.format = entry;
-        validateFormat(entry);
-    }
-
-    function testKeyboardSupport(parsed, entry) {
-        parsed.keyboardSupport = entry;
-
-        if (typeof entry !== "boolean") {
-            throw new Error("noUiSlider (" + VERSION + "): 'keyboardSupport' option must be a boolean.");
-        }
-    }
-
-    function testDocumentElement(parsed, entry) {
-        // This is an advanced option. Passed values are used without validation.
-        parsed.documentElement = entry;
-    }
-
-    function testCssPrefix(parsed, entry) {
-        if (typeof entry !== "string" && entry !== false) {
-            throw new Error("noUiSlider (" + VERSION + "): 'cssPrefix' must be a string or `false`.");
-        }
-
-        parsed.cssPrefix = entry;
-    }
-
-    function testCssClasses(parsed, entry) {
-        if ((typeof entry === "undefined" ? "undefined" : _typeof(entry)) !== "object") {
-            throw new Error("noUiSlider (" + VERSION + "): 'cssClasses' must be an object.");
-        }
-
-        if (typeof parsed.cssPrefix === "string") {
-            parsed.cssClasses = {};
-
-            for (var key in entry) {
-                if (!entry.hasOwnProperty(key)) {
-                    continue;
-                }
-
-                parsed.cssClasses[key] = parsed.cssPrefix + entry[key];
-            }
-        } else {
-            parsed.cssClasses = entry;
-        }
-    }
-
-    // Test all developer settings and parse to assumption-safe values.
-    function testOptions(options) {
-        // To prove a fix for #537, freeze options here.
-        // If the object is modified, an error will be thrown.
-        // Object.freeze(options);
-
-        var parsed = {
-            margin: 0,
-            limit: 0,
-            padding: 0,
-            animate: true,
-            animationDuration: 300,
-            ariaFormat: defaultFormatter,
-            format: defaultFormatter
-        };
-
-        // Tests are executed in the order they are presented here.
-        var tests = {
-            step: { r: false, t: testStep },
-            start: { r: true, t: testStart },
-            connect: { r: true, t: testConnect },
-            direction: { r: true, t: testDirection },
-            snap: { r: false, t: testSnap },
-            animate: { r: false, t: testAnimate },
-            animationDuration: { r: false, t: testAnimationDuration },
-            range: { r: true, t: testRange },
-            orientation: { r: false, t: testOrientation },
-            margin: { r: false, t: testMargin },
-            limit: { r: false, t: testLimit },
-            padding: { r: false, t: testPadding },
-            behaviour: { r: true, t: testBehaviour },
-            ariaFormat: { r: false, t: testAriaFormat },
-            format: { r: false, t: testFormat },
-            tooltips: { r: false, t: testTooltips },
-            keyboardSupport: { r: true, t: testKeyboardSupport },
-            documentElement: { r: false, t: testDocumentElement },
-            cssPrefix: { r: true, t: testCssPrefix },
-            cssClasses: { r: true, t: testCssClasses }
-        };
-
-        var defaults = {
-            connect: false,
-            direction: "ltr",
-            behaviour: "tap",
-            orientation: "horizontal",
-            keyboardSupport: true,
-            cssPrefix: "noUi-",
-            cssClasses: {
-                target: "target",
-                base: "base",
-                origin: "origin",
-                handle: "handle",
-                handleLower: "handle-lower",
-                handleUpper: "handle-upper",
-                horizontal: "horizontal",
-                vertical: "vertical",
-                background: "background",
-                connect: "connect",
-                connects: "connects",
-                ltr: "ltr",
-                rtl: "rtl",
-                draggable: "draggable",
-                drag: "state-drag",
-                tap: "state-tap",
-                active: "active",
-                tooltip: "tooltip",
-                pips: "pips",
-                pipsHorizontal: "pips-horizontal",
-                pipsVertical: "pips-vertical",
-                marker: "marker",
-                markerHorizontal: "marker-horizontal",
-                markerVertical: "marker-vertical",
-                markerNormal: "marker-normal",
-                markerLarge: "marker-large",
-                markerSub: "marker-sub",
-                value: "value",
-                valueHorizontal: "value-horizontal",
-                valueVertical: "value-vertical",
-                valueNormal: "value-normal",
-                valueLarge: "value-large",
-                valueSub: "value-sub"
-            }
-        };
-
-        // AriaFormat defaults to regular format, if any.
-        if (options.format && !options.ariaFormat) {
-            options.ariaFormat = options.format;
-        }
-
-        // Run all options through a testing mechanism to ensure correct
-        // input. It should be noted that options might get modified to
-        // be handled properly. E.g. wrapping integers in arrays.
-        Object.keys(tests).forEach(function (name) {
-            // If the option isn't set, but it is required, throw an error.
-            if (!isSet(options[name]) && defaults[name] === undefined) {
-                if (tests[name].r) {
-                    throw new Error("noUiSlider (" + VERSION + "): '" + name + "' is required.");
-                }
-
-                return true;
-            }
-
-            tests[name].t(parsed, !isSet(options[name]) ? defaults[name] : options[name]);
-        });
-
-        // Forward pips options
-        parsed.pips = options.pips;
-
-        // All recent browsers accept unprefixed transform.
-        // We need -ms- for IE9 and -webkit- for older Android;
-        // Assume use of -webkit- if unprefixed and -ms- are not supported.
-        // https://caniuse.com/#feat=transforms2d
-        var d = document.createElement("div");
-        var msPrefix = d.style.msTransform !== undefined;
-        var noPrefix = d.style.transform !== undefined;
-
-        parsed.transformRule = noPrefix ? "transform" : msPrefix ? "msTransform" : "webkitTransform";
-
-        // Pips don't move, so we can place them using left/top.
-        var styles = [["left", "top"], ["right", "bottom"]];
-
-        parsed.style = styles[parsed.dir][parsed.ort];
-
-        return parsed;
-    }
-
-    function scope(target, options, originalOptions) {
-        var actions = getActions();
-        var supportsTouchActionNone = getSupportsTouchActionNone();
-        var supportsPassive = supportsTouchActionNone && getSupportsPassive();
-
-        // All variables local to 'scope' are prefixed with 'scope_'
-        var scope_Target = target;
-        var scope_Locations = [];
-        var scope_Base;
-        var scope_Handles;
-        var scope_HandleNumbers = [];
-        var scope_ActiveHandlesCount = 0;
-        var scope_Connects;
-        var scope_Spectrum = options.spectrum;
-        var scope_Values = [];
-        var scope_Events = {};
-        var scope_Self;
-        var scope_Pips;
-        var scope_Document = target.ownerDocument;
-        var scope_DocumentElement = options.documentElement || scope_Document.documentElement;
-        var scope_Body = scope_Document.body;
-
-        // Pips constants
-        var PIPS_NONE = -1;
-        var PIPS_NO_VALUE = 0;
-        var PIPS_LARGE_VALUE = 1;
-        var PIPS_SMALL_VALUE = 2;
-
-        // For horizontal sliders in standard ltr documents,
-        // make .noUi-origin overflow to the left so the document doesn't scroll.
-        var scope_DirOffset = scope_Document.dir === "rtl" || options.ort === 1 ? 0 : 100;
-
-        // Creates a node, adds it to target, returns the new node.
-        function addNodeTo(addTarget, className) {
-            var div = scope_Document.createElement("div");
-
-            if (className) {
-                addClass(div, className);
-            }
-
-            addTarget.appendChild(div);
-
-            return div;
-        }
-
-        // Append a origin to the base
-        function addOrigin(base, handleNumber) {
-            var origin = addNodeTo(base, options.cssClasses.origin);
-            var handle = addNodeTo(origin, options.cssClasses.handle);
-
-            handle.setAttribute("data-handle", handleNumber);
-
-            if (options.keyboardSupport) {
-                // https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex
-                // 0 = focusable and reachable
-                handle.setAttribute("tabindex", "0");
-            }
-
-            handle.setAttribute("role", "slider");
-            handle.setAttribute("aria-orientation", options.ort ? "vertical" : "horizontal");
-
-            if (handleNumber === 0) {
-                addClass(handle, options.cssClasses.handleLower);
-            } else if (handleNumber === options.handles - 1) {
-                addClass(handle, options.cssClasses.handleUpper);
-            }
-
-            return origin;
-        }
-
-        // Insert nodes for connect elements
-        function addConnect(base, add) {
-            if (!add) {
-                return false;
-            }
-
-            return addNodeTo(base, options.cssClasses.connect);
-        }
-
-        // Add handles to the slider base.
-        function addElements(connectOptions, base) {
-            var connectBase = addNodeTo(base, options.cssClasses.connects);
-
-            scope_Handles = [];
-            scope_Connects = [];
-
-            scope_Connects.push(addConnect(connectBase, connectOptions[0]));
-
-            // [::::O====O====O====]
-            // connectOptions = [0, 1, 1, 1]
-
-            for (var i = 0; i < options.handles; i++) {
-                // Keep a list of all added handles.
-                scope_Handles.push(addOrigin(base, i));
-                scope_HandleNumbers[i] = i;
-                scope_Connects.push(addConnect(connectBase, connectOptions[i + 1]));
-            }
-        }
-
-        // Initialize a single slider.
-        function addSlider(addTarget) {
-            // Apply classes and data to the target.
-            addClass(addTarget, options.cssClasses.target);
-
-            if (options.dir === 0) {
-                addClass(addTarget, options.cssClasses.ltr);
-            } else {
-                addClass(addTarget, options.cssClasses.rtl);
-            }
-
-            if (options.ort === 0) {
-                addClass(addTarget, options.cssClasses.horizontal);
-            } else {
-                addClass(addTarget, options.cssClasses.vertical);
-            }
-
-            return addNodeTo(addTarget, options.cssClasses.base);
-        }
-
-        function addTooltip(handle, handleNumber) {
-            if (!options.tooltips[handleNumber]) {
-                return false;
-            }
-
-            return addNodeTo(handle.firstChild, options.cssClasses.tooltip);
-        }
-
-        // The tooltips option is a shorthand for using the 'update' event.
-        function tooltips() {
-            // Tooltips are added with options.tooltips in original order.
-            var tips = scope_Handles.map(addTooltip);
-
-            bindEvent("update", function (values, handleNumber, unencoded) {
-                if (!tips[handleNumber]) {
-                    return;
-                }
-
-                var formattedValue = values[handleNumber];
-
-                if (options.tooltips[handleNumber] !== true) {
-                    formattedValue = options.tooltips[handleNumber].to(unencoded[handleNumber]);
-                }
-
-                tips[handleNumber].innerHTML = formattedValue;
-            });
-        }
-
-        function aria() {
-            bindEvent("update", function (values, handleNumber, unencoded, tap, positions) {
-                // Update Aria Values for all handles, as a change in one changes min and max values for the next.
-                scope_HandleNumbers.forEach(function (index) {
-                    var handle = scope_Handles[index];
-
-                    var min = checkHandlePosition(scope_Locations, index, 0, true, true, true);
-                    var max = checkHandlePosition(scope_Locations, index, 100, true, true, true);
-
-                    var now = positions[index];
-
-                    // Formatted value for display
-                    var text = options.ariaFormat.to(unencoded[index]);
-
-                    // Map to slider range values
-                    min = scope_Spectrum.fromStepping(min).toFixed(1);
-                    max = scope_Spectrum.fromStepping(max).toFixed(1);
-                    now = scope_Spectrum.fromStepping(now).toFixed(1);
-
-                    handle.children[0].setAttribute("aria-valuemin", min);
-                    handle.children[0].setAttribute("aria-valuemax", max);
-                    handle.children[0].setAttribute("aria-valuenow", now);
-                    handle.children[0].setAttribute("aria-valuetext", text);
-                });
-            });
-        }
-
-        function getGroup(mode, values, stepped) {
-            // Use the range.
-            if (mode === "range" || mode === "steps") {
-                return scope_Spectrum.xVal;
-            }
-
-            if (mode === "count") {
-                if (values < 2) {
-                    throw new Error("noUiSlider (" + VERSION + "): 'values' (>= 2) required for mode 'count'.");
-                }
-
-                // Divide 0 - 100 in 'count' parts.
-                var interval = values - 1;
-                var spread = 100 / interval;
-
-                values = [];
-
-                // List these parts and have them handled as 'positions'.
-                while (interval--) {
-                    values[interval] = interval * spread;
-                }
-
-                values.push(100);
-
-                mode = "positions";
-            }
-
-            if (mode === "positions") {
-                // Map all percentages to on-range values.
-                return values.map(function (value) {
-                    return scope_Spectrum.fromStepping(stepped ? scope_Spectrum.getStep(value) : value);
-                });
-            }
-
-            if (mode === "values") {
-                // If the value must be stepped, it needs to be converted to a percentage first.
-                if (stepped) {
-                    return values.map(function (value) {
-                        // Convert to percentage, apply step, return to value.
-                        return scope_Spectrum.fromStepping(scope_Spectrum.getStep(scope_Spectrum.toStepping(value)));
-                    });
-                }
-
-                // Otherwise, we can simply use the values.
-                return values;
-            }
-        }
-
-        function generateSpread(density, mode, group) {
-            function safeIncrement(value, increment) {
-                // Avoid floating point variance by dropping the smallest decimal places.
-                return (value + increment).toFixed(7) / 1;
-            }
-
-            var indexes = {};
-            var firstInRange = scope_Spectrum.xVal[0];
-            var lastInRange = scope_Spectrum.xVal[scope_Spectrum.xVal.length - 1];
-            var ignoreFirst = false;
-            var ignoreLast = false;
-            var prevPct = 0;
-
-            // Create a copy of the group, sort it and filter away all duplicates.
-            group = unique(group.slice().sort(function (a, b) {
-                return a - b;
-            }));
-
-            // Make sure the range starts with the first element.
-            if (group[0] !== firstInRange) {
-                group.unshift(firstInRange);
-                ignoreFirst = true;
-            }
-
-            // Likewise for the last one.
-            if (group[group.length - 1] !== lastInRange) {
-                group.push(lastInRange);
-                ignoreLast = true;
-            }
-
-            group.forEach(function (current, index) {
-                // Get the current step and the lower + upper positions.
-                var step;
-                var i;
-                var q;
-                var low = current;
-                var high = group[index + 1];
-                var newPct;
-                var pctDifference;
-                var pctPos;
-                var type;
-                var steps;
-                var realSteps;
-                var stepSize;
-                var isSteps = mode === "steps";
-
-                // When using 'steps' mode, use the provided steps.
-                // Otherwise, we'll step on to the next subrange.
-                if (isSteps) {
-                    step = scope_Spectrum.xNumSteps[index];
-                }
-
-                // Default to a 'full' step.
-                if (!step) {
-                    step = high - low;
-                }
-
-                // Low can be 0, so test for false. If high is undefined,
-                // we are at the last subrange. Index 0 is already handled.
-                if (low === false || high === undefined) {
-                    return;
-                }
-
-                // Make sure step isn't 0, which would cause an infinite loop (#654)
-                step = Math.max(step, 0.0000001);
-
-                // Find all steps in the subrange.
-                for (i = low; i <= high; i = safeIncrement(i, step)) {
-                    // Get the percentage value for the current step,
-                    // calculate the size for the subrange.
-                    newPct = scope_Spectrum.toStepping(i);
-                    pctDifference = newPct - prevPct;
-
-                    steps = pctDifference / density;
-                    realSteps = Math.round(steps);
-
-                    // This ratio represents the amount of percentage-space a point indicates.
-                    // For a density 1 the points/percentage = 1. For density 2, that percentage needs to be re-divided.
-                    // Round the percentage offset to an even number, then divide by two
-                    // to spread the offset on both sides of the range.
-                    stepSize = pctDifference / realSteps;
-
-                    // Divide all points evenly, adding the correct number to this subrange.
-                    // Run up to <= so that 100% gets a point, event if ignoreLast is set.
-                    for (q = 1; q <= realSteps; q += 1) {
-                        // The ratio between the rounded value and the actual size might be ~1% off.
-                        // Correct the percentage offset by the number of points
-                        // per subrange. density = 1 will result in 100 points on the
-                        // full range, 2 for 50, 4 for 25, etc.
-                        pctPos = prevPct + q * stepSize;
-                        indexes[pctPos.toFixed(5)] = [scope_Spectrum.fromStepping(pctPos), 0];
-                    }
-
-                    // Determine the point type.
-                    type = group.indexOf(i) > -1 ? PIPS_LARGE_VALUE : isSteps ? PIPS_SMALL_VALUE : PIPS_NO_VALUE;
-
-                    // Enforce the 'ignoreFirst' option by overwriting the type for 0.
-                    if (!index && ignoreFirst) {
-                        type = 0;
-                    }
-
-                    if (!(i === high && ignoreLast)) {
-                        // Mark the 'type' of this point. 0 = plain, 1 = real value, 2 = step value.
-                        indexes[newPct.toFixed(5)] = [i, type];
-                    }
-
-                    // Update the percentage count.
-                    prevPct = newPct;
-                }
-            });
-
-            return indexes;
-        }
-
-        function addMarking(spread, filterFunc, formatter) {
-            var element = scope_Document.createElement("div");
-
-            var valueSizeClasses = [];
-            valueSizeClasses[PIPS_NO_VALUE] = options.cssClasses.valueNormal;
-            valueSizeClasses[PIPS_LARGE_VALUE] = options.cssClasses.valueLarge;
-            valueSizeClasses[PIPS_SMALL_VALUE] = options.cssClasses.valueSub;
-
-            var markerSizeClasses = [];
-            markerSizeClasses[PIPS_NO_VALUE] = options.cssClasses.markerNormal;
-            markerSizeClasses[PIPS_LARGE_VALUE] = options.cssClasses.markerLarge;
-            markerSizeClasses[PIPS_SMALL_VALUE] = options.cssClasses.markerSub;
-
-            var valueOrientationClasses = [options.cssClasses.valueHorizontal, options.cssClasses.valueVertical];
-            var markerOrientationClasses = [options.cssClasses.markerHorizontal, options.cssClasses.markerVertical];
-
-            addClass(element, options.cssClasses.pips);
-            addClass(element, options.ort === 0 ? options.cssClasses.pipsHorizontal : options.cssClasses.pipsVertical);
-
-            function getClasses(type, source) {
-                var a = source === options.cssClasses.value;
-                var orientationClasses = a ? valueOrientationClasses : markerOrientationClasses;
-                var sizeClasses = a ? valueSizeClasses : markerSizeClasses;
-
-                return source + " " + orientationClasses[options.ort] + " " + sizeClasses[type];
-            }
-
-            function addSpread(offset, value, type) {
-                // Apply the filter function, if it is set.
-                type = filterFunc ? filterFunc(value, type) : type;
-
-                if (type === PIPS_NONE) {
-                    return;
-                }
-
-                // Add a marker for every point
-                var node = addNodeTo(element, false);
-                node.className = getClasses(type, options.cssClasses.marker);
-                node.style[options.style] = offset + "%";
-
-                // Values are only appended for points marked '1' or '2'.
-                if (type > PIPS_NO_VALUE) {
-                    node = addNodeTo(element, false);
-                    node.className = getClasses(type, options.cssClasses.value);
-                    node.setAttribute("data-value", value);
-                    node.style[options.style] = offset + "%";
-                    node.innerHTML = formatter.to(value);
-                }
-            }
-
-            // Append all points.
-            Object.keys(spread).forEach(function (offset) {
-                addSpread(offset, spread[offset][0], spread[offset][1]);
-            });
-
-            return element;
-        }
-
-        function removePips() {
-            if (scope_Pips) {
-                removeElement(scope_Pips);
-                scope_Pips = null;
-            }
-        }
-
-        function pips(grid) {
-            // Fix #669
-            removePips();
-
-            var mode = grid.mode;
-            var density = grid.density || 1;
-            var filter = grid.filter || false;
-            var values = grid.values || false;
-            var stepped = grid.stepped || false;
-            var group = getGroup(mode, values, stepped);
-            var spread = generateSpread(density, mode, group);
-            var format = grid.format || {
-                to: Math.round
-            };
-
-            scope_Pips = scope_Target.appendChild(addMarking(spread, filter, format));
-
-            return scope_Pips;
-        }
-
-        // Shorthand for base dimensions.
-        function baseSize() {
-            var rect = scope_Base.getBoundingClientRect();
-            var alt = "offset" + ["Width", "Height"][options.ort];
-            return options.ort === 0 ? rect.width || scope_Base[alt] : rect.height || scope_Base[alt];
-        }
-
-        // Handler for attaching events trough a proxy.
-        function attachEvent(events, element, callback, data) {
-            // This function can be used to 'filter' events to the slider.
-            // element is a node, not a nodeList
-
-            var method = function method(e) {
-                e = fixEvent(e, data.pageOffset, data.target || element);
-
-                // fixEvent returns false if this event has a different target
-                // when handling (multi-) touch events;
-                if (!e) {
-                    return false;
-                }
-
-                // doNotReject is passed by all end events to make sure released touches
-                // are not rejected, leaving the slider "stuck" to the cursor;
-                if (scope_Target.hasAttribute("disabled") && !data.doNotReject) {
-                    return false;
-                }
-
-                // Stop if an active 'tap' transition is taking place.
-                if (hasClass(scope_Target, options.cssClasses.tap) && !data.doNotReject) {
-                    return false;
-                }
-
-                // Ignore right or middle clicks on start #454
-                if (events === actions.start && e.buttons !== undefined && e.buttons > 1) {
-                    return false;
-                }
-
-                // Ignore right or middle clicks on start #454
-                if (data.hover && e.buttons) {
-                    return false;
-                }
-
-                // 'supportsPassive' is only true if a browser also supports touch-action: none in CSS.
-                // iOS safari does not, so it doesn't get to benefit from passive scrolling. iOS does support
-                // touch-action: manipulation, but that allows panning, which breaks
-                // sliders after zooming/on non-responsive pages.
-                // See: https://bugs.webkit.org/show_bug.cgi?id=133112
-                if (!supportsPassive) {
-                    e.preventDefault();
-                }
-
-                e.calcPoint = e.points[options.ort];
-
-                // Call the event handler with the event [ and additional data ].
-                callback(e, data);
-            };
-
-            var methods = [];
-
-            // Bind a closure on the target for every event type.
-            events.split(" ").forEach(function (eventName) {
-                element.addEventListener(eventName, method, supportsPassive ? { passive: true } : false);
-                methods.push([eventName, method]);
-            });
-
-            return methods;
-        }
-
-        // Provide a clean event with standardized offset values.
-        function fixEvent(e, pageOffset, eventTarget) {
-            // Filter the event to register the type, which can be
-            // touch, mouse or pointer. Offset changes need to be
-            // made on an event specific basis.
-            var touch = e.type.indexOf("touch") === 0;
-            var mouse = e.type.indexOf("mouse") === 0;
-            var pointer = e.type.indexOf("pointer") === 0;
-
-            var x;
-            var y;
-
-            // IE10 implemented pointer events with a prefix;
-            if (e.type.indexOf("MSPointer") === 0) {
-                pointer = true;
-            }
-
-            // In the event that multitouch is activated, the only thing one handle should be concerned
-            // about is the touches that originated on top of it.
-            if (touch) {
-                // Returns true if a touch originated on the target.
-                var isTouchOnTarget = function isTouchOnTarget(checkTouch) {
-                    return checkTouch.target === eventTarget || eventTarget.contains(checkTouch.target);
-                };
-
-                // In the case of touchstart events, we need to make sure there is still no more than one
-                // touch on the target so we look amongst all touches.
-                if (e.type === "touchstart") {
-                    var targetTouches = Array.prototype.filter.call(e.touches, isTouchOnTarget);
-
-                    // Do not support more than one touch per handle.
-                    if (targetTouches.length > 1) {
-                        return false;
-                    }
-
-                    x = targetTouches[0].pageX;
-                    y = targetTouches[0].pageY;
-                } else {
-                    // In the other cases, find on changedTouches is enough.
-                    var targetTouch = Array.prototype.find.call(e.changedTouches, isTouchOnTarget);
-
-                    // Cancel if the target touch has not moved.
-                    if (!targetTouch) {
-                        return false;
-                    }
-
-                    x = targetTouch.pageX;
-                    y = targetTouch.pageY;
-                }
-            }
-
-            pageOffset = pageOffset || getPageOffset(scope_Document);
-
-            if (mouse || pointer) {
-                x = e.clientX + pageOffset.x;
-                y = e.clientY + pageOffset.y;
-            }
-
-            e.pageOffset = pageOffset;
-            e.points = [x, y];
-            e.cursor = mouse || pointer; // Fix #435
-
-            return e;
-        }
-
-        // Translate a coordinate in the document to a percentage on the slider
-        function calcPointToPercentage(calcPoint) {
-            var location = calcPoint - offset(scope_Base, options.ort);
-            var proposal = location * 100 / baseSize();
-
-            // Clamp proposal between 0% and 100%
-            // Out-of-bound coordinates may occur when .noUi-base pseudo-elements
-            // are used (e.g. contained handles feature)
-            proposal = limit(proposal);
-
-            return options.dir ? 100 - proposal : proposal;
-        }
-
-        // Find handle closest to a certain percentage on the slider
-        function getClosestHandle(proposal) {
-            var closest = 100;
-            var handleNumber = false;
-
-            scope_Handles.forEach(function (handle, index) {
-                // Disabled handles are ignored
-                if (handle.hasAttribute("disabled")) {
-                    return;
-                }
-
-                var pos = Math.abs(scope_Locations[index] - proposal);
-
-                if (pos < closest || pos === 100 && closest === 100) {
-                    handleNumber = index;
-                    closest = pos;
-                }
-            });
-
-            return handleNumber;
-        }
-
-        // Fire 'end' when a mouse or pen leaves the document.
-        function documentLeave(event, data) {
-            if (event.type === "mouseout" && event.target.nodeName === "HTML" && event.relatedTarget === null) {
-                eventEnd(event, data);
-            }
-        }
-
-        // Handle movement on document for handle and range drag.
-        function eventMove(event, data) {
-            // Fix #498
-            // Check value of .buttons in 'start' to work around a bug in IE10 mobile (data.buttonsProperty).
-            // https://connect.microsoft.com/IE/feedback/details/927005/mobile-ie10-windows-phone-buttons-property-of-pointermove-event-always-zero
-            // IE9 has .buttons and .which zero on mousemove.
-            // Firefox breaks the spec MDN defines.
-            if (navigator.appVersion.indexOf("MSIE 9") === -1 && event.buttons === 0 && data.buttonsProperty !== 0) {
-                return eventEnd(event, data);
-            }
-
-            // Check if we are moving up or down
-            var movement = (options.dir ? -1 : 1) * (event.calcPoint - data.startCalcPoint);
-
-            // Convert the movement into a percentage of the slider width/height
-            var proposal = movement * 100 / data.baseSize;
-
-            moveHandles(movement > 0, proposal, data.locations, data.handleNumbers);
-        }
-
-        // Unbind move events on document, call callbacks.
-        function eventEnd(event, data) {
-            // The handle is no longer active, so remove the class.
-            if (data.handle) {
-                removeClass(data.handle, options.cssClasses.active);
-                scope_ActiveHandlesCount -= 1;
-            }
-
-            // Unbind the move and end events, which are added on 'start'.
-            data.listeners.forEach(function (c) {
-                scope_DocumentElement.removeEventListener(c[0], c[1]);
-            });
-
-            if (scope_ActiveHandlesCount === 0) {
-                // Remove dragging class.
-                removeClass(scope_Target, options.cssClasses.drag);
-                setZindex();
-
-                // Remove cursor styles and text-selection events bound to the body.
-                if (event.cursor) {
-                    scope_Body.style.cursor = "";
-                    scope_Body.removeEventListener("selectstart", preventDefault);
-                }
-            }
-
-            data.handleNumbers.forEach(function (handleNumber) {
-                fireEvent("change", handleNumber);
-                fireEvent("set", handleNumber);
-                fireEvent("end", handleNumber);
-            });
-        }
-
-        // Bind move events on document.
-        function eventStart(event, data) {
-            var handle;
-            if (data.handleNumbers.length === 1) {
-                var handleOrigin = scope_Handles[data.handleNumbers[0]];
-
-                // Ignore 'disabled' handles
-                if (handleOrigin.hasAttribute("disabled")) {
-                    return false;
-                }
-
-                handle = handleOrigin.children[0];
-                scope_ActiveHandlesCount += 1;
-
-                // Mark the handle as 'active' so it can be styled.
-                addClass(handle, options.cssClasses.active);
-            }
-
-            // A drag should never propagate up to the 'tap' event.
-            event.stopPropagation();
-
-            // Record the event listeners.
-            var listeners = [];
-
-            // Attach the move and end events.
-            var moveEvent = attachEvent(actions.move, scope_DocumentElement, eventMove, {
-                // The event target has changed so we need to propagate the original one so that we keep
-                // relying on it to extract target touches.
-                target: event.target,
-                handle: handle,
-                listeners: listeners,
-                startCalcPoint: event.calcPoint,
-                baseSize: baseSize(),
-                pageOffset: event.pageOffset,
-                handleNumbers: data.handleNumbers,
-                buttonsProperty: event.buttons,
-                locations: scope_Locations.slice()
-            });
-
-            var endEvent = attachEvent(actions.end, scope_DocumentElement, eventEnd, {
-                target: event.target,
-                handle: handle,
-                listeners: listeners,
-                doNotReject: true,
-                handleNumbers: data.handleNumbers
-            });
-
-            var outEvent = attachEvent("mouseout", scope_DocumentElement, documentLeave, {
-                target: event.target,
-                handle: handle,
-                listeners: listeners,
-                doNotReject: true,
-                handleNumbers: data.handleNumbers
-            });
-
-            // We want to make sure we pushed the listeners in the listener list rather than creating
-            // a new one as it has already been passed to the event handlers.
-            listeners.push.apply(listeners, moveEvent.concat(endEvent, outEvent));
-
-            // Text selection isn't an issue on touch devices,
-            // so adding cursor styles can be skipped.
-            if (event.cursor) {
-                // Prevent the 'I' cursor and extend the range-drag cursor.
-                scope_Body.style.cursor = getComputedStyle(event.target).cursor;
-
-                // Mark the target with a dragging state.
-                if (scope_Handles.length > 1) {
-                    addClass(scope_Target, options.cssClasses.drag);
-                }
-
-                // Prevent text selection when dragging the handles.
-                // In noUiSlider <= 9.2.0, this was handled by calling preventDefault on mouse/touch start/move,
-                // which is scroll blocking. The selectstart event is supported by FireFox starting from version 52,
-                // meaning the only holdout is iOS Safari. This doesn't matter: text selection isn't triggered there.
-                // The 'cursor' flag is false.
-                // See: http://caniuse.com/#search=selectstart
-                scope_Body.addEventListener("selectstart", preventDefault, false);
-            }
-
-            data.handleNumbers.forEach(function (handleNumber) {
-                fireEvent("start", handleNumber);
-            });
-        }
-
-        // Move closest handle to tapped location.
-        function eventTap(event) {
-            // The tap event shouldn't propagate up
-            event.stopPropagation();
-
-            var proposal = calcPointToPercentage(event.calcPoint);
-            var handleNumber = getClosestHandle(proposal);
-
-            // Tackle the case that all handles are 'disabled'.
-            if (handleNumber === false) {
-                return false;
-            }
-
-            // Flag the slider as it is now in a transitional state.
-            // Transition takes a configurable amount of ms (default 300). Re-enable the slider after that.
-            if (!options.events.snap) {
-                addClassFor(scope_Target, options.cssClasses.tap, options.animationDuration);
-            }
-
-            setHandle(handleNumber, proposal, true, true);
-
-            setZindex();
-
-            fireEvent("slide", handleNumber, true);
-            fireEvent("update", handleNumber, true);
-            fireEvent("change", handleNumber, true);
-            fireEvent("set", handleNumber, true);
-
-            if (options.events.snap) {
-                eventStart(event, { handleNumbers: [handleNumber] });
-            }
-        }
-
-        // Fires a 'hover' event for a hovered mouse/pen position.
-        function eventHover(event) {
-            var proposal = calcPointToPercentage(event.calcPoint);
-
-            var to = scope_Spectrum.getStep(proposal);
-            var value = scope_Spectrum.fromStepping(to);
-
-            Object.keys(scope_Events).forEach(function (targetEvent) {
-                if ("hover" === targetEvent.split(".")[0]) {
-                    scope_Events[targetEvent].forEach(function (callback) {
-                        callback.call(scope_Self, value);
-                    });
-                }
-            });
-        }
-
-        // Attach events to several slider parts.
-        function bindSliderEvents(behaviour) {
-            // Attach the standard drag event to the handles.
-            if (!behaviour.fixed) {
-                scope_Handles.forEach(function (handle, index) {
-                    // These events are only bound to the visual handle
-                    // element, not the 'real' origin element.
-                    attachEvent(actions.start, handle.children[0], eventStart, {
-                        handleNumbers: [index]
-                    });
-                });
-            }
-
-            // Attach the tap event to the slider base.
-            if (behaviour.tap) {
-                attachEvent(actions.start, scope_Base, eventTap, {});
-            }
-
-            // Fire hover events
-            if (behaviour.hover) {
-                attachEvent(actions.move, scope_Base, eventHover, {
-                    hover: true
-                });
-            }
-
-            // Make the range draggable.
-            if (behaviour.drag) {
-                scope_Connects.forEach(function (connect, index) {
-                    if (connect === false || index === 0 || index === scope_Connects.length - 1) {
-                        return;
-                    }
-
-                    var handleBefore = scope_Handles[index - 1];
-                    var handleAfter = scope_Handles[index];
-                    var eventHolders = [connect];
-
-                    addClass(connect, options.cssClasses.draggable);
-
-                    // When the range is fixed, the entire range can
-                    // be dragged by the handles. The handle in the first
-                    // origin will propagate the start event upward,
-                    // but it needs to be bound manually on the other.
-                    if (behaviour.fixed) {
-                        eventHolders.push(handleBefore.children[0]);
-                        eventHolders.push(handleAfter.children[0]);
-                    }
-
-                    eventHolders.forEach(function (eventHolder) {
-                        attachEvent(actions.start, eventHolder, eventStart, {
-                            handles: [handleBefore, handleAfter],
-                            handleNumbers: [index - 1, index]
-                        });
-                    });
-                });
-            }
-        }
-
-        // Attach an event to this slider, possibly including a namespace
-        function bindEvent(namespacedEvent, callback) {
-            scope_Events[namespacedEvent] = scope_Events[namespacedEvent] || [];
-            scope_Events[namespacedEvent].push(callback);
-
-            // If the event bound is 'update,' fire it immediately for all handles.
-            if (namespacedEvent.split(".")[0] === "update") {
-                scope_Handles.forEach(function (a, index) {
-                    fireEvent("update", index);
-                });
-            }
-        }
-
-        // Undo attachment of event
-        function removeEvent(namespacedEvent) {
-            var event = namespacedEvent && namespacedEvent.split(".")[0];
-            var namespace = event && namespacedEvent.substring(event.length);
-
-            Object.keys(scope_Events).forEach(function (bind) {
-                var tEvent = bind.split(".")[0];
-                var tNamespace = bind.substring(tEvent.length);
-
-                if ((!event || event === tEvent) && (!namespace || namespace === tNamespace)) {
-                    delete scope_Events[bind];
-                }
-            });
-        }
-
-        // External event handling
-        function fireEvent(eventName, handleNumber, tap) {
-            Object.keys(scope_Events).forEach(function (targetEvent) {
-                var eventType = targetEvent.split(".")[0];
-
-                if (eventName === eventType) {
-                    scope_Events[targetEvent].forEach(function (callback) {
-                        callback.call(
-                        // Use the slider public API as the scope ('this')
-                        scope_Self,
-                        // Return values as array, so arg_1[arg_2] is always valid.
-                        scope_Values.map(options.format.to),
-                        // Handle index, 0 or 1
-                        handleNumber,
-                        // Un-formatted slider values
-                        scope_Values.slice(),
-                        // Event is fired by tap, true or false
-                        tap || false,
-                        // Left offset of the handle, in relation to the slider
-                        scope_Locations.slice());
-                    });
-                }
-            });
-        }
-
-        function toPct(pct) {
-            return pct + "%";
-        }
-
-        // Split out the handle positioning logic so the Move event can use it, too
-        function checkHandlePosition(reference, handleNumber, to, lookBackward, lookForward, getValue) {
-            // For sliders with multiple handles, limit movement to the other handle.
-            // Apply the margin option by adding it to the handle positions.
-            if (scope_Handles.length > 1) {
-                if (lookBackward && handleNumber > 0) {
-                    to = Math.max(to, reference[handleNumber - 1] + options.margin);
-                }
-
-                if (lookForward && handleNumber < scope_Handles.length - 1) {
-                    to = Math.min(to, reference[handleNumber + 1] - options.margin);
-                }
-            }
-
-            // The limit option has the opposite effect, limiting handles to a
-            // maximum distance from another. Limit must be > 0, as otherwise
-            // handles would be unmovable.
-            if (scope_Handles.length > 1 && options.limit) {
-                if (lookBackward && handleNumber > 0) {
-                    to = Math.min(to, reference[handleNumber - 1] + options.limit);
-                }
-
-                if (lookForward && handleNumber < scope_Handles.length - 1) {
-                    to = Math.max(to, reference[handleNumber + 1] - options.limit);
-                }
-            }
-
-            // The padding option keeps the handles a certain distance from the
-            // edges of the slider. Padding must be > 0.
-            if (options.padding) {
-                if (handleNumber === 0) {
-                    to = Math.max(to, options.padding[0]);
-                }
-
-                if (handleNumber === scope_Handles.length - 1) {
-                    to = Math.min(to, 100 - options.padding[1]);
-                }
-            }
-
-            to = scope_Spectrum.getStep(to);
-
-            // Limit percentage to the 0 - 100 range
-            to = limit(to);
-
-            // Return false if handle can't move
-            if (to === reference[handleNumber] && !getValue) {
-                return false;
-            }
-
-            return to;
-        }
-
-        // Uses slider orientation to create CSS rules. a = base value;
-        function inRuleOrder(v, a) {
-            var o = options.ort;
-            return (o ? a : v) + ", " + (o ? v : a);
-        }
-
-        // Moves handle(s) by a percentage
-        // (bool, % to move, [% where handle started, ...], [index in scope_Handles, ...])
-        function moveHandles(upward, proposal, locations, handleNumbers) {
-            var proposals = locations.slice();
-
-            var b = [!upward, upward];
-            var f = [upward, !upward];
-
-            // Copy handleNumbers so we don't change the dataset
-            handleNumbers = handleNumbers.slice();
-
-            // Check to see which handle is 'leading'.
-            // If that one can't move the second can't either.
-            if (upward) {
-                handleNumbers.reverse();
-            }
-
-            // Step 1: get the maximum percentage that any of the handles can move
-            if (handleNumbers.length > 1) {
-                handleNumbers.forEach(function (handleNumber, o) {
-                    var to = checkHandlePosition(proposals, handleNumber, proposals[handleNumber] + proposal, b[o], f[o], false);
-
-                    // Stop if one of the handles can't move.
-                    if (to === false) {
-                        proposal = 0;
-                    } else {
-                        proposal = to - proposals[handleNumber];
-                        proposals[handleNumber] = to;
-                    }
-                });
-            }
-
-            // If using one handle, check backward AND forward
-            else {
-                    b = f = [true];
-                }
-
-            var state = false;
-
-            // Step 2: Try to set the handles with the found percentage
-            handleNumbers.forEach(function (handleNumber, o) {
-                state = setHandle(handleNumber, locations[handleNumber] + proposal, b[o], f[o]) || state;
-            });
-
-            // Step 3: If a handle moved, fire events
-            if (state) {
-                handleNumbers.forEach(function (handleNumber) {
-                    fireEvent("update", handleNumber);
-                    fireEvent("slide", handleNumber);
-                });
-            }
-        }
-
-        // Takes a base value and an offset. This offset is used for the connect bar size.
-        // In the initial design for this feature, the origin element was 1% wide.
-        // Unfortunately, a rounding bug in Chrome makes it impossible to implement this feature
-        // in this manner: https://bugs.chromium.org/p/chromium/issues/detail?id=798223
-        function transformDirection(a, b) {
-            return options.dir ? 100 - a - b : a;
-        }
-
-        // Updates scope_Locations and scope_Values, updates visual state
-        function updateHandlePosition(handleNumber, to) {
-            // Update locations.
-            scope_Locations[handleNumber] = to;
-
-            // Convert the value to the slider stepping/range.
-            scope_Values[handleNumber] = scope_Spectrum.fromStepping(to);
-
-            var rule = "translate(" + inRuleOrder(toPct(transformDirection(to, 0) - scope_DirOffset), "0") + ")";
-            scope_Handles[handleNumber].style[options.transformRule] = rule;
-
-            updateConnect(handleNumber);
-            updateConnect(handleNumber + 1);
-        }
-
-        // Handles before the slider middle are stacked later = higher,
-        // Handles after the middle later is lower
-        // [[7] [8] .......... | .......... [5] [4]
-        function setZindex() {
-            scope_HandleNumbers.forEach(function (handleNumber) {
-                var dir = scope_Locations[handleNumber] > 50 ? -1 : 1;
-                var zIndex = 3 + (scope_Handles.length + dir * handleNumber);
-                scope_Handles[handleNumber].style.zIndex = zIndex;
-            });
-        }
-
-        // Test suggested values and apply margin, step.
-        function setHandle(handleNumber, to, lookBackward, lookForward) {
-            to = checkHandlePosition(scope_Locations, handleNumber, to, lookBackward, lookForward, false);
-
-            if (to === false) {
-                return false;
-            }
-
-            updateHandlePosition(handleNumber, to);
-
-            return true;
-        }
-
-        // Updates style attribute for connect nodes
-        function updateConnect(index) {
-            // Skip connects set to false
-            if (!scope_Connects[index]) {
-                return;
-            }
-
-            var l = 0;
-            var h = 100;
-
-            if (index !== 0) {
-                l = scope_Locations[index - 1];
-            }
-
-            if (index !== scope_Connects.length - 1) {
-                h = scope_Locations[index];
-            }
-
-            // We use two rules:
-            // 'translate' to change the left/top offset;
-            // 'scale' to change the width of the element;
-            // As the element has a width of 100%, a translation of 100% is equal to 100% of the parent (.noUi-base)
-            var connectWidth = h - l;
-            var translateRule = "translate(" + inRuleOrder(toPct(transformDirection(l, connectWidth)), "0") + ")";
-            var scaleRule = "scale(" + inRuleOrder(connectWidth / 100, "1") + ")";
-
-            scope_Connects[index].style[options.transformRule] = translateRule + " " + scaleRule;
-        }
-
-        // Parses value passed to .set method. Returns current value if not parse-able.
-        function resolveToValue(to, handleNumber) {
-            // Setting with null indicates an 'ignore'.
-            // Inputting 'false' is invalid.
-            if (to === null || to === false || to === undefined) {
-                return scope_Locations[handleNumber];
-            }
-
-            // If a formatted number was passed, attempt to decode it.
-            if (typeof to === "number") {
-                to = String(to);
-            }
-
-            to = options.format.from(to);
-            to = scope_Spectrum.toStepping(to);
-
-            // If parsing the number failed, use the current value.
-            if (to === false || isNaN(to)) {
-                return scope_Locations[handleNumber];
-            }
-
-            return to;
-        }
-
-        // Set the slider value.
-        function valueSet(input, fireSetEvent) {
-            var values = asArray(input);
-            var isInit = scope_Locations[0] === undefined;
-
-            // Event fires by default
-            fireSetEvent = fireSetEvent === undefined ? true : !!fireSetEvent;
-
-            // Animation is optional.
-            // Make sure the initial values were set before using animated placement.
-            if (options.animate && !isInit) {
-                addClassFor(scope_Target, options.cssClasses.tap, options.animationDuration);
-            }
-
-            // First pass, without lookAhead but with lookBackward. Values are set from left to right.
-            scope_HandleNumbers.forEach(function (handleNumber) {
-                setHandle(handleNumber, resolveToValue(values[handleNumber], handleNumber), true, false);
-            });
-
-            // Second pass. Now that all base values are set, apply constraints
-            scope_HandleNumbers.forEach(function (handleNumber) {
-                setHandle(handleNumber, scope_Locations[handleNumber], true, true);
-            });
-
-            setZindex();
-
-            scope_HandleNumbers.forEach(function (handleNumber) {
-                fireEvent("update", handleNumber);
-
-                // Fire the event only for handles that received a new value, as per #579
-                if (values[handleNumber] !== null && fireSetEvent) {
-                    fireEvent("set", handleNumber);
-                }
-            });
-        }
-
-        // Reset slider to initial values
-        function valueReset(fireSetEvent) {
-            valueSet(options.start, fireSetEvent);
-        }
-
-        // Get the slider value.
-        function valueGet() {
-            var values = scope_Values.map(options.format.to);
-
-            // If only one handle is used, return a single value.
-            if (values.length === 1) {
-                return values[0];
-            }
-
-            return values;
-        }
-
-        // Removes classes from the root and empties it.
-        function destroy() {
-            for (var key in options.cssClasses) {
-                if (!options.cssClasses.hasOwnProperty(key)) {
-                    continue;
-                }
-                removeClass(scope_Target, options.cssClasses[key]);
-            }
-
-            while (scope_Target.firstChild) {
-                scope_Target.removeChild(scope_Target.firstChild);
-            }
-
-            delete scope_Target.noUiSlider;
-        }
-
-        // Get the current step size for the slider.
-        function getCurrentStep() {
-            // Check all locations, map them to their stepping point.
-            // Get the step point, then find it in the input list.
-            return scope_Locations.map(function (location, index) {
-                var nearbySteps = scope_Spectrum.getNearbySteps(location);
-                var value = scope_Values[index];
-                var increment = nearbySteps.thisStep.step;
-                var decrement = null;
-
-                // If the next value in this step moves into the next step,
-                // the increment is the start of the next step - the current value
-                if (increment !== false) {
-                    if (value + increment > nearbySteps.stepAfter.startValue) {
-                        increment = nearbySteps.stepAfter.startValue - value;
-                    }
-                }
-
-                // If the value is beyond the starting point
-                if (value > nearbySteps.thisStep.startValue) {
-                    decrement = nearbySteps.thisStep.step;
-                } else if (nearbySteps.stepBefore.step === false) {
-                    decrement = false;
-                }
-
-                // If a handle is at the start of a step, it always steps back into the previous step first
-                else {
-                        decrement = value - nearbySteps.stepBefore.highestStep;
-                    }
-
-                // Now, if at the slider edges, there is not in/decrement
-                if (location === 100) {
-                    increment = null;
-                } else if (location === 0) {
-                    decrement = null;
-                }
-
-                // As per #391, the comparison for the decrement step can have some rounding issues.
-                var stepDecimals = scope_Spectrum.countStepDecimals();
-
-                // Round per #391
-                if (increment !== null && increment !== false) {
-                    increment = Number(increment.toFixed(stepDecimals));
-                }
-
-                if (decrement !== null && decrement !== false) {
-                    decrement = Number(decrement.toFixed(stepDecimals));
-                }
-
-                return [decrement, increment];
-            });
-        }
-
-        // Updateable: margin, limit, padding, step, range, animate, snap
-        function updateOptions(optionsToUpdate, fireSetEvent) {
-            // Spectrum is created using the range, snap, direction and step options.
-            // 'snap' and 'step' can be updated.
-            // If 'snap' and 'step' are not passed, they should remain unchanged.
-            var v = valueGet();
-
-            var updateAble = ["margin", "limit", "padding", "range", "animate", "snap", "step", "format"];
-
-            // Only change options that we're actually passed to update.
-            updateAble.forEach(function (name) {
-                if (optionsToUpdate[name] !== undefined) {
-                    originalOptions[name] = optionsToUpdate[name];
-                }
-            });
-
-            var newOptions = testOptions(originalOptions);
-
-            // Load new options into the slider state
-            updateAble.forEach(function (name) {
-                if (optionsToUpdate[name] !== undefined) {
-                    options[name] = newOptions[name];
-                }
-            });
-
-            scope_Spectrum = newOptions.spectrum;
-
-            // Limit, margin and padding depend on the spectrum but are stored outside of it. (#677)
-            options.margin = newOptions.margin;
-            options.limit = newOptions.limit;
-            options.padding = newOptions.padding;
-
-            // Update pips, removes existing.
-            if (options.pips) {
-                pips(options.pips);
-            }
-
-            // Invalidate the current positioning so valueSet forces an update.
-            scope_Locations = [];
-            valueSet(optionsToUpdate.start || v, fireSetEvent);
-        }
-
-        // Create the base element, initialize HTML and set classes.
-        // Add handles and connect elements.
-        scope_Base = addSlider(scope_Target);
-        addElements(options.connect, scope_Base);
-
-        // Attach user events.
-        bindSliderEvents(options.events);
-
-        // Use the public value method to set the start values.
-        valueSet(options.start);
-
-        // noinspection JSUnusedGlobalSymbols
-        scope_Self = {
-            destroy: destroy,
-            steps: getCurrentStep,
-            on: bindEvent,
-            off: removeEvent,
-            get: valueGet,
-            set: valueSet,
-            reset: valueReset,
-            // Exposed for unit testing, don't use this in your application.
-            __moveHandles: function __moveHandles(a, b, c) {
-                moveHandles(a, b, scope_Locations, c);
-            },
-            options: originalOptions, // Issue #600, #678
-            updateOptions: updateOptions,
-            target: scope_Target, // Issue #597
-            removePips: removePips,
-            pips: pips // Issue #594
-        };
-
-        if (options.pips) {
-            pips(options.pips);
-        }
-
-        if (options.tooltips) {
-            tooltips();
-        }
-
-        aria();
-
-        return scope_Self;
-    }
-
-    // Run the standard initializer
-    function initialize(target, originalOptions) {
-        if (!target || !target.nodeName) {
-            throw new Error("noUiSlider (" + VERSION + "): create requires a single element, got: " + target);
-        }
-
-        // Throw an error if the slider was already initialized.
-        if (target.noUiSlider) {
-            throw new Error("noUiSlider (" + VERSION + "): Slider was already initialized.");
-        }
-
-        // Test the options and create the slider environment;
-        var options = testOptions(originalOptions, target);
-        var api = scope(target, options, originalOptions);
-
-        target.noUiSlider = api;
-
-        return api;
-    }
-
-    // Use an object instead of a function for future expandability;
-    return {
-        // Exposed for unit testing, don't use this in your application.
-        __spectrum: Spectrum,
-        version: VERSION,
-        create: initialize
-    };
+	} else if ((typeof module === "undefined" ? "undefined" : _typeof(module)) === "object" && module.exports) {
+		var jQuery;
+		try {
+			jQuery = require("jquery");
+		} catch (err) {
+			jQuery = null;
+		}
+		module.exports = factory(jQuery);
+	} else if (window) {
+		window.Slider = factory(window.jQuery);
+	}
+})(function ($) {
+	// Constants
+	var NAMESPACE_MAIN = 'slider';
+	var NAMESPACE_ALTERNATE = 'bootstrapSlider';
+
+	// Polyfill console methods
+	if (windowIsDefined && !window.console) {
+		window.console = {};
+	}
+	if (windowIsDefined && !window.console.log) {
+		window.console.log = function () {};
+	}
+	if (windowIsDefined && !window.console.warn) {
+		window.console.warn = function () {};
+	}
+
+	// Reference to Slider constructor
+	var Slider;
+
+	(function ($) {
+
+		'use strict';
+
+		// -------------------------- utils -------------------------- //
+
+		var slice = Array.prototype.slice;
+
+		function noop() {}
+
+		// -------------------------- definition -------------------------- //
+
+		function defineBridget($) {
+
+			// bail if no jQuery
+			if (!$) {
+				return;
+			}
+
+			// -------------------------- addOptionMethod -------------------------- //
+
+			/**
+    * adds option method -> $().plugin('option', {...})
+    * @param {Function} PluginClass - constructor class
+    */
+			function addOptionMethod(PluginClass) {
+				// don't overwrite original option method
+				if (PluginClass.prototype.option) {
+					return;
+				}
+
+				// option setter
+				PluginClass.prototype.option = function (opts) {
+					// bail out if not an object
+					if (!$.isPlainObject(opts)) {
+						return;
+					}
+					this.options = $.extend(true, this.options, opts);
+				};
+			}
+
+			// -------------------------- plugin bridge -------------------------- //
+
+			// helper function for logging errors
+			// $.error breaks jQuery chaining
+			var logError = typeof console === 'undefined' ? noop : function (message) {
+				console.error(message);
+			};
+
+			/**
+    * jQuery plugin bridge, access methods like $elem.plugin('method')
+    * @param {String} namespace - plugin name
+    * @param {Function} PluginClass - constructor class
+    */
+			function bridge(namespace, PluginClass) {
+				// add to jQuery fn namespace
+				$.fn[namespace] = function (options) {
+					if (typeof options === 'string') {
+						// call plugin method when first argument is a string
+						// get arguments for method
+						var args = slice.call(arguments, 1);
+
+						for (var i = 0, len = this.length; i < len; i++) {
+							var elem = this[i];
+							var instance = $.data(elem, namespace);
+							if (!instance) {
+								logError("cannot call methods on " + namespace + " prior to initialization; " + "attempted to call '" + options + "'");
+								continue;
+							}
+							if (!$.isFunction(instance[options]) || options.charAt(0) === '_') {
+								logError("no such method '" + options + "' for " + namespace + " instance");
+								continue;
+							}
+
+							// trigger method with arguments
+							var returnValue = instance[options].apply(instance, args);
+
+							// break look and return first value if provided
+							if (returnValue !== undefined && returnValue !== instance) {
+								return returnValue;
+							}
+						}
+						// return this if no return value
+						return this;
+					} else {
+						var objects = this.map(function () {
+							var instance = $.data(this, namespace);
+							if (instance) {
+								// apply options & init
+								instance.option(options);
+								instance._init();
+							} else {
+								// initialize new instance
+								instance = new PluginClass(this, options);
+								$.data(this, namespace, instance);
+							}
+							return $(this);
+						});
+
+						if (!objects || objects.length > 1) {
+							return objects;
+						} else {
+							return objects[0];
+						}
+					}
+				};
+			}
+
+			// -------------------------- bridget -------------------------- //
+
+			/**
+    * converts a Prototypical class into a proper jQuery plugin
+    *   the class must have a ._init method
+    * @param {String} namespace - plugin name, used in $().pluginName
+    * @param {Function} PluginClass - constructor class
+    */
+			$.bridget = function (namespace, PluginClass) {
+				addOptionMethod(PluginClass);
+				bridge(namespace, PluginClass);
+			};
+
+			return $.bridget;
+		}
+
+		// get jquery from browser global
+		defineBridget($);
+	})($);
+
+	/*************************************************
+ 			BOOTSTRAP-SLIDER SOURCE CODE
+ 	**************************************************/
+
+	(function ($) {
+
+		var ErrorMsgs = {
+			formatInvalidInputErrorMsg: function formatInvalidInputErrorMsg(input) {
+				return "Invalid input value '" + input + "' passed in";
+			},
+			callingContextNotSliderInstance: "Calling context element does not have instance of Slider bound to it. Check your code to make sure the JQuery object returned from the call to the slider() initializer is calling the method"
+		};
+
+		var SliderScale = {
+			linear: {
+				toValue: function toValue(percentage) {
+					var rawValue = percentage / 100 * (this.options.max - this.options.min);
+					var shouldAdjustWithBase = true;
+					if (this.options.ticks_positions.length > 0) {
+						var minv,
+						    maxv,
+						    minp,
+						    maxp = 0;
+						for (var i = 1; i < this.options.ticks_positions.length; i++) {
+							if (percentage <= this.options.ticks_positions[i]) {
+								minv = this.options.ticks[i - 1];
+								minp = this.options.ticks_positions[i - 1];
+								maxv = this.options.ticks[i];
+								maxp = this.options.ticks_positions[i];
+
+								break;
+							}
+						}
+						var partialPercentage = (percentage - minp) / (maxp - minp);
+						rawValue = minv + partialPercentage * (maxv - minv);
+						shouldAdjustWithBase = false;
+					}
+
+					var adjustment = shouldAdjustWithBase ? this.options.min : 0;
+					var value = adjustment + Math.round(rawValue / this.options.step) * this.options.step;
+					if (value < this.options.min) {
+						return this.options.min;
+					} else if (value > this.options.max) {
+						return this.options.max;
+					} else {
+						return value;
+					}
+				},
+				toPercentage: function toPercentage(value) {
+					if (this.options.max === this.options.min) {
+						return 0;
+					}
+
+					if (this.options.ticks_positions.length > 0) {
+						var minv,
+						    maxv,
+						    minp,
+						    maxp = 0;
+						for (var i = 0; i < this.options.ticks.length; i++) {
+							if (value <= this.options.ticks[i]) {
+								minv = i > 0 ? this.options.ticks[i - 1] : 0;
+								minp = i > 0 ? this.options.ticks_positions[i - 1] : 0;
+								maxv = this.options.ticks[i];
+								maxp = this.options.ticks_positions[i];
+
+								break;
+							}
+						}
+						if (i > 0) {
+							var partialPercentage = (value - minv) / (maxv - minv);
+							return minp + partialPercentage * (maxp - minp);
+						}
+					}
+
+					return 100 * (value - this.options.min) / (this.options.max - this.options.min);
+				}
+			},
+
+			logarithmic: {
+				/* Based on http://stackoverflow.com/questions/846221/logarithmic-slider */
+				toValue: function toValue(percentage) {
+					var offset = 1 - this.options.min;
+					var min = Math.log(this.options.min + offset);
+					var max = Math.log(this.options.max + offset);
+					var value = Math.exp(min + (max - min) * percentage / 100) - offset;
+					if (Math.round(value) === max) {
+						return max;
+					}
+					value = this.options.min + Math.round((value - this.options.min) / this.options.step) * this.options.step;
+					/* Rounding to the nearest step could exceed the min or
+      * max, so clip to those values. */
+					if (value < this.options.min) {
+						return this.options.min;
+					} else if (value > this.options.max) {
+						return this.options.max;
+					} else {
+						return value;
+					}
+				},
+				toPercentage: function toPercentage(value) {
+					if (this.options.max === this.options.min) {
+						return 0;
+					} else {
+						var offset = 1 - this.options.min;
+						var max = Math.log(this.options.max + offset);
+						var min = Math.log(this.options.min + offset);
+						var v = Math.log(value + offset);
+						return 100 * (v - min) / (max - min);
+					}
+				}
+			}
+		};
+
+		/*************************************************
+  						CONSTRUCTOR
+  	**************************************************/
+		Slider = function Slider(element, options) {
+			createNewSlider.call(this, element, options);
+			return this;
+		};
+
+		function createNewSlider(element, options) {
+
+			/*
+   	The internal state object is used to store data about the current 'state' of slider.
+   	This includes values such as the `value`, `enabled`, etc...
+   */
+			this._state = {
+				value: null,
+				enabled: null,
+				offset: null,
+				size: null,
+				percentage: null,
+				inDrag: false,
+				over: false
+			};
+
+			// The objects used to store the reference to the tick methods if ticks_tooltip is on
+			this.ticksCallbackMap = {};
+			this.handleCallbackMap = {};
+
+			if (typeof element === "string") {
+				this.element = document.querySelector(element);
+			} else if (element instanceof HTMLElement) {
+				this.element = element;
+			}
+
+			/*************************************************
+   					Process Options
+   	**************************************************/
+			options = options ? options : {};
+			var optionTypes = Object.keys(this.defaultOptions);
+
+			for (var i = 0; i < optionTypes.length; i++) {
+				var optName = optionTypes[i];
+
+				// First check if an option was passed in via the constructor
+				var val = options[optName];
+				// If no data attrib, then check data atrributes
+				val = typeof val !== 'undefined' ? val : getDataAttrib(this.element, optName);
+				// Finally, if nothing was specified, use the defaults
+				val = val !== null ? val : this.defaultOptions[optName];
+
+				// Set all options on the instance of the Slider
+				if (!this.options) {
+					this.options = {};
+				}
+				this.options[optName] = val;
+			}
+
+			// Check options.rtl
+			if (this.options.rtl === 'auto') {
+				this.options.rtl = window.getComputedStyle(this.element).direction === 'rtl';
+			}
+
+			/*
+   	Validate `tooltip_position` against 'orientation`
+   	- if `tooltip_position` is incompatible with orientation, swith it to a default compatible with specified `orientation`
+   		-- default for "vertical" -> "right", "left" if rtl
+   		-- default for "horizontal" -> "top"
+   */
+			if (this.options.orientation === "vertical" && (this.options.tooltip_position === "top" || this.options.tooltip_position === "bottom")) {
+				if (this.options.rtl) {
+					this.options.tooltip_position = "left";
+				} else {
+					this.options.tooltip_position = "right";
+				}
+			} else if (this.options.orientation === "horizontal" && (this.options.tooltip_position === "left" || this.options.tooltip_position === "right")) {
+
+				this.options.tooltip_position = "top";
+			}
+
+			function getDataAttrib(element, optName) {
+				var dataName = "data-slider-" + optName.replace(/_/g, '-');
+				var dataValString = element.getAttribute(dataName);
+
+				try {
+					return JSON.parse(dataValString);
+				} catch (err) {
+					return dataValString;
+				}
+			}
+
+			/*************************************************
+   					Create Markup
+   	**************************************************/
+
+			var origWidth = this.element.style.width;
+			var updateSlider = false;
+			var parent = this.element.parentNode;
+			var sliderTrackSelection;
+			var sliderTrackLow, sliderTrackHigh;
+			var sliderMinHandle;
+			var sliderMaxHandle;
+
+			if (this.sliderElem) {
+				updateSlider = true;
+			} else {
+				/* Create elements needed for slider */
+				this.sliderElem = document.createElement("div");
+				this.sliderElem.className = "slider";
+
+				/* Create slider track elements */
+				var sliderTrack = document.createElement("div");
+				sliderTrack.className = "slider-track";
+
+				sliderTrackLow = document.createElement("div");
+				sliderTrackLow.className = "slider-track-low";
+
+				sliderTrackSelection = document.createElement("div");
+				sliderTrackSelection.className = "slider-selection";
+
+				sliderTrackHigh = document.createElement("div");
+				sliderTrackHigh.className = "slider-track-high";
+
+				sliderMinHandle = document.createElement("div");
+				sliderMinHandle.className = "slider-handle min-slider-handle";
+				sliderMinHandle.setAttribute('role', 'slider');
+				sliderMinHandle.setAttribute('aria-valuemin', this.options.min);
+				sliderMinHandle.setAttribute('aria-valuemax', this.options.max);
+
+				sliderMaxHandle = document.createElement("div");
+				sliderMaxHandle.className = "slider-handle max-slider-handle";
+				sliderMaxHandle.setAttribute('role', 'slider');
+				sliderMaxHandle.setAttribute('aria-valuemin', this.options.min);
+				sliderMaxHandle.setAttribute('aria-valuemax', this.options.max);
+
+				sliderTrack.appendChild(sliderTrackLow);
+				sliderTrack.appendChild(sliderTrackSelection);
+				sliderTrack.appendChild(sliderTrackHigh);
+
+				/* Create highlight range elements */
+				this.rangeHighlightElements = [];
+				var rangeHighlightsOpts = this.options.rangeHighlights;
+				if (Array.isArray(rangeHighlightsOpts) && rangeHighlightsOpts.length > 0) {
+					for (var j = 0; j < rangeHighlightsOpts.length; j++) {
+						var rangeHighlightElement = document.createElement("div");
+						var customClassString = rangeHighlightsOpts[j].class || "";
+						rangeHighlightElement.className = "slider-rangeHighlight slider-selection " + customClassString;
+						this.rangeHighlightElements.push(rangeHighlightElement);
+						sliderTrack.appendChild(rangeHighlightElement);
+					}
+				}
+
+				/* Add aria-labelledby to handle's */
+				var isLabelledbyArray = Array.isArray(this.options.labelledby);
+				if (isLabelledbyArray && this.options.labelledby[0]) {
+					sliderMinHandle.setAttribute('aria-labelledby', this.options.labelledby[0]);
+				}
+				if (isLabelledbyArray && this.options.labelledby[1]) {
+					sliderMaxHandle.setAttribute('aria-labelledby', this.options.labelledby[1]);
+				}
+				if (!isLabelledbyArray && this.options.labelledby) {
+					sliderMinHandle.setAttribute('aria-labelledby', this.options.labelledby);
+					sliderMaxHandle.setAttribute('aria-labelledby', this.options.labelledby);
+				}
+
+				/* Create ticks */
+				this.ticks = [];
+				if (Array.isArray(this.options.ticks) && this.options.ticks.length > 0) {
+					this.ticksContainer = document.createElement('div');
+					this.ticksContainer.className = 'slider-tick-container';
+
+					for (i = 0; i < this.options.ticks.length; i++) {
+						var tick = document.createElement('div');
+						tick.className = 'slider-tick';
+						if (this.options.ticks_tooltip) {
+							var tickListenerReference = this._addTickListener();
+							var enterCallback = tickListenerReference.addMouseEnter(this, tick, i);
+							var leaveCallback = tickListenerReference.addMouseLeave(this, tick);
+
+							this.ticksCallbackMap[i] = {
+								mouseEnter: enterCallback,
+								mouseLeave: leaveCallback
+							};
+						}
+						this.ticks.push(tick);
+						this.ticksContainer.appendChild(tick);
+					}
+
+					sliderTrackSelection.className += " tick-slider-selection";
+				}
+
+				this.tickLabels = [];
+				if (Array.isArray(this.options.ticks_labels) && this.options.ticks_labels.length > 0) {
+					this.tickLabelContainer = document.createElement('div');
+					this.tickLabelContainer.className = 'slider-tick-label-container';
+
+					for (i = 0; i < this.options.ticks_labels.length; i++) {
+						var label = document.createElement('div');
+						var noTickPositionsSpecified = this.options.ticks_positions.length === 0;
+						var tickLabelsIndex = this.options.reversed && noTickPositionsSpecified ? this.options.ticks_labels.length - (i + 1) : i;
+						label.className = 'slider-tick-label';
+						label.innerHTML = this.options.ticks_labels[tickLabelsIndex];
+
+						this.tickLabels.push(label);
+						this.tickLabelContainer.appendChild(label);
+					}
+				}
+
+				var createAndAppendTooltipSubElements = function createAndAppendTooltipSubElements(tooltipElem) {
+					var arrow = document.createElement("div");
+					arrow.className = "tooltip-arrow";
+
+					var inner = document.createElement("div");
+					inner.className = "tooltip-inner";
+
+					tooltipElem.appendChild(arrow);
+					tooltipElem.appendChild(inner);
+				};
+
+				/* Create tooltip elements */
+				var sliderTooltip = document.createElement("div");
+				sliderTooltip.className = "tooltip tooltip-main";
+				sliderTooltip.setAttribute('role', 'presentation');
+				createAndAppendTooltipSubElements(sliderTooltip);
+
+				var sliderTooltipMin = document.createElement("div");
+				sliderTooltipMin.className = "tooltip tooltip-min";
+				sliderTooltipMin.setAttribute('role', 'presentation');
+				createAndAppendTooltipSubElements(sliderTooltipMin);
+
+				var sliderTooltipMax = document.createElement("div");
+				sliderTooltipMax.className = "tooltip tooltip-max";
+				sliderTooltipMax.setAttribute('role', 'presentation');
+				createAndAppendTooltipSubElements(sliderTooltipMax);
+
+				/* Append components to sliderElem */
+				this.sliderElem.appendChild(sliderTrack);
+				this.sliderElem.appendChild(sliderTooltip);
+				this.sliderElem.appendChild(sliderTooltipMin);
+				this.sliderElem.appendChild(sliderTooltipMax);
+
+				if (this.tickLabelContainer) {
+					this.sliderElem.appendChild(this.tickLabelContainer);
+				}
+				if (this.ticksContainer) {
+					this.sliderElem.appendChild(this.ticksContainer);
+				}
+
+				this.sliderElem.appendChild(sliderMinHandle);
+				this.sliderElem.appendChild(sliderMaxHandle);
+
+				/* Append slider element to parent container, right before the original <input> element */
+				parent.insertBefore(this.sliderElem, this.element);
+
+				/* Hide original <input> element */
+				this.element.style.display = "none";
+			}
+			/* If JQuery exists, cache JQ references */
+			if ($) {
+				this.$element = $(this.element);
+				this.$sliderElem = $(this.sliderElem);
+			}
+
+			/*************************************************
+   						Setup
+   	**************************************************/
+			this.eventToCallbackMap = {};
+			this.sliderElem.id = this.options.id;
+
+			this.touchCapable = 'ontouchstart' in window || window.DocumentTouch && document instanceof window.DocumentTouch;
+
+			this.touchX = 0;
+			this.touchY = 0;
+
+			this.tooltip = this.sliderElem.querySelector('.tooltip-main');
+			this.tooltipInner = this.tooltip.querySelector('.tooltip-inner');
+
+			this.tooltip_min = this.sliderElem.querySelector('.tooltip-min');
+			this.tooltipInner_min = this.tooltip_min.querySelector('.tooltip-inner');
+
+			this.tooltip_max = this.sliderElem.querySelector('.tooltip-max');
+			this.tooltipInner_max = this.tooltip_max.querySelector('.tooltip-inner');
+
+			if (SliderScale[this.options.scale]) {
+				this.options.scale = SliderScale[this.options.scale];
+			}
+
+			if (updateSlider === true) {
+				// Reset classes
+				this._removeClass(this.sliderElem, 'slider-horizontal');
+				this._removeClass(this.sliderElem, 'slider-vertical');
+				this._removeClass(this.sliderElem, 'slider-rtl');
+				this._removeClass(this.tooltip, 'hide');
+				this._removeClass(this.tooltip_min, 'hide');
+				this._removeClass(this.tooltip_max, 'hide');
+
+				// Undo existing inline styles for track
+				["left", "right", "top", "width", "height"].forEach(function (prop) {
+					this._removeProperty(this.trackLow, prop);
+					this._removeProperty(this.trackSelection, prop);
+					this._removeProperty(this.trackHigh, prop);
+				}, this);
+
+				// Undo inline styles on handles
+				[this.handle1, this.handle2].forEach(function (handle) {
+					this._removeProperty(handle, 'left');
+					this._removeProperty(handle, 'right');
+					this._removeProperty(handle, 'top');
+				}, this);
+
+				// Undo inline styles and classes on tooltips
+				[this.tooltip, this.tooltip_min, this.tooltip_max].forEach(function (tooltip) {
+					this._removeProperty(tooltip, 'left');
+					this._removeProperty(tooltip, 'right');
+					this._removeProperty(tooltip, 'top');
+
+					this._removeClass(tooltip, 'right');
+					this._removeClass(tooltip, 'left');
+					this._removeClass(tooltip, 'top');
+				}, this);
+			}
+
+			if (this.options.orientation === 'vertical') {
+				this._addClass(this.sliderElem, 'slider-vertical');
+				this.stylePos = 'top';
+				this.mousePos = 'pageY';
+				this.sizePos = 'offsetHeight';
+			} else {
+				this._addClass(this.sliderElem, 'slider-horizontal');
+				this.sliderElem.style.width = origWidth;
+				this.options.orientation = 'horizontal';
+				if (this.options.rtl) {
+					this.stylePos = 'right';
+				} else {
+					this.stylePos = 'left';
+				}
+				this.mousePos = 'clientX';
+				this.sizePos = 'offsetWidth';
+			}
+			// specific rtl class
+			if (this.options.rtl) {
+				this._addClass(this.sliderElem, 'slider-rtl');
+			}
+			this._setTooltipPosition();
+			/* In case ticks are specified, overwrite the min and max bounds */
+			if (Array.isArray(this.options.ticks) && this.options.ticks.length > 0) {
+				this.options.max = Math.max.apply(Math, this.options.ticks);
+				this.options.min = Math.min.apply(Math, this.options.ticks);
+			}
+
+			if (Array.isArray(this.options.value)) {
+				this.options.range = true;
+				this._state.value = this.options.value;
+			} else if (this.options.range) {
+				// User wants a range, but value is not an array
+				this._state.value = [this.options.value, this.options.max];
+			} else {
+				this._state.value = this.options.value;
+			}
+
+			this.trackLow = sliderTrackLow || this.trackLow;
+			this.trackSelection = sliderTrackSelection || this.trackSelection;
+			this.trackHigh = sliderTrackHigh || this.trackHigh;
+
+			if (this.options.selection === 'none') {
+				this._addClass(this.trackLow, 'hide');
+				this._addClass(this.trackSelection, 'hide');
+				this._addClass(this.trackHigh, 'hide');
+			} else if (this.options.selection === 'after' || this.options.selection === 'before') {
+				this._removeClass(this.trackLow, 'hide');
+				this._removeClass(this.trackSelection, 'hide');
+				this._removeClass(this.trackHigh, 'hide');
+			}
+
+			this.handle1 = sliderMinHandle || this.handle1;
+			this.handle2 = sliderMaxHandle || this.handle2;
+
+			if (updateSlider === true) {
+				// Reset classes
+				this._removeClass(this.handle1, 'round triangle');
+				this._removeClass(this.handle2, 'round triangle hide');
+
+				for (i = 0; i < this.ticks.length; i++) {
+					this._removeClass(this.ticks[i], 'round triangle hide');
+				}
+			}
+
+			var availableHandleModifiers = ['round', 'triangle', 'custom'];
+			var isValidHandleType = availableHandleModifiers.indexOf(this.options.handle) !== -1;
+			if (isValidHandleType) {
+				this._addClass(this.handle1, this.options.handle);
+				this._addClass(this.handle2, this.options.handle);
+
+				for (i = 0; i < this.ticks.length; i++) {
+					this._addClass(this.ticks[i], this.options.handle);
+				}
+			}
+
+			this._state.offset = this._offset(this.sliderElem);
+			this._state.size = this.sliderElem[this.sizePos];
+			this.setValue(this._state.value);
+
+			/******************************************
+   				Bind Event Listeners
+   	******************************************/
+
+			// Bind keyboard handlers
+			this.handle1Keydown = this._keydown.bind(this, 0);
+			this.handle1.addEventListener("keydown", this.handle1Keydown, false);
+
+			this.handle2Keydown = this._keydown.bind(this, 1);
+			this.handle2.addEventListener("keydown", this.handle2Keydown, false);
+
+			this.mousedown = this._mousedown.bind(this);
+			this.touchstart = this._touchstart.bind(this);
+			this.touchmove = this._touchmove.bind(this);
+
+			if (this.touchCapable) {
+				// Test for passive event support
+				var supportsPassive = false;
+				try {
+					var opts = Object.defineProperty({}, 'passive', {
+						get: function get() {
+							supportsPassive = true;
+						}
+					});
+					window.addEventListener("test", null, opts);
+				} catch (e) {}
+				// Use our detect's results. passive applied if supported, capture will be false either way.
+				var eventOptions = supportsPassive ? { passive: true } : false;
+				// Bind touch handlers
+				this.sliderElem.addEventListener("touchstart", this.touchstart, eventOptions);
+				this.sliderElem.addEventListener("touchmove", this.touchmove, eventOptions);
+			}
+			this.sliderElem.addEventListener("mousedown", this.mousedown, false);
+
+			// Bind window handlers
+			this.resize = this._resize.bind(this);
+			window.addEventListener("resize", this.resize, false);
+
+			// Bind tooltip-related handlers
+			if (this.options.tooltip === 'hide') {
+				this._addClass(this.tooltip, 'hide');
+				this._addClass(this.tooltip_min, 'hide');
+				this._addClass(this.tooltip_max, 'hide');
+			} else if (this.options.tooltip === 'always') {
+				this._showTooltip();
+				this._alwaysShowTooltip = true;
+			} else {
+				this.showTooltip = this._showTooltip.bind(this);
+				this.hideTooltip = this._hideTooltip.bind(this);
+
+				if (this.options.ticks_tooltip) {
+					var callbackHandle = this._addTickListener();
+					//create handle1 listeners and store references in map
+					var mouseEnter = callbackHandle.addMouseEnter(this, this.handle1);
+					var mouseLeave = callbackHandle.addMouseLeave(this, this.handle1);
+					this.handleCallbackMap.handle1 = {
+						mouseEnter: mouseEnter,
+						mouseLeave: mouseLeave
+					};
+					//create handle2 listeners and store references in map
+					mouseEnter = callbackHandle.addMouseEnter(this, this.handle2);
+					mouseLeave = callbackHandle.addMouseLeave(this, this.handle2);
+					this.handleCallbackMap.handle2 = {
+						mouseEnter: mouseEnter,
+						mouseLeave: mouseLeave
+					};
+				} else {
+					this.sliderElem.addEventListener("mouseenter", this.showTooltip, false);
+					this.sliderElem.addEventListener("mouseleave", this.hideTooltip, false);
+				}
+
+				this.handle1.addEventListener("focus", this.showTooltip, false);
+				this.handle1.addEventListener("blur", this.hideTooltip, false);
+
+				this.handle2.addEventListener("focus", this.showTooltip, false);
+				this.handle2.addEventListener("blur", this.hideTooltip, false);
+			}
+
+			if (this.options.enabled) {
+				this.enable();
+			} else {
+				this.disable();
+			}
+		}
+
+		/*************************************************
+  				INSTANCE PROPERTIES/METHODS
+  	- Any methods bound to the prototype are considered
+  part of the plugin's `public` interface
+  	**************************************************/
+		Slider.prototype = {
+			_init: function _init() {}, // NOTE: Must exist to support bridget
+
+			constructor: Slider,
+
+			defaultOptions: {
+				id: "",
+				min: 0,
+				max: 10,
+				step: 1,
+				precision: 0,
+				orientation: 'horizontal',
+				value: 5,
+				range: false,
+				selection: 'before',
+				tooltip: 'show',
+				tooltip_split: false,
+				handle: 'round',
+				reversed: false,
+				rtl: 'auto',
+				enabled: true,
+				formatter: function formatter(val) {
+					if (Array.isArray(val)) {
+						return val[0] + " : " + val[1];
+					} else {
+						return val;
+					}
+				},
+				natural_arrow_keys: false,
+				ticks: [],
+				ticks_positions: [],
+				ticks_labels: [],
+				ticks_snap_bounds: 0,
+				ticks_tooltip: false,
+				scale: 'linear',
+				focus: false,
+				tooltip_position: null,
+				labelledby: null,
+				rangeHighlights: []
+			},
+
+			getElement: function getElement() {
+				return this.sliderElem;
+			},
+
+			getValue: function getValue() {
+				if (this.options.range) {
+					return this._state.value;
+				} else {
+					return this._state.value[0];
+				}
+			},
+
+			setValue: function setValue(val, triggerSlideEvent, triggerChangeEvent) {
+				if (!val) {
+					val = 0;
+				}
+				var oldValue = this.getValue();
+				this._state.value = this._validateInputValue(val);
+				var applyPrecision = this._applyPrecision.bind(this);
+
+				if (this.options.range) {
+					this._state.value[0] = applyPrecision(this._state.value[0]);
+					this._state.value[1] = applyPrecision(this._state.value[1]);
+
+					this._state.value[0] = Math.max(this.options.min, Math.min(this.options.max, this._state.value[0]));
+					this._state.value[1] = Math.max(this.options.min, Math.min(this.options.max, this._state.value[1]));
+				} else {
+					this._state.value = applyPrecision(this._state.value);
+					this._state.value = [Math.max(this.options.min, Math.min(this.options.max, this._state.value))];
+					this._addClass(this.handle2, 'hide');
+					if (this.options.selection === 'after') {
+						this._state.value[1] = this.options.max;
+					} else {
+						this._state.value[1] = this.options.min;
+					}
+				}
+
+				if (this.options.max > this.options.min) {
+					this._state.percentage = [this._toPercentage(this._state.value[0]), this._toPercentage(this._state.value[1]), this.options.step * 100 / (this.options.max - this.options.min)];
+				} else {
+					this._state.percentage = [0, 0, 100];
+				}
+
+				this._layout();
+				var newValue = this.options.range ? this._state.value : this._state.value[0];
+
+				this._setDataVal(newValue);
+				if (triggerSlideEvent === true) {
+					this._trigger('slide', newValue);
+				}
+				if (oldValue !== newValue && triggerChangeEvent === true) {
+					this._trigger('change', {
+						oldValue: oldValue,
+						newValue: newValue
+					});
+				}
+
+				return this;
+			},
+
+			destroy: function destroy() {
+				// Remove event handlers on slider elements
+				this._removeSliderEventHandlers();
+
+				// Remove the slider from the DOM
+				this.sliderElem.parentNode.removeChild(this.sliderElem);
+				/* Show original <input> element */
+				this.element.style.display = "";
+
+				// Clear out custom event bindings
+				this._cleanUpEventCallbacksMap();
+
+				// Remove data values
+				this.element.removeAttribute("data");
+
+				// Remove JQuery handlers/data
+				if ($) {
+					this._unbindJQueryEventHandlers();
+					this.$element.removeData('slider');
+				}
+			},
+
+			disable: function disable() {
+				this._state.enabled = false;
+				this.handle1.removeAttribute("tabindex");
+				this.handle2.removeAttribute("tabindex");
+				this._addClass(this.sliderElem, 'slider-disabled');
+				this._trigger('slideDisabled');
+
+				return this;
+			},
+
+			enable: function enable() {
+				this._state.enabled = true;
+				this.handle1.setAttribute("tabindex", 0);
+				this.handle2.setAttribute("tabindex", 0);
+				this._removeClass(this.sliderElem, 'slider-disabled');
+				this._trigger('slideEnabled');
+
+				return this;
+			},
+
+			toggle: function toggle() {
+				if (this._state.enabled) {
+					this.disable();
+				} else {
+					this.enable();
+				}
+				return this;
+			},
+
+			isEnabled: function isEnabled() {
+				return this._state.enabled;
+			},
+
+			on: function on(evt, callback) {
+				this._bindNonQueryEventHandler(evt, callback);
+				return this;
+			},
+
+			off: function off(evt, callback) {
+				if ($) {
+					this.$element.off(evt, callback);
+					this.$sliderElem.off(evt, callback);
+				} else {
+					this._unbindNonQueryEventHandler(evt, callback);
+				}
+			},
+
+			getAttribute: function getAttribute(attribute) {
+				if (attribute) {
+					return this.options[attribute];
+				} else {
+					return this.options;
+				}
+			},
+
+			setAttribute: function setAttribute(attribute, value) {
+				this.options[attribute] = value;
+				return this;
+			},
+
+			refresh: function refresh() {
+				this._removeSliderEventHandlers();
+				createNewSlider.call(this, this.element, this.options);
+				if ($) {
+					// Bind new instance of slider to the element
+					$.data(this.element, 'slider', this);
+				}
+				return this;
+			},
+
+			relayout: function relayout() {
+				this._resize();
+				this._layout();
+				return this;
+			},
+
+			/******************************+
+   				HELPERS
+   	- Any method that is not part of the public interface.
+   - Place it underneath this comment block and write its signature like so:
+   		_fnName : function() {...}
+   	********************************/
+			_removeSliderEventHandlers: function _removeSliderEventHandlers() {
+				// Remove keydown event listeners
+				this.handle1.removeEventListener("keydown", this.handle1Keydown, false);
+				this.handle2.removeEventListener("keydown", this.handle2Keydown, false);
+
+				//remove the listeners from the ticks and handles if they had their own listeners
+				if (this.options.ticks_tooltip) {
+					var ticks = this.ticksContainer.getElementsByClassName('slider-tick');
+					for (var i = 0; i < ticks.length; i++) {
+						ticks[i].removeEventListener('mouseenter', this.ticksCallbackMap[i].mouseEnter, false);
+						ticks[i].removeEventListener('mouseleave', this.ticksCallbackMap[i].mouseLeave, false);
+					}
+					this.handle1.removeEventListener('mouseenter', this.handleCallbackMap.handle1.mouseEnter, false);
+					this.handle2.removeEventListener('mouseenter', this.handleCallbackMap.handle2.mouseEnter, false);
+					this.handle1.removeEventListener('mouseleave', this.handleCallbackMap.handle1.mouseLeave, false);
+					this.handle2.removeEventListener('mouseleave', this.handleCallbackMap.handle2.mouseLeave, false);
+				}
+
+				this.handleCallbackMap = null;
+				this.ticksCallbackMap = null;
+
+				if (this.showTooltip) {
+					this.handle1.removeEventListener("focus", this.showTooltip, false);
+					this.handle2.removeEventListener("focus", this.showTooltip, false);
+				}
+				if (this.hideTooltip) {
+					this.handle1.removeEventListener("blur", this.hideTooltip, false);
+					this.handle2.removeEventListener("blur", this.hideTooltip, false);
+				}
+
+				// Remove event listeners from sliderElem
+				if (this.showTooltip) {
+					this.sliderElem.removeEventListener("mouseenter", this.showTooltip, false);
+				}
+				if (this.hideTooltip) {
+					this.sliderElem.removeEventListener("mouseleave", this.hideTooltip, false);
+				}
+				this.sliderElem.removeEventListener("touchstart", this.touchstart, false);
+				this.sliderElem.removeEventListener("touchmove", this.touchmove, false);
+				this.sliderElem.removeEventListener("mousedown", this.mousedown, false);
+
+				// Remove window event listener
+				window.removeEventListener("resize", this.resize, false);
+			},
+			_bindNonQueryEventHandler: function _bindNonQueryEventHandler(evt, callback) {
+				if (this.eventToCallbackMap[evt] === undefined) {
+					this.eventToCallbackMap[evt] = [];
+				}
+				this.eventToCallbackMap[evt].push(callback);
+			},
+			_unbindNonQueryEventHandler: function _unbindNonQueryEventHandler(evt, callback) {
+				var callbacks = this.eventToCallbackMap[evt];
+				if (callbacks !== undefined) {
+					for (var i = 0; i < callbacks.length; i++) {
+						if (callbacks[i] === callback) {
+							callbacks.splice(i, 1);
+							break;
+						}
+					}
+				}
+			},
+			_cleanUpEventCallbacksMap: function _cleanUpEventCallbacksMap() {
+				var eventNames = Object.keys(this.eventToCallbackMap);
+				for (var i = 0; i < eventNames.length; i++) {
+					var eventName = eventNames[i];
+					delete this.eventToCallbackMap[eventName];
+				}
+			},
+			_showTooltip: function _showTooltip() {
+				if (this.options.tooltip_split === false) {
+					this._addClass(this.tooltip, 'in');
+					this.tooltip_min.style.display = 'none';
+					this.tooltip_max.style.display = 'none';
+				} else {
+					this._addClass(this.tooltip_min, 'in');
+					this._addClass(this.tooltip_max, 'in');
+					this.tooltip.style.display = 'none';
+				}
+				this._state.over = true;
+			},
+			_hideTooltip: function _hideTooltip() {
+				if (this._state.inDrag === false && this.alwaysShowTooltip !== true) {
+					this._removeClass(this.tooltip, 'in');
+					this._removeClass(this.tooltip_min, 'in');
+					this._removeClass(this.tooltip_max, 'in');
+				}
+				this._state.over = false;
+			},
+			_setToolTipOnMouseOver: function _setToolTipOnMouseOver(tempState) {
+				var formattedTooltipVal = this.options.formatter(!tempState ? this._state.value[0] : tempState.value[0]);
+				var positionPercentages = !tempState ? getPositionPercentages(this._state, this.options.reversed) : getPositionPercentages(tempState, this.options.reversed);
+				this._setText(this.tooltipInner, formattedTooltipVal);
+
+				this.tooltip.style[this.stylePos] = positionPercentages[0] + "%";
+
+				function getPositionPercentages(state, reversed) {
+					if (reversed) {
+						return [100 - state.percentage[0], this.options.range ? 100 - state.percentage[1] : state.percentage[1]];
+					}
+					return [state.percentage[0], state.percentage[1]];
+				}
+			},
+			_addTickListener: function _addTickListener() {
+				return {
+					addMouseEnter: function addMouseEnter(reference, tick, index) {
+						var enter = function enter() {
+							var tempState = reference._state;
+							var idString = index >= 0 ? index : this.attributes['aria-valuenow'].value;
+							var hoverIndex = parseInt(idString, 10);
+							tempState.value[0] = hoverIndex;
+							tempState.percentage[0] = reference.options.ticks_positions[hoverIndex];
+							reference._setToolTipOnMouseOver(tempState);
+							reference._showTooltip();
+						};
+						tick.addEventListener("mouseenter", enter, false);
+						return enter;
+					},
+					addMouseLeave: function addMouseLeave(reference, tick) {
+						var leave = function leave() {
+							reference._hideTooltip();
+						};
+						tick.addEventListener("mouseleave", leave, false);
+						return leave;
+					}
+				};
+			},
+			_layout: function _layout() {
+				var positionPercentages;
+
+				if (this.options.reversed) {
+					positionPercentages = [100 - this._state.percentage[0], this.options.range ? 100 - this._state.percentage[1] : this._state.percentage[1]];
+				} else {
+					positionPercentages = [this._state.percentage[0], this._state.percentage[1]];
+				}
+
+				this.handle1.style[this.stylePos] = positionPercentages[0] + "%";
+				this.handle1.setAttribute('aria-valuenow', this._state.value[0]);
+				if (isNaN(this.options.formatter(this._state.value[0]))) {
+					this.handle1.setAttribute('aria-valuetext', this.options.formatter(this._state.value[0]));
+				}
+
+				this.handle2.style[this.stylePos] = positionPercentages[1] + "%";
+				this.handle2.setAttribute('aria-valuenow', this._state.value[1]);
+				if (isNaN(this.options.formatter(this._state.value[1]))) {
+					this.handle2.setAttribute('aria-valuetext', this.options.formatter(this._state.value[1]));
+				}
+
+				/* Position highlight range elements */
+				if (this.rangeHighlightElements.length > 0 && Array.isArray(this.options.rangeHighlights) && this.options.rangeHighlights.length > 0) {
+					for (var _i = 0; _i < this.options.rangeHighlights.length; _i++) {
+						var startPercent = this._toPercentage(this.options.rangeHighlights[_i].start);
+						var endPercent = this._toPercentage(this.options.rangeHighlights[_i].end);
+
+						if (this.options.reversed) {
+							var sp = 100 - endPercent;
+							endPercent = 100 - startPercent;
+							startPercent = sp;
+						}
+
+						var currentRange = this._createHighlightRange(startPercent, endPercent);
+
+						if (currentRange) {
+							if (this.options.orientation === 'vertical') {
+								this.rangeHighlightElements[_i].style.top = currentRange.start + "%";
+								this.rangeHighlightElements[_i].style.height = currentRange.size + "%";
+							} else {
+								if (this.options.rtl) {
+									this.rangeHighlightElements[_i].style.right = currentRange.start + "%";
+								} else {
+									this.rangeHighlightElements[_i].style.left = currentRange.start + "%";
+								}
+								this.rangeHighlightElements[_i].style.width = currentRange.size + "%";
+							}
+						} else {
+							this.rangeHighlightElements[_i].style.display = "none";
+						}
+					}
+				}
+
+				/* Position ticks and labels */
+				if (Array.isArray(this.options.ticks) && this.options.ticks.length > 0) {
+
+					var styleSize = this.options.orientation === 'vertical' ? 'height' : 'width';
+					var styleMargin;
+					if (this.options.orientation === 'vertical') {
+						styleMargin = 'marginTop';
+					} else {
+						if (this.options.rtl) {
+							styleMargin = 'marginRight';
+						} else {
+							styleMargin = 'marginLeft';
+						}
+					}
+					var labelSize = this._state.size / (this.options.ticks.length - 1);
+
+					if (this.tickLabelContainer) {
+						var extraMargin = 0;
+						if (this.options.ticks_positions.length === 0) {
+							if (this.options.orientation !== 'vertical') {
+								this.tickLabelContainer.style[styleMargin] = -labelSize / 2 + "px";
+							}
+
+							extraMargin = this.tickLabelContainer.offsetHeight;
+						} else {
+							/* Chidren are position absolute, calculate height by finding the max offsetHeight of a child */
+							for (i = 0; i < this.tickLabelContainer.childNodes.length; i++) {
+								if (this.tickLabelContainer.childNodes[i].offsetHeight > extraMargin) {
+									extraMargin = this.tickLabelContainer.childNodes[i].offsetHeight;
+								}
+							}
+						}
+						if (this.options.orientation === 'horizontal') {
+							this.sliderElem.style.marginBottom = extraMargin + "px";
+						}
+					}
+					for (var i = 0; i < this.options.ticks.length; i++) {
+
+						var percentage = this.options.ticks_positions[i] || this._toPercentage(this.options.ticks[i]);
+
+						if (this.options.reversed) {
+							percentage = 100 - percentage;
+						}
+
+						this.ticks[i].style[this.stylePos] = percentage + "%";
+
+						/* Set class labels to denote whether ticks are in the selection */
+						this._removeClass(this.ticks[i], 'in-selection');
+						if (!this.options.range) {
+							if (this.options.selection === 'after' && percentage >= positionPercentages[0]) {
+								this._addClass(this.ticks[i], 'in-selection');
+							} else if (this.options.selection === 'before' && percentage <= positionPercentages[0]) {
+								this._addClass(this.ticks[i], 'in-selection');
+							}
+						} else if (percentage >= positionPercentages[0] && percentage <= positionPercentages[1]) {
+							this._addClass(this.ticks[i], 'in-selection');
+						}
+
+						if (this.tickLabels[i]) {
+							this.tickLabels[i].style[styleSize] = labelSize + "px";
+
+							if (this.options.orientation !== 'vertical' && this.options.ticks_positions[i] !== undefined) {
+								this.tickLabels[i].style.position = 'absolute';
+								this.tickLabels[i].style[this.stylePos] = percentage + "%";
+								this.tickLabels[i].style[styleMargin] = -labelSize / 2 + 'px';
+							} else if (this.options.orientation === 'vertical') {
+								if (this.options.rtl) {
+									this.tickLabels[i].style['marginRight'] = this.sliderElem.offsetWidth + "px";
+								} else {
+									this.tickLabels[i].style['marginLeft'] = this.sliderElem.offsetWidth + "px";
+								}
+								this.tickLabelContainer.style[styleMargin] = this.sliderElem.offsetWidth / 2 * -1 + 'px';
+							}
+						}
+					}
+				}
+
+				var formattedTooltipVal;
+
+				if (this.options.range) {
+					formattedTooltipVal = this.options.formatter(this._state.value);
+					this._setText(this.tooltipInner, formattedTooltipVal);
+					this.tooltip.style[this.stylePos] = (positionPercentages[1] + positionPercentages[0]) / 2 + "%";
+
+					var innerTooltipMinText = this.options.formatter(this._state.value[0]);
+					this._setText(this.tooltipInner_min, innerTooltipMinText);
+
+					var innerTooltipMaxText = this.options.formatter(this._state.value[1]);
+					this._setText(this.tooltipInner_max, innerTooltipMaxText);
+
+					this.tooltip_min.style[this.stylePos] = positionPercentages[0] + "%";
+
+					this.tooltip_max.style[this.stylePos] = positionPercentages[1] + "%";
+				} else {
+					formattedTooltipVal = this.options.formatter(this._state.value[0]);
+					this._setText(this.tooltipInner, formattedTooltipVal);
+
+					this.tooltip.style[this.stylePos] = positionPercentages[0] + "%";
+				}
+
+				if (this.options.orientation === 'vertical') {
+					this.trackLow.style.top = '0';
+					this.trackLow.style.height = Math.min(positionPercentages[0], positionPercentages[1]) + '%';
+
+					this.trackSelection.style.top = Math.min(positionPercentages[0], positionPercentages[1]) + '%';
+					this.trackSelection.style.height = Math.abs(positionPercentages[0] - positionPercentages[1]) + '%';
+
+					this.trackHigh.style.bottom = '0';
+					this.trackHigh.style.height = 100 - Math.min(positionPercentages[0], positionPercentages[1]) - Math.abs(positionPercentages[0] - positionPercentages[1]) + '%';
+				} else {
+					if (this.stylePos === 'right') {
+						this.trackLow.style.right = '0';
+					} else {
+						this.trackLow.style.left = '0';
+					}
+					this.trackLow.style.width = Math.min(positionPercentages[0], positionPercentages[1]) + '%';
+
+					if (this.stylePos === 'right') {
+						this.trackSelection.style.right = Math.min(positionPercentages[0], positionPercentages[1]) + '%';
+					} else {
+						this.trackSelection.style.left = Math.min(positionPercentages[0], positionPercentages[1]) + '%';
+					}
+					this.trackSelection.style.width = Math.abs(positionPercentages[0] - positionPercentages[1]) + '%';
+
+					if (this.stylePos === 'right') {
+						this.trackHigh.style.left = '0';
+					} else {
+						this.trackHigh.style.right = '0';
+					}
+					this.trackHigh.style.width = 100 - Math.min(positionPercentages[0], positionPercentages[1]) - Math.abs(positionPercentages[0] - positionPercentages[1]) + '%';
+
+					var offset_min = this.tooltip_min.getBoundingClientRect();
+					var offset_max = this.tooltip_max.getBoundingClientRect();
+
+					if (this.options.tooltip_position === 'bottom') {
+						if (offset_min.right > offset_max.left) {
+							this._removeClass(this.tooltip_max, 'bottom');
+							this._addClass(this.tooltip_max, 'top');
+							this.tooltip_max.style.top = '';
+							this.tooltip_max.style.bottom = 22 + 'px';
+						} else {
+							this._removeClass(this.tooltip_max, 'top');
+							this._addClass(this.tooltip_max, 'bottom');
+							this.tooltip_max.style.top = this.tooltip_min.style.top;
+							this.tooltip_max.style.bottom = '';
+						}
+					} else {
+						if (offset_min.right > offset_max.left) {
+							this._removeClass(this.tooltip_max, 'top');
+							this._addClass(this.tooltip_max, 'bottom');
+							this.tooltip_max.style.top = 18 + 'px';
+						} else {
+							this._removeClass(this.tooltip_max, 'bottom');
+							this._addClass(this.tooltip_max, 'top');
+							this.tooltip_max.style.top = this.tooltip_min.style.top;
+						}
+					}
+				}
+			},
+			_createHighlightRange: function _createHighlightRange(start, end) {
+				if (this._isHighlightRange(start, end)) {
+					if (start > end) {
+						return { 'start': end, 'size': start - end };
+					}
+					return { 'start': start, 'size': end - start };
+				}
+				return null;
+			},
+			_isHighlightRange: function _isHighlightRange(start, end) {
+				if (0 <= start && start <= 100 && 0 <= end && end <= 100) {
+					return true;
+				} else {
+					return false;
+				}
+			},
+			_resize: function _resize(ev) {
+				/*jshint unused:false*/
+				this._state.offset = this._offset(this.sliderElem);
+				this._state.size = this.sliderElem[this.sizePos];
+				this._layout();
+			},
+			_removeProperty: function _removeProperty(element, prop) {
+				if (element.style.removeProperty) {
+					element.style.removeProperty(prop);
+				} else {
+					element.style.removeAttribute(prop);
+				}
+			},
+			_mousedown: function _mousedown(ev) {
+				if (!this._state.enabled) {
+					return false;
+				}
+
+				if (ev.preventDefault) {
+					ev.preventDefault();
+				}
+
+				this._state.offset = this._offset(this.sliderElem);
+				this._state.size = this.sliderElem[this.sizePos];
+
+				var percentage = this._getPercentage(ev);
+
+				if (this.options.range) {
+					var diff1 = Math.abs(this._state.percentage[0] - percentage);
+					var diff2 = Math.abs(this._state.percentage[1] - percentage);
+					this._state.dragged = diff1 < diff2 ? 0 : 1;
+					this._adjustPercentageForRangeSliders(percentage);
+				} else {
+					this._state.dragged = 0;
+				}
+
+				this._state.percentage[this._state.dragged] = percentage;
+				this._layout();
+
+				if (this.touchCapable) {
+					document.removeEventListener("touchmove", this.mousemove, false);
+					document.removeEventListener("touchend", this.mouseup, false);
+				}
+
+				if (this.mousemove) {
+					document.removeEventListener("mousemove", this.mousemove, false);
+				}
+				if (this.mouseup) {
+					document.removeEventListener("mouseup", this.mouseup, false);
+				}
+
+				this.mousemove = this._mousemove.bind(this);
+				this.mouseup = this._mouseup.bind(this);
+
+				if (this.touchCapable) {
+					// Touch: Bind touch events:
+					document.addEventListener("touchmove", this.mousemove, false);
+					document.addEventListener("touchend", this.mouseup, false);
+				}
+				// Bind mouse events:
+				document.addEventListener("mousemove", this.mousemove, false);
+				document.addEventListener("mouseup", this.mouseup, false);
+
+				this._state.inDrag = true;
+				var newValue = this._calculateValue();
+
+				this._trigger('slideStart', newValue);
+
+				this._setDataVal(newValue);
+				this.setValue(newValue, false, true);
+
+				ev.returnValue = false;
+
+				if (this.options.focus) {
+					this._triggerFocusOnHandle(this._state.dragged);
+				}
+
+				return true;
+			},
+			_touchstart: function _touchstart(ev) {
+				if (ev.changedTouches === undefined) {
+					this._mousedown(ev);
+					return;
+				}
+
+				var touch = ev.changedTouches[0];
+				this.touchX = touch.pageX;
+				this.touchY = touch.pageY;
+			},
+			_triggerFocusOnHandle: function _triggerFocusOnHandle(handleIdx) {
+				if (handleIdx === 0) {
+					this.handle1.focus();
+				}
+				if (handleIdx === 1) {
+					this.handle2.focus();
+				}
+			},
+			_keydown: function _keydown(handleIdx, ev) {
+				if (!this._state.enabled) {
+					return false;
+				}
+
+				var dir;
+				switch (ev.keyCode) {
+					case 37: // left
+					case 40:
+						// down
+						dir = -1;
+						break;
+					case 39: // right
+					case 38:
+						// up
+						dir = 1;
+						break;
+				}
+				if (!dir) {
+					return;
+				}
+
+				// use natural arrow keys instead of from min to max
+				if (this.options.natural_arrow_keys) {
+					var ifVerticalAndNotReversed = this.options.orientation === 'vertical' && !this.options.reversed;
+					var ifHorizontalAndReversed = this.options.orientation === 'horizontal' && this.options.reversed; // @todo control with rtl
+
+					if (ifVerticalAndNotReversed || ifHorizontalAndReversed) {
+						dir = -dir;
+					}
+				}
+
+				var val = this._state.value[handleIdx] + dir * this.options.step;
+				var percentage = val / this.options.max * 100;
+				this._state.keyCtrl = handleIdx;
+				if (this.options.range) {
+					this._adjustPercentageForRangeSliders(percentage);
+					var val1 = !this._state.keyCtrl ? val : this._state.value[0];
+					var val2 = this._state.keyCtrl ? val : this._state.value[1];
+					val = [val1, val2];
+				}
+
+				this._trigger('slideStart', val);
+				this._setDataVal(val);
+				this.setValue(val, true, true);
+
+				this._setDataVal(val);
+				this._trigger('slideStop', val);
+				this._layout();
+
+				this._pauseEvent(ev);
+				delete this._state.keyCtrl;
+
+				return false;
+			},
+			_pauseEvent: function _pauseEvent(ev) {
+				if (ev.stopPropagation) {
+					ev.stopPropagation();
+				}
+				if (ev.preventDefault) {
+					ev.preventDefault();
+				}
+				ev.cancelBubble = true;
+				ev.returnValue = false;
+			},
+			_mousemove: function _mousemove(ev) {
+				if (!this._state.enabled) {
+					return false;
+				}
+
+				var percentage = this._getPercentage(ev);
+				this._adjustPercentageForRangeSliders(percentage);
+				this._state.percentage[this._state.dragged] = percentage;
+				this._layout();
+
+				var val = this._calculateValue(true);
+				this.setValue(val, true, true);
+
+				return false;
+			},
+			_touchmove: function _touchmove(ev) {
+				if (ev.changedTouches === undefined) {
+					return;
+				}
+
+				var touch = ev.changedTouches[0];
+
+				var xDiff = touch.pageX - this.touchX;
+				var yDiff = touch.pageY - this.touchY;
+
+				if (!this._state.inDrag) {
+					// Vertical Slider
+					if (this.options.orientation === 'vertical' && xDiff <= 5 && xDiff >= -5 && (yDiff >= 15 || yDiff <= -15)) {
+						this._mousedown(ev);
+					}
+					// Horizontal slider.
+					else if (yDiff <= 5 && yDiff >= -5 && (xDiff >= 15 || xDiff <= -15)) {
+							this._mousedown(ev);
+						}
+				}
+			},
+			_adjustPercentageForRangeSliders: function _adjustPercentageForRangeSliders(percentage) {
+				if (this.options.range) {
+					var precision = this._getNumDigitsAfterDecimalPlace(percentage);
+					precision = precision ? precision - 1 : 0;
+					var percentageWithAdjustedPrecision = this._applyToFixedAndParseFloat(percentage, precision);
+					if (this._state.dragged === 0 && this._applyToFixedAndParseFloat(this._state.percentage[1], precision) < percentageWithAdjustedPrecision) {
+						this._state.percentage[0] = this._state.percentage[1];
+						this._state.dragged = 1;
+					} else if (this._state.dragged === 1 && this._applyToFixedAndParseFloat(this._state.percentage[0], precision) > percentageWithAdjustedPrecision) {
+						this._state.percentage[1] = this._state.percentage[0];
+						this._state.dragged = 0;
+					} else if (this._state.keyCtrl === 0 && this._state.value[1] / this.options.max * 100 < percentage) {
+						this._state.percentage[0] = this._state.percentage[1];
+						this._state.keyCtrl = 1;
+						this.handle2.focus();
+					} else if (this._state.keyCtrl === 1 && this._state.value[0] / this.options.max * 100 > percentage) {
+						this._state.percentage[1] = this._state.percentage[0];
+						this._state.keyCtrl = 0;
+						this.handle1.focus();
+					}
+				}
+			},
+			_mouseup: function _mouseup() {
+				if (!this._state.enabled) {
+					return false;
+				}
+				if (this.touchCapable) {
+					// Touch: Unbind touch event handlers:
+					document.removeEventListener("touchmove", this.mousemove, false);
+					document.removeEventListener("touchend", this.mouseup, false);
+				}
+				// Unbind mouse event handlers:
+				document.removeEventListener("mousemove", this.mousemove, false);
+				document.removeEventListener("mouseup", this.mouseup, false);
+
+				this._state.inDrag = false;
+				if (this._state.over === false) {
+					this._hideTooltip();
+				}
+				var val = this._calculateValue(true);
+
+				this._layout();
+				this._setDataVal(val);
+				this._trigger('slideStop', val);
+
+				return false;
+			},
+			_calculateValue: function _calculateValue(snapToClosestTick) {
+				var val;
+				if (this.options.range) {
+					val = [this.options.min, this.options.max];
+					if (this._state.percentage[0] !== 0) {
+						val[0] = this._toValue(this._state.percentage[0]);
+						val[0] = this._applyPrecision(val[0]);
+					}
+					if (this._state.percentage[1] !== 100) {
+						val[1] = this._toValue(this._state.percentage[1]);
+						val[1] = this._applyPrecision(val[1]);
+					}
+				} else {
+					val = this._toValue(this._state.percentage[0]);
+					val = parseFloat(val);
+					val = this._applyPrecision(val);
+				}
+
+				if (snapToClosestTick) {
+					var min = [val, Infinity];
+					for (var i = 0; i < this.options.ticks.length; i++) {
+						var diff = Math.abs(this.options.ticks[i] - val);
+						if (diff <= min[1]) {
+							min = [this.options.ticks[i], diff];
+						}
+					}
+					if (min[1] <= this.options.ticks_snap_bounds) {
+						return min[0];
+					}
+				}
+
+				return val;
+			},
+			_applyPrecision: function _applyPrecision(val) {
+				var precision = this.options.precision || this._getNumDigitsAfterDecimalPlace(this.options.step);
+				return this._applyToFixedAndParseFloat(val, precision);
+			},
+			_getNumDigitsAfterDecimalPlace: function _getNumDigitsAfterDecimalPlace(num) {
+				var match = ('' + num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
+				if (!match) {
+					return 0;
+				}
+				return Math.max(0, (match[1] ? match[1].length : 0) - (match[2] ? +match[2] : 0));
+			},
+			_applyToFixedAndParseFloat: function _applyToFixedAndParseFloat(num, toFixedInput) {
+				var truncatedNum = num.toFixed(toFixedInput);
+				return parseFloat(truncatedNum);
+			},
+			/*
+   	Credits to Mike Samuel for the following method!
+   	Source: http://stackoverflow.com/questions/10454518/javascript-how-to-retrieve-the-number-of-decimals-of-a-string-number
+   */
+			_getPercentage: function _getPercentage(ev) {
+				if (this.touchCapable && (ev.type === 'touchstart' || ev.type === 'touchmove')) {
+					ev = ev.touches[0];
+				}
+
+				var eventPosition = ev[this.mousePos];
+				var sliderOffset = this._state.offset[this.stylePos];
+				var distanceToSlide = eventPosition - sliderOffset;
+				if (this.stylePos === 'right') {
+					distanceToSlide = -distanceToSlide;
+				}
+				// Calculate what percent of the length the slider handle has slid
+				var percentage = distanceToSlide / this._state.size * 100;
+				percentage = Math.round(percentage / this._state.percentage[2]) * this._state.percentage[2];
+				if (this.options.reversed) {
+					percentage = 100 - percentage;
+				}
+
+				// Make sure the percent is within the bounds of the slider.
+				// 0% corresponds to the 'min' value of the slide
+				// 100% corresponds to the 'max' value of the slide
+				return Math.max(0, Math.min(100, percentage));
+			},
+			_validateInputValue: function _validateInputValue(val) {
+				if (!isNaN(+val)) {
+					return +val;
+				} else if (Array.isArray(val)) {
+					this._validateArray(val);
+					return val;
+				} else {
+					throw new Error(ErrorMsgs.formatInvalidInputErrorMsg(val));
+				}
+			},
+			_validateArray: function _validateArray(val) {
+				for (var i = 0; i < val.length; i++) {
+					var input = val[i];
+					if (typeof input !== 'number') {
+						throw new Error(ErrorMsgs.formatInvalidInputErrorMsg(input));
+					}
+				}
+			},
+			_setDataVal: function _setDataVal(val) {
+				this.element.setAttribute('data-value', val);
+				this.element.setAttribute('value', val);
+				this.element.value = val;
+			},
+			_trigger: function _trigger(evt, val) {
+				val = val || val === 0 ? val : undefined;
+
+				var callbackFnArray = this.eventToCallbackMap[evt];
+				if (callbackFnArray && callbackFnArray.length) {
+					for (var i = 0; i < callbackFnArray.length; i++) {
+						var callbackFn = callbackFnArray[i];
+						callbackFn(val);
+					}
+				}
+
+				/* If JQuery exists, trigger JQuery events */
+				if ($) {
+					this._triggerJQueryEvent(evt, val);
+				}
+			},
+			_triggerJQueryEvent: function _triggerJQueryEvent(evt, val) {
+				var eventData = {
+					type: evt,
+					value: val
+				};
+				this.$element.trigger(eventData);
+				this.$sliderElem.trigger(eventData);
+			},
+			_unbindJQueryEventHandlers: function _unbindJQueryEventHandlers() {
+				this.$element.off();
+				this.$sliderElem.off();
+			},
+			_setText: function _setText(element, text) {
+				if (typeof element.textContent !== "undefined") {
+					element.textContent = text;
+				} else if (typeof element.innerText !== "undefined") {
+					element.innerText = text;
+				}
+			},
+			_removeClass: function _removeClass(element, classString) {
+				var classes = classString.split(" ");
+				var newClasses = element.className;
+
+				for (var i = 0; i < classes.length; i++) {
+					var classTag = classes[i];
+					var regex = new RegExp("(?:\\s|^)" + classTag + "(?:\\s|$)");
+					newClasses = newClasses.replace(regex, " ");
+				}
+
+				element.className = newClasses.trim();
+			},
+			_addClass: function _addClass(element, classString) {
+				var classes = classString.split(" ");
+				var newClasses = element.className;
+
+				for (var i = 0; i < classes.length; i++) {
+					var classTag = classes[i];
+					var regex = new RegExp("(?:\\s|^)" + classTag + "(?:\\s|$)");
+					var ifClassExists = regex.test(newClasses);
+
+					if (!ifClassExists) {
+						newClasses += " " + classTag;
+					}
+				}
+
+				element.className = newClasses.trim();
+			},
+			_offsetLeft: function _offsetLeft(obj) {
+				return obj.getBoundingClientRect().left;
+			},
+			_offsetRight: function _offsetRight(obj) {
+				return obj.getBoundingClientRect().right;
+			},
+			_offsetTop: function _offsetTop(obj) {
+				var offsetTop = obj.offsetTop;
+				while ((obj = obj.offsetParent) && !isNaN(obj.offsetTop)) {
+					offsetTop += obj.offsetTop;
+					if (obj.tagName !== 'BODY') {
+						offsetTop -= obj.scrollTop;
+					}
+				}
+				return offsetTop;
+			},
+			_offset: function _offset(obj) {
+				return {
+					left: this._offsetLeft(obj),
+					right: this._offsetRight(obj),
+					top: this._offsetTop(obj)
+				};
+			},
+			_css: function _css(elementRef, styleName, value) {
+				if ($) {
+					$.style(elementRef, styleName, value);
+				} else {
+					var style = styleName.replace(/^-ms-/, "ms-").replace(/-([\da-z])/gi, function (all, letter) {
+						return letter.toUpperCase();
+					});
+					elementRef.style[style] = value;
+				}
+			},
+			_toValue: function _toValue(percentage) {
+				return this.options.scale.toValue.apply(this, [percentage]);
+			},
+			_toPercentage: function _toPercentage(value) {
+				return this.options.scale.toPercentage.apply(this, [value]);
+			},
+			_setTooltipPosition: function _setTooltipPosition() {
+				var tooltips = [this.tooltip, this.tooltip_min, this.tooltip_max];
+				if (this.options.orientation === 'vertical') {
+					var tooltipPos;
+					if (this.options.tooltip_position) {
+						tooltipPos = this.options.tooltip_position;
+					} else {
+						if (this.options.rtl) {
+							tooltipPos = 'left';
+						} else {
+							tooltipPos = 'right';
+						}
+					}
+					var oppositeSide = tooltipPos === 'left' ? 'right' : 'left';
+					tooltips.forEach(function (tooltip) {
+						this._addClass(tooltip, tooltipPos);
+						tooltip.style[oppositeSide] = '100%';
+					}.bind(this));
+				} else if (this.options.tooltip_position === 'bottom') {
+					tooltips.forEach(function (tooltip) {
+						this._addClass(tooltip, 'bottom');
+						tooltip.style.top = 22 + 'px';
+					}.bind(this));
+				} else {
+					tooltips.forEach(function (tooltip) {
+						this._addClass(tooltip, 'top');
+						tooltip.style.top = -this.tooltip.outerHeight - 14 + 'px';
+					}.bind(this));
+				}
+			}
+		};
+
+		/*********************************
+  		Attach to global namespace
+  	*********************************/
+		if ($ && $.fn) {
+			var autoRegisterNamespace = void 0;
+
+			if (!$.fn.slider) {
+				$.bridget(NAMESPACE_MAIN, Slider);
+				autoRegisterNamespace = NAMESPACE_MAIN;
+			} else {
+				if (windowIsDefined) {
+					window.console.warn("bootstrap-slider.js - WARNING: $.fn.slider namespace is already bound. Use the $.fn.bootstrapSlider namespace instead.");
+				}
+				autoRegisterNamespace = NAMESPACE_ALTERNATE;
+			}
+			$.bridget(NAMESPACE_ALTERNATE, Slider);
+
+			// Auto-Register data-provide="slider" Elements
+			$(function () {
+				$("input[data-provide=slider]")[autoRegisterNamespace]();
+			});
+		}
+	})($);
+
+	return Slider;
 });
 
 /***/ }),
-/* 39 */
+/* 37 */
 /***/ (function(module, exports) {
 
 $(document).ready(function () {
@@ -40615,19 +37957,18 @@ $(document).ready(function () {
 
     //price trackbar
 
-    var connectSlider = document.getElementById('slider-connect');
-
-    noUiSlider.create(connectSlider, {
-        start: [4000, 8000],
-        range: {
-            'min': [2000],
-            'max': [10000]
-        }
+    $("#priceBar").slider({ min: 5000, max: 25000, range: true, value: [7500, 15000] });
+    $("#priceBar").on("slide", function (slideEvt) {
+        $("#priceBarCurrentSliderVal").text(slideEvt.value);
     });
+
+    // Call a method on the slider
+    // var value = priceBar.getValue();
+
 });
 
 /***/ }),
-/* 40 */
+/* 38 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
