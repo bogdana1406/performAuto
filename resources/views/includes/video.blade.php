@@ -4,7 +4,11 @@
 		<div class="video-wrapper">
 			<div class="bordered-angle-top"></div>
 		    <div class="bordered-angle-bottom"></div>
-			<iframe width="854" height="480" src="https://www.youtube.com/embed/8AfYdq6kU7I" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+			<div id="player"></div>
+				<div id="thumbnail_container" class="thumbnail_container">
+	    		<img class="thumbnail" id="thumbnail"/>
+	    		<a class="start-video"><img width="64" src="img/play-button.svg"></a>
+			</div>
 		</div>
 	</div>
 </section>

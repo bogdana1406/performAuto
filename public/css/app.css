@@ -11693,3 +11693,36 @@ h2 {
   color: #363636;
 }
 
+.start-video {
+  position: absolute;
+  top: 50%;
+  padding: 12px;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  opacity: .6;
+  cursor: pointer;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.start-video img {
+  -webkit-filter: invert(100%);
+          filter: invert(100%);
+}
+
+.start-video:hover {
+  opacity: 1;
+  -webkit-filter: brightness 1;
+}
+
+div.thumbnail_container {
+  overflow: hidden;
+  position: relative;
+}
+
+img.thumbnail {
+  margin-top: -50px;
+  background: #0f0f0f;
+}
+
