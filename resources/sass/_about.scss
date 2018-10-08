@@ -1,0 +1,59 @@
+.hero-about {
+    padding-top: 12vw;
+
+    &.hero {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%), url('/img/about_hero_bg.jpg');
+        background-color: #40413E;
+        height: 35vw;
+
+        .hero-title {
+            font-weight: 400;
+            color: white;
+            margin-left: 2vw;
+
+            h2 {
+                color: inherit;
+                font-size: 2.57rem;
+                font-weight: inherit;
+                margin-bottom: .5rem;
+            }
+
+            .breadcrumb {
+                background-color: transparent;
+                padding: 0;
+                margin: 0;
+
+                .breadcrumb-item {
+                    font-size: 0.75rem;
+                    color: #a9a9a9;
+
+                    a {
+                        color: inherit;
+                        transition: $transition;
+
+                        &:hover {
+                            color: white;
+                        }
+                    }
+                    &::before {
+						color: $text-red;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.about-features {
+	padding-top: 2rem;
+	.features-title {
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 0;
+		font-size: 2.25rem;
+		line-height: 2.4rem;
+		font-weight: 300;
+		color: white;
+		max-width: 844px;
+	}
+}

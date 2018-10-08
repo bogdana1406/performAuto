@@ -11204,6 +11204,8 @@ header .dropdown-toggle:after {
 }
 
 .gallery {
+  background-color: white;
+  padding-top: 6.87rem;
   padding-bottom: 13.12rem;
 }
 
@@ -11300,6 +11302,7 @@ header .dropdown-toggle:after {
 }
 
 .reviews {
+  background-color: white;
   padding-top: 6.25rem;
   padding-bottom: 7.93rem;
 }
@@ -11495,10 +11498,12 @@ footer .sub-footer {
 }
 
 .home-features {
-  padding-top: 2rem;
+  background-color: white;
+  padding-top: 5.5rem;
   padding-bottom: 5rem;
   color: #6a6969;
   text-align: center;
+  margin-top: -50px;
 }
 
 .home-features .features-title {
@@ -11611,8 +11616,72 @@ footer .sub-footer {
   border-left-style: solid;
 }
 
+.hero-about {
+  padding-top: 12vw;
+}
+
+.hero-about.hero {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.2)), to(rgba(0, 0, 0, 0.2))), url("/img/about_hero_bg.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%), url("/img/about_hero_bg.jpg");
+  background-color: #40413E;
+  height: 35vw;
+}
+
+.hero-about.hero .hero-title {
+  font-weight: 400;
+  color: white;
+  margin-left: 2vw;
+}
+
+.hero-about.hero .hero-title h2 {
+  color: inherit;
+  font-size: 2.57rem;
+  font-weight: inherit;
+  margin-bottom: .5rem;
+}
+
+.hero-about.hero .hero-title .breadcrumb {
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+.hero-about.hero .hero-title .breadcrumb .breadcrumb-item {
+  font-size: 0.75rem;
+  color: #a9a9a9;
+}
+
+.hero-about.hero .hero-title .breadcrumb .breadcrumb-item a {
+  color: inherit;
+  -webkit-transition: all 0.25s ease-out;
+  transition: all 0.25s ease-out;
+}
+
+.hero-about.hero .hero-title .breadcrumb .breadcrumb-item a:hover {
+  color: white;
+}
+
+.hero-about.hero .hero-title .breadcrumb .breadcrumb-item::before {
+  color: #c92223;
+}
+
+.about-features {
+  padding-top: 2rem;
+}
+
+.about-features .features-title {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  font-size: 2.25rem;
+  line-height: 2.4rem;
+  font-weight: 300;
+  color: white;
+  max-width: 844px;
+}
+
 body {
-  background-color: white;
+  background-color: #0f0f0f;
   font-family: 'Roboto', sans-serif;
 }
 
@@ -11647,6 +11716,9 @@ h2 {
   max-width: 1144px;
   margin-left: auto;
   margin-right: auto;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
 }
 
 .contacts a {
