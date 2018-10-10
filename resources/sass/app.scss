@@ -17,6 +17,7 @@
 @import 'counter';
 @import 'gallery';
 @import 'reviews';
+@import 'carousel';
 @import 'footer';
 
 //pages
@@ -128,20 +129,32 @@ h2 {
     }
 }
 
-.start-video:hover
-{
+.start-video:hover {
     opacity: 1;
     -webkit-filter: brightness (1);
 }
 
-div.thumbnail_container
-{
+div.thumbnail_container {
     overflow: hidden;
     position: relative;
 }
 
-img.thumbnail
-{
+img.thumbnail {
     margin-top: -50px;
     background: $main-black;
+}
+
+.divider {
+    position: relative;
+    &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%);
+        width: 26%;
+        height: 1px;
+        border-bottom: 2px solid #494949;
+    }
 }

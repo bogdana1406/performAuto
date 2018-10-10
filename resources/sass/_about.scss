@@ -46,14 +46,24 @@
 
 .about-features {
 	padding-top: 2rem;
+    color: $text-ultra-light-gray;
 	.features-title {
 		margin-left: auto;
 		margin-right: auto;
-		margin-top: 0;
+        padding-bottom: 1.8rem;
 		font-size: 2.25rem;
 		line-height: 2.4rem;
 		font-weight: 300;
 		color: white;
 		max-width: 844px;
 	}
+    .features-slogan {
+        text-align: left;
+        max-width: 940px;
+        margin-top: 2.7rem;
+        margin-bottom: 3.87rem;
+    }
+    span {
+        color: white;
+    }
 }

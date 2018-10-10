@@ -17,16 +17,22 @@
 		</div>
 	</div>
 	
-	<section class="about-features  arrow-down arrow-up arrow-black"">
+	<section class="about-features  arrow-down arrow-up-rev arrow-black"">
 		<div class="main-wrapper text-center">
-			<h2 class="features-title mt-5 divider">@lang('about.features-title')</h2>
-			<p class="features-slogan mx-auto my-4">@lang('about.features-slogan')</p>
+			<h2 class="features-title mt-5 mb-0 divider">@lang('about.features-title')</h2>
+			<p class="features-slogan mx-auto">@lang('about.features-slogan')</p>
 
 			@include('includes.counter')
 
 			<p class="features-slogan mx-auto my-4">@lang('about.features-slogan')</p>
 			<span>&laquo;@lang('about.features-quote')&raquo;</span>
-	
+			
+			<div class="clients-carousel">
+				
+				@include('includes.carousel')
+			
+			</div>
+
 		</div>
 	</section>
 
