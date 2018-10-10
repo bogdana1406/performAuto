@@ -1,10 +1,17 @@
 <html>
 <head>
 	{{-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> --}}
-  <title>PERFORM auto | @yield('title')</title>
-  <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-  <link rel="stylesheet" href="{{ asset('fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
-  <link rel="stylesheet" href="{{ asset('fonts/themify-icons/themify-icons.css')}}">
+  	<title>PERFORM auto | @yield('title')</title>
+  	<link rel="shortcut icon" type="image/png" href="/img/logo.png">
+  	{{-- fonts --}}
+  	<link rel="stylesheet" href="{{ asset('fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
+  	<link rel="stylesheet" href="{{ asset('fonts/themify-icons/themify-icons.css')}}">
+  	{{-- main styles --}}
+  	<link rel="stylesheet" href="{{ asset('css/app.css') }}">
+  	{{-- header styles --}}
+  	@if (request()->is('/'))
+    <link rel="stylesheet" href="{{ asset('css/header-transparent.css') }}">
+	@endif
 
 </head>
 <body>
@@ -13,7 +20,7 @@
     
 	@show
 
-  @yield('content')
+  	@yield('content')
     
 	@include('common.footer')
 

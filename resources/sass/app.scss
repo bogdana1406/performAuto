@@ -1,3 +1,4 @@
+
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900');
 
@@ -17,6 +18,7 @@
 @import 'counter';
 @import 'gallery';
 @import 'reviews';
+@import 'carousel';
 @import 'footer';
 
 //pages
@@ -73,6 +75,8 @@ h2 {
     .fa {
         color: $red;
         font-size: 1.37rem;
+        line-height: 1.6rem;
+        vertical-align: top;
     }
 }
 
@@ -82,7 +86,7 @@ h2 {
         height: 1.6rem;
         background-color: white;
         margin-right: 0.62rem;
-        transition: all .25s ease-out;
+        transition: $transition;
         .fa {
             line-height: 1.7rem;
             color: #0f0f0f;
@@ -120,26 +124,38 @@ h2 {
     transform: translate(-50%, -50%);
     opacity: .6;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: transition;
     img {
         filter: invert(100%);
     }
 }
 
-.start-video:hover
-{
+.start-video:hover {
     opacity: 1;
     -webkit-filter: brightness (1);
 }
 
-div.thumbnail_container
-{
+div.thumbnail_container {
     overflow: hidden;
     position: relative;
 }
 
-img.thumbnail
-{
+img.thumbnail {
     margin-top: -50px;
     background: $main-black;
+}
+
+.divider {
+    position: relative;
+    &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%);
+        width: 26%;
+        height: 1px;
+        border-bottom: 2px solid #494949;
+    }
 }

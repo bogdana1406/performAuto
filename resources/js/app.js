@@ -7,6 +7,7 @@
 
 require('./bootstrap');
 require('./bootstrap-slider');
+require('./owl.carousel.min.js');
 require('./main');
 
 // window.Vue = require('vue');

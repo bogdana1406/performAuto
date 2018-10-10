@@ -35,7 +35,7 @@
 		margin-right: -10px;
 		font-size: 0.87rem;
 		line-height: 1.2rem;
-		transition: all .25s ease-in-out;
+		transition: $transition;
 		border: 0 none;
 		a {
 			color: $text-gray;

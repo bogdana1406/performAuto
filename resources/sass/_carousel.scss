@@ -1,0 +1,39 @@
+@import '../css/owl-carousel/owl.carousel.min.css';
+@import '../css/owl-carousel/owl.theme.default.min.css';
+
+.clients-carousel {
+	padding-top: 5rem;
+	padding-bottom: 6.25rem;
+}
+
+.owl-theme .owl-nav {
+    margin-top: 0;
+    position: absolute;
+    left: -2rem;
+    right: -2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    z-index: -1;
+    font-size: 3.5rem;
+    line-height: 3.5rem;
+    font-weight: 100;
+    [class*=owl-] {
+        opacity: .5;
+        &:hover {
+            background: none;
+            text-decoration: none;
+            opacity: 1;
+        }
+    }
+}
+
+.owl-carousel .owl-nav {
+    button.owl-next,
+    button.owl-prev {
+    	&:focus {
+			outline: 0 none;
+		}
+    }
+}

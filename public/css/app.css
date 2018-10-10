@@ -317,7 +317,17 @@
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff8ac1ef', endColorstr='#ff82b3de', GradientType=0);
   opacity: 1;
 }
-/*!
+/**
+ * Owl Carousel v2.3.4
+ * Copyright 2013-2018 David Deutsch
+ * Licensed under: SEE LICENSE IN https://github.com/OwlCarousel2/OwlCarousel2/blob/master/LICENSE
+ */
+.owl-carousel,.owl-carousel .owl-item{-webkit-tap-highlight-color:transparent;position:relative}.owl-carousel{display:none;width:100%;z-index:1}.owl-carousel .owl-stage{position:relative;-ms-touch-action:pan-Y;touch-action:manipulation;-moz-backface-visibility:hidden}.owl-carousel .owl-stage:after{content:".";display:block;clear:both;visibility:hidden;line-height:0;height:0}.owl-carousel .owl-stage-outer{position:relative;overflow:hidden;-webkit-transform:translate3d(0,0,0)}.owl-carousel .owl-item,.owl-carousel .owl-wrapper{-webkit-backface-visibility:hidden;-moz-backface-visibility:hidden;-ms-backface-visibility:hidden;-webkit-transform:translate3d(0,0,0);-moz-transform:translate3d(0,0,0);-ms-transform:translate3d(0,0,0)}.owl-carousel .owl-item{min-height:1px;float:left;-webkit-backface-visibility:hidden;-webkit-touch-callout:none}.owl-carousel .owl-item img{display:block;width:100%}.owl-carousel .owl-dots.disabled,.owl-carousel .owl-nav.disabled{display:none}.no-js .owl-carousel,.owl-carousel.owl-loaded{display:block}.owl-carousel .owl-dot,.owl-carousel .owl-nav .owl-next,.owl-carousel .owl-nav .owl-prev{cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.owl-carousel .owl-nav button.owl-next,.owl-carousel .owl-nav button.owl-prev,.owl-carousel button.owl-dot{background:0 0;color:inherit;border:none;padding:0!important;font:inherit}.owl-carousel.owl-loading{opacity:0;display:block}.owl-carousel.owl-hidden{opacity:0}.owl-carousel.owl-refresh .owl-item{visibility:hidden}.owl-carousel.owl-drag .owl-item{-ms-touch-action:pan-y;touch-action:pan-y;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.owl-carousel.owl-grab{cursor:move;cursor:-webkit-grab;cursor:grab}.owl-carousel.owl-rtl{direction:rtl}.owl-carousel.owl-rtl .owl-item{float:right}.owl-carousel .animated{-webkit-animation-duration:1s;animation-duration:1s;-webkit-animation-fill-mode:both;animation-fill-mode:both}.owl-carousel .owl-animated-in{z-index:0}.owl-carousel .owl-animated-out{z-index:1}.owl-carousel .fadeOut{-webkit-animation-name:fadeOut;animation-name:fadeOut}@-webkit-keyframes fadeOut{0%{opacity:1}100%{opacity:0}}@keyframes fadeOut{0%{opacity:1}100%{opacity:0}}.owl-height{-webkit-transition:height .5s ease-in-out;transition:height .5s ease-in-out}.owl-carousel .owl-item .owl-lazy{opacity:0;-webkit-transition:opacity .4s ease;transition:opacity .4s ease}.owl-carousel .owl-item .owl-lazy:not([src]),.owl-carousel .owl-item .owl-lazy[src^=""]{max-height:0}.owl-carousel .owl-item img.owl-lazy{-webkit-transform-style:preserve-3d;transform-style:preserve-3d}.owl-carousel .owl-video-wrapper{position:relative;height:100%;background:#000}.owl-carousel .owl-video-play-icon{position:absolute;height:80px;width:80px;left:50%;top:50%;margin-left:-40px;margin-top:-40px;background:url(/images/owl.video.play.png?4a37f8008959c75f619bf0a3a4e2d7a2) no-repeat;cursor:pointer;z-index:1;-webkit-backface-visibility:hidden;-webkit-transition:-webkit-transform .1s ease;transition:-webkit-transform .1s ease;transition:transform .1s ease;transition:transform .1s ease, -webkit-transform .1s ease}.owl-carousel .owl-video-play-icon:hover{-webkit-transform:scale(1.3,1.3);transform:scale(1.3,1.3)}.owl-carousel .owl-video-playing .owl-video-play-icon,.owl-carousel .owl-video-playing .owl-video-tn{display:none}.owl-carousel .owl-video-tn{opacity:0;height:100%;background-position:center center;background-repeat:no-repeat;background-size:contain;-webkit-transition:opacity .4s ease;transition:opacity .4s ease}.owl-carousel .owl-video-frame{position:relative;z-index:1;height:100%;width:100%}/**
+ * Owl Carousel v2.3.4
+ * Copyright 2013-2018 David Deutsch
+ * Licensed under: SEE LICENSE IN https://github.com/OwlCarousel2/OwlCarousel2/blob/master/LICENSE
+ */
+.owl-theme .owl-dots,.owl-theme .owl-nav{text-align:center;-webkit-tap-highlight-color:transparent}.owl-theme .owl-nav{margin-top:10px}.owl-theme .owl-nav [class*=owl-]{color:#FFF;font-size:14px;margin:5px;padding:4px 7px;background:#D6D6D6;display:inline-block;cursor:pointer;border-radius:3px}.owl-theme .owl-nav [class*=owl-]:hover{background:#869791;color:#FFF;text-decoration:none}.owl-theme .owl-nav .disabled{opacity:.5;cursor:default}.owl-theme .owl-nav.disabled+.owl-dots{margin-top:10px}.owl-theme .owl-dots .owl-dot{display:inline-block;zoom:1}.owl-theme .owl-dots .owl-dot span{width:10px;height:10px;margin:5px 7px;background:#D6D6D6;display:block;-webkit-backface-visibility:visible;-webkit-transition:opacity .2s ease;transition:opacity .2s ease;border-radius:30px}.owl-theme .owl-dots .owl-dot.active span,.owl-theme .owl-dots .owl-dot:hover span{background:#869791}/*!
  * Bootstrap v4.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors
  * Copyright 2011-2018 Twitter, Inc.
@@ -10794,7 +10804,7 @@ a.text-dark:focus {
 }
 
 header {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: #111111;
   position: absolute;
   top: 0;
   left: 0;
@@ -10880,8 +10890,8 @@ header .navbar-expand-lg .navbar-nav a.nav-link {
   padding-left: 1.8rem;
   padding-right: 1.8rem;
   border: 1px solid rgba(225, 225, 225, 0);
-  -webkit-transition: all .25s ease-out;
-  transition: all .25s ease-out;
+  -webkit-transition: all 0.25s ease-out;
+  transition: all 0.25s ease-out;
 }
 
 header .navbar-expand-lg .navbar-nav a.nav-link:hover {
@@ -10943,13 +10953,15 @@ header .dropdown-toggle:after {
 
 .arrow-up,
 .arrow-down,
-.arrow-down-rev {
+.arrow-down-rev,
+.arrow-up-rev {
   position: relative;
 }
 
 .arrow-up::before,
 .arrow-down::before,
-.arrow-down-rev::after {
+.arrow-down-rev::after,
+.arrow-up-rev::after {
   position: absolute;
   content: "";
   display: block;
@@ -10976,15 +10988,23 @@ header .dropdown-toggle:after {
           clip-path: polygon(0 0, 100% 0, 100% 1px, 50% 100%, 0 1px);
 }
 
+.arrow-up-rev::after {
+  bottom: -45px;
+  -webkit-clip-path: polygon(0 0, 0 100%, 50% 1px, 100% 100%, 100% 0);
+          clip-path: polygon(0 0, 0 100%, 50% 1px, 100% 100%, 100% 0);
+}
+
 .arrow-black.arrow-up::before,
 .arrow-black.arrow-down::before,
-.arrow-black.arrow-down-rev::after {
+.arrow-black.arrow-down-rev::after,
+.arrow-black.arrow-up-rev::after {
   background-color: #0f0f0f;
 }
 
 .arrow-white.arrow-up::before,
 .arrow-white.arrow-down::before,
-.arrow-white.arrow-down-rev::after {
+.arrow-white.arrow-down-rev::after,
+.arrow-white.arrow-up-rev::after {
   background-color: white;
 }
 
@@ -11245,8 +11265,8 @@ header .dropdown-toggle:after {
   margin-right: -10px;
   font-size: 0.87rem;
   line-height: 1.2rem;
-  -webkit-transition: all .25s ease-in-out;
-  transition: all .25s ease-in-out;
+  -webkit-transition: all 0.25s ease-out;
+  transition: all 0.25s ease-out;
   border: 0 none;
 }
 
@@ -11388,6 +11408,46 @@ header .dropdown-toggle:after {
   color: #fefeff;
   font-weight: 700;
   text-transform: uppercase;
+}
+
+.clients-carousel {
+  padding-top: 5rem;
+  padding-bottom: 6.25rem;
+}
+
+.owl-theme .owl-nav {
+  margin-top: 0;
+  position: absolute;
+  left: -2rem;
+  right: -2rem;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  z-index: -1;
+  font-size: 3.5rem;
+  line-height: 3.5rem;
+  font-weight: 100;
+}
+
+.owl-theme .owl-nav [class*=owl-] {
+  opacity: .5;
+}
+
+.owl-theme .owl-nav [class*=owl-]:hover {
+  background: none;
+  text-decoration: none;
+  opacity: 1;
+}
+
+.owl-carousel .owl-nav button.owl-next:focus,
+.owl-carousel .owl-nav button.owl-prev:focus {
+  outline: 0 none;
 }
 
 footer .top-footer {
@@ -11667,17 +11727,29 @@ footer .sub-footer {
 
 .about-features {
   padding-top: 2rem;
+  color: #ccc;
 }
 
 .about-features .features-title {
   margin-left: auto;
   margin-right: auto;
-  margin-top: 0;
+  padding-bottom: 1.8rem;
   font-size: 2.25rem;
   line-height: 2.4rem;
   font-weight: 300;
   color: white;
   max-width: 844px;
+}
+
+.about-features .features-slogan {
+  text-align: left;
+  max-width: 940px;
+  margin-top: 2.7rem;
+  margin-bottom: 3.87rem;
+}
+
+.about-features span {
+  color: white;
 }
 
 body {
@@ -11728,6 +11800,8 @@ h2 {
 .contacts .fa {
   color: #c92223;
   font-size: 1.37rem;
+  line-height: 1.6rem;
+  vertical-align: top;
 }
 
 .social a.rounded-circle {
@@ -11735,8 +11809,8 @@ h2 {
   height: 1.6rem;
   background-color: white;
   margin-right: 0.62rem;
-  -webkit-transition: all .25s ease-out;
-  transition: all .25s ease-out;
+  -webkit-transition: all 0.25s ease-out;
+  transition: all 0.25s ease-out;
 }
 
 .social a.rounded-circle .fa {
@@ -11774,8 +11848,10 @@ h2 {
           transform: translate(-50%, -50%);
   opacity: .6;
   cursor: pointer;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
+  -webkit-transition: -webkit-transition;
+  transition: -webkit-transition;
+  transition: transition;
+  transition: transition, -webkit-transition;
 }
 
 .start-video img {
@@ -11796,5 +11872,22 @@ div.thumbnail_container {
 img.thumbnail {
   margin-top: -50px;
   background: #0f0f0f;
+}
+
+.divider {
+  position: relative;
+}
+
+.divider::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  width: 26%;
+  height: 1px;
+  border-bottom: 2px solid #494949;
 }
 
