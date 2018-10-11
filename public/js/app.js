@@ -13705,6 +13705,7 @@ module.exports = __webpack_require__(39);
 
 __webpack_require__(12);
 __webpack_require__(36);
+__webpack_require__(50);
 __webpack_require__(37);
 __webpack_require__(38);
 
@@ -38596,6 +38597,15 @@ $(document).ready(function () {
     // Call a method on the slider
     // var value = priceBar.getValue();
 
+    //filtered gallery with light box
+
+    // filter
+    $('nav#gallery-filter a').on('click', function (event) {
+        event.preventDefault();
+        // active class
+        $('nav#gallery-filter a.active').removeClass('active');
+        $(this).addClass('active');
+    });
 });
 
 //youtube script
@@ -38620,26 +38630,6 @@ onYouTubeIframeAPIReady = function onYouTubeIframeAPIReady() {
             'onStateChange': onPlayerStateChange
         }
     });
-
-    // owl-carousel
-
-    $('.owl-carousel').owlCarousel({
-        loop: true,
-        margin: 10,
-        nav: true,
-        dots: false,
-        responsive: {
-            0: {
-                items: 1
-            },
-            600: {
-                items: 3
-            },
-            1000: {
-                items: 4
-            }
-        }
-    });
 };
 
 var p = document.getElementById("player");
@@ -38661,11 +38651,77 @@ $(document).on('click', '.start-video', function () {
     player.playVideo();
 });
 
+// owl-carousel
+
+$('.owl-carousel').owlCarousel({
+    loop: true,
+    margin: 10,
+    nav: true,
+    dots: false,
+    responsive: {
+        0: {
+            items: 1
+        },
+        600: {
+            items: 3
+        },
+        1000: {
+            items: 4
+        }
+    }
+});
+
 /***/ }),
 /* 39 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */
+/***/ (function(module, exports) {
+
+/* ============================================================
+ * bootstrap-portfilter.js for Bootstrap v2.3.1
+ * https://github.com/geedmo/portfilter
+ * ============================================================*/
+!function (d) {
+  var c = "portfilter";var b = function b(e) {
+    this.$element = d(e);this.stuff = d("[data-tag]");this.target = this.$element.data("target") || "";
+  };b.prototype.filter = function (g) {
+    var e = [],
+        f = this.target;this.stuff.fadeOut("fast").promise().done(function () {
+      d(this).each(function () {
+        if (d(this).data("tag") == f || f == "all") {
+          e.push(this);
+        }
+      });d(e).show();
+    });
+  };var a = d.fn[c];d.fn[c] = function (e) {
+    return this.each(function () {
+      var g = d(this),
+          f = g.data(c);if (!f) {
+        g.data(c, f = new b(this));
+      }if (e == "filter") {
+        f.filter();
+      }
+    });
+  };d.fn[c].defaults = {};d.fn[c].Constructor = b;d.fn[c].noConflict = function () {
+    d.fn[c] = a;return this;
+  };d(document).on("click.portfilter.data-api", "[data-toggle^=portfilter]", function (f) {
+    d(this).portfilter("filter");
+  });
+}(window.jQuery);
 
 /***/ })
 /******/ ]);

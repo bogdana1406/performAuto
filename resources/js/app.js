@@ -7,7 +7,8 @@
 
 require('./bootstrap');
 require('./bootstrap-slider');
-require('./owl.carousel.min.js');
+require('./bootstrap-portfilter.min');
+require('./owl.carousel.min');
 require('./main');
 
 // window.Vue = require('vue');

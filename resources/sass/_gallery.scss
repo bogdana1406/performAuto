@@ -7,6 +7,7 @@
 		margin-bottom: 6.87rem;
 	}
 	.gallery-title {
+		position: relative;
 		h2 {
 			font-size: 1.87rem;
 			line-height: 1.8rem;
@@ -18,16 +19,63 @@
 			line-height: 1.1rem;
 			color: $text-dark-gray;
 		}
+		&::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			width: 2px;
+			background-color: $red;
+			transform: $skew;
+		}
 	}
 	.nav {
 		background-color: $main-black;
+		padding-left: 2rem;
+		padding-right: 2rem;
+		position: relative;
+		&::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			right: 98%;
+    		width: 25px;
+    		background-color: #0f0f0f;
+    		transform: skewX(-10deg);
+		}
+		&::after {
+			content: "";
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			right: -10px;
+    		width: 25px;
+    		background-color: #0f0f0f;
+    		transform: $skew;
+    		border-right: 10px solid $red;
+		}
 	}
 	.nav-link{
 		color: white;
-		font-size: 1.12rem;
+		font-size: .87rem;
 		line-height: 2.1rem;
 		text-transform: uppercase;
 		text-decoration: none;
+		position: relative;
+		z-index: 1;
+		&.active::before {
+			content: '';
+			position: absolute;
+			z-index: -1;
+			top: 0;
+			bottom: 0;
+			left: -.2rem;
+			right: -.2rem;
+			background-color: $red;
+			transform: $skew;
+		}
 	}
 	.card {
 		margin-bottom: 2rem;

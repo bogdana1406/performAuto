@@ -2,11 +2,11 @@
 
 return [
 
-	'all_brands' => 'Show all',
-	'brand1' => 'BENTLEY',
-	'brand2' => 'BMV',
-	'brand3' => 'HONDA',
-	'brand4' => 'RANGE ROVER',
-	'brand5' => 'AUDI',
-	'brand6' => 'VW',
+	'all_brands' => 'show all',
+	'brand1' => 'bentley',
+	'brand2' => 'bmv',
+	'brand3' => 'honda',
+	'brand4' => 'range rover',
+	'brand5' => 'audi',
+	'brand6' => 'vw',
 ];

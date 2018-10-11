@@ -102,13 +102,24 @@ $(document).ready(function() {
 
     //price trackbar
 
-    $("#priceBar").slider({ min: 5000, max: 25000, range: true, value: [7500, 15000]});
+    $("#priceBar").slider({ min: 5000, max: 25000, range: true, value: [7500, 15000] });
     $("#priceBar").on("slide", function(slideEvt) {
-    $("#priceBarCurrentSliderVal").text(slideEvt.value);
-});
+        $("#priceBarCurrentSliderVal").text(slideEvt.value);
+    });
 
     // Call a method on the slider
     // var value = priceBar.getValue();
+
+    //filtered gallery with light box
+
+    // filter
+    $('nav#gallery-filter a').on('click', function(event) {
+        event.preventDefault();
+        // active class
+        $('nav#gallery-filter a.active').removeClass('active');
+        $(this).addClass('active');
+
+    });
 
 
 });
@@ -121,11 +132,11 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 var player;
 
-onYouTubeIframeAPIReady = function () {
+onYouTubeIframeAPIReady = function() {
     player = new YT.Player('player', {
         // height: '244',
         // width: '434',
-        videoId: '8AfYdq6kU7I',  // youtube video id
+        videoId: '8AfYdq6kU7I', // youtube video id
         playerVars: {
             'autoplay': 0,
             'rel': 0,
@@ -135,43 +146,43 @@ onYouTubeIframeAPIReady = function () {
             'onStateChange': onPlayerStateChange
         }
     });
-
-    // owl-carousel
-
-    $('.owl-carousel').owlCarousel({
-        loop:true,
-        margin:10,
-        nav:true,
-        dots: false,
-        responsive:{
-            0:{
-                items:1
-            },
-            600:{
-                items:3
-            },
-            1000:{
-                items:4
-            }
-        }
-    })
 }
 
-var p = document.getElementById ("player");
+var p = document.getElementById("player");
 $(p).hide();
 
-var t = document.getElementById ("thumbnail");
+var t = document.getElementById("thumbnail");
 t.src = "img/video-thtumb.jpg";
 
-onPlayerStateChange = function (event) {
+onPlayerStateChange = function(event) {
     if (event.data == YT.PlayerState.ENDED) {
         $('.start-video').fadeIn('normal');
     }
 }
 
-$(document).on('click', '.start-video', function () {
+$(document).on('click', '.start-video', function() {
     $(this).hide();
     $("#player").show();
     $("#thumbnail_container").hide();
     player.playVideo();
 });
+
+// owl-carousel
+
+$('.owl-carousel').owlCarousel({
+    loop: true,
+    margin: 10,
+    nav: true,
+    dots: false,
+    responsive: {
+        0: {
+            items: 1
+        },
+        600: {
+            items: 3
+        },
+        1000: {
+            items: 4
+        }
+    }
+})
