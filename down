@@ -1,0 +1,4 @@
+#!/bin/bash
+cd laradock
+docker-compose stop nginx mysql phpmyadmin redis workspace 
+exit
