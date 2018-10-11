@@ -69,14 +69,14 @@
 	<div class="footer-links arrow-down arrow-black pt-5">
 		<div class="main-wrapper">
 			<nav class="navbar navbar-expand-md navbar-dark pb-4">
-			    <a class="navbar-brand" href="#">
+			    <a class="navbar-brand" href="/">
 			        <img src="{{ asset('img/logo.png') }}" alt="">
 			    </a>
 				<div class="ml-md-auto">
 				    <div class="navbar-nav">
 				      <a class="nav-item nav-link active" href="#">@lang('navigation.nav-link1')</a>
 				      <a class="nav-item nav-link" href="#">@lang('navigation.nav-link2')</a>
-				      <a class="nav-item nav-link" href="#">@lang('navigation.nav-link3')</a>
+				      <a class="nav-item nav-link" href="/about">@lang('navigation.nav-link3')</a>
 				      <a class="nav-item nav-link" href="#">@lang('navigation.nav-link4')</a>
 				    </div>
 				</div>

@@ -1,6 +1,6 @@
 <header>
   <nav class="navbar navbar-expand-lg">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="/">
     	<img src="{{ asset('img/logo.png') }}" alt="Perform Auto">
   	</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,7 +61,7 @@
 		        <a class="nav-link" href="#">@lang('navigation.nav-link2')</a>
 		      </li>
 		      <li class="nav-item">
-		        <a class="nav-link" href="#">@lang('navigation.nav-link3')</a>
+		        <a class="nav-link" href="/about">@lang('navigation.nav-link3')</a>
 		      </li>
 		      <li class="nav-item">
 		        <a class="nav-link" href="#">@lang('navigation.nav-link4')</a>
