@@ -4,20 +4,21 @@
 			{{-- contacts --}}
 			<div class="contacts-container d-md-flex">
 				<div class="col-md-6">
-					<div class="inline-title">
+					<div class="inline-title pl-4 slash">
 						<h2 class="text-white">@lang('footer.contacts1')</h2>
 					</div>
-					<div class="contact-details text-white">
+					<div class="contact-details text-white pl-4">
 						<span class="d-block">@lang('footer.street') 142A</span>
 						<span>@lang('footer.city'), </span>
 						<span>@lang('footer.country') 8880</span>
 					</div>
 				</div>
 				<div class="col-md-6">
-					<div class="inline-title">
+					<div class="inline-title pl-4 slash d-flex">
 						<h2 class="text-white">@lang('footer.contacts2')</h2>
+						<button class="btn btn-red btn-medium">write to us</button>
 					</div>
-					<div class="contact-details">
+					<div class="contact-details pl-4">
 						<a class="d-block" href="tel:+32 494 15 96 75">+32 494 15 96 75</a>
 						<a class="d-block" href="mailto:info@performauto.be">info@performauto.be</a>
 					</div>
@@ -26,7 +27,7 @@
 			{{-- /contacts --}}
 			{{-- dealers --}}
 			<div class="cards-wrapper d-md-flex">
-				<div class="col-md-6">
+				<div class="col-md-6 pr-4">
 					<div class="card p-0 border-0 d-flex flex-row">
 						<div class="card-body p-0 pb-4">
 							<div class="card-title">
@@ -41,7 +42,7 @@
 						<div class="card-img"><img src="{{ asset('/img/dealer1.jpg') }}" alt=""></div>
 					</div>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-6 pl-4">
 					<div class="card p-0 border-0 d-flex flex-row">
 						<div class="card-body p-0">
 							<div class="card-title">
@@ -61,9 +62,199 @@
 		</div>
 	</div>
 	{{-- google map --}}
-	<div class="map">
-		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2116.879500198804!2d3.149142613623346!3d50.87915559343541!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c33149dcbf9487%3A0x76da0cbf95702c1a!2zUm9lc2VsYXJlc3RyYWF0IDE0MiwgODg4MCBMZWRlZ2VtLCDQkdC10LvRjNCz0LjRjw!5e0!3m2!1sru!2sua!4v1538038556581" width="100%" height="568" frameborder="0" style="border:0" allowfullscreen></iframe>
-	</div>
+	<div id="map"></div>
+    <script>
+      function initMap() {
+        var styledMapType = new google.maps.StyledMapType(
+            [
+			  {
+			    "elementType": "geometry",
+			    "stylers": [
+			      {
+			        "color": "#353535"
+			      }
+			    ]
+			  },
+			  {
+			    "elementType": "labels.icon",
+			    "stylers": [
+			      {
+			        "visibility": "off"
+			      }
+			    ]
+			  },
+			  {
+			    "elementType": "labels.text.fill",
+			    "stylers": [
+			      {
+			        "color": "#757575"
+			      }
+			    ]
+			  },
+			  {
+			    "elementType": "labels.text.stroke",
+			    "stylers": [
+			      {
+			        "color": "#212121"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "administrative",
+			    "elementType": "geometry",
+			    "stylers": [
+			      {
+			        "color": "#757575"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "administrative.country",
+			    "elementType": "labels.text.fill",
+			    "stylers": [
+			      {
+			        "color": "#9e9e9e"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "administrative.land_parcel",
+			    "stylers": [
+			      {
+			        "visibility": "off"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "administrative.locality",
+			    "elementType": "labels.text.fill",
+			    "stylers": [
+			      {
+			        "color": "#bdbdbd"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "poi",
+			    "elementType": "labels.text.fill",
+			    "stylers": [
+			      {
+			        "color": "#757575"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "poi.park",
+			    "elementType": "geometry",
+			    "stylers": [
+			      {
+			        "color": "#181818"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "poi.park",
+			    "elementType": "labels.text.fill",
+			    "stylers": [
+			      {
+			        "color": "#616161"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "poi.park",
+			    "elementType": "labels.text.stroke",
+			    "stylers": [
+			      {
+			        "color": "#1b1b1b"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "road",
+			    "elementType": "geometry",
+			    "stylers": [
+			      {
+			        "color": "#2e2e2e"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "road",
+			    "elementType": "labels.text.fill",
+			    "stylers": [
+			      {
+			        "color": "#8a8a8a"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "road.local",
+			    "elementType": "labels.text.fill",
+			    "stylers": [
+			      {
+			        "color": "#616161"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "transit",
+			    "elementType": "labels.text.fill",
+			    "stylers": [
+			      {
+			        "color": "#757575"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "water",
+			    "elementType": "geometry",
+			    "stylers": [
+			      {
+			        "color": "#2e2e2e"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "water",
+			    "elementType": "labels.text.fill",
+			    "stylers": [
+			      {
+			        "color": "#3d3d3d"
+			      }
+			    ]
+			  }
+			],
+            {name: 'Styled Map'});
+
+        // Create a map object, and include the MapTypeId to add
+        // to the map type control.
+        var coordinates = {lat: 50.879782, lng: 3.150103},
+
+        	markerImage = 'img/map_marker.png',
+
+        	map = new google.maps.Map(document.getElementById('map'), {
+          		center: {lat: 50.879782, lng: 3.150103},
+          		zoom: 16,
+          		mapTypeControlOptions: {
+            		mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain', 'styled_map']
+          		}
+        	}),
+
+        	marker = new google.maps.Marker({
+        		position: coordinates,
+        		map: map,
+        		icon: markerImage
+    		});
+
+        //Associate the styled map with the MapTypeId and set it to display.
+        map.mapTypes.set('styled_map', styledMapType);
+        map.setMapTypeId('styled_map');
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkvSDbeBHqgyLj6ljVm37QBUl48srbzyA&callback=initMap">
+    </script>
 	{{-- /google map --}}
 	{{-- footer navigation --}}
 	<div class="footer-links arrow-down arrow-black pt-5">
