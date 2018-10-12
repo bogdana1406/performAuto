@@ -121,7 +121,6 @@ $(document).ready(function() {
 
     });
 
-
 });
 
 //youtube script

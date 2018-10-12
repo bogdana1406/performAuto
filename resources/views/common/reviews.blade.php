@@ -1,6 +1,6 @@
 <section class="reviews arrow-down arrow-down-rev arrow-white">
 	<div class="main-wrapper">
-		<div class="inline-title">
+		<div class="inline-title pl-4 slash">
 			<h2 class="mb-0">@lang('reviews.title')</h2>
 			<span>@lang('reviews.sub-title')</span>
 		</div>

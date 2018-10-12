@@ -18,8 +18,7 @@
 			@include('includes.counter')
 	
 		</div>
-		<h2 class="features-title mt-5">@lang('home.features-title')</h2>
-		<div class="divider mt-4"></div>
+		<h2 class="features-title mt-5 divider">@lang('home.features-title')</h2>
 		<p class="features-slogan mx-auto my-4">@lang('home.features-slogan')</p>
 		<span>&laquo;@lang('home.features-quote')&raquo;</span>
 	</section>

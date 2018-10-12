@@ -9,9 +9,9 @@
 		<div class="nav-wrapper d-flex flex-column">
 			<div class="top-bar d-flex justify-content-between align-items-center">
 				{{-- contacts --}}
-				<div class="contacts"><i class="fa fa-phone mr-2"></i><a href="tel:+32 494 15 96 75">+32 494 15 96 75</a>
+				<div class="contacts"><i class="fa fa-phone mr-3"></i><a href="tel:+32 494 15 96 75">+32 494 15 96 75</a>
 				</div>
-				<div class="contacts"><i class="fa fa-envelope-o mr-2"></i><a href="mailto:contact@performauto.be">contact@performauto.be</a>
+				<div class="contacts"><i class="fa fa-envelope-o mr-3"></i><a href="mailto:contact@performauto.be">contact@performauto.be</a>
 				</div>
 				{{-- !contacts --}}
 				{{-- social --}}

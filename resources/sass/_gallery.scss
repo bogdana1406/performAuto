@@ -1,7 +1,26 @@
 .gallery {
 	background-color: white;
-	padding-top: 6.87rem;
-	padding-bottom: 13.12rem;
+	padding-top: 5rem;
+	padding-bottom: 9.22rem;
+	.holder {
+        background-image:linear-gradient(rgba(255, 255, 255, .95), rgba(255, 255, 255, .95)), url('/img/headerbg.png');
+        background-size: cover;
+        // padding-top: 1.5rem;
+        // padding-bottom: 3.75rem;
+        overflow: hidden;
+        position: relative;
+        &::before {
+            content: '';
+            display: block;
+            width: 1400px;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            position: absolute;
+            background-color: white;
+            transform: translateX(-50%) $skew;  
+        }
+    }
 	.gallery-filter {
 		margin-top: 4.37rem;
 		margin-bottom: 6.87rem;
@@ -18,16 +37,6 @@
 			font-size: 1rem;
 			line-height: 1.1rem;
 			color: $text-dark-gray;
-		}
-		&::before {
-			content: "";
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			left: 0;
-			width: 2px;
-			background-color: $red;
-			transform: $skew;
 		}
 	}
 	.nav {
@@ -119,6 +128,7 @@
 		line-height: 0.9rem;
 		font-weight: 700;
 		padding: 0.75rem 2.375rem;
+		margin-bottom: 3.9rem;
 		border: 1px solid $main-black;
 		text-transform: uppercase;
 		color: $text-red;

@@ -11088,16 +11088,6 @@ header .dropdown-toggle:after {
   line-height: 2rem;
 }
 
-.search .btn-search {
-  background-color: #c92223;
-  color: white;
-  text-transform: uppercase;
-  padding: 1.25rem 1.37rem;
-  margin-left: 1.87rem;
-  font-size: 0.87rem;
-  line-height: 0.87rem;
-}
-
 .custom-select {
   position: relative;
   background-color: transparent;
@@ -11225,8 +11215,29 @@ header .dropdown-toggle:after {
 
 .gallery {
   background-color: white;
-  padding-top: 6.87rem;
-  padding-bottom: 13.12rem;
+  padding-top: 5rem;
+  padding-bottom: 9.22rem;
+}
+
+.gallery .holder {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.95)), to(rgba(255, 255, 255, 0.95))), url("/img/headerbg.png");
+  background-image: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), url("/img/headerbg.png");
+  background-size: cover;
+  overflow: hidden;
+  position: relative;
+}
+
+.gallery .holder::before {
+  content: '';
+  display: block;
+  width: 1400px;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  background-color: white;
+  -webkit-transform: translateX(-50%) skewX(-10deg);
+          transform: translateX(-50%) skewX(-10deg);
 }
 
 .gallery .gallery-filter {
@@ -11249,18 +11260,6 @@ header .dropdown-toggle:after {
   font-size: 1rem;
   line-height: 1.1rem;
   color: #363636;
-}
-
-.gallery .gallery-title::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 2px;
-  background-color: #c92223;
-  -webkit-transform: skewX(-10deg);
-          transform: skewX(-10deg);
 }
 
 .gallery .nav {
@@ -11370,6 +11369,7 @@ header .dropdown-toggle:after {
   line-height: 0.9rem;
   font-weight: 700;
   padding: 0.75rem 2.375rem;
+  margin-bottom: 3.9rem;
   border: 1px solid #0f0f0f;
   text-transform: uppercase;
   color: #c92223;
@@ -11521,12 +11521,23 @@ footer .contacts-container {
   margin-bottom: 5.12rem;
 }
 
+footer .contacts-container .inline-title h2 {
+  margin-bottom: .2rem;
+  padding-bottom: 1.1rem;
+}
+
 footer .contacts-container a {
   color: white;
 }
 
+footer .contacts-container .btn {
+  margin-left: 25%;
+}
+
 footer .cards-wrapper {
   margin-bottom: -8rem;
+  position: relative;
+  z-index: 50;
 }
 
 footer .card {
@@ -11535,7 +11546,7 @@ footer .card {
 }
 
 footer .card-body {
-  background-color: #111;
+  background-color: #111111;
   -webkit-box-flex: inherit;
       -ms-flex: inherit;
           flex: inherit;
@@ -11583,6 +11594,10 @@ footer .card-img {
           flex: 1;
 }
 
+footer #map {
+  height: 25vw;
+}
+
 footer .footer-links {
   background-color: #0f0f0f;
   text-transform: uppercase;
@@ -11594,7 +11609,7 @@ footer .footer-links .nav-link {
 }
 
 footer .sub-footer {
-  background-color: #111;
+  background-color: #111111;
   padding-top: 2rem;
   padding-bottom: 2rem;
   font-size: .75rem;
@@ -11619,7 +11634,6 @@ footer .sub-footer {
 .home-features {
   background-color: white;
   padding-top: 5.5rem;
-  padding-bottom: 5rem;
   color: #6a6969;
   text-align: center;
   margin-top: -50px;
@@ -11632,28 +11646,17 @@ footer .sub-footer {
   max-width: 724px;
   margin-left: auto;
   margin-right: auto;
+  padding-bottom: 1.9rem;
 }
 
 .home-features .features-slogan {
   max-width: 480px;
 }
 
-.home-features .divider {
-  height: 1px;
-  position: relative;
-}
-
-.home-features .divider::after {
-  content: "";
-  position: absolute;
-  height: 1px;
+.home-features .divider::before {
   width: 236px;
   background-color: #6a6969;
   opacity: .2;
-  top: 0;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
 }
 
 .video-box {
@@ -11843,6 +11846,24 @@ h2 {
   border-color: inherit;
 }
 
+.btn.btn-large {
+  padding: 1.25rem 1.37rem;
+  margin-left: 1.87rem;
+  font-size: 0.87rem;
+  line-height: 0.87rem;
+}
+
+.btn.btn-medium {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
+.btn.btn-red {
+  background-color: #c92223;
+  color: white;
+  text-transform: uppercase;
+}
+
 .main-wrapper {
   max-width: 1144px;
   margin-left: auto;
@@ -11948,5 +11969,21 @@ img.thumbnail {
   width: 26%;
   height: 1px;
   border-bottom: 2px solid #494949;
+}
+
+.slash {
+  position: relative;
+}
+
+.slash::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 2px;
+  background-color: #c92223;
+  -webkit-transform: skewX(-10deg);
+          transform: skewX(-10deg);
 }
 

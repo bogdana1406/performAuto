@@ -14,7 +14,7 @@
 .home-features {
     background-color: white;
     padding-top: 5.5rem;
-    padding-bottom: 5rem;
+    // padding-bottom: 5rem;
     color: $text-gray;
     text-align: center;
     margin-top: -50px;
@@ -25,23 +25,16 @@
         max-width: 724px;
         margin-left: auto;
         margin-right: auto;
+        padding-bottom: 1.9rem;
     }
     .features-slogan {
         max-width: 480px;
     }
     .divider {
-        height: 1px;
-        position: relative;
-        &::after {
-            content: "";
-            position: absolute;
-            height: 1px;
+        &::before {
             width: 236px;
             background-color: $text-gray;
             opacity: .2;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
         }
     }
 }
