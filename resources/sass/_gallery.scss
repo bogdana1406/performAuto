@@ -99,7 +99,11 @@
 			text-decoration: none;
 		}
 		&:hover {
-			box-shadow: 0 0 30px #dedede; 
+			box-shadow: 0 0 30px #dedede;
+			.card-img-top::before {
+				opacity: .5;
+			}	
+
 		}
 		.card-title {
 			font-size: 1.12rem;
@@ -117,10 +121,70 @@
 		}
 	}
 	.card-img-top {
-		position: relative;
-			.img-thumb {
-			width: 100%;
+		> a {
+			display: block;
+			position: relative;
+			&::before {
+				content: '';
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				z-index: 100;
+				background-color: rgba(0, 0, 0, .6);
+				opacity: 0;
+				transition: $transition;
+			}
+			&:hover {
+				&::before {
+					opacity: 1;
+				}
+				.search-icon {
+					opacity: 1;
+				}
+			}
 		}
+		.img-thumb {
+			width: 100%;
+			position: relative;
+		}
+		.search-icon {
+			position: absolute;
+			display: flex;
+			justify-content: center;
+			width: 100%;
+			top: 0;
+			bottom: 0;
+			z-index: 120;
+			opacity: 0;
+			transition: $transition;
+		}
+		.img-icon {
+			align-self: center;
+		}
+	}
+
+	.search-icon::before,
+	.search-icon::after {
+		content: '';
+		position: absolute;
+		height: 42px;
+		width: 42px;
+		margin: 10px;
+	}
+
+	.search-icon::before {
+		left: 0;
+		border-left: $border-red;
+		border-top: $border-red;
+	}
+
+	.search-icon::after {
+		right: 0;
+		bottom: 0;
+		border-right: $border-red;
+		border-bottom: $border-red;
 	}
 
 	.btn {
