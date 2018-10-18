@@ -46,7 +46,7 @@
 		  <div class="collapse navbar-collapse header-divider pt-1" id="navbarSupportedContent">
 		    <ul class="navbar-nav py-1 mr-auto">
 		    	<li class="nav-item dropdown">
-		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@lang('navigation.nav-link1')</a>
+		        <a class="nav-link dropdown-toggle {{ Request::is('/') ? 'active' : null }}" href="{{ url('/') }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@lang('navigation.nav-link1')</a>
 		        <div class="dropdown-menu triangle-top" aria-labelledby="navbarDropdown">
 		          <a class="dropdown-item" href="#">@lang('navigation.dropdown-link1')<span class="float-right">24</span></a>
 		          <a class="dropdown-item" href="#">@lang('navigation.dropdown-link2')<span class="float-right">2</span></a>
@@ -57,14 +57,14 @@
 		          <a class="dropdown-item" href="#">@lang('navigation.dropdown-link7')<span class="float-right">8</span></a>
 		        </div>
 		      </li>
-		      <li class="nav-item active">
-		        <a class="nav-link" href="#">@lang('navigation.nav-link2')</a>
+		      <li class="nav-item">
+		        <a class="nav-link {{ Request::is('advantages') ? 'active' : null }}" href="{{ url('advantages') }}">@lang('advantages.title')</a>
 		      </li>
 		      <li class="nav-item">
-		        <a class="nav-link" href="/about">@lang('navigation.nav-link3')</a>
+		        <a class="nav-link {{ Request::is('about') ? 'active' : null }}" href="{{ url('about') }}">@lang('about.title')</a>
 		      </li>
 		      <li class="nav-item">
-		        <a class="nav-link" href="#">@lang('navigation.nav-link4')</a>
+		        <a class="nav-link {{ Request::is('') ? 'active' : null }}" href="#">@lang('navigation.nav-link4')</a>
 		      </li>
 		    </ul>
 		    <div class="btn-group">

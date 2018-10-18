@@ -23,6 +23,6 @@ Route::get('/about', function () {
     return view('about');
 });
 
-Route::get('/page3', function () {
-    return view('page3');
+Route::get('/advantages', function () {
+    return view('advantages');
 });

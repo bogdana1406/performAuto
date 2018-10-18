@@ -40,7 +40,7 @@
 				<input id="priceBar" type="text"/>
 			</div>
 			<div class="col-auto">
-				<buton class="btn btn-red btn-large">search</buton>
+				<buton class="btn btn-red btn-large border-0">search</buton>
 			</div>
 		</form>
 	</div>

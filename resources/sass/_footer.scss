@@ -75,6 +75,31 @@ footer {
 		font-size: .75rem;
 		.nav-link {
 			color: #a9a9a9;
+			position: relative;
+			transition: $transition;
+			@media (min-width: 768px) {
+				padding-bottom: 0;
+			}
+			&::before {
+				content: '';
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				height: 1px;
+				border-bottom: $border-red;
+				opacity: 0;
+				transition: $transition;
+				@media (min-width: 768px) {
+					margin-right: .5rem;
+					margin-left: .5rem;
+				}
+			}
+			&:hover {
+				&::before {
+					opacity: 1;
+				}
+			}
 		}
 	}
 	.sub-footer {

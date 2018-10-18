@@ -2,6 +2,7 @@
 
 return [
 
+	'title' => 'Home',
     'hero-title' => 'Only performance cars',
     'search-title' => 'Search Cars',
     'features-title' => 'PerformAuto is an independent distributor

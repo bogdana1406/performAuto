@@ -10,20 +10,20 @@
 	.count-box {
 		height: 5.25rem;
 		width: 5.25rem;
-		border-left: 1px solid $red;
-		border-bottom: 1px solid $red;
+		border-left: $border-red;
+		border-bottom: $border-red;
 		position: relative;
 		&:after {
 			display: block;
 			content: '';
 			width: 1.68rem;
-			border-top: 1px solid $red;
+			border-top: $border-red;
 		}
 		&:before {
 			display: block;
 			content: '';
 			height: 1.68rem;
-			border-right: 1px solid $red;
+			border-right: $border-red;
 			position: absolute;
 			bottom: 0;
 			right: 0;

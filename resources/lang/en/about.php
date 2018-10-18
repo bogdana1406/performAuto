@@ -2,7 +2,7 @@
 
 return [
 
-    'hero-title' => 'About us',
+	'title' => 'About Us',
     'hero-sub-title' => 'Search Cars',
     'features-title' => 'PerformAuto is an independent distributor
  specializing in top models of reliable brands.',

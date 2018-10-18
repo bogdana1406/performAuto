@@ -16,7 +16,7 @@
 				<div class="col-md-6">
 					<div class="inline-title pl-4 slash d-flex">
 						<h2 class="text-white">@lang('footer.contacts2')</h2>
-						<button class="btn btn-red btn-medium">write to us</button>
+						<button class="btn btn-red btn-medium border-0">write to us</button>
 					</div>
 					<div class="contact-details pl-4">
 						<a class="d-block" href="tel:+32 494 15 96 75">+32 494 15 96 75</a>
@@ -253,22 +253,22 @@
       }
     </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkvSDbeBHqgyLj6ljVm37QBUl48srbzyA&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzTbEWcML77cE02KRqFNkW8MlnzjDFs6E&callback=initMap">
     </script>
 	{{-- /google map --}}
 	{{-- footer navigation --}}
 	<div class="footer-links arrow-down arrow-black pt-5">
 		<div class="main-wrapper">
 			<nav class="navbar navbar-expand-md navbar-dark pb-4">
-			    <a class="navbar-brand" href="/">
+			    <a class="navbar-brand" href="{{ url('/') }}">
 			        <img src="{{ asset('img/logo.png') }}" alt="">
 			    </a>
 				<div class="ml-md-auto">
 				    <div class="navbar-nav">
-				      <a class="nav-item nav-link active" href="#">@lang('navigation.nav-link1')</a>
-				      <a class="nav-item nav-link" href="#">@lang('navigation.nav-link2')</a>
-				      <a class="nav-item nav-link" href="/about">@lang('navigation.nav-link3')</a>
-				      <a class="nav-item nav-link" href="#">@lang('navigation.nav-link4')</a>
+				      <a class="nav-item nav-link {{ Request::is('/') ? 'active' : null }}" href="{{ url('/') }}">@lang('navigation.nav-link1')</a>
+				      <a class="nav-item nav-link {{ Request::is('advantages') ? 'active' : null }}" href="{{ url('advantages') }}">@lang('advantages.title')</a>
+				      <a class="nav-item nav-link {{ Request::is('about') ? 'active' : null }}" href="{{ url('about') }}">@lang('about.title')</a>
+				      <a class="nav-item nav-link {{ Request::is('') ? 'active' : null }}" href="{{ url('') }}">@lang('navigation.nav-link4')</a>
 				    </div>
 				</div>
 			</nav>

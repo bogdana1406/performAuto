@@ -68,12 +68,17 @@ header {
 		padding-right: 1.8rem;
 		border: 1px solid rgba(225, 225, 225, 0);
 		transition: $transition;
+		&.active {
+			color: $text-red;
+		}
 		&:hover {
 			border: 1px solid rgba(225, 225, 225, .2);
 			border-radius: 0.25rem;
+			color: $text-red;
 		}
 		&.dropdown-toggle:focus {
 			border: 1px solid rgba(225, 225, 225, .4);
+			color: $text-red;
 		}
 	}
 	.top-bar{
