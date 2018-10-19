@@ -38,6 +38,10 @@
 
 	@include('includes.video')
 
-	@include('common.reviews')
+	<section class="reviews arrow-down arrow-down-rev arrow-white">
+
+		@include('common.reviews')
+		
+	</section>
 
 @endsection

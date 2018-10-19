@@ -1,4 +1,4 @@
-<section class="video-box">
+<section class="video-box" id="videoBox">
 	<h2 class="title text-center">@lang('video.title')</h2>
 	<div class="video d-flex justify-content-center">
 		<div class="video-wrapper">

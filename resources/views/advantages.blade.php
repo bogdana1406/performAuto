@@ -3,7 +3,6 @@
 @section('title', 'Advantages')
 
 @section('content')
-	
 	<div class="hero hero-advantages d-flex">
 		<div class="main-wrapper">
 			<div class="hero-title">
@@ -21,7 +20,6 @@
 	<section class="features features-advantages arrow-down arrow-up-rev arrow-black"">
 		<div class="main-wrapper text-center">
 			<h2 class="features-title mt-5 mb-0 divider">@lang('advantages.features-title')</h2>
-
 			<div class="features-list">
 				<ul class="list-unstyled text-left">
 					<li class="bordered-square"><span class="num">01</span>@lang('advantages.features1')</li>
@@ -31,16 +29,24 @@
 					<li class="bordered-square"><span class="num">05</span>@lang('advantages.features5')</li>
 				</ul>
 			</div>
-
-			<span>&laquo;@lang('advantages.features-quote')&raquo;</span>
-			
-			{{-- <div class="clients-carousel">
-				
-				@include('includes.carousel')
-			
-			</div> --}}
-
+			<span class="features-quote">&laquo;@lang('advantages.features-quote')&raquo;</span>
+			<div class="d-flex justify-content-center pt-4">
+				<a href="#" class="btn btn-red btn-medium border-0">Choose your car</a>
+			</div>
 		</div>
 	</section>
 
+	<section class="clients-carousel bg-white">
+		<div class="main-wrapper">
+	
+			@include('includes.carousel')
+	
+		</div>
+	</section>
+
+	<section class="reviews arrow-down-rev arrow-white">
+				
+		@include('common.reviews')
+
+	</section>
 @endsection

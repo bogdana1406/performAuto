@@ -19,10 +19,14 @@ Route::get('/home', function () {
     return view('home');
 });
 
+Route::get('/advantages', function () {
+    return view('advantages');
+});
+
 Route::get('/about', function () {
     return view('about');
 });
 
-Route::get('/advantages', function () {
-    return view('advantages');
+Route::get('/p3', function () {
+    return view('page3');
 });

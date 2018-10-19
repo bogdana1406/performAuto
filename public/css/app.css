@@ -11859,6 +11859,10 @@ footer .sub-footer {
   background-image: url("/img/advantages-hero-bg.png");
 }
 
+.features {
+  padding-bottom: 5rem;
+}
+
 .features.features-advantages .features-title {
   max-width: 470px;
 }
@@ -11881,7 +11885,6 @@ footer .sub-footer {
 }
 
 .bordered-square::before,
-.bordered-square::after,
 .bordered-square .num {
   content: '';
   position: absolute;
@@ -11903,6 +11906,17 @@ footer .sub-footer {
   z-index: 10;
   font-size: 2.62rem;
   line-height: 2.62rem;
+}
+
+.features-quote {
+  font-size: 1.12rem;
+  line-height: 2rem;
+  font-weight: 700;
+}
+
+.clients-carousel {
+  padding-top: 7.87rem;
+  padding-bottom: 1.25rem;
 }
 
 body {

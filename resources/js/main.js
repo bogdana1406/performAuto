@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    //counter
+    //====Counter====
 
     var counters = $(".count");
     var countersQuantity = counters.length;
@@ -24,7 +24,7 @@ $(document).ready(function() {
         count(0, counter[j], j);
     }
 
-    //custom select
+    //====Custom select====
 
     var x, i, j, selElmnt, a, b, c;
     /*look for any elements with the class "custom-select":*/
@@ -100,7 +100,7 @@ $(document).ready(function() {
     then close all select boxes:*/
     document.addEventListener("click", closeAllSelect);
 
-    //price trackbar
+    //====Price trackbar====
 
     $("#priceBar").slider({ min: 5000, max: 25000, range: true, value: [7500, 15000] });
     $("#priceBar").on("slide", function(slideEvt) {
@@ -110,7 +110,7 @@ $(document).ready(function() {
     // Call a method on the slider
     // var value = priceBar.getValue();
 
-    //filtered gallery with light box
+    //====Filtered gallery with light box====
 
     // filter
     $('nav#gallery-filter a').on('click', function(event) {
@@ -121,67 +121,73 @@ $(document).ready(function() {
 
     });
 
-});
 
-//youtube script
-var tag = document.createElement('script');
-tag.src = "//www.youtube.com/iframe_api";
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-var player;
+    //====Youtube script====
 
-onYouTubeIframeAPIReady = function() {
-    player = new YT.Player('player', {
-        // height: '244',
-        // width: '434',
-        videoId: '8AfYdq6kU7I', // youtube video id
-        playerVars: {
-            'autoplay': 0,
-            'rel': 0,
-            'showinfo': 0
-        },
-        events: {
-            'onStateChange': onPlayerStateChange
+    if ( document.getElementById('videoBox')) {
+
+        var tag = document.createElement('script');
+        tag.src = "//www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+
+        onYouTubeIframeAPIReady = function() {
+            player = new YT.Player('player', {
+                // height: '244',
+                // width: '434',
+                videoId: '8AfYdq6kU7I', // youtube video id
+                playerVars: {
+                    'autoplay': 0,
+                    'rel': 0,
+                    'showinfo': 0
+                },
+                events: {
+                    'onStateChange': onPlayerStateChange
+                }
+            });
         }
-    });
-}
 
-var p = document.getElementById("player");
-$(p).hide();
+        var p = document.getElementById("player");
+        $(p).hide();
 
-var t = document.getElementById("thumbnail");
-t.src = "img/video-thtumb.jpg";
+        var t = document.getElementById("thumbnail");
+        t.src = "/img/video-thtumb.jpg";
 
-onPlayerStateChange = function(event) {
-    if (event.data == YT.PlayerState.ENDED) {
-        $('.start-video').fadeIn('normal');
-    }
-}
-
-$(document).on('click', '.start-video', function() {
-    $(this).hide();
-    $("#player").show();
-    $("#thumbnail_container").hide();
-    player.playVideo();
-});
-
-// owl-carousel
-
-$('.owl-carousel').owlCarousel({
-    loop: true,
-    margin: 10,
-    nav: true,
-    dots: false,
-    responsive: {
-        0: {
-            items: 1
-        },
-        600: {
-            items: 3
-        },
-        1000: {
-            items: 4
+        onPlayerStateChange = function(event) {
+            if (event.data == YT.PlayerState.ENDED) {
+                $('.start-video').fadeIn('normal');
+            }
         }
+
+        $(document).on('click', '.start-video', function() {
+            $(this).hide();
+            $("#player").show();
+            $("#thumbnail_container").hide();
+            player.playVideo();
+        });
     }
-})
+
+    //====Owl-carousel====
+
+    $('.owl-carousel').owlCarousel({
+        loop: true,
+        margin: 10,
+        nav: true,
+        dots: false,
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 3
+            },
+            1000: {
+                items: 4
+            }
+        }
+    })
+
+});
