@@ -4931,11 +4931,13 @@ input[type="button"].btn-block {
   text-align: center;
 }
 
-.tab-content > .tab-pane {
+.tab-content > .tab-pane,
+.car-card .alternate-car > .tab-pane {
   display: none;
 }
 
-.tab-content > .active {
+.tab-content > .active,
+.car-card .alternate-car > .active {
   display: block;
 }
 
@@ -11745,6 +11747,7 @@ footer .sub-footer {
 .home-features {
   background-color: white;
   padding-top: 5.5rem;
+  font-size: 1.12rem;
   color: #6a6969;
   text-align: center;
   margin-top: -50px;
@@ -11855,6 +11858,14 @@ footer .sub-footer {
   background-color: #40413E;
 }
 
+.features.features-about {
+  font-size: 1rem;
+}
+
+.features.features-about .features-quote {
+  font-size: 1.12rem;
+}
+
 .hero-advantages.hero {
   background-image: url("/img/advantages-hero-bg.png");
 }
@@ -11908,15 +11919,98 @@ footer .sub-footer {
   line-height: 2.62rem;
 }
 
-.features-quote {
-  font-size: 1.12rem;
-  line-height: 2rem;
-  font-weight: 700;
-}
-
 .clients-carousel {
   padding-top: 7.87rem;
   padding-bottom: 1.25rem;
+}
+
+.car-card {
+  padding-top: 12vw;
+  padding-bottom: 4rem;
+  background-image: url("/img/car_bg.png");
+  background-size: cover;
+}
+
+.car-card .car-title,
+.car-card .car-price {
+  font-size: 2.25rem;
+  line-height: 2.25rem;
+  font-weight: 400;
+  color: white;
+  margin-bottom: .5rem;
+}
+
+.car-card .car-price {
+  font-weight: 300;
+}
+
+.car-card .car-properties {
+  margin-top: 4.6rem;
+}
+
+.car-card .nav-tabs {
+  border: none;
+  margin-bottom: 1.75rem;
+}
+
+.car-card .nav-link {
+  position: relative;
+  color: #696969;
+  text-transform: uppercase;
+  padding-bottom: 0;
+  padding-left: 0;
+  border: none;
+}
+
+.car-card .nav-link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  border-bottom: 1px solid #c92223;
+  opacity: 0;
+  -webkit-transition: all 0.25s ease-out;
+  transition: all 0.25s ease-out;
+  margin-right: 1rem;
+}
+
+.car-card .nav-link:hover {
+  border: none;
+}
+
+.car-card .nav-link:hover::before {
+  opacity: 1;
+}
+
+.car-card .nav-link.active {
+  color: white;
+  background-color: initial;
+  border: none;
+}
+
+.car-card .nav-link.active.nav-link::before {
+  opacity: 1;
+}
+
+.car-card .tab-content,
+.car-card .alternate-car {
+  color: #ccc;
+}
+
+.car-card .alternate-car {
+  margin-top: 6.25rem;
+  font-size: 1.12rem;
+}
+
+.car-card .alternate-car .alt-price {
+  font-size: .87rem;
+  color: #c92223;
+}
+
+.car-card + div .gallery > .holder {
+  background-image: initial;
 }
 
 body {
@@ -12062,6 +12156,7 @@ h2 {
 .features {
   padding-top: 2rem;
   color: #ccc;
+  font-size: 1.12rem;
 }
 
 .features .features-title {
@@ -12084,6 +12179,11 @@ h2 {
 
 .features span {
   color: white;
+}
+
+.features span.features-quote {
+  line-height: 2rem;
+  font-weight: 700;
 }
 
 .inline-title h2 {

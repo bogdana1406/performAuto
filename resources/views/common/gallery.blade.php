@@ -1,4 +1,4 @@
-<section class="gallery arrow-up arrow-white">
+<section class="gallery">
 	<div class="holder">
 		<div class="main-wrapper">
 			<div class="gallery-filter d-flex">

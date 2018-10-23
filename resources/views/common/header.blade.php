@@ -64,7 +64,7 @@
 		        <a class="nav-link {{ Request::is('about') ? 'active' : null }}" href="{{ url('about') }}">@lang('about.title')</a>
 		      </li>
 		      <li class="nav-item">
-		        <a class="nav-link {{ Request::is('') ? 'active' : null }}" href="#">@lang('navigation.nav-link4')</a>
+		        <a class="nav-link {{ Request::is('') ? 'active' : null }}" href="#" id="toContacts">@lang('navigation.nav-link4')</a>
 		      </li>
 		    </ul>
 		    <div class="btn-group">

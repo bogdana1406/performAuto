@@ -1,5 +1,5 @@
 <footer>
-	<div class="top-footer">
+	<div class="top-footer" id="contacts">
 		<div class="main-wrapper">
 			{{-- contacts --}}
 			<div class="contacts-container d-md-flex">

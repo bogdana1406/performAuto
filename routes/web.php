@@ -27,6 +27,10 @@ Route::get('/about', function () {
     return view('about');
 });
 
+Route::get('/car', function () {
+    return view('car');
+});
+
 Route::get('/p3', function () {
     return view('page3');
 });

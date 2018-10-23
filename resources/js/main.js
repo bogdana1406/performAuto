@@ -168,7 +168,7 @@ $(document).ready(function() {
             $("#thumbnail_container").hide();
             player.playVideo();
         });
-    }
+    };
 
     //====Owl-carousel====
 
@@ -188,6 +188,21 @@ $(document).ready(function() {
                 items: 4
             }
         }
-    })
+    });
+
+    //====Smooth scrolling====
+
+    $("#toContacts").click(function (){
+        $('html, body').animate({
+            scrollTop: $("#contacts").offset().top
+        }, 750);
+    });
+
+    //====Unite gallery====
+
+    // $("#gallery").unitegallery({
+    //     gallery_theme: "grid",
+    //     theme_panel_position: "right"
+    // }); 
 
 });

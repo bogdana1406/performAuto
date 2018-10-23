@@ -17,7 +17,7 @@
 		</div>
 	</div>
 	
-	<section class="features  arrow-down arrow-up-rev arrow-black"">
+	<section class="features features-about arrow-down arrow-up-rev arrow-black"">
 		<div class="main-wrapper text-center">
 			<h2 class="features-title mt-5 mb-0 divider">@lang('about.features-title')</h2>
 			<p class="features-slogan mx-auto">@lang('about.features-slogan')</p>
@@ -25,7 +25,7 @@
 			@include('includes.counter')
 
 			<p class="features-slogan mx-auto my-4">@lang('about.features-slogan')</p>
-			<span>&laquo;@lang('about.features-quote')&raquo;</span>
+			<span class="features-quote">&laquo;@lang('about.features-quote')&raquo;</span>
 			
 			<div class="clients-carousel">
 				
@@ -41,7 +41,7 @@
 	<section class="reviews arrow-down arrow-down-rev arrow-white">
 
 		@include('common.reviews')
-		
+
 	</section>
 
 @endsection

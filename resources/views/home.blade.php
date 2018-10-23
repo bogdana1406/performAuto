@@ -23,7 +23,11 @@
 		<span>&laquo;@lang('home.features-quote')&raquo;</span>
 	</section>
 
-	@include('common.gallery')
+	<div class="arrow-up arrow-white">
+
+		@include('common.gallery')
+		
+	</div>
 
 	@include('includes.video')
 

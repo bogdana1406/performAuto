@@ -1,0 +1,77 @@
+// @import '../css/unite-gallery.css';
+// @import '../css/ug-theme-default.css';
+.car-card {
+  padding-top: 12vw;
+  padding-bottom: 4rem;
+  background-image: url('/img/car_bg.png');
+  background-size: cover;
+  .car-title {
+    font-size: 2.25rem;
+    line-height: 2.25rem;
+    font-weight: 400;
+    color: white;
+    margin-bottom: .5rem;
+  }
+  .car-price {
+    @extend .car-title;
+    font-weight: 300;
+  }
+	.car-properties {
+		margin-top: 4.6rem;
+	}
+  .nav-tabs {
+    border: none;
+    margin-bottom: 1.75rem;
+  }
+  .nav-link {
+  	position: relative;
+    color: $text-light-gray;
+    text-transform: uppercase;
+    padding-bottom: 0;
+    padding-left: 0;
+    border: none;
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 1px;
+      border-bottom: $border-red;
+      opacity: 0;
+      transition: $transition;
+      margin-right: 1rem;
+    }
+    &:hover {
+    	border: none;
+      &::before {
+        opacity: 1;
+      }
+    }
+    &.active {
+      color: white;
+      background-color: initial;
+      border: none;
+      &.nav-link::before {
+        opacity: 1;
+      }
+    }
+  }
+  .tab-content {
+    color: $text-ultra-light-gray;
+  }
+  .alternate-car {
+    @extend .tab-content;
+    margin-top: 6.25rem;
+    font-size: 1.12rem;
+    .alt-price {
+      font-size: .87rem;
+      color: $text-red;
+    }
+  }
+  & + div {
+    .gallery > .holder {
+      background-image: initial;
+    }
+  }
+}
