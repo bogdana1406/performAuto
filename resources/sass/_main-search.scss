@@ -1,73 +1,124 @@
 .search {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+  margin-bottom: -2px;
+  .form-group {
+    margin-bottom: 0;
+    padding: 1.12rem 1.87rem;
+  }
+  .form-control {
+    background-color: transparent;
+    border-radius: 0;
+    height: auto;
+    padding: .87rem 1.1rem;
+  }
+  .trackbar {
+    @extend .form-group;
+    padding-top: .8rem;
+    padding-bottom: .8rem;
+    .slider-horizontal {
+      .slider-track {
+        height: 4px;
+      }
+      .slider-handle {
+        width: 16px;
+        height: 16px;
+        top: -1;
+        background-image: none;
+      }
+      .tooltip-main {
+        opacity: 1;
+        left: initial !important;
+        right: -70px;
+        &::before, .tooltip-inner {
+          background-color: transparent;
+          font-size: 1.12rem;
+          font-family: 'Roboto', sans-serif;
+          font-weight: 600;
+          margin-bottom: 0;
+        }
+        &::before {
+          content: "\f153";
+          position: absolute;
+          left: -5px;
+          bottom: .2rem;
+          font-family: FontAwesome;
+        }
+      }
+    }
+    .trackbar-title {
+      text-transform: uppercase;
+      line-height: 2rem;
+    }
+  }
+}
+.search-dark {
+  .search {
     background-color: $main-black;
-    padding-top: 2.5rem;
-    padding-bottom: 2.5rem;
-    margin-bottom: -2px;
-
     .form-group {
-        margin-bottom: 0;
-        padding: 1.12rem 1.87rem;
-        border-right: 1px solid #262525;
-    }
-
-    .form-control {
-        background-color: transparent;
-        border-radius: 0;
-        border-color: #494949;
-        color: white;
-        height: auto;
-        padding: .87rem 1.1rem;
-    }
-
-    .trackbar {
-        @extend .form-group;
-        padding-top: .8rem;
-        padding-bottom: .8rem;
-        .slider-horizontal {
-            .slider-track {
-                height: 4px;
-            }
-            .slider-track-low,
-            .slider-track-high {
-                background-color: #494949;
-            }
-            .slider-selection {
-                background: $red;
-            }
-            .slider-handle {
-                width: 16px;
-                height: 16px;
-                top: -1;
-                background-color: $red;
-                border: 2px solid $main-black;
-                background-image: none;
-            }
-            .tooltip-main {
-                opacity: 1;
-                left: initial !important;
-                right: -70px;
-                &::before,
-                .tooltip-inner {
-                    background-color: transparent;
-                    color: $text-red;
-                    font-size: 1.12rem;
-                    font-family: 'Roboto', sans-serif;
-                    font-weight: 600;
-                    margin-bottom: 0;
-                }
-                &::before {
-                    content: "\f153";
-                    position: absolute;
-                    left: -5px;
-                    bottom: .2rem;
-                    font-family: FontAwesome;
-                }
-            }
+    border-right: 1px solid #262525;
+  }
+  .form-control {
+    border-color: #494949;
+    color: white;
+  }
+  .trackbar {
+      .slider-track-low, .slider-track-high {
+        background-color: #494949;
+      }
+      .slider-selection {
+        background: $red;
+      }
+      .slider-handle {
+        background-color: $red;
+        border: 2px solid $main-black;
+      }
+      .tooltip-main {
+        &::before, .tooltip-inner {
+          color: $text-red;
         }
-        .trackbar-title {
-            color: white;
-            text-transform: uppercase;
-            line-height: 2rem;
-        }
+      }
     }
+    .trackbar-title {
+      color: white;
+    }
+  }
+}
+.search-white {
+  .search {
+    background-color: white;
+    .form-group {
+    border-right: 1px solid #eee;
+    .custom-select {
+      border-color: #c6c6c6;
+      .select-selected {
+        color: $text-light-gray;
+        background-color: white;
+        &::after {
+          background-color: inherit;
+        }
+      }
+    }
+  }
+  .trackbar {
+      .slider-track-low, .slider-track-high {
+        background-color: #c6c6c6;
+      }
+      .slider-selection {
+        background: $red;
+      }
+      .slider-handle {
+        background-color: $red;
+        border: 2px solid white;
+      }
+      .tooltip-main {
+        &::before, .tooltip-inner {
+          color: $text-red;
+        }
+      }
+    }
+    .trackbar-title {
+      color: $text-light-gray;
+    }
+  }
 }

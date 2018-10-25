@@ -31,6 +31,10 @@ Route::get('/car', function () {
     return view('car');
 });
 
+Route::get('/cars', function () {
+    return view('cars-gallery');
+});
+
 Route::get('/p3', function () {
     return view('page3');
 });

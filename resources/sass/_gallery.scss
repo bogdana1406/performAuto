@@ -60,10 +60,10 @@
 			top: 0;
 			bottom: 0;
 			right: -10px;
-    		width: 25px;
-    		background-color: #0f0f0f;
-    		transform: $skew;
-    		border-right: 10px solid $red;
+    	width: 25px;
+    	background-color: #0f0f0f;
+    	transform: $skew;
+    	border-right: 10px solid $red;
 		}
 	}
 	.nav-link{
@@ -196,11 +196,36 @@
 		border: 1px solid $main-black;
 		text-transform: uppercase;
 		color: $text-red;
+		&.btn-outline:hover {
+			background-color: rgba(0, 0, 0, .1);
+		}
 	}
 
 	.modal {
 		.img-zoom {
 			object-fit: cover;
+		}
+	}
+}
+
+.gallery-light {
+	.nav {
+		background-color: white;
+		&::before {
+    	background: transparent;
+		}
+		&::after {
+    	background: transparent;
+    	border-right: 0 none;
+		}
+	}
+	.nav-link{
+		color: $text-dark-gray;
+		&.active {
+			color: white;
+			&::before {
+				background-color: $main-black;
+			}
 		}
 	}
 }

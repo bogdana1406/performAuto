@@ -279,8 +279,8 @@
 	<div class="sub-footer">
 		<div class="main-wrapper d-flex justify-content-between">
 			<div class="copyright">
-				<span class="d-block">&copy;2018 @lang('footer.copyright').</span>
-				<span>@lang('footer.designed-by')</span>
+				<span class="d-block">@lang('footer.copyright').</span>
+				<a href="{{ url('/') }}"><span>@lang('footer.designed-by')</span></a>
 			</div>
 			<div class="social">
 				<a href="" class="d-inline-block rounded-circle text-center"><i class="fa fa-facebook"></i></a>

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Car details')
+
 @section('content')
 
 <div class="test text-light">

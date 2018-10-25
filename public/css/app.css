@@ -10811,6 +10811,7 @@ header {
   top: 0;
   left: 0;
   right: 0;
+  z-index: 100;
 }
 
 header .navbar {
@@ -10962,7 +10963,8 @@ header .dropdown-toggle:after {
 .arrow-up,
 .arrow-down,
 .arrow-down-rev,
-.arrow-up-rev {
+.arrow-up-rev,
+.triangles-down {
   position: relative;
 }
 
@@ -11016,8 +11018,19 @@ header .dropdown-toggle:after {
   background-color: white;
 }
 
+.triangles-down::before {
+  content: '';
+  position: absolute;
+  height: 52px;
+  width: 100%;
+  left: 0;
+  bottom: -50px;
+  background: #0f0f0f;
+  -webkit-clip-path: polygon(0 25%, 0 0, 100% 0%, 100% 25%, 93% 100%, 85% 0, 15% 0, 7% 100%);
+          clip-path: polygon(0 25%, 0 0, 100% 0%, 100% 25%, 93% 100%, 85% 0, 15% 0, 7% 100%);
+}
+
 .search {
-  background-color: #0f0f0f;
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
   margin-bottom: -2px;
@@ -11027,14 +11040,11 @@ header .dropdown-toggle:after {
 .search .trackbar {
   margin-bottom: 0;
   padding: 1.12rem 1.87rem;
-  border-right: 1px solid #262525;
 }
 
 .search .form-control {
   background-color: transparent;
   border-radius: 0;
-  border-color: #494949;
-  color: white;
   height: auto;
   padding: .87rem 1.1rem;
 }
@@ -11048,21 +11058,10 @@ header .dropdown-toggle:after {
   height: 4px;
 }
 
-.search .trackbar .slider-horizontal .slider-track-low,
-.search .trackbar .slider-horizontal .slider-track-high {
-  background-color: #494949;
-}
-
-.search .trackbar .slider-horizontal .slider-selection {
-  background: #c92223;
-}
-
 .search .trackbar .slider-horizontal .slider-handle {
   width: 16px;
   height: 16px;
   top: -1;
-  background-color: #c92223;
-  border: 2px solid #0f0f0f;
   background-image: none;
 }
 
@@ -11075,7 +11074,6 @@ header .dropdown-toggle:after {
 .search .trackbar .slider-horizontal .tooltip-main::before,
 .search .trackbar .slider-horizontal .tooltip-main .tooltip-inner {
   background-color: transparent;
-  color: #c92223;
   font-size: 1.12rem;
   font-family: 'Roboto', sans-serif;
   font-weight: 600;
@@ -11091,9 +11089,93 @@ header .dropdown-toggle:after {
 }
 
 .search .trackbar .trackbar-title {
-  color: white;
   text-transform: uppercase;
   line-height: 2rem;
+}
+
+.search-dark .search {
+  background-color: #0f0f0f;
+}
+
+.search-dark .search .form-group,
+.search-dark .search .trackbar {
+  border-right: 1px solid #262525;
+}
+
+.search-dark .search .form-control {
+  border-color: #494949;
+  color: white;
+}
+
+.search-dark .search .trackbar .slider-track-low,
+.search-dark .search .trackbar .slider-track-high {
+  background-color: #494949;
+}
+
+.search-dark .search .trackbar .slider-selection {
+  background: #c92223;
+}
+
+.search-dark .search .trackbar .slider-handle {
+  background-color: #c92223;
+  border: 2px solid #0f0f0f;
+}
+
+.search-dark .search .trackbar .tooltip-main::before,
+.search-dark .search .trackbar .tooltip-main .tooltip-inner {
+  color: #c92223;
+}
+
+.search-dark .search .trackbar-title {
+  color: white;
+}
+
+.search-white .search {
+  background-color: white;
+}
+
+.search-white .search .form-group,
+.search-white .search .trackbar {
+  border-right: 1px solid #eee;
+}
+
+.search-white .search .form-group .custom-select,
+.search-white .search .trackbar .custom-select {
+  border-color: #c6c6c6;
+}
+
+.search-white .search .form-group .custom-select .select-selected,
+.search-white .search .trackbar .custom-select .select-selected {
+  color: #696969;
+  background-color: white;
+}
+
+.search-white .search .form-group .custom-select .select-selected::after,
+.search-white .search .trackbar .custom-select .select-selected::after {
+  background-color: inherit;
+}
+
+.search-white .search .trackbar .slider-track-low,
+.search-white .search .trackbar .slider-track-high {
+  background-color: #c6c6c6;
+}
+
+.search-white .search .trackbar .slider-selection {
+  background: #c92223;
+}
+
+.search-white .search .trackbar .slider-handle {
+  background-color: #c92223;
+  border: 2px solid white;
+}
+
+.search-white .search .trackbar .tooltip-main::before,
+.search-white .search .trackbar .tooltip-main .tooltip-inner {
+  color: #c92223;
+}
+
+.search-white .search .trackbar-title {
+  color: #696969;
 }
 
 .custom-select {
@@ -11162,13 +11244,6 @@ header .dropdown-toggle:after {
 .custom-select .select-items div:hover,
 .custom-select .same-as-selected {
   background-color: rgba(0, 0, 0, 0.8);
-}
-
-.triangles-down {
-  height: 50px;
-  background: #0f0f0f;
-  -webkit-clip-path: polygon(0 25%, 0 0, 100% 0%, 100% 25%, 93% 100%, 85% 0, 15% 0, 7% 100%);
-          clip-path: polygon(0 25%, 0 0, 100% 0%, 100% 25%, 93% 100%, 85% 0, 15% 0, 7% 100%);
 }
 
 .counter {
@@ -11455,9 +11530,38 @@ header .dropdown-toggle:after {
   color: #c92223;
 }
 
+.gallery .btn.btn-outline:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
 .gallery .modal .img-zoom {
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+.gallery-light .nav {
+  background-color: white;
+}
+
+.gallery-light .nav::before {
+  background: transparent;
+}
+
+.gallery-light .nav::after {
+  background: transparent;
+  border-right: 0 none;
+}
+
+.gallery-light .nav-link {
+  color: #363636;
+}
+
+.gallery-light .nav-link.active {
+  color: white;
+}
+
+.gallery-light .nav-link.active::before {
+  background-color: #0f0f0f;
 }
 
 .reviews {
@@ -11730,6 +11834,16 @@ footer .sub-footer {
   color: #5b5b5b;
 }
 
+footer .sub-footer a {
+  color: inherit;
+  -webkit-transition: all 0.25s ease-out;
+  transition: all 0.25s ease-out;
+}
+
+footer .sub-footer a:hover {
+  color: #ccc;
+}
+
 .hero {
   background-image: radial-gradient(ellipse at center, rgba(255, 255, 255, 0) 24%, rgba(255, 255, 255, 0.05) 32%, rgba(94, 115, 160, 0.44) 99%, rgba(94, 115, 160, 0.45) 100%), url("/img/headerbg.png");
   background-size: cover;
@@ -11922,6 +12036,18 @@ footer .sub-footer {
 .clients-carousel {
   padding-top: 7.87rem;
   padding-bottom: 1.25rem;
+}
+
+.cars-gallery .gallery {
+  padding-top: 9rem;
+}
+
+.cars-gallery .gallery .btn {
+  margin-bottom: 0;
+}
+
+.cars-gallery .gallery .gallery-filter {
+  margin-bottom: 1.6rem;
 }
 
 .car-card {

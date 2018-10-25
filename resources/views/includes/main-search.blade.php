@@ -1,4 +1,4 @@
-<div class="search arrow-down arrow-black  px-3">
+<div class="search px-3">
 	<div class="main-wrapper">
 		<form action="" class="form-row mb-0 align-items-center">
 			<div class="col form-group">
@@ -46,4 +46,3 @@
 	</div>
 </div>
 
-@include('includes.triangles-down')

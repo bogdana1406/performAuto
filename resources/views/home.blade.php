@@ -10,7 +10,13 @@
 		</div>
 	</div>
 	
-	@include('includes.main-search')
+	<div class="search-dark arrow-down arrow-black">
+
+		<div class="triangles-down">
+			@include('includes.main-search')
+		</div>
+
+	</div>
 
 	<section class="home-features">
 		<div class="main-wrapper">

@@ -1,21 +1,45 @@
+@if (request()->is('cars'))
+<section class="gallery gallery-light">
+@else
 <section class="gallery">
 	<div class="holder">
+@endif
 		<div class="main-wrapper">
-			<div class="gallery-filter d-flex">
-				<div class="gallery-title slash pl-4">
-					<h2 class="mb-0">@lang('gallery.title')</h2>
-					<span>@lang('gallery.sub-title')</span>
+				<div class="gallery-filter d-flex">
+					{{-- gallery filter --}}
+					@if (request()->is('cars'))
+					<div class="gallery-title pl-4">
+						<h2 class="mb-0">@lang('gallery.full_gallery_title')</h2>
+						<nav aria-label="breadcrumb">
+						  <ol class="breadcrumb">
+						   	<li class="breadcrumb-item"><a href="{{ URL('/') }}">Home</a></li>
+						   	<li class="breadcrumb-item active" aria-current="page">@lang('cars.title')</li>
+					  	</ol>
+						</nav>
+					@else
+					<div class="gallery-title slash pl-4">
+						<h2 class="mb-0">@lang('gallery.title')</h2>
+						<span>@lang('gallery.sub-title')</span>
+					@endif
+					</div>
+					<nav class="nav ml-auto" id="gallery-filter">
+						<a href="#" class="nav-link active" data-toggle="portfilter" data-target="all">@lang('brands.all_brands')<sup class="cars-number">24</sup></a>
+						<a href="#" class="nav-link"" data-toggle="portfilter" data-target="@lang('brands.brand1')">@lang('brands.brand1')<sup class="cars-number">2</sup></a>
+						<a href="#" class="nav-link"" data-toggle="portfilter" data-target="@lang('brands.brand2')">@lang('brands.brand2')<sup class="cars-number">6</sup></a>
+						<a href="#" class="nav-link"" data-toggle="portfilter" data-target="@lang('brands.brand3')">@lang('brands.brand3')<sup class="cars-number">2</sup></a>
+						<a href="#" class="nav-link"" data-toggle="portfilter" data-target="@lang('brands.brand4')">@lang('brands.brand4')<sup class="cars-number">1</sup></a>
+						<a href="#" class="nav-link"" data-toggle="portfilter" data-target="@lang('brands.brand5')">@lang('brands.brand5')<sup class="cars-number">5</sup></a>
+						<a href="#" class="nav-link"" data-toggle="portfilter" data-target="@lang('brands.brand6')">@lang('brands.brand6')<sup class="cars-number">8</sup></a>
+					</nav>
 				</div>
-				<nav class="nav ml-auto" id="gallery-filter">
-					<a href="#" class="nav-link active" data-toggle="portfilter" data-target="all">@lang('brands.all_brands')<sup class="cars-number">24</sup></a>
-					<a href="#" class="nav-link"" data-toggle="portfilter" data-target="@lang('brands.brand1')">@lang('brands.brand1')<sup class="cars-number">2</sup></a>
-					<a href="#" class="nav-link"" data-toggle="portfilter" data-target="@lang('brands.brand2')">@lang('brands.brand2')<sup class="cars-number">6</sup></a>
-					<a href="#" class="nav-link"" data-toggle="portfilter" data-target="@lang('brands.brand3')">@lang('brands.brand3')<sup class="cars-number">2</sup></a>
-					<a href="#" class="nav-link"" data-toggle="portfilter" data-target="@lang('brands.brand4')">@lang('brands.brand4')<sup class="cars-number">1</sup></a>
-					<a href="#" class="nav-link"" data-toggle="portfilter" data-target="@lang('brands.brand5')">@lang('brands.brand5')<sup class="cars-number">5</sup></a>
-					<a href="#" class="nav-link"" data-toggle="portfilter" data-target="@lang('brands.brand6')">@lang('brands.brand6')<sup class="cars-number">8</sup></a>
-				</nav>
-			</div>
+			{{-- search for full gallery --}}
+			@if (request()->is('cars'))
+				<div class="search-white">
+
+					@include('includes.main-search')
+
+				</div>
+			@endif
 			{{-- car cards --}}
 			<div class="row">
 				<div class="col-md-3" data-tag="@lang('brands.brand6')">
