@@ -1,4 +1,4 @@
-// @import '../css/unite-gallery.css';
+@import '../css/lightslider/lightslider.css';
 // @import '../css/ug-theme-default.css';
 .car-card {
   padding-top: 12vw;
@@ -19,6 +19,9 @@
 	.car-properties {
 		margin-top: 4.6rem;
 	}
+  .car-description {
+    flex: 1;
+  }
   .nav-tabs {
     border: none;
     margin-bottom: 1.75rem;

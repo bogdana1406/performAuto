@@ -200,9 +200,36 @@ $(document).ready(function() {
 
     //====Unite gallery====
 
-    // $("#gallery").unitegallery({
+    // jQuery("#gallery").unitegallery({
     //     gallery_theme: "grid",
     //     theme_panel_position: "right"
-    // }); 
+    // });
 
+    $("#lightSlider").lightSlider({
+        item: 5,
+        autoWidth: true,
+        slideMove: 3, // slidemove will be 1 if loop is true
+        slideMargin: 10,
+
+        keyPress: false,
+        controls: false,
+        prevHtml: '',
+        nextHtml: '',
+
+        vertical:true,
+        verticalHeight:500,
+        vThumbWidth:100,
+ 
+        thumbItem:5,
+        pager: true,
+        gallery: true,
+        galleryMargin: 15,
+        thumbMargin: 5,
+        currentPagerPosition: 'middle',
+
+        enableTouch:true,
+        enableDrag:true,
+        freeMove:true,
+        swipeThreshold: 40,
+    }); 
 });
