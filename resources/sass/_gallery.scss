@@ -205,6 +205,18 @@
 		.img-zoom {
 			object-fit: cover;
 		}
+		.modal-content {
+			position: relative;
+			.close {
+				position: absolute;
+    		top: 0;
+    		right: 0;
+    		z-index: 100;
+    		color: white;
+    		margin-right: .5rem;
+    		font-size: 2rem;				
+			}
+		}
 	}
 }
 

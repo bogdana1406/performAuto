@@ -17,7 +17,7 @@ $(document).ready(function() {
                 localStart++;
                 counters[id].innerHTML = localStart;
             }
-        }, 40);
+        }, 2);
     }
 
     for (j = 0; j < countersQuantity; j++) {
@@ -113,10 +113,10 @@ $(document).ready(function() {
     //====Filtered gallery with light box====
 
     // filter
-    $('nav#gallery-filter a').on('click', function(event) {
+    $('#gallery-filter a').on('click', function(event) {
         event.preventDefault();
         // active class
-        $('nav#gallery-filter a.active').removeClass('active');
+        $('#gallery-filter a.active').removeClass('active');
         $(this).addClass('active');
 
     });
@@ -192,18 +192,13 @@ $(document).ready(function() {
 
     //====Smooth scrolling====
 
-    $("#toContacts").click(function (){
+    $(".toContacts").click(function (){
         $('html, body').animate({
             scrollTop: $("#contacts").offset().top
         }, 750);
     });
 
-    //====Unite gallery====
-
-    // jQuery("#gallery").unitegallery({
-    //     gallery_theme: "grid",
-    //     theme_panel_position: "right"
-    // });
+    //====Car slider====
 
     $("#lightSlider").lightSlider({
         item: 5,

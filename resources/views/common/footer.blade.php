@@ -16,7 +16,30 @@
 				<div class="col-md-6">
 					<div class="inline-title pl-4 slash d-flex">
 						<h2 class="text-white">@lang('footer.contacts2')</h2>
-						<button class="btn btn-red btn-medium border-0">write to us</button>
+						<button class="btn btn-red btn-medium border-0" data-toggle="modal" data-target="#contactModal">write to us</button>
+						<div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+						  <div class="modal-dialog modal-dialog-centered" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title" id="contactModalLabel">@lang('contact_form.title')</h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div class="modal-body">
+						        <form action="">
+						            <input type="text" name="name" class="form-control" placeholder="@lang('contact_form.name')">
+						            <input type="number" class="form-control" name="phone" placeholder="@lang('contact_form.phone')">
+						            <input type="email" name="email" class="form-control" placeholder="@lang('contact_form.email')">
+						            <textarea class="form-control" placeholder="@lang('contact_form.text')"></textarea>
+						        </form>
+						      </div>
+						      <div class="modal-footer">
+						        <button type="submit" class="btn btn-middle btn-red border-0" data-dismiss="modal">Submit</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
 					</div>
 					<div class="contact-details pl-4">
 						<a class="d-block" href="tel:+32 494 15 96 75">+32 494 15 96 75</a>
@@ -268,7 +291,7 @@
 				      <a class="nav-item nav-link {{ Request::is('/') ? 'active' : null }}" href="{{ url('/') }}">@lang('navigation.nav-link1')</a>
 				      <a class="nav-item nav-link {{ Request::is('advantages') ? 'active' : null }}" href="{{ url('advantages') }}">@lang('advantages.title')</a>
 				      <a class="nav-item nav-link {{ Request::is('about') ? 'active' : null }}" href="{{ url('about') }}">@lang('about.title')</a>
-				      <a class="nav-item nav-link {{ Request::is('') ? 'active' : null }}" href="{{ url('') }}">@lang('navigation.nav-link4')</a>
+				      <a class="nav-item nav-link {{ Request::is('') ? 'active' : null }} toContacts" href="#">@lang('navigation.nav-link4')</a>
 				    </div>
 				</div>
 			</nav>

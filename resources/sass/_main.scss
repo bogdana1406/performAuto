@@ -1,232 +1,256 @@
 body {
-    background-color: $main-black;
-    font-family: 'Roboto', sans-serif;
+  background-color: $main-black;
+  font-family: 'Roboto', sans-serif;
 }
 
 h2 {
-    margin-bottom: 1.87rem;
-    color: white;
-    font-size: 60px;
-    font-weight: 100;
+  margin-bottom: 1.87rem;
+  color: white;
+  font-size: 60px;
+  font-weight: 100;
 }
 
 .btn {
-    border-radius: 0.187rem;
+  border-radius: 0.187rem;
 }
 
 .btn-outline {
-    background: none;
+  background: none;
 }
 
-.btn:focus,
-.btn:active:focus,
-.btn.active:focus,
-.form-control:focus,
-.form-control:active:focus,
-.form-control.active:focus,
-    {
-    outline: 0 none;
-    box-shadow: none;
-    border-color: inherit;
+.btn:focus, .btn:active:focus, .btn.active:focus, .form-control:focus, .form-control:active:focus, .form-control.active:focus, {
+  outline: 0 none;
+  box-shadow: none;
+  border-color: inherit;
 }
 
 .btn.btn-large {
-    padding: 1.25rem 1.37rem;
-    margin-left: 1.87rem;
-    font-size: 0.87rem;
-    line-height: 0.87rem;
+  padding: 1.25rem 1.37rem;
+  margin-left: 1.87rem;
+  font-size: 0.87rem;
+  line-height: 0.87rem;
 }
 
 .btn.btn-medium {
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
 }
 
 .btn.btn-red {
-    background-color: $red;
-    color: white;
-    text-transform: uppercase;
-
-    &:hover {
-        box-shadow: inset 0 0 3px 2px $red-shadow;
-    }
+  background-color: $red;
+  color: white;
+  text-transform: uppercase;
+  &:hover {
+    box-shadow: inset 0 0 3px 2px $red-shadow;
+  }
 }
 
 .main-wrapper {
-    max-width: 1144px;
-    margin-left: auto;
-    margin-right: auto;
-    flex-grow: 1;
+  max-width: 1144px;
+  margin-left: auto;
+  margin-right: auto;
+  flex-grow: 1;
+}
+
+//====Modal====
+
+.modal {
+  background-color: rgba(0, 0, 0, .5);
+  .modal-content {
+    background-color: $main-black;
+    color: $text-ultra-light-gray;
+    .modal-header {
+      border-bottom: none 0;
+    }
+    .modal-footer {
+      border-top: 0 none;
+    }
+    .form-control {
+      color: $text-ultra-light-gray;
+      border-radius: 0;
+      background-color: transparent;
+      border-color: $border-color-gray;
+      margin-bottom: 1rem;
+    }
+  }
+  .close {
+    &:active, &:focus {
+      outline: none;
+    }
+    span {
+      font-size: 1.5rem;
+      color: white;
+    }
+  }
 }
 
 .contacts {
-    a {
-        color: white;
-    }
-
-    .fa {
-        color: $red;
-        font-size: 1.37rem;
-        line-height: 1.6rem;
-        vertical-align: top;
-    }
+  a {
+    color: white;
+  }
+  .fa {
+    color: $red;
+    font-size: 1.37rem;
+    line-height: 1.6rem;
+    vertical-align: top;
+  }
 }
 
 .social {
-    a.rounded-circle {
-        width: 1.6rem;
-        height: 1.6rem;
-        background-color: white;
-        margin-right: 0.62rem;
-        transition: $transition;
-        .fa {
-            line-height: 1.7rem;
-            color: #0f0f0f;
-        }
-        &:last-child {
-            margin-right: 0;
-        }
-        &:hover {
-            opacity: .6;
-        }
+  a.rounded-circle {
+    width: 1.6rem;
+    height: 1.6rem;
+    background-color: white;
+    margin-right: 0.62rem;
+    transition: $transition;
+    .fa {
+      line-height: 1.7rem;
+      color: #0f0f0f;
     }
+    &:last-child {
+      margin-right: 0;
+    }
+    &:hover {
+      opacity: .6;
+    }
+  }
 }
 
-.hero { 
-    height: 35vw;
-    padding-top: 12vw;
-    .hero-title {
-        font-weight: 400;
-        color: white;
-        margin-left: 2vw;
-        h2 {
-            color: inherit;
-            font-size: 2.57rem;
-            font-weight: inherit;
-            margin-bottom: .5rem;
-        }
+.hero {
+  height: 35vw;
+  padding-top: 12vw;
+  .hero-title {
+    font-weight: 400;
+    color: white;
+    margin-left: 2vw;
+    h2 {
+      color: inherit;
+      font-size: 2.57rem;
+      font-weight: inherit;
+      margin-bottom: .5rem;
     }
+  }
 }
 
 .breadcrumb {
-    background-color: transparent;
-    padding: 0;
-    margin: 0;
-    .breadcrumb-item {
-        font-size: 0.75rem;
-        color: #a9a9a9;
-        a {
-            color: inherit;
-            transition: $transition;
-            &:hover {
-                color: white;
-            }
-        }
-        &::before {
-            color: $text-red;
-        }
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  .breadcrumb-item {
+    font-size: 0.75rem;
+    color: #a9a9a9;
+    a {
+      color: inherit;
+      transition: $transition;
+      &:hover {
+        color: white;
+      }
     }
+    &::before {
+      color: $text-red;
+    }
+  }
 }
 
 .features {
-    padding-top: 2rem;
-    color: $text-ultra-light-gray;
-    font-size: 1.12rem;
-    .features-title {
-        margin-left: auto;
-        margin-right: auto;
-        padding-bottom: 1.8rem;
-        font-size: 2.25rem;
-        line-height: 2.4rem;
-        font-weight: 300;
-        color: white;
-        max-width: 844px;
+  padding-top: 2rem;
+  color: $text-ultra-light-gray;
+  font-size: 1.12rem;
+  .features-title {
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 1.8rem;
+    font-size: 2.25rem;
+    line-height: 2.4rem;
+    font-weight: 300;
+    color: white;
+    max-width: 844px;
+  }
+  .features-slogan {
+    text-align: left;
+    max-width: 940px;
+    margin-top: 2.7rem;
+    margin-bottom: 3.87rem;
+  }
+  span {
+    color: white;
+    &.features-quote {
+      line-height: 2rem;
+      font-weight: 700;
     }
-    .features-slogan {
-        text-align: left;
-        max-width: 940px;
-        margin-top: 2.7rem;
-        margin-bottom: 3.87rem;
-    }
-    span {
-        color: white;
-        &.features-quote {
-            line-height: 2rem;
-            font-weight: 700;
-        }
-    }
+  }
 }
 
 .inline-title {
-    h2 {
-        font-size: 1.87rem;
-        line-height: 1.8rem;
-        color: $text-black;
-        font-weight: 700;
-    }
-    span {
-        font-size: 1rem;
-        line-height: 1.1rem;
-        color: $text-dark-gray;
-    }
+  h2 {
+    font-size: 1.87rem;
+    line-height: 1.8rem;
+    color: $text-black;
+    font-weight: 700;
+  }
+  span {
+    font-size: 1rem;
+    line-height: 1.1rem;
+    color: $text-dark-gray;
+  }
 }
 
-// video
+//====video====
 
 .start-video {
-    position: absolute;
-    top: 50%;
-    padding: 12px;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: .6;
-    cursor: pointer;
-    transition: transition;
-    img {
-        filter: invert(100%);
-    }
+  position: absolute;
+  top: 50%;
+  padding: 12px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: .6;
+  cursor: pointer;
+  transition: transition;
+  img {
+    filter: invert(100%);
+  }
 }
 
 .start-video:hover {
-    opacity: 1;
-    -webkit-filter: brightness (1);
+  opacity: 1;
+  -webkit-filter: brightness (1);
 }
 
 div.thumbnail_container {
-    overflow: hidden;
-    position: relative;
+  overflow: hidden;
+  position: relative;
 }
 
 img.thumbnail {
-    margin-top: -50px;
-    background: $main-black;
+  margin-top: -50px;
+  background: $main-black;
 }
 
 .divider {
-    position: relative;
-    &::before {
-        content: '';
-        display: block;
-        position: absolute;
-        left: 50%;
-        bottom: 0;
-        transform: translateX(-50%);
-        width: 13.75rem;
-        height: 1px;
-        border-bottom: 2px solid #494949;
-    }
+  position: relative;
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 13.75rem;
+    height: 1px;
+    border-bottom: 2px solid $border-color-gray;
+  }
 }
 
 .slash {
-    position: relative;
-    &::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        width: 2px;
-        background-color: $red;
-        transform: $skew;
-    }
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 2px;
+    background-color: $red;
+    transform: $skew;
+  }
 }
