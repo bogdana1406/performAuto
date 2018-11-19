@@ -102,7 +102,7 @@ $(document).ready(function() {
 
     //====Price trackbar====
 
-    $("#priceBar").slider({ min: 5000, max: 25000, range: true, value: [7500, 15000] });
+    $("#priceBar").slider({ min: 5000, max: 25000, range: true, value: [0, 15000] });
     $("#priceBar").on("slide", function(slideEvt) {
         $("#priceBarCurrentSliderVal").text(slideEvt.value);
     });
@@ -136,13 +136,14 @@ $(document).ready(function() {
 
         onYouTubeIframeAPIReady = function() {
             player = new YT.Player('player', {
-                // height: '244',
-                // width: '434',
+                height: '480',
+                width: '850',
                 videoId: '8AfYdq6kU7I', // youtube video id
                 playerVars: {
                     'autoplay': 0,
                     'rel': 0,
-                    'showinfo': 0
+                    'showinfo': 0,
+                    'controls': 0
                 },
                 events: {
                     'onStateChange': onPlayerStateChange

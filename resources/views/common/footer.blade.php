@@ -52,7 +52,7 @@
 			<div class="cards-wrapper d-md-flex">
 				<div class="col-md-6 pr-4">
 					<div class="card p-0 border-0 d-flex flex-row">
-						<div class="card-body p-0 pb-4">
+						<div class="card-body p-0 pb-4 arrow-right">
 							<div class="card-title">
 								<h3>@lang('footer.name1')</h3>
 								<span class="position">@lang('footer.dealer')</span>
@@ -67,7 +67,7 @@
 				</div>
 				<div class="col-md-6 pl-4">
 					<div class="card p-0 border-0 d-flex flex-row">
-						<div class="card-body p-0">
+						<div class="card-body p-0 arrow-right">
 							<div class="card-title">
 								<h3>@lang('footer.name2')</h3>
 								<span class="position">@lang('footer.dealer')</span>
@@ -258,7 +258,8 @@
 
         	map = new google.maps.Map(document.getElementById('map'), {
           		center: {lat: 50.879782, lng: 3.150103},
-          		zoom: 16,
+          		zoom: 12,
+          		disableDefaultUI: true,
           		mapTypeControlOptions: {
             		mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain', 'styled_map']
           		}
@@ -280,7 +281,7 @@
     </script>
 	{{-- /google map --}}
 	{{-- footer navigation --}}
-	<div class="footer-links arrow-down arrow-black pt-5">
+	<div class="footer-links arrow-down-plus arrow-black pt-5">
 		<div class="main-wrapper">
 			<nav class="navbar navbar-expand-md navbar-dark pb-4">
 			    <a class="navbar-brand" href="{{ url('/') }}">

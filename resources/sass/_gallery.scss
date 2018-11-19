@@ -12,7 +12,8 @@
         &::before {
             content: '';
             display: block;
-            width: 1400px;
+            width: 88vw;
+            min-width: 1320px;
             left: 50%;
             top: 0;
             bottom: 0;
@@ -74,6 +75,7 @@
 		text-decoration: none;
 		position: relative;
 		z-index: 1;
+		transition: $transition;
 		&.active::before {
 			content: '';
 			position: absolute;

@@ -38879,7 +38879,7 @@ $(document).ready(function () {
 
     //====Price trackbar====
 
-    $("#priceBar").slider({ min: 5000, max: 25000, range: true, value: [7500, 15000] });
+    $("#priceBar").slider({ min: 5000, max: 25000, range: true, value: [0, 15000] });
     $("#priceBar").on("slide", function (slideEvt) {
         $("#priceBarCurrentSliderVal").text(slideEvt.value);
     });
@@ -38910,13 +38910,14 @@ $(document).ready(function () {
 
         onYouTubeIframeAPIReady = function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
-                // height: '244',
-                // width: '434',
+                height: '480',
+                width: '850',
                 videoId: '8AfYdq6kU7I', // youtube video id
                 playerVars: {
                     'autoplay': 0,
                     'rel': 0,
-                    'showinfo': 0
+                    'showinfo': 0,
+                    'controls': 0
                 },
                 events: {
                     'onStateChange': onPlayerStateChange
@@ -39007,7 +39008,7 @@ $(document).ready(function () {
 /* 41 */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+throw new Error("Module build failed: ModuleBuildError: Module build failed: \n    height: \n          ^\n      Invalid CSS after \"    height:\": expected expression (e.g. 1px, bold), was \"}\"\n      in /home/mihoz/perform_auto/resources/sass/_arrows.scss (line 31, column 12)\n    at runLoaders (/home/mihoz/perform_auto/node_modules/webpack/lib/NormalModule.js:195:19)\n    at /home/mihoz/perform_auto/node_modules/loader-runner/lib/LoaderRunner.js:364:11\n    at /home/mihoz/perform_auto/node_modules/loader-runner/lib/LoaderRunner.js:230:18\n    at context.callback (/home/mihoz/perform_auto/node_modules/loader-runner/lib/LoaderRunner.js:111:13)\n    at Object.asyncSassJobQueue.push [as callback] (/home/mihoz/perform_auto/node_modules/sass-loader/lib/loader.js:55:13)\n    at Object.done [as callback] (/home/mihoz/perform_auto/node_modules/neo-async/async.js:7974:18)\n    at options.error (/home/mihoz/perform_auto/node_modules/node-sass/lib/index.js:294:32)");
 
 /***/ })
 /******/ ]);

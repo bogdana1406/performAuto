@@ -11246,7 +11246,7 @@ header .navbar .btn-navbar {
 }
 
 header .navbar .btn-navbar:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+  color: #c92223;
 }
 
 header .navbar .nav-toggler {
@@ -11643,9 +11643,13 @@ header .dropdown-toggle:after {
   background-color: #0f0f0f;
   padding-top: 2rem;
   padding-bottom: 2rem;
-  padding-left: 3.25rem;
-  padding-right: 3.25rem;
+  padding-left: 3.12rem;
+  padding-right: 3.12rem;
   color: white;
+}
+
+.counter > div {
+  padding: 0 0.8rem;
 }
 
 .counter .count-box {
@@ -11677,11 +11681,14 @@ header .dropdown-toggle:after {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
+  font-size: 1rem;
+  line-height: 1.1rem;
 }
 
 .counter .count {
   font-size: 2.62rem;
   line-height: 2.7rem;
+  font-weight: bold;
   position: absolute;
   top: 0.5rem;
   right: -0.68rem;
@@ -11704,7 +11711,8 @@ header .dropdown-toggle:after {
 .gallery .holder::before {
   content: '';
   display: block;
-  width: 1400px;
+  width: 88vw;
+  min-width: 1320px;
   left: 50%;
   top: 0;
   bottom: 0;
@@ -11776,6 +11784,8 @@ header .dropdown-toggle:after {
   text-decoration: none;
   position: relative;
   z-index: 1;
+  -webkit-transition: all 0.25s ease-out;
+  transition: all 0.25s ease-out;
 }
 
 .gallery .nav-link.active::before {
@@ -11985,6 +11995,9 @@ header .dropdown-toggle:after {
   -webkit-box-shadow: 0 0 30px #dedede;
           box-shadow: 0 0 30px #dedede;
   min-height: 13rem;
+  -webkit-transition: all 0.25s ease-out;
+  transition: all 0.25s ease-out;
+  border: 0 none;
 }
 
 .reviews .card:hover {
@@ -12141,6 +12154,22 @@ footer .card-body {
           flex: inherit;
 }
 
+footer .card-body.arrow-right {
+  position: relative;
+}
+
+footer .card-body.arrow-right::after {
+  content: '';
+  width: 1.6rem;
+  height: 1.6rem;
+  position: absolute;
+  background-color: inherit;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  top: 37px;
+  right: -12px;
+}
+
 footer .card-body .card-title {
   padding-top: 2rem;
   padding-bottom: 1.25rem;
@@ -12250,7 +12279,7 @@ footer .sub-footer a:hover {
 }
 
 .hero {
-  background-image: radial-gradient(ellipse at center, rgba(255, 255, 255, 0) 24%, rgba(255, 255, 255, 0.05) 32%, rgba(94, 115, 160, 0.44) 99%, rgba(94, 115, 160, 0.45) 100%), url("/img/headerbg.png");
+  background-image: radial-gradient(ellipse at center, rgba(255, 255, 255, 0) 24%, rgba(255, 255, 255, 0.05) 32%, rgba(94, 115, 160, 0.44) 99%, rgba(94, 115, 160, 0.45) 100%), url("/img/main1700.png");
   background-size: cover;
   background-color: #7F8890;
   height: 45vw;
@@ -12265,7 +12294,7 @@ footer .sub-footer a:hover {
 
 .home-features {
   background-color: white;
-  padding-top: 5.5rem;
+  padding-top: 8rem;
   font-size: 1.12rem;
   color: #6a6969;
   text-align: center;
@@ -12274,7 +12303,7 @@ footer .sub-footer a:hover {
 
 .home-features .features-title {
   font-size: 2.25rem;
-  font-weight: 400;
+  font-weight: 300;
   color: #363636;
   max-width: 724px;
   margin-left: auto;
@@ -12372,8 +12401,8 @@ footer .sub-footer a:hover {
 }
 
 .hero-about.hero {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.2)), to(rgba(0, 0, 0, 0.2))), url("/img/about_hero_bg.jpg");
-  background-image: linear-gradient(rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%), url("/img/about_hero_bg.jpg");
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.2)), to(rgba(0, 0, 0, 0.2))), url("/img/about1700.png");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%), url("/img/about1700.png");
   background-color: #40413E;
 }
 
@@ -12386,7 +12415,7 @@ footer .sub-footer a:hover {
 }
 
 .hero-advantages.hero {
-  background-image: url("/img/advantages-hero-bg.png");
+  background-image: url("/img/advantages1700.png");
 }
 
 .features {
@@ -12598,11 +12627,12 @@ h2 {
   background-color: #c92223;
   color: white;
   text-transform: uppercase;
+  -webkit-transition: all 0.25s ease-out;
+  transition: all 0.25s ease-out;
 }
 
 .btn.btn-red:hover {
-  -webkit-box-shadow: inset 0 0 3px 2px #641111;
-          box-shadow: inset 0 0 3px 2px #641111;
+  background-color: rgba(201, 34, 35, 0.7);
 }
 
 .main-wrapper {
@@ -12655,7 +12685,7 @@ h2 {
 
 .contacts .fa {
   color: #c92223;
-  font-size: 1.37rem;
+  font-size: 1.05rem;
   line-height: 1.6rem;
   vertical-align: top;
 }
@@ -12688,7 +12718,7 @@ h2 {
 }
 
 .hero .hero-title {
-  font-weight: 400;
+  font-weight: 300;
   color: white;
   margin-left: 2vw;
 }
@@ -12696,8 +12726,8 @@ h2 {
 .hero .hero-title h2 {
   color: inherit;
   font-size: 2.57rem;
-  font-weight: inherit;
   margin-bottom: .5rem;
+  font-weight: inherit;
 }
 
 .breadcrumb {

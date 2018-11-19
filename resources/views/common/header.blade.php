@@ -37,7 +37,7 @@
 					  </button>
 					  <div class="dropdown-menu text-center" aria-labelledby="btnGroupDrop2">
 				    	<a class="dropdown-item" href="#">en</a>
-				    	<a class="dropdown-item" href="#">fra</a>
+				    	<a class="dropdown-item" href="#">fr</a>
 				    </div>
 				  </div>
 				</div>
@@ -46,13 +46,13 @@
 		  <div class="collapse navbar-collapse header-divider pt-1" id="navbarSupportedContent">
 		    <ul class="navbar-nav py-1 mr-auto">
 		    	<li class="nav-item dropdown">
-		        <a class="nav-link dropdown-toggle {{ Request::is('/') ? 'active' : null }}" href="{{ url('/') }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@lang('navigation.nav-link1')</a>
-		        <div class="dropdown-menu triangle-top" aria-labelledby="navbarDropdown">
-		          <a class="dropdown-item" href="#">@lang('navigation.dropdown-link1')<span class="float-right">24</span></a>
-		          <a class="dropdown-item" href="#">@lang('navigation.dropdown-link2')<span class="float-right">2</span></a>
-		          <a class="dropdown-item" href="#">@lang('navigation.dropdown-link3')<span class="float-right">6</span></a>
-		          <a class="dropdown-item" href="#">@lang('navigation.dropdown-link4')<span class="float-right">2</span></a>
-		          <a class="dropdown-item" href="#">@lang('navigation.dropdown-link5')<span class="float-right">1</span></a>
+		        <a class="nav-link dropdown-toggle" href="{{ url('/') }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@lang('navigation.nav-link1')</a>
+						<div class="dropdown-menu triangle-top" aria-labelledby="navbarDropdown">
+			        <a class="dropdown-item" href="#">@lang('navigation.dropdown-link1')<span class="float-right">24</span></a>
+			        <a class="dropdown-item" href="#">@lang('navigation.dropdown-link2')<span class="float-right">2</span></a>
+			        <a class="dropdown-item" href="#">@lang('navigation.dropdown-link3')<span class="float-right">6</span></a>
+			        <a class="dropdown-item" href="#">@lang('navigation.dropdown-link4')<span class="float-right">2</span></a>
+			        <a class="dropdown-item" href="#">@lang('navigation.dropdown-link5')<span class="float-right">1</span></a>
 		          <a class="dropdown-item" href="#">@lang('navigation.dropdown-link6')<span class="float-right">5</span></a>
 		          <a class="dropdown-item" href="#">@lang('navigation.dropdown-link7')<span class="float-right">8</span></a>
 		        </div>
