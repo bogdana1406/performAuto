@@ -46,9 +46,9 @@
 					<div class="card">
 						<div class="card-img-top">
 							<a href="#" class="show-modal" data-toggle="modal" data-target="#car1">
-								<img src="{{ URL::asset('/img/car-1.jpg') }}" class="img-thumb" alt="car-thumb">
+								<img src="{{ URL::asset('/images/car-1.jpg') }}" class="img-thumb" alt="car-thumb">
 								<div class="search-icon">
-									<img src="{{ URL::asset('/img/search.png') }}" class="img-icon" alt="search">
+									<img src="{{ URL::asset('/images/search.png') }}" class="img-icon" alt="search">
 								</div>
 							</a>
 							<div class="modal fade" id="car1" tabindex="-1" role="dialog" aria-labelledby="car1Label" aria-hidden="true">
@@ -57,7 +57,7 @@
 									   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									      <span aria-hidden="true">&times;</span>
 									    </button>
-										<img src="{{ URL::asset('/img/car-1.jpg') }}" class="img-thumb" alt="car-thumb">
+										<img src="{{ URL::asset('/images/car-1.jpg') }}" class="img-thumb" alt="car-thumb">
 									</div>
 								</div>
 							</div>
@@ -86,9 +86,9 @@
 					<div class="card">
 						<div class="card-img-top">
 							<a href="#" class="show-modal" data-toggle="modal" data-target="#car2">
-								<img src="{{ URL::asset('/img/car-2.jpg') }}" class="img-thumb" alt="car-thumb">
+								<img src="{{ URL::asset('/images/car-2.jpg') }}" class="img-thumb" alt="car-thumb">
 								<div class="search-icon">
-									<img src="{{ URL::asset('/img/search.png') }}" class="img-icon" alt="search">
+									<img src="{{ URL::asset('/images/search.png') }}" class="img-icon" alt="search">
 								</div>
 							</a>
 							<div class="modal fade" id="car2" tabindex="-1" role="dialog" aria-labelledby="car2Label" aria-hidden="true">
@@ -97,7 +97,7 @@
 									    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									      <span aria-hidden="true">&times;</span>
 									    </button>
-									    <img src="{{ URL::asset('/img/car-2.jpg') }}" class="img-thumb" alt="car-thumb">
+									    <img src="{{ URL::asset('/images/car-2.jpg') }}" class="img-thumb" alt="car-thumb">
 									</div>
 								</div>
 							</div>
@@ -126,9 +126,9 @@
 					<div class="card">
 						<div class="card-img-top">
 							<a href="#" class="show-modal" data-toggle="modal" data-target="#car3">
-								<img src="{{ URL::asset('/img/car-3.jpg') }}" class="img-thumb" alt="car-thumb">
+								<img src="{{ URL::asset('/images/car-3.jpg') }}" class="img-thumb" alt="car-thumb">
 								<div class="search-icon">
-									<img src="{{ URL::asset('/img/search.png') }}" class="img-icon" alt="search">
+									<img src="{{ URL::asset('/images/search.png') }}" class="img-icon" alt="search">
 								</div>
 							</a>
 							<div class="modal fade" id="car3" tabindex="-1" role="dialog" aria-labelledby="car3Label" aria-hidden="true">
@@ -137,7 +137,7 @@
 									    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									      <span aria-hidden="true">&times;</span>
 									    </button>
-									    <img src="{{ URL::asset('/img/car-3.jpg') }}" class="img-thumb" alt="car-thumb">
+									    <img src="{{ URL::asset('/images/car-3.jpg') }}" class="img-thumb" alt="car-thumb">
 									</div>
 								</div>
 							</div>
@@ -166,9 +166,9 @@
 					<div class="card">
 						<div class="card-img-top">
 							<a href="#" class="show-modal" data-toggle="modal" data-target="#car4">
-								<img src="{{ URL::asset('/img/car-4.jpg') }}" class="img-thumb" alt="car-thumb">
+								<img src="{{ URL::asset('/images/car-4.jpg') }}" class="img-thumb" alt="car-thumb">
 								<div class="search-icon">
-									<img src="{{ URL::asset('/img/search.png') }}" class="img-icon" alt="search">
+									<img src="{{ URL::asset('/images/search.png') }}" class="img-icon" alt="search">
 								</div>
 							</a>
 							<div class="modal fade" id="car4" tabindex="-1" role="dialog" aria-labelledby="car4Label" aria-hidden="true">
@@ -177,7 +177,7 @@
 									    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									       <span aria-hidden="true">&times;</span>
 									    </button>
-									    <img src="{{ URL::asset('/img/car-4.jpg') }}" class="img-thumb" alt="car-thumb">
+									    <img src="{{ URL::asset('/images/car-4.jpg') }}" class="img-thumb" alt="car-thumb">
 									</div>
 								</div>
 							</div>
@@ -206,9 +206,9 @@
 					<div class="card">
 						<div class="card-img-top">
 							<a href="#" class="show-modal" data-toggle="modal" data-target="#car5">
-								<img src="{{ URL::asset('/img/car-5.jpg') }}" class="img-thumb" alt="car-thumb">
+								<img src="{{ URL::asset('/images/car-5.jpg') }}" class="img-thumb" alt="car-thumb">
 								<div class="search-icon">
-									<img src="{{ URL::asset('/img/search.png') }}" class="img-icon" alt="search">
+									<img src="{{ URL::asset('/images/search.png') }}" class="img-icon" alt="search">
 								</div>
 							</a>
 							<div class="modal fade" id="car5" tabindex="-1" role="dialog" aria-labelledby="car5Label" aria-hidden="true">
@@ -217,7 +217,7 @@
 									    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									      <span aria-hidden="true">&times;</span>
 									    </button>
-									    <img src="{{ URL::asset('/img/car-5.jpg') }}" class="img-thumb" alt="car-thumb">
+									    <img src="{{ URL::asset('/images/car-5.jpg') }}" class="img-thumb" alt="car-thumb">
 									</div>
 								</div>
 							</div>
@@ -246,9 +246,9 @@
 					<div class="card">
 						<div class="card-img-top">
 							<a href="#" class="show-modal" data-toggle="modal" data-target="#car6">
-								<img src="{{ URL::asset('/img/car-6.jpg') }}" class="img-thumb" alt="car-thumb">
+								<img src="{{ URL::asset('/images/car-6.jpg') }}" class="img-thumb" alt="car-thumb">
 								<div class="search-icon">
-									<img src="{{ URL::asset('/img/search.png') }}" class="img-icon" alt="search">
+									<img src="{{ URL::asset('/images/search.png') }}" class="img-icon" alt="search">
 								</div>
 							</a>
 							<div class="modal fade" id="car6" tabindex="-1" role="dialog" aria-labelledby="car6Label" aria-hidden="true">
@@ -257,7 +257,7 @@
 									    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									      <span aria-hidden="true">&times;</span>
 									    </button>
-									    <img src="{{ URL::asset('/img/car-6.jpg') }}" class="img-thumb" alt="car-thumb">
+									    <img src="{{ URL::asset('/images/car-6.jpg') }}" class="img-thumb" alt="car-thumb">
 									</div>
 								</div>
 							</div>
@@ -286,9 +286,9 @@
 					<div class="card">
 						<div class="card-img-top">
 							<a href="#" class="show-modal" data-toggle="modal" data-target="#car7">
-								<img src="{{ URL::asset('/img/car-7.jpg') }}" class="img-thumb" alt="car-thumb">
+								<img src="{{ URL::asset('/images/car-7.jpg') }}" class="img-thumb" alt="car-thumb">
 								<div class="search-icon">
-									<img src="{{ URL::asset('/img/search.png') }}" class="img-icon" alt="search">
+									<img src="{{ URL::asset('/images/search.png') }}" class="img-icon" alt="search">
 								</div>
 							</a>
 							<div class="modal fade" id="car7" tabindex="-1" role="dialog" aria-labelledby="car7Label" aria-hidden="true">
@@ -297,7 +297,7 @@
 									    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									      <span aria-hidden="true">&times;</span>
 									    </button>
-									    <img src="{{ URL::asset('/img/car-7.jpg') }}" class="img-thumb" alt="car-thumb">
+									    <img src="{{ URL::asset('/images/car-7.jpg') }}" class="img-thumb" alt="car-thumb">
 									</div>
 								</div>
 							</div>
@@ -326,9 +326,9 @@
 					<div class="card">
 						<div class="card-img-top">
 							<a href="#" class="show-modal" data-toggle="modal" data-target="#car8">
-								<img src="{{ URL::asset('/img/car-8.jpg') }}" class="img-thumb" alt="car-thumb">
+								<img src="{{ URL::asset('/images/car-8.jpg') }}" class="img-thumb" alt="car-thumb">
 								<div class="search-icon">
-									<img src="{{ URL::asset('/img/search.png') }}" class="img-icon" alt="search">
+									<img src="{{ URL::asset('/images/search.png') }}" class="img-icon" alt="search">
 								</div>
 							</a>
 							<div class="modal fade" id="car8" tabindex="-1" role="dialog" aria-labelledby="car8Label" aria-hidden="true">
@@ -337,7 +337,7 @@
 									    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									      <span aria-hidden="true">&times;</span>
 									    </button>
-									    <img src="{{ URL::asset('/img/car-8.jpg') }}" class="img-thumb" alt="car-thumb">
+									    <img src="{{ URL::asset('/images/car-8.jpg') }}" class="img-thumb" alt="car-thumb">
 									</div>
 								</div>
 							</div>

@@ -142,20 +142,20 @@
                                     </div>
                                 </div>
 
-                                {{--@foreach(['en', 'fr'] as $locale)--}}
-                                    {{--<div class="control-group">--}}
-                                        {{--<label class="control-label">About_{{$locale}}</label>--}}
-                                        {{--<div class="controls">--}}
-                                            {{--<textarea type="text" rows="10" cols="45" name="about[{{$locale}}]" id="about">{{old('about')}}</textarea>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--@endforeach--}}
+                                @foreach(['en', 'fr'] as $locale)
+                                    <div class="control-group">
+                                        <label class="control-label">About_{{$locale}}</label>
+                                        <div class="controls">
+                                            <textarea type="text" rows="10" cols="45" name="about[{{$locale}}]" id="about">{{old('about')}}</textarea>
+                                        </div>
+                                    </div>
+                                @endforeach
 
                                 @foreach(['en', 'fr'] as $locale)
                                     <div class="control-group">
                                         <label class="control-label">Description_{{$locale}}</label>
                                         <div class="controls">
-                                            <textarea type="text" rows="10" cols="45" name="descriptions[{{$locale}}]" id="description">{{old('description')}}</textarea>
+                                            <textarea type="text" rows="10" cols="45" name="descriptions[{{$locale}}]" id="description">{{old('descriptions')}}</textarea>
                                         </div>
                                     </div>
                                 @endforeach

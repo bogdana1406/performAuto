@@ -8,7 +8,7 @@
 				<div class="card">
 					<a href="#" target="_blank" class="d-flex">
 						<div class="col-auto">
-							<img src="{{ asset('/img/profile-img1.jpg') }}" alt="post-author" class="card-img rounded-circle">
+							<img src="{{ asset('/images/profile-img1.jpg') }}" alt="post-author" class="card-img rounded-circle">
 							<div class="stars mx-auto bg-primary text-center">5<i class="fa fa-star"></i></div>
 						</div>
 						<div class="col">
@@ -27,7 +27,7 @@
 				<div class="card">
 					<a href="#" target="_blank" class="d-flex">
 						<div class="col-auto">
-							<img src="{{ asset('/img/profile-img2.jpg') }}" alt="post-author" class="card-img rounded-circle">
+							<img src="{{ asset('/images/profile-img2.jpg') }}" alt="post-author" class="card-img rounded-circle">
 							<div class="stars mx-auto bg-primary text-center">5<i class="fa fa-star"></i></div>
 						</div>
 						<div class="col">
@@ -46,7 +46,7 @@
 				<div class="card">
 					<a href="#" target="_blank" class="d-flex">
 						<div class="col-auto">
-							<img src="{{ asset('/img/profile-img3.jpg') }}" alt="post-author" class="card-img rounded-circle">
+							<img src="{{ asset('/images/profile-img3.jpg') }}" alt="post-author" class="card-img rounded-circle">
 							<div class="stars mx-auto bg-primary text-center">5<i class="fa fa-star"></i></div>
 						</div>
 						<div class="col">
@@ -65,7 +65,7 @@
 				<div class="card">
 					<a href="#" target="_blank" class="d-flex">
 						<div class="col-auto">
-							<img src="{{ asset('/img/profile-img4.jpg') }}" alt="post-author" class="card-img rounded-circle">
+							<img src="{{ asset('/images/profile-img4.jpg') }}" alt="post-author" class="card-img rounded-circle">
 							<div class="stars mx-auto bg-primary text-center">5<i class="fa fa-star"></i></div>
 						</div>
 						<div class="col">
@@ -84,7 +84,7 @@
 				<div class="card">
 					<a href="#" target="_blank" class="d-flex">
 						<div class="col-auto">
-							<img src="{{ asset('/img/profile-img5.jpg') }}" alt="post-author" class="card-img rounded-circle">
+							<img src="{{ asset('/images/profile-img5.jpg') }}" alt="post-author" class="card-img rounded-circle">
 							<div class="stars mx-auto bg-primary text-center">5<i class="fa fa-star"></i></div>
 						</div>
 						<div class="col">
@@ -103,7 +103,7 @@
 				<div class="card">
 					<a href="#" target="_blank" class="d-flex">
 						<div class="col-auto">
-							<img src="{{ asset('/img/profile-img6.jpg') }}" alt="post-author" class="card-img rounded-circle">
+							<img src="{{ asset('/images/profile-img6.jpg') }}" alt="post-author" class="card-img rounded-circle">
 							<div class="stars mx-auto bg-primary text-center">5<i class="fa fa-star"></i></div>
 						</div>
 						<div class="col">
@@ -122,7 +122,7 @@
 				<div class="card">
 					<a href="#" target="_blank" class="d-flex">
 						<div class="col-auto">
-							<img src="{{ asset('/img/profile-img7.jpg') }}" alt="post-author" class="card-img rounded-circle">
+							<img src="{{ asset('/images/profile-img7.jpg') }}" alt="post-author" class="card-img rounded-circle">
 							<div class="stars mx-auto bg-primary text-center">5<i class="fa fa-star"></i></div>
 						</div>
 						<div class="col">
@@ -141,7 +141,7 @@
 				<div class="card">
 					<a href="#" target="_blank" class="d-flex">
 						<div class="col-auto">
-							<img src="{{ asset('/img/profile-img8.jpg') }}" alt="post-author" class="card-img rounded-circle">
+							<img src="{{ asset('/images/profile-img8.jpg') }}" alt="post-author" class="card-img rounded-circle">
 							<div class="stars mx-auto bg-primary text-center">5<i class="fa fa-star"></i></div>
 						</div>
 						<div class="col">

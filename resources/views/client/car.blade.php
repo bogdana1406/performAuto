@@ -23,11 +23,11 @@
     <div class="row">
       <div class="col-sm-6 d-flex flex-column justify-content-between">
         <div class="car-properties row">
-          <span class="col property"><img src="/img/icon-car-seat.png" class="icon mr-2">4</span>
-          <span class="col property"><img src="/img/icon-gas-station.png" class="icon mr-2">@lang('car_details.fuel')</span>
-          <span class="col property"><img src="/img/icon-car.png" class="icon mr-2">5/5</span>
-          <span class="col property"><img src="/img/icon-gearshift.png" class="icon mr-2">4A OD</span>
-          <span class="col property"><img src="/img/icon-certificate-shape.png" class="icon mr-2">2014</span>
+          <span class="col property"><img src="/images/icon-car-seat.png" class="icon mr-2">4</span>
+          <span class="col property"><img src="/images/icon-gas-station.png" class="icon mr-2">@lang('car_details.fuel')</span>
+          <span class="col property"><img src="/images/icon-car.png" class="icon mr-2">5/5</span>
+          <span class="col property"><img src="/images/icon-gearshift.png" class="icon mr-2">4A OD</span>
+          <span class="col property"><img src="/images/icon-certificate-shape.png" class="icon mr-2">2014</span>
         </div>
         <div class="car-description d-flex flex-column justify-content-between">
           <div class="tabs">
@@ -56,23 +56,23 @@
       <div class="col-sm-6">
         <div class="slider">
           <ul id="lightSlider">
-            <li data-thumb="{{ asset('/img/mers-s1.png') }}" class="active">
-              <img alt="Image 1 Title" src="{{ asset('/img/mers_big.jpg') }}" class="img-fluid">
+            <li data-thumb="{{ asset('/images/mers-s1.png') }}" class="active">
+              <img alt="Image 1 Title" src="{{ asset('/images/mers_big.jpg') }}" class="img-fluid">
             </li>
-            <li data-thumb="{{ asset('/img/mers-s2.png') }}">
-              <img alt="Image 1 Title" src="{{ asset('/img/mers_big2.jpg') }}" class="img-fluid">
+            <li data-thumb="{{ asset('/images/mers-s2.png') }}">
+              <img alt="Image 1 Title" src="{{ asset('/images/mers_big2.jpg') }}" class="img-fluid">
             </li>
-            <li data-thumb="{{ asset('/img/mers-s3.png') }}">
-              <img alt="Image 1 Title" src="{{ asset('/img/mers_big3.jpg') }}" class="img-fluid">
+            <li data-thumb="{{ asset('/images/mers-s3.png') }}">
+              <img alt="Image 1 Title" src="{{ asset('/images/mers_big3.jpg') }}" class="img-fluid">
             </li>
-            <li data-thumb="{{ asset('/img/mers-s1.png') }}">
-              <img alt="Image 1 Title" src="{{ asset('/img/mers_big.jpg') }}" class="img-fluid">
+            <li data-thumb="{{ asset('/images/mers-s1.png') }}">
+              <img alt="Image 1 Title" src="{{ asset('/images/mers_big.jpg') }}" class="img-fluid">
             </li>
-            <li data-thumb="{{ asset('/img/mers-s2.png') }}">
-              <img alt="Image 1 Title" src="{{ asset('/img/mers_big2.jpg') }}" class="img-fluid">
+            <li data-thumb="{{ asset('/images/mers-s2.png') }}">
+              <img alt="Image 1 Title" src="{{ asset('/images/mers_big2.jpg') }}" class="img-fluid">
             </li>
-            <li data-thumb="{{ asset('/img/mers-s3.png') }}">
-              <img alt="Image 1 Title" src="{{ asset('/img/mers_big3.jpg') }}" class="img-fluid">
+            <li data-thumb="{{ asset('/images/mers-s3.png') }}">
+              <img alt="Image 1 Title" src="{{ asset('/images/mers_big3.jpg') }}" class="img-fluid">
             </li>
             <li></li>
           </ul>

@@ -89,8 +89,10 @@
                                                 <p>Transmission type: {{ $car->transmission_types }}</p>
                                                 <p>Year:              {{ $car->year }}</p>
                                                 <p>Engine:            {{ $car->engine->name }}</p>
-                                                <p>Description:       {{ $car->description['en'] }}</p>
-                                                <p>About:             {{ $car->about['en'] }}</p>
+                                                <p>Description_en:    {{ $car->descriptions['en'] }}</p>
+                                                <p>Description_fr:    {{ $car->descriptions['fr'] }}</p>
+                                                <p>About_en:          {{ $car->about['en'] }}</p>
+                                                <p>About_fr:          {{ $car->about['fr'] }}</p>
                                                 <p>Price:             {{ $car->price }}</p>
                                             </div>
                                         </div>

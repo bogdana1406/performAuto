@@ -158,16 +158,16 @@ class CarController extends Controller
                     Image::make($image_tmp)->resize($medium_w,$medium_h)->save($medium_image_path);
                     Image::make($image_tmp)->resize($small_w,$small_h)->save($small_image_path);
 
-                    //$data['image'] = $filename;
+                    $data['image'] = $filename;
                 }
-            }else{
-                $filename = $data['current_image'];
             }
 
-            Car::where(['id'=>$id])->update(['name'=>$data['name'],'model'=>$data['model'],'brand_id'=>$data['brand_id'],
-                'seats'=>$data['seats'],'doors'=>$data['doors'],'transmission_types'=>$data['transmission_types'],
-                'year'=>$data['year'],'engine_id'=>$data['engine_id'],'price'=>$data['price'],'about'=>$data['about'],
-                'description'=>$data['description'],'image'=>$filename]);
+            $car->update($data);
+            //dd($car);
+//            Car::where(['id'=>$id])->update(['name'=>$data['name'],'model'=>$data['model'],'brand_id'=>$data['brand_id'],
+//                'seats'=>$data['seats'],'doors'=>$data['doors'],'transmission_types'=>$data['transmission_types'],
+//                'year'=>$data['year'],'engine_id'=>$data['engine_id'],'price'=>$data['price'],'about'=>$data['about'],
+//                'descriptions'=>$data['descriptions'],'image'=>$filename]);
 
             //return redirect('/admin/view-brands')->with('flash_massage_success', 'Brands Update Successfully');
             return redirect('/admin/view-cars')->with('flash_massage_success', 'Car Update Successfully');

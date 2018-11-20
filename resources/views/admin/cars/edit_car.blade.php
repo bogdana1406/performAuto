@@ -151,20 +151,24 @@
                                     </div>
                                 </div>
 
-                                <div class="control-group">
-                                    <label class="control-label">About</label>
-                                    <div class="controls">
-                                        <textarea type="text" rows="10" cols="45" name="about" id="about">{{ old('about')?? $carDetails->about }}</textarea>
+                                @foreach(['en', 'fr'] as $locale)
+                                    <div class="control-group">
+                                        <label class="control-label">About_{{$locale}}</label>
+                                        <div class="controls">
+                                            <textarea type="text" rows="10" cols="45" name="about[{{$locale}}]" id="about">{{old('about')?? $carDetails->about[$locale]}}</textarea>
+                                        </div>
                                     </div>
-                                </div>
+                                @endforeach
 
-                                <div class="control-group">
-                                    <label class="control-label">Description</label>
-                                    <div class="controls">
-                                        <textarea type="text" rows="10" cols="45" name="description" id="description">{{ old('description')?? $carDetails->description}}</textarea>
+
+                                @foreach(['en', 'fr'] as $locale)
+                                    <div class="control-group">
+                                        <label class="control-label">Description_{{$locale}}</label>
+                                        <div class="controls">
+                                            <textarea type="text" rows="10" cols="45" name="descriptions[{{$locale}}]" id="description">{{old('descriptions')?? $carDetails->descriptions[$locale]}}</textarea>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="control-group">
+                                @endforeach
 
                                     <label class="control-label">Parameters Small Image</label>
                                     <div class="controls">
