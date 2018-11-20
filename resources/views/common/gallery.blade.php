@@ -45,7 +45,7 @@
 				<div class="col-md-3" data-tag="@lang('brands.brand6')">
 					<div class="card">
 						<div class="card-img-top">
-							<a href="#" class="" data-toggle="modal" data-target="#car1">
+							<a href="#" class="show-modal" data-toggle="modal" data-target="#car1">
 								<img src="{{ URL::asset('/img/car-1.jpg') }}" class="img-thumb" alt="car-thumb">
 								<div class="search-icon">
 									<img src="{{ URL::asset('/img/search.png') }}" class="img-icon" alt="search">
@@ -85,7 +85,7 @@
 				<div class="col-md-3" data-tag="@lang('brands.brand1')">
 					<div class="card">
 						<div class="card-img-top">
-							<a href="#" class="" data-toggle="modal" data-target="#car2">
+							<a href="#" class="show-modal" data-toggle="modal" data-target="#car2">
 								<img src="{{ URL::asset('/img/car-2.jpg') }}" class="img-thumb" alt="car-thumb">
 								<div class="search-icon">
 									<img src="{{ URL::asset('/img/search.png') }}" class="img-icon" alt="search">
@@ -125,7 +125,7 @@
 				<div class="col-md-3" data-tag="@lang('brands.brand6')">
 					<div class="card">
 						<div class="card-img-top">
-							<a href="#" class="" data-toggle="modal" data-target="#car3">
+							<a href="#" class="show-modal" data-toggle="modal" data-target="#car3">
 								<img src="{{ URL::asset('/img/car-3.jpg') }}" class="img-thumb" alt="car-thumb">
 								<div class="search-icon">
 									<img src="{{ URL::asset('/img/search.png') }}" class="img-icon" alt="search">
@@ -165,7 +165,7 @@
 				<div class="col-md-3" data-tag="@lang('brands.brand6')">
 					<div class="card">
 						<div class="card-img-top">
-							<a href="#" class="" data-toggle="modal" data-target="#car4">
+							<a href="#" class="show-modal" data-toggle="modal" data-target="#car4">
 								<img src="{{ URL::asset('/img/car-4.jpg') }}" class="img-thumb" alt="car-thumb">
 								<div class="search-icon">
 									<img src="{{ URL::asset('/img/search.png') }}" class="img-icon" alt="search">
@@ -205,7 +205,7 @@
 				<div class="col-md-3" data-tag="@lang('brands.brand5')">
 					<div class="card">
 						<div class="card-img-top">
-							<a href="#" class="" data-toggle="modal" data-target="#car5">
+							<a href="#" class="show-modal" data-toggle="modal" data-target="#car5">
 								<img src="{{ URL::asset('/img/car-5.jpg') }}" class="img-thumb" alt="car-thumb">
 								<div class="search-icon">
 									<img src="{{ URL::asset('/img/search.png') }}" class="img-icon" alt="search">
@@ -245,7 +245,7 @@
 				<div class="col-md-3" data-tag="@lang('brands.brand5')">
 					<div class="card">
 						<div class="card-img-top">
-							<a href="#" class="" data-toggle="modal" data-target="#car6">
+							<a href="#" class="show-modal" data-toggle="modal" data-target="#car6">
 								<img src="{{ URL::asset('/img/car-6.jpg') }}" class="img-thumb" alt="car-thumb">
 								<div class="search-icon">
 									<img src="{{ URL::asset('/img/search.png') }}" class="img-icon" alt="search">
@@ -285,7 +285,7 @@
 				<div class="col-md-3" data-tag="@lang('brands.brand6')">
 					<div class="card">
 						<div class="card-img-top">
-							<a href="#" class="" data-toggle="modal" data-target="#car7">
+							<a href="#" class="show-modal" data-toggle="modal" data-target="#car7">
 								<img src="{{ URL::asset('/img/car-7.jpg') }}" class="img-thumb" alt="car-thumb">
 								<div class="search-icon">
 									<img src="{{ URL::asset('/img/search.png') }}" class="img-icon" alt="search">
@@ -325,7 +325,7 @@
 				<div class="col-md-3" data-tag="@lang('brands.brand6')">
 					<div class="card">
 						<div class="card-img-top">
-							<a href="#" class="" data-toggle="modal" data-target="#car8">
+							<a href="#" class="show-modal" data-toggle="modal" data-target="#car8">
 								<img src="{{ URL::asset('/img/car-8.jpg') }}" class="img-thumb" alt="car-thumb">
 								<div class="search-icon">
 									<img src="{{ URL::asset('/img/search.png') }}" class="img-icon" alt="search">
