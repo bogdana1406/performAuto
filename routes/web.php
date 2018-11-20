@@ -11,30 +11,137 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
+//Route::get('/', function () {
+//    return redirect('/'. App\Http\Middleware\LocaleMiddleware::$mainLanguage);
+//});
+
+
+Route::get('/admin', 'AdminController@login');
+Route::post('/logout', 'AdminController@logout');
+Route::match(['get', 'post'], '/admin', 'AdminController@login');
+
+
+Route::get('setlocale/{lang}', function ($lang) {
+
+    $referer = Redirect::back()->getTargetUrl();
+    $parse_url = parse_url($referer, PHP_URL_PATH);
+
+
+    $segments = explode('/', $parse_url);
+
+
+    if (in_array($segments[1], App\Http\Middleware\LocaleMiddleware::$languages)) {
+
+        unset($segments[1]);
+    }
+
+
+    if ($lang != App\Http\Middleware\LocaleMiddleware::$mainLanguage){
+        array_splice($segments, 1, 0, $lang);
+    }
+
+
+    $url = Request::root().implode("/", $segments);
+
+    if(parse_url($referer, PHP_URL_QUERY)){
+        $url = $url.'?'. parse_url($referer, PHP_URL_QUERY);
+    }
+    return redirect($url);
+
+})->name('setlocale');
+
+
+//Route::prefix('{lang?}')->middleware('localisation')->group(function() {
+
+Route::group(['prefix' => App\Http\Middleware\LocaleMiddleware::getLocale()], function(){
+
+    Route::get('/', 'DisplayConrtoller@home');
+
+    Route::get('/home', 'DisplayConrtoller@home');
+
+//        Route::get('/advantages', function () {
+//            return view('client.advantages');
+//        });
+//
+//        Route::get('/about', function () {
+//            return view('client.about');
+//        });
+//
+//        Route::get('/car', function () {
+//            return view('client.car');
+//        });
+//
+//        Route::get('/cars', function () {
+//            return view('client.cars-gallery');
+//        });
+//
+//        Route::get('/p3', function () {
+//            return view('client.page3');
+//        });
 });
 
-Route::get('/home', function () {
-    return view('home');
-});
+Auth::routes();
 
-Route::get('/advantages', function () {
-    return view('advantages');
-});
+Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function(){
+    Route::get('/dashboard', 'AdminController@dashboard');
+    Route::get('/settings', 'AdminController@settings');
+    Route::get('/check-pwd', 'AdminController@checkPassword');
+    Route::match(['get', 'post'], '/update-pwd', 'AdminController@updatePassword');
 
-Route::get('/about', function () {
-    return view('about');
-});
 
-Route::get('/car', function () {
-    return view('car');
-});
+    //brands Route (Admin)
 
-Route::get('/cars', function () {
-    return view('cars-gallery');
-});
+    Route::get('/add-brand', 'BrandController@showAddBrand');
+    Route::post('/add-brand', 'BrandController@addBrand');
+    Route::get('/edit-brand/{id}', 'BrandController@showEditBrand');
+    Route::post('/edit-brand/{id}', 'BrandController@editBrand');
+    Route::match(['get', 'post'], '/delete-brand/{id}', 'BrandController@deleteBrand');
+    Route::get('/view-brands', 'BrandController@viewBrands');
 
-Route::get('/p3', function () {
-    return view('page3');
+    //engines Route (Admin)
+
+    Route::get('/add-engine', 'EngineController@showAddEngine');
+    Route::post('/add-engine', 'EngineController@addEngine');
+    Route::get('/edit-engine/{id}', 'EngineController@showEditEngine');
+    Route::post('/edit-engine/{id}', 'EngineController@editEngine');
+    Route::match(['get', 'post'], '/delete-engine/{id}', 'EngineController@deleteEngine');
+    Route::get('/view-engines', 'EngineController@viewEngines');
+
+    //reviews Route (Admin)
+
+    Route::get('/add-review', 'ReviewController@showAddReview');
+    Route::post('/add-review', 'ReviewController@addReview');
+    Route::get('/view-reviews', 'ReviewController@viewReview');
+    Route::get('/edit-review/{id}', 'ReviewController@showEditReview');
+    Route::post('/edit-review/{id}', 'ReviewController@editReview');
+    Route::get('/delete-review-image/{id}', 'ReviewController@deleteReviewPhoto');
+    Route::get('/delete-review/{id}', 'ReviewController@deleteReview');
+
+    //cars Route (Admin)
+
+    Route::post('/add-car', 'CarController@addCar');
+    Route::get('/add-car', 'CarController@showAddCar');
+    Route::get('/edit-car/{id}', 'CarController@showEditCar');
+    Route::post('/edit-car/{id}', 'CarController@editCar');
+    Route::get('/view-cars', 'CarController@viewCars');
+    Route::get('/delete-car-image/{id}', 'CarController@deleteCarImage');
+    //Route::match(['get', 'post'], '/delete-car/{id}', 'CarController@deleteCar');
+    Route::get('/delete-car/{id}', 'CarController@deleteCar');
+
+    //carsSearch Route (Admin)
+    Route::get('/search-cars', 'SearchController@showFilter');
+    Route::post('/search-cars', 'SearchController@showResultFilter');
+
+
+    //Images upload Route
+    Route::get('/upload-car-images/{id}', 'CarsImageController@uploadForm');
+    Route::post('/upload-car-images/{id}', 'CarsImageController@uploadSubmit');
+
+
+    Route::get('/upload-car-images-form', 'CarsImageController@uploadImagesForm');
+    Route::post('/upload-car-images-form', 'CarsImageController@uploadFormSubmit');
+
+
+    Route::get('/view-images-table', 'CarsImageController@showImagesTable');
+    Route::get('/delete-car-image-record/{id}', 'CarsImageController@deleteCarsImageRecord');
 });

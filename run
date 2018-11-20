@@ -1,4 +1,4 @@
 #!/bin/bash
-cd laradock
+cd laradockAdmin
 docker-compose up -d nginx mysql phpmyadmin redis workspace
 exit
