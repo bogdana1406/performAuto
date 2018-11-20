@@ -18,6 +18,15 @@
   }
 	.car-properties {
 		margin-top: 4.6rem;
+    margin-bottom: 2.12rem;
+    .property {
+      font-size: .88rem;
+      line-height: 2.25rem;
+      color: white;
+      .icon {
+        vertical-align: baseline;
+      }
+    }
 	}
   .car-description {
     flex: 1;
@@ -75,6 +84,39 @@
   & + div {
     .gallery > .holder {
       background-image: initial;
+    }
+  }
+}
+
+.slider {
+  position: relative;
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    height: 42px;
+    width: 42px;
+    border-style:solid #cdcdcd;
+  }
+  &::before {
+    top: -4px;
+    left: -4px;
+  }
+  &::after {
+    bottom: -8px;
+    right: -8px;
+  }
+
+  li.active img {
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      bottom: -2px;
+      left: -2px;
+      border: 2px solid white;
     }
   }
 }

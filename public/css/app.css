@@ -12447,6 +12447,17 @@ footer .sub-footer a:hover {
 
 .car-card .car-properties {
   margin-top: 4.6rem;
+  margin-bottom: 2.12rem;
+}
+
+.car-card .car-properties .property {
+  font-size: .88rem;
+  line-height: 2.25rem;
+  color: white;
+}
+
+.car-card .car-properties .property .icon {
+  vertical-align: baseline;
 }
 
 .car-card .car-description {
@@ -12518,6 +12529,43 @@ footer .sub-footer a:hover {
 
 .car-card + div .gallery > .holder {
   background-image: initial;
+}
+
+.slider {
+  position: relative;
+}
+
+.slider::before,
+.slider::after {
+  content: '';
+  position: absolute;
+  height: 42px;
+  width: 42px;
+  border-style: solid #cdcdcd;
+}
+
+.slider::before {
+  top: -4px;
+  left: -4px;
+}
+
+.slider::after {
+  bottom: -8px;
+  right: -8px;
+}
+
+.slider li.active img {
+  position: relative;
+}
+
+.slider li.active img::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  bottom: -2px;
+  left: -2px;
+  border: 2px solid white;
 }
 
 body {
