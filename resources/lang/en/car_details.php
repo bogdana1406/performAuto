@@ -7,5 +7,7 @@ return [
 	'alternate_car_name' => 'Mercedes S-Klasse Long met Wald',
 	'tab1' => 'About',
 	'tab2' => 'Description',
+	'fuel' => 'Petrol',
+	'buy'  => 'Buy',
 
 ];

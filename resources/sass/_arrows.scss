@@ -1,8 +1,8 @@
 .arrow-up, .arrow-down, .arrow-down-rev, .arrow-up-rev,
-.triangles-down {
+.triangles-down, .arrow-down-plus {
   position: relative;
 }
-.arrow-up::before, .arrow-down::before, .arrow-down-rev::after, .arrow-up-rev::after {
+.arrow-up::before, .arrow-down::before, .arrow-down-rev::after, .arrow-up-rev::after, .arrow-down-plus::after {
   position: absolute;
   content: "";
   display: block;
@@ -27,12 +27,14 @@
   clip-path: polygon(0 0, 0 100%, 50% 1px, 100% 100%, 100% 0);
 }
 
-.arrow-down-plus {
-    height: 
+.arrow-down-plus::after {
+    height: 81px;
+    top: -80px;
+    clip-path: polygon(0 100%, 0 40%, 55px 0, 150px 62%, 50% calc(100% - 1px), calc(100% - 150px) 62%, calc(100% - 55px) 0, 100% 40%, 100% 0, 100% 100%, 50% 100%);
 }
 
 //arrows colors
-.arrow-black.arrow-up::before, .arrow-black.arrow-down::before, .arrow-black.arrow-down-rev::after, .arrow-black.arrow-up-rev::after {
+.arrow-black.arrow-up::before, .arrow-black.arrow-down::before, .arrow-black.arrow-down-rev::after, .arrow-black.arrow-up-rev::after, .arrow-down-plus::after {
   background-color: $main-black;
 }
 .arrow-white.arrow-up::before, .arrow-white.arrow-down::before, .arrow-white.arrow-down-rev::after, .arrow-white.arrow-up-rev::after {

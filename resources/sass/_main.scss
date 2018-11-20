@@ -55,11 +55,91 @@ h2 {
 
 //====Modal====
 
+a.show-modal {
+  display: block;
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, .6);
+    opacity: 0;
+    transition: $transition;
+  }
+  .search-icon {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    z-index: 120;
+    opacity: 0;
+    transition: $transition;
+    .img-icon {
+      align-self: center;
+      width: 32px;
+      height: 32px;
+    }
+  }
+  &:hover {
+    &::before {
+        opacity: 1;
+    }
+    .search-icon {
+        opacity: 1;
+    }
+  }
+}
+
+.img-thumb {
+  width: 100%;
+  position: relative;
+}
+
+.search-icon::before,
+.search-icon::after {
+  content: '';
+  position: absolute;
+  height: 42px;
+  width: 42px;
+  margin: 10px;
+}
+
+.search-icon::before {
+  left: 0;
+  border-left: $border-red;
+  border-top: $border-red;
+}
+
+.search-icon::after {
+  right: 0;
+  bottom: 0;
+  border-right: $border-red;
+  border-bottom: $border-red;
+}
 .modal {
   background-color: rgba(0, 0, 0, .5);
+  .img-zoom {
+    object-fit: cover;
+  }
   .modal-content {
     background-color: $main-black;
     color: $text-ultra-light-gray;
+    position: relative;
+    .close {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 100;
+      color: white;
+      margin-right: .5rem;
+      font-size: 2rem;        
+    }
     .modal-header {
       border-bottom: none 0;
     }
