@@ -125,7 +125,7 @@ $(document).ready(function() {
 
     //====Youtube script====
 
-    if ( document.getElementById('videoBox')) {
+    if (document.getElementById('videoBox')) {
 
         var tag = document.createElement('script');
         tag.src = "//www.youtube.com/iframe_api";
@@ -193,7 +193,7 @@ $(document).ready(function() {
 
     //====Smooth scrolling====
 
-    $(".toContacts").click(function (){
+    $(".toContacts").click(function() {
         $('html, body').animate({
             scrollTop: $("#contacts").offset().top
         }, 750);
@@ -208,24 +208,39 @@ $(document).ready(function() {
         slideMargin: 10,
 
         keyPress: false,
-        controls: false,
+        controls: true,
         prevHtml: '',
         nextHtml: '',
 
-        vertical:true,
-        verticalHeight:500,
-        vThumbWidth:100,
- 
-        thumbItem:5,
+        vertical: true,
+        verticalHeight: 500,
+        vThumbWidth: 80,
+
+        thumbItem: 5,
         pager: true,
         gallery: true,
-        galleryMargin: 15,
+        galleryMargin: 40,
         thumbMargin: 5,
         currentPagerPosition: 'middle',
 
-        enableTouch:true,
-        enableDrag:true,
-        freeMove:true,
+        enableTouch: true,
+        enableDrag: true,
+        freeMove: true,
         swipeThreshold: 40,
-    }); 
+    });
+
+    function showSlides(n) {
+        var i;
+        var slides = document.querySelectorAll("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        dots[slideIndex - 1].className += " active";
+    }
 });

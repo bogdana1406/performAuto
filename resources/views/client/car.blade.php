@@ -14,13 +14,13 @@
       	<span>19 500,00</span><span class="currency">&euro;</span>
       </div>
     </div>
-    <nav aria-label="breadcrumb">
+    <nav class="mb-5" aria-label="breadcrumb">
 		 	<ol class="breadcrumb">
 		   	<li class="breadcrumb-item"><a href="{{ URL('/') }}">Home</a></li>
 		   	<li class="breadcrumb-item active" aria-current="page">@lang('car_details.title')</li>
 		 	</ol>
 		</nav>
-    <div class="row">
+    <div class="row pt-4">
       <div class="col-sm-6 d-flex flex-column justify-content-between">
         <div class="car-properties row">
           <span class="col property"><img src="/img/icon-car-seat.png" class="icon mr-2">4</span>
@@ -76,6 +76,12 @@
             </li>
             <li></li>
           </ul>
+          <ol class="carousel-indicators" style="display:none;"></ol>
+          {{-- <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span> 
+            <span class="dot" onclick="currentSlide(2)"></span> 
+            <span class="dot" onclick="currentSlide(3)"></span> 
+          </div> --}}
         </div>
       </div>
     </div>

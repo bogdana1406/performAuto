@@ -12446,7 +12446,6 @@ footer .sub-footer a:hover {
 }
 
 .car-card .car-properties {
-  margin-top: 4.6rem;
   margin-bottom: 2.12rem;
 }
 
@@ -12541,31 +12540,94 @@ footer .sub-footer a:hover {
   position: absolute;
   height: 42px;
   width: 42px;
-  border-style: solid #cdcdcd;
+  border-color: #494949;
+  border-width: 1px;
 }
 
 .slider::before {
-  top: -4px;
-  left: -4px;
+  top: -8px;
+  left: -8px;
+  border-top-style: solid;
+  border-left-style: solid;
 }
 
 .slider::after {
   bottom: -8px;
-  right: -8px;
+  right: 112px;
+  border-right-style: solid;
+  border-bottom-style: solid;
 }
 
-.slider li.active img {
+.slider .lSSlideOuter .lSSlideWrapper {
+  position: static;
+}
+
+.slider .lSSlideOuter .lSPager.lSGallery li {
   position: relative;
+  -webkit-transition: all 0.25s ease-out;
+  transition: all 0.25s ease-out;
 }
 
-.slider li.active img::before {
-  content: '';
+.slider .lSSlideOuter .lSPager.lSGallery li::before,
+.slider .lSSlideOuter .lSPager.lSGallery li::after {
   position: absolute;
-  top: -2px;
-  right: -2px;
-  bottom: -2px;
-  left: -2px;
+  content: '';
+  top: 2px;
+  right: 2px;
+  bottom: 2px;
+  left: 2px;
+  border: 2px solid #1f1f1f;
+  opacity: 0;
+  -webkit-transition: all 0.25s ease-out;
+  transition: all 0.25s ease-out;
+}
+
+.slider .lSSlideOuter .lSPager.lSGallery li::after {
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
   border: 2px solid white;
+}
+
+.slider .lSSlideOuter .lSPager.lSGallery li:hover,
+.slider .lSSlideOuter .lSPager.lSGallery li.active {
+  border-radius: 0;
+}
+
+.slider .lSSlideOuter .lSPager.lSGallery li:hover::before,
+.slider .lSSlideOuter .lSPager.lSGallery li:hover::after,
+.slider .lSSlideOuter .lSPager.lSGallery li.active::before,
+.slider .lSSlideOuter .lSPager.lSGallery li.active::after {
+  opacity: 1;
+}
+
+.slider .lSSlideOuter .lSPager.lSGallery li:hover::after {
+  opacity: .6;
+}
+
+.slider .lSSlideOuter.vertical .lSAction > a {
+  width: 80px;
+  height: 20px;
+  left: initial;
+  right: 0;
+  opacity: .8;
+  background-position: center;
+  background-size: cover;
+}
+
+.slider .lSSlideOuter.vertical .lSAction > a:hover {
+  opacity: 1;
+}
+
+.slider .lSSlideOuter.vertical .lSAction > .lSPrev {
+  background-image: url("/images/angle-arrow-up.png");
+  top: -1px;
+}
+
+.slider .lSSlideOuter.vertical .lSAction > .lSNext {
+  background-image: url("/images/angle-arrow-down.png");
+  bottom: 0;
 }
 
 body {

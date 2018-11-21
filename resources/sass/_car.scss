@@ -17,7 +17,6 @@
     font-weight: 300;
   }
 	.car-properties {
-		margin-top: 4.6rem;
     margin-bottom: 2.12rem;
     .property {
       font-size: .88rem;
@@ -96,27 +95,87 @@
     position: absolute;
     height: 42px;
     width: 42px;
-    border-style:solid #cdcdcd;
+    border-color: $border-color-gray;
+    border-width: 1px;
   }
   &::before {
-    top: -4px;
-    left: -4px;
+    top: -8px;
+    left: -8px;
+    border-top-style: solid;
+    border-left-style: solid;
   }
   &::after {
     bottom: -8px;
-    right: -8px;
+    right: 112px;
+    border-right-style: solid;
+    border-bottom-style: solid;
   }
-
-  li.active img {
-    position: relative;
-    &::before {
-      content: '';
-      position: absolute;
-      top: -2px;
-      right: -2px;
-      bottom: -2px;
-      left: -2px;
-      border: 2px solid white;
+  // ====LightSlider overrides
+  .lSSlideOuter {
+    .lSSlideWrapper {
+      position: static;
+    }
+    .lSPager.lSGallery {
+      li {
+        position: relative;
+        transition: $transition;
+        &::before,
+        &::after {
+          position: absolute;
+          content: '';
+          top: 2px;
+          right: 2px;
+          bottom: 2px;
+          left: 2px;
+          border: 2px solid #1f1f1f;
+          opacity: 0;
+          transition: $transition;
+        }
+        &::after {
+          top: 0px;
+          right: 0px;
+          bottom: 0px;
+          left: 0px;
+          border: 2px solid white;
+        }
+        &:hover,
+        &.active {
+          border-radius: 0;
+          &::before,
+          &::after {
+            opacity: 1;
+          }
+        }
+        &:hover {
+          &::after {
+            opacity: .6
+          }
+        }
+      }
+    }
+    &.vertical {
+      .lSAction{ 
+        & > a {
+          width: 80px;
+          height: 20px;
+          left: initial;
+          right: 0;
+          opacity: .8;
+          background-position: center;
+          background-size: cover;
+          &:hover {
+            opacity: 1;
+          }
+        }
+        & > .lSPrev {
+          background-image: url('/images/angle-arrow-up.png');
+          top: -1px;
+        }
+        & > .lSNext {
+          background-image: url('/images/angle-arrow-down.png');
+          bottom: 0;
+        }
+      }
     }
   }
 }

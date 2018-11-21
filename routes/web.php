@@ -59,25 +59,25 @@ Route::group(['prefix' => App\Http\Middleware\LocaleMiddleware::getLocale()], fu
 
     Route::get('/home', 'DisplayConrtoller@home');
 
-//        Route::get('/advantages', function () {
-//            return view('client.advantages');
-//        });
-//
-//        Route::get('/about', function () {
-//            return view('client.about');
-//        });
-//
-//        Route::get('/car', function () {
-//            return view('client.car');
-//        });
-//
-//        Route::get('/cars', function () {
-//            return view('client.cars-gallery');
-//        });
-//
-//        Route::get('/p3', function () {
-//            return view('client.page3');
-//        });
+       Route::get('/advantages', function () {
+           return view('client.advantages');
+       });
+
+       Route::get('/about', function () {
+           return view('client.about');
+       });
+
+       Route::get('/car', function () {
+           return view('client.car');
+       });
+
+       Route::get('/cars', function () {
+           return view('client.cars-gallery');
+       });
+
+       Route::get('/p3', function () {
+           return view('client.page3');
+       });
 });
 
 Auth::routes();
