@@ -23,7 +23,7 @@
     <div class="row">
       <div class="col-sm-6 d-flex flex-column justify-content-between">
         <div class="car-properties row">
-          <span class="col property"><img src="/images/icon-car-seat.png" class="icon mr-2">4</span>
+          <span class="col property"><img src="/images/icon-car-seat.png" class="icon mr-2">{{$carDetails->seats}}</span>
           <span class="col property"><img src="/images/icon-gas-station.png" class="icon mr-2">@lang('car_details.fuel')</span>
           <span class="col property"><img src="/images/icon-car.png" class="icon mr-2">5/5</span>
           <span class="col property"><img src="/images/icon-gearshift.png" class="icon mr-2">4A OD</span>
@@ -40,7 +40,7 @@
               </li>
             </ul>
             <div class="tab-content">
-              <div class="tab-pane active" id="aboutCar" role="tabpanel" aria-labelledby="aboutCar-tab"><p>Hierbij bieden wij deze exclusieve Full option Mercedes-Benz W221 320CDI Long version met Japanse Wald Black Bison body kit. De auto bevindt zich in zeer goede staat zowel binnen als buiten. Carrosserie is zonder krassen en interieur was altijd netjes gehouden en goed verzorgd. Wagen werd ook maniakaal onderhouden.</p> Voor meer info of een afspraak bel of sms naar: +32 494 15 96 75
+              <div class="tab-pane active" id="aboutCar" role="tabpanel" aria-labelledby="aboutCar-tab"><p>{{$carDetails->about[App::getLocale()]}}</p>
               </div>
               <div class="tab-pane" id="descriptionCar" role="tabpanel" aria-labelledby="descriptionCar-tab">ack Bison body kit. De auto bevindt zich in zeer goede staat zowel binnen als buiten. Carrosserie is zonder krassen en interieur was altijd netjes gehouden en goed verzorgd. Wagen werd ook maniakaal onderh
               </div>

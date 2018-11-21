@@ -1,6 +1,6 @@
 <header>
   <nav class="navbar navbar-expand-lg">
-    <a class="navbar-brand" href="/">
+    <a class="navbar-brand" href="{{route('home')}}">
     	<img src="{{ asset('images/logo.png') }}" alt="Perform Auto">
   	</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,8 +36,10 @@
 					  	en
 					  </button>
 					  <div class="dropdown-menu text-center" aria-labelledby="btnGroupDrop2">
-				    	<a class="dropdown-item" href="#">en</a>
-				    	<a class="dropdown-item" href="#">fr</a>
+				    	{{--<a class="dropdown-item" href="#">en</a>--}}
+				    	{{--<a class="dropdown-item" href="#">fr</a>--}}
+						  <a class="dropdown-item" href="<?= route('setlocale', ['lang' => 'en']) ?>">en</a>
+						  <a class="dropdown-item" href="<?= route('setlocale', ['lang' => 'fr']) ?>">fr</a>
 				    </div>
 				  </div>
 				</div>
@@ -58,10 +60,10 @@
 		        </div>
 		      </li>
 		      <li class="nav-item">
-		        <a class="nav-link {{ Request::is('advantages') ? 'active' : null }}" href="{{ url('advantages') }}">@lang('advantages.title')</a>
+		        <a class="nav-link {{ Request::is('advantages') ? 'active' : null }}" href="{{ route('advantages') }}">@lang('advantages.title')</a>
 		      </li>
 		      <li class="nav-item">
-		        <a class="nav-link {{ Request::is('about') ? 'active' : null }}" href="{{ url('about') }}">@lang('about.title')</a>
+		        <a class="nav-link {{ Request::is('about') ? 'active' : null }}" href="{{ route('about') }}">@lang('about.title')</a>
 		      </li>
 		      <li class="nav-item">
 		        <a class="nav-link {{ Request::is('') ? 'active' : null }} toContacts" href="#">@lang('navigation.nav-link4')</a>
