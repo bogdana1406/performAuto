@@ -146,7 +146,7 @@
                                     <div class="control-group">
                                         <label class="control-label">About_{{$locale}}</label>
                                         <div class="controls">
-                                            <textarea type="text" rows="10" cols="45" name="about[{{$locale}}]" id="about">{{old('about')}}</textarea>
+                                            <textarea type="text" rows="10" cols="45" name="about[{{$locale}}]" id="about">{{old("about[$locale]")}}</textarea>
                                         </div>
                                     </div>
                                 @endforeach
@@ -155,7 +155,7 @@
                                     <div class="control-group">
                                         <label class="control-label">Description_{{$locale}}</label>
                                         <div class="controls">
-                                            <textarea type="text" rows="10" cols="45" name="descriptions[{{$locale}}]" id="description">{{old('descriptions')}}</textarea>
+                                            <textarea type="text" rows="10" cols="45" name="descriptions[{{$locale}}]" id="description">{{old("descriptions[$locale]")}}</textarea>
                                         </div>
                                     </div>
                                 @endforeach

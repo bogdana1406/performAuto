@@ -31,20 +31,21 @@
 @include('layouts.adminLayout.admin_footer')
 
 
-<script src="{{ asset('js/jquery.min.js')}}"></script>
-<script src="{{ asset('js/jquery.ui.custom.js')}}"></script>
-<script src="{{ asset('js/bootstrap.min.js')}}"></script>
-<script src="{{ asset('js/jquery.uniform.js')}}"></script>
-<script src="{{ asset('js/select2.min.js')}}"></script>
-<script src="{{ asset('js/jquery.dataTables.min.js')}}"></script>
-<script src="{{ asset('js/jquery.validate.js')}}"></script>
-<script src="{{ asset('js/matrix.js')}}"></script>
-<script src="{{ asset('js/matrix.form_validation.js')}}"></script>
-<script src="{{ asset('js/matrix.tables.js')}}"></script>
-<script src="{{ asset('js/matrix.popover.js')}}"></script>
+
+/<script src="{{ asset('js/admin/jquery.min.js')}}"></script>
+/<script src="{{ asset('js/admin/jquery.ui.custom.js')}}"></script>
+/<script src="{{ asset('js/admin/bootstrap.min.js')}}"></script>
+/<script src="{{ asset('js/admin/jquery.uniform.js')}}"></script>
+/<script src="{{ asset('js/admin/select2.min.js')}}"></script>
+/<script src="{{ asset('js/admin/jquery.dataTables.min.js')}}"></script>
+/<script src="{{ asset('js/admin/jquery.validate.js')}}"></script>
+/<script src="{{ asset('js/admin/matrix.js')}}"></script>
+/<script src="{{ asset('js/admin/matrix.form_validation.js')}}"></script>
+/<script src="{{ asset('js/admin/matrix.tables.js')}}"></script>
+<script src="{{ asset('js/admin/matrix.popover.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 
-
+{{--<script src="{{ asset('js/admin.js')}}"></script>--}}
 
 </body>
 </html>

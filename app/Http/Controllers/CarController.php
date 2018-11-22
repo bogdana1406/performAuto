@@ -224,7 +224,26 @@ class CarController extends Controller
 
                 if($car) {
                     $carsImageRecords = $car->carsImage()->pluck('filename')->toArray();
-                    $deleteImg = Storage::delete($carsImageRecords);
+                    //dd($carsImageRecords);
+                    foreach($carsImageRecords as $carsImageRecord){
+                    $existsLarge = Storage::exists('files/images/carsGallery/large/'.$carsImageRecord);
+                    if($existsLarge){
+                    Storage::delete('files/images/carsGallery/large/'.$carsImageRecord);
+                        }
+                    }
+                    foreach($carsImageRecords as $carsImageRecord){
+                        $existsMedium = Storage::exists('files/images/carsGallery/medium/'.$carsImageRecord);
+                        if($existsMedium){
+                            Storage::delete('files/images/carsGallery/medium/'.$carsImageRecord);
+                        }
+                    }
+
+                    foreach($carsImageRecords as $carsImageRecord){
+                        $existsSmall = Storage::exists('files/images/carsGallery/small/'.$carsImageRecord);
+                        if($existsSmall){
+                            Storage::delete('files/images/carsGallery/small/'.$carsImageRecord);
+                        }
+                    }
                         $car->carsImage()->delete();
                         $car->delete();
 

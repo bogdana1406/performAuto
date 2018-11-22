@@ -13,11 +13,7 @@
 
 
 
-Route::get('/', function () {
-    return redirect('/'. App\Http\Middleware\LocaleMiddleware::$mainLanguage);
-});
 
-Route::get('setlocale/{lang}', 'SetLocaleController@setLang')->name('setlocale');
 
 
 
@@ -26,28 +22,6 @@ Route::get('setlocale/{lang}', 'SetLocaleController@setLang')->name('setlocale')
 Route::get('/admin', 'AdminController@login');
 Route::post('/logout', 'AdminController@logout');
 Route::match(['get', 'post'], '/admin', 'AdminController@login');
-
-
-//Route::prefix('{lang?}')->middleware('localisation')->group(function() {
-
-Route::group(['prefix' => App\Http\Middleware\LocaleMiddleware::getLocale()], function(){
-
-    Route::get('/', 'DisplayConrtoller@home')->name('home');
-
-    Route::get('home', 'DisplayConrtoller@home')->name('home');
-
-    Route::get('advantages', 'DisplayConrtoller@advantages')->name('advantages');
-
-    Route::get('about', 'DisplayConrtoller@about')->name('about');
-
-    Route::get('car/{id}', 'DisplayConrtoller@car')->name('car');
-
-    Route::get('cars', 'DisplayConrtoller@cars')->name('cars');
-
-    Route::get('p3', 'DisplayConrtoller@p3')->name('p3');
-});
-
-Auth::routes();
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function(){
     Route::get('/dashboard', 'AdminController@dashboard');
@@ -112,3 +86,31 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function(){
     Route::get('/view-images-table', 'CarsImageController@showImagesTable');
     Route::get('/delete-car-image-record/{id}', 'CarsImageController@deleteCarsImageRecord');
 });
+
+
+Route::get('/', function () {
+    return redirect('/'. App\Http\Middleware\LocaleMiddleware::$mainLanguage);
+});
+
+Route::get('setlocale/{lang}', 'SetLocaleController@setLang')->name('setlocale');
+//Route::prefix('{lang?}')->middleware('localisation')->group(function() {
+
+Route::group(['prefix' => App\Http\Middleware\LocaleMiddleware::getLocale()], function(){
+
+    Route::get('/', 'DisplayConrtoller@home')->name('home');
+
+    Route::get('home', 'DisplayConrtoller@home')->name('home');
+
+    Route::get('advantages', 'DisplayConrtoller@advantages')->name('advantages');
+
+    Route::get('about', 'DisplayConrtoller@about')->name('about');
+
+    Route::get('car/{id}', 'DisplayConrtoller@car')->name('car');
+
+    Route::get('cars', 'DisplayConrtoller@cars')->name('cars');
+
+    Route::get('p3', 'DisplayConrtoller@p3')->name('p3');
+});
+
+//Auth::routes();
+

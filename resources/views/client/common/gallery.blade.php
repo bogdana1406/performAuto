@@ -23,13 +23,10 @@
 					@endif
 					</div>
 					<nav class="nav ml-auto" id="gallery-filter">
-						<a href="#" class="nav-link active" data-toggle="portfilter" data-target="all">@lang('brands.all_brands')<sup class="cars-number">24</sup></a>
-						<a href="#" class="nav-link" data-toggle="portfilter" data-target="@lang('brands.brand1')">@lang('brands.brand1')<sup class="cars-number">2</sup></a>
-						<a href="#" class="nav-link" data-toggle="portfilter" data-target="@lang('brands.brand2')">@lang('brands.brand2')<sup class="cars-number">6</sup></a>
-						<a href="#" class="nav-link" data-toggle="portfilter" data-target="@lang('brands.brand3')">@lang('brands.brand3')<sup class="cars-number">2</sup></a>
-						<a href="#" class="nav-link" data-toggle="portfilter" data-target="@lang('brands.brand4')">@lang('brands.brand4')<sup class="cars-number">1</sup></a>
-						<a href="#" class="nav-link" data-toggle="portfilter" data-target="@lang('brands.brand5')">@lang('brands.brand5')<sup class="cars-number">5</sup></a>
-						<a href="#" class="nav-link" data-toggle="portfilter" data-target="@lang('brands.brand6')">@lang('brands.brand6')<sup class="cars-number">8</sup></a>
+						<a href="#" class="nav-link active" data-toggle="portfilter" data-target="all">@lang('brands.all_brands')<sup class="cars-number">{{ $countAllCars }}</sup></a>
+						@foreach($arrayBrandsCount as $brandName => $brandCount)
+						<a href="#" class="nav-link" data-toggle="portfilter" data-target={{ $brandName }}>{{ $brandName }}<sup class="cars-number">{{ $brandCount }}</sup></a>
+						@endforeach
 					</nav>
 				</div>
 			{{-- search for full gallery --}}
@@ -42,14 +39,23 @@
 			@endif
 			{{-- car cards --}}
 			<div class="row">
-
+			@php
+			$i=0
+			@endphp
 				@foreach($cars as $car)
-				<div class="col-md-3" data-tag="@lang('brands.brand6')">
+					@php
+						$i++
+					@endphp
+				@if($i>8)
+						<div class="col-md-3" data-tag={{ $car->brand->name }} style="display: none">
+					@else
+						<div class="col-md-3" data-tag={{ $car->brand->name }}>
+					@endif
 					<div class="card">
 						<div class="card-img-top">
 							<a href="#" class="show-modal" data-toggle="modal" data-target="#car{{$car->id}}">
 								@if(!empty($car->image))
-									<img src="{{ URL::asset('/images/backend_images/cars/small/'.$car->image) }}" class="img-thumb" alt="car-thumb">
+									<img src="{{ URL::asset('/images/backend_images/cars/large/'.$car->image) }}" class="img-thumb" alt="car-thumb">
 									@else
 									<img src="{{ URL::asset('/images/car-default.jpg') }}" class="img-thumb" alt="car-thumb">
 								@endif
@@ -85,9 +91,9 @@
 						    		<div class="col">
 						    			<span class="car-price">{{$car->price}}</span><span class="currency">&euro;</span>
 						    		</div>
-						    		<div class="col text-right">
-						    			<span class="mileage">150000 km</span>
-						    		</div>
+						    		{{--<div class="col text-right">--}}
+						    			{{--<span class="mileage">150000 km</span>--}}
+						    		{{--</div>--}}
 						    	</div>
 						    </a>
 						</div>

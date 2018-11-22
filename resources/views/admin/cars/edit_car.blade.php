@@ -196,7 +196,7 @@
                                         <a href="{{ url('/admin/delete-car-image/'.$carDetails->id) }}">Delete</a>
                                         @endif
                                     </div>
-                                </div>
+
                                         {{--<a href="{{ url('/admin/upload-car-images/'.$carDetails->id) }}" class="btn btn-primary btn-mini">Upload Images</a>--}}
 
                                 <div class="form-actions">
@@ -205,26 +205,26 @@
                             </form>
 
 
-                            <form action="/admin/upload-car-images/{{$carDetails->id}}" method="post" enctype="multipart/form-data">
-                                {{ csrf_field() }}
+                            {{--<form action="/admin/upload-car-images/{{$carDetails->id}}" method="post" enctype="multipart/form-data">--}}
+                                {{--{{ csrf_field() }}--}}
                                 {{--Car model:--}}
-                                <br />
-                                <input type="hidden" name="id_car_image" value="{{ $carDetails->id }}"/>
-                                <br /><br />
-                                <input type="hidden" name="name_car_image" value="{{ $carDetails->model }}"/>
-                                @if (count($errors) > 0)
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                @endif
-                                <br /><br />
-                                Car Images (can attach more than one):
-                                <br />
-                                <input type="file" name="images[]"  multiple />
-                                <br /><br />
-                                <input type="submit" value="Upload" />
+                                {{--<br />--}}
+                                {{--<input type="hidden" name="id_car_image" value="{{ $carDetails->id }}"/>--}}
+                                {{--<br /><br />--}}
+                                {{--<input type="hidden" name="name_car_image" value="{{ $carDetails->model }}"/>--}}
+                                {{--@if (count($errors) > 0)--}}
+                                    {{--<ul>--}}
+                                        {{--@foreach ($errors->all() as $error)--}}
+                                            {{--<li>{{ $error }}</li>--}}
+                                        {{--@endforeach--}}
+                                    {{--</ul>--}}
+                                {{--@endif--}}
+                                {{--<br /><br />--}}
+                                {{--Car Images (can attach more than one):--}}
+                                {{--<br />--}}
+                                {{--<input type="file" name="images[]"  multiple />--}}
+                                {{--<br /><br />--}}
+                                {{--<input type="submit" value="Upload" />--}}
 
 
                                 {{--@if($errors->has('images[]'))--}}

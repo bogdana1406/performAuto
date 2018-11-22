@@ -61,7 +61,19 @@ class CarsImageController extends Controller
             $imageRecord = CarsImage::where(['id' => $id])->value('filename');
 //            dd($imageRecord);
 
-            Storage::delete($imageRecord);
+            $existsMedium = Storage::exists('files/images/carsGallery/medium/'.$imageRecord);
+            if($existsMedium){
+                Storage::delete('files/images/carsGallery/medium/'.$imageRecord);
+            }
+            $existsLarge = Storage::exists('files/images/carsGallery/large/'.$imageRecord);
+            if($existsLarge){
+                Storage::delete('files/images/carsGallery/large/'.$imageRecord);
+            }
+            $existsSmall = Storage::exists('files/images/carsGallery/small/'.$imageRecord);
+            if($existsSmall){
+                Storage::delete('files/images/carsGallery/small/'.$imageRecord);
+            }
+            //Storage::delete($imageRecord);
 
             CarsImage::where(['id' => $id])->delete();
 
@@ -87,31 +99,32 @@ class CarsImageController extends Controller
             $dataCarImage = [];
 
             if($request->hasFile('images'))
-                $files = $request->file('images');
-            foreach ($files as $file){
-                foreach ($request->images as $image) {
-                    $extension = $file->getClientOriginalExtension();
-                    $filename = rand(111, 99999).".".$extension;
+                $image_tmps = Input::file('images');
+        //dd($image_tmps);
+                //$files = $request->file('images');
+          // dd($files, $image_tmp);
+            foreach ($image_tmps as $image_tmp){
+                    $extension = $image_tmp->getClientOriginalExtension();
+                    $filename = rand(111, 99999)."_car_".$data['car_id'].".".$extension;
+                    //dd($filename);
+                    $large_image_path = 'files/images/carsGallery/large/'.$filename;
+                    $small_image_path = 'files/images/carsGallery/small/'.$filename;
+                    $medium_image_path = 'files/images/carsGallery/medium/'.$filename;
 
-                    $filepath = Storage::putFileAs(
-                        'files/images/cars'.$data['car_id'], $image, $filename
-                    );
+                Image::make($image_tmp)->save($medium_image_path);
+                Image::make($image_tmp)->resize(80, 80)->save($small_image_path);
+                Image::make($image_tmp)->resize(460, 460)->save($large_image_path);
 
-                    //$filepath = $image->storeAs('files/images/cars'.$data['car_id'], $filename);
-
-
-                    $dataCarImage[] = [
-                        'car_id' => $data['car_id'],
-                        'filename' => $filepath
+                $dataCarImage[] =[
+                        'car_id' =>$data['car_id'],
+                        'filename'=>$filename
                     ];
-//                    CarsImage::create([
-//                        'car_id' =>$data['car_id'],
-//                        'filename'=>$filepath
-//                    ]);
-                }
+
+                } //dd($dataCarImage);
+
                 CarsImage::insert($dataCarImage);
                 return redirect('/admin/view-images-table/');
-            }
+            //}
 
 
 
