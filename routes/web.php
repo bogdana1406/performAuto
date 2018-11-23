@@ -110,6 +110,10 @@ Route::group(['prefix' => App\Http\Middleware\LocaleMiddleware::getLocale()], fu
     Route::get('cars', 'DisplayConrtoller@cars')->name('cars');
 
     Route::get('p3', 'DisplayConrtoller@p3')->name('p3');
+
+   // Route::get('/filter-cars', 'FilterController@showFilter');
+
+    Route::post('filter-cars', 'DisplayConrtoller@showResultFilter')->name('carsFilter');
 });
 
 //Auth::routes();

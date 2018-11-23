@@ -25,7 +25,7 @@ class ReviewController extends Controller
             $filepath = $photo->storeAs('files/images/customers', $filename);
             $data['customer_photo'] = $filepath;
         }
-        dd($data);
+        //dd($data);
         $review = Review::create($data);
 
         if($review){

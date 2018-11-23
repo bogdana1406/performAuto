@@ -55,7 +55,7 @@
 						<div class="card-img-top">
 							<a href="#" class="show-modal" data-toggle="modal" data-target="#car{{$car->id}}">
 								@if(!empty($car->image))
-									<img src="{{ URL::asset('/images/backend_images/cars/large/'.$car->image) }}" class="img-thumb" alt="car-thumb">
+									<img src="{{ URL::asset('/images/backend_images/cars/medium/'.$car->image) }}" class="img-thumb" alt="car-thumb">
 									@else
 									<img src="{{ URL::asset('/images/car-default.jpg') }}" class="img-thumb" alt="car-thumb">
 								@endif
@@ -71,7 +71,7 @@
 									      <span aria-hidden="true">&times;</span>
 									    </button>
 									@if(!empty($car->image))
-										<img src="{{ URL::asset('/images/backend_images/cars/small/'.$car->image) }}" class="img-thumb" alt="car-thumb">
+										<img src="{{ URL::asset('/images/backend_images/cars/medium/'.$car->image) }}" class="img-thumb" alt="car-thumb">
 									@else
 										<img src="{{ URL::asset('/images/car-default.jpg') }}" class="img-thumb" alt="car-thumb">
 									@endif
@@ -80,7 +80,7 @@
 							</div>
 						</div>
 						<div class="card-body">
-						    <a href="#" class="d-block">
+						    <a href="{{route('car', ['id'=>$car->id])}}" class="d-block">
 						    	<div class="row">
 							    	<h5 class="col card-title d-inline-block">{{$car->name}}</h5>
 						    		<div class="col text-right">
