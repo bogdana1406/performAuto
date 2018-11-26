@@ -60,7 +60,7 @@
                                         <td>{{ $car->price }}</td>
                                         <td>
                                             @if(!empty($car->image))
-                                                <img src="{{ asset('/images/backend_images/cars/small/'.$car->image) }}" style="width:50px;">
+                                                <img src="{{ asset('files/images/backend_images/small/'.$car->image) }}" style="width:50px;">
                                                 @endif
                                         </td>
                                         <td class="center">

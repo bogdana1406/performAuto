@@ -42,9 +42,9 @@ class CarController extends Controller
             if($image_tmp->isValid()){
                 $extension = $image_tmp->getClientOriginalExtension();
                 $filename = rand(111, 99999).".".$extension;
-                $large_image_path = 'images/backend_images/cars/large/'.$filename;
-                $small_image_path = 'images/backend_images/cars/small/'.$filename;
-                $medium_image_path = 'images/backend_images/cars/medium/'.$filename;
+                $large_image_path = 'files/images/backend_images/large/'.$filename;
+                $small_image_path = 'files/images/backend_images/small/'.$filename;
+                $medium_image_path = 'files/images/backend_images/medium/'.$filename;
 
                 Image::make($image_tmp)->save($large_image_path);
                 Image::make($image_tmp)->resize($small_w, $small_h)->save($small_image_path);
@@ -127,21 +127,21 @@ class CarController extends Controller
 
             if($request->hasFile('image')){
                 if($old_image){
-                    $existsMedium = Storage::disk('public')->exists('images/backend_images/cars/medium/'.$old_image);
+                    $existsMedium = Storage::exists('files/images/backend_images/medium/'.$old_image);
                     if($existsMedium){
-                            Storage::disk('public')->delete('images/backend_images/cars/medium/'.$old_image);
+                            Storage::delete('files/images/backend_images/medium/'.$old_image);
                     }
                 }
                 if($old_image){
-                    $existsSmall = Storage::disk('public')->exists('images/backend_images/cars/small/'.$old_image);
+                    $existsSmall = Storage::exists('files/images/backend_images/small/'.$old_image);
                     if($existsSmall){
-                        Storage::disk('public')->delete('images/backend_images/cars/small/'.$old_image);
+                        Storage::delete('files/images/backend_images/small/'.$old_image);
                     }
                 }
                 if($old_image){
-                    $existsLarge = Storage::disk('public')->exists('images/backend_images/cars/large/'.$old_image);
+                    $existsLarge = Storage::exists('files/images/backend_images/large/'.$old_image);
                     if($existsLarge){
-                        Storage::disk('public')->delete('images/backend_images/cars/large/'.$old_image);
+                        Storage::delete('files/images/backend_images/large/'.$old_image);
                     }
                 }
                 $image_tmp = Input::file('image');
@@ -150,9 +150,9 @@ class CarController extends Controller
                     $extension = $image_tmp->getClientOriginalExtension();
                     $filename = rand(111, 99999).".".$extension;
                     //dd($filename);
-                    $large_image_path = 'images/backend_images/cars/large/'.$filename;
-                    $medium_image_path = 'images/backend_images/cars/medium/'.$filename;
-                    $small_image_path = 'images/backend_images/cars/small/'.$filename;
+                    $large_image_path = 'files/images/backend_images/large/'.$filename;
+                    $medium_image_path = 'files/images/backend_images/medium/'.$filename;
+                    $small_image_path = 'files/images/backend_images/small/'.$filename;
 
                     Image::make($image_tmp)->save($large_image_path);
                     Image::make($image_tmp)->resize($medium_w,$medium_h)->save($medium_image_path);
@@ -184,17 +184,17 @@ class CarController extends Controller
 
             $car = Car::find($id);
             $filename = $car->image;
-            $existsLarge = Storage::disk('public')->exists('images/backend_images/cars/large/'.$filename);
+            $existsLarge = Storage::exists('files/images/backend_images/large/'.$filename);
             if($existsLarge){
-               Storage::disk('public')->delete('images/backend_images/cars/large/'.$filename);
+               Storage::delete('files/images/backend_images/large/'.$filename);
             }
-            $existsMedium = Storage::disk('public')->exists('images/backend_images/cars/medium/'.$filename);
+            $existsMedium = Storage::exists('files/images/backend_images/medium/'.$filename);
             if($existsMedium){
-                Storage::disk('public')->delete('images/backend_images/cars/medium/'.$filename);
+                Storage::delete('files/images/backend_images/medium/'.$filename);
             }
-            $existsSmall = Storage::disk('public')->exists('images/backend_images/cars/small/'.$filename);
+            $existsSmall = Storage::exists('files/images/backend_images/small/'.$filename);
             if($existsSmall){
-                Storage::disk('public')->delete('images/backend_images/cars/small/'.$filename);
+                Storage::delete('files/images/backend_images/small/'.$filename);
             }
 
             //die;
@@ -209,17 +209,17 @@ class CarController extends Controller
              $car = Car::find($id);
 
              $filename = $car->image;
-             $existsLarge = Storage::disk('public')->exists('images/backend_images/cars/large/'.$filename);
+             $existsLarge = Storage::exists('files/images/backend_images/large/'.$filename);
              if($existsLarge){
-                Storage::disk('public')->delete('images/backend_images/cars/large/'.$filename);
+                Storage::delete('files/images/backend_images/large/'.$filename);
              }
-             $existsMedium = Storage::disk('public')->exists('images/backend_images/cars/medium/'.$filename);
+             $existsMedium = Storage::exists('files/images/backend_images/medium/'.$filename);
              if($existsMedium){
-                Storage::disk('public')->delete('images/backend_images/cars/medium/'.$filename);
+                Storage::delete('files/images/backend_images/medium/'.$filename);
              }
-             $existsSmall = Storage::disk('public')->exists('images/backend_images/cars/small/'.$filename);
+             $existsSmall = Storage::exists('files/images/backend_images/small/'.$filename);
              if($existsSmall){
-                Storage::disk('public')->delete('images/backend_images/cars/small/'.$filename);
+                Storage::delete('files/images/backend_images/small/'.$filename);
              }
 
                 if($car) {

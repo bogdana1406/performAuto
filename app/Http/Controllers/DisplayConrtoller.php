@@ -10,18 +10,30 @@ use Illuminate\Http\Request;
 
 class DisplayConrtoller extends Controller
 {
-    public function home(){
-
+    public function getHeaderParams(){
         $cars = Car::orderBy('id', 'desc')->get();
         $carBrands = Brand::has('car')->get();
         $countAllCars = $cars->count();
         $arrayBrandsCount = [];
-
-        $reviews = Review::orderBy('id', 'desc')->get();
+        $activBrand = \request()->brand??'all';
 
         foreach ($carBrands as $carBrand) {
             $arrayBrandsCount[$carBrand->name] = $carBrand->car()->count();
         }
+
+        return [
+            'carBrands'=>$carBrands,
+            'arrayBrandsCount'=>$arrayBrandsCount,
+            'countAllCars'=>$countAllCars,
+            'activBrand'=>$activBrand
+        ];
+    }
+
+    public function home(){
+
+        $cars = Car::orderBy('id', 'desc')->get();
+
+        $reviews = Review::orderBy('id', 'desc')->get();
 
         $carFilterBrands = Brand::has('car')->pluck('name', 'id');
 
@@ -38,17 +50,18 @@ class DisplayConrtoller extends Controller
 
         //dd(max(Car::pluck('price')->toArray()));
 
-        return view('client.home')->with(compact('carDetails', 'cars', 'carBrands', 'countAllCars', 'arrayBrandsCount',
+        return view('client.home')->with(compact('carDetails', 'cars',
             'carFilterBrands', 'carFilterModels', 'carFilterYears', 'carFilterPriceMin', 'carFilterPriceMax', 'reviews'));
     }
 
     public function advantages(){
-
         $reviews = Review::orderBy('id', 'desc')->get();
         return view('client.advantages')->with(compact('reviews'));
     }
 
     public function about(){
+
+
 
         $reviews = Review::orderBy('id', 'desc')->get();
         return view('client.about')->with(compact('reviews'));
@@ -71,12 +84,15 @@ class DisplayConrtoller extends Controller
         $carImagesGallery = CarsImage::where(['car_id'=>$id])->get();
 
        //dd($carImagesGallery);
-        return view('client.car')->with(compact('carDetails', 'cars', 'carBrands', 'countAllCars', 'arrayBrandsCount', 'carImagesGallery'));
+        return view('client.car')->with(compact('carDetails', 'cars',
+            'carBrands', 'countAllCars', 'arrayBrandsCount', 'carImagesGallery'));
     }
 
-    public function cars(){
+    public function cars(Request $request){
 
 
+        $activBrand = $request->brand??'all';
+//        dd($activBrand);
         $carBrands = Brand::has('car')->get();
         $cars = Car::orderBy('id', 'desc')->get();
         $countAllCars = $cars->count();
@@ -89,7 +105,7 @@ class DisplayConrtoller extends Controller
         //dd($arrayBrandsCount, $cars);
 
         //dd($car1, $cars, $all_cars, $carBrands);
-        return view('client.cars-gallery')->with(compact('cars', 'carBrands', 'countAllCars', 'arrayBrandsCount'));
+        return view('client.cars-gallery')->with(compact('cars', 'carBrands', 'countAllCars', 'arrayBrandsCount', 'activBrand'));
     }
 
     public function p3(){
@@ -127,10 +143,10 @@ class DisplayConrtoller extends Controller
             $car->where('year', $request->input('year'))->get();
         }
 
-        $priceBar = explode(",", $priceString);
+        list($priceBarMin, $priceBarMax) = explode(",", $priceString);
 
         if($request->has('priceBar')&&($data['priceBar']!="")){
-            $car->whereBetween('price', $priceBar)->get();
+            $car->where('price', '>=' , (int)$priceBarMin)->where('price', '<=' , (int)$priceBarMax)->get();
         }
 //
 //        if($request->has('priceBar')&&($data['priceBar']!="")){
@@ -138,6 +154,7 @@ class DisplayConrtoller extends Controller
 //        }
 
         $cars = $car->get();
+
 //
         $carBrands = $data['brand_id'] ? Brand::whereId($data['brand_id'])->get() : Brand::has('car')->get();
 

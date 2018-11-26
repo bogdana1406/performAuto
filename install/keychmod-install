@@ -25,5 +25,21 @@ echo 'Set chmod 777 for /storage/logs/error.log ok/ '
 chmod 777 ./storage/logs/info.log
 echo 'Set chmod 777 for /storage/logs/info.log ok/ '
 
+mkdir -p ./storage/app/files/images/backend_images/large
+mkdir -p ./storage/app/files/images/backend_images/medium
+mkdir -p ./storage/app/files/images/backend_images/small
+
+mkdir -p ./storage/app/files/images/carsGallery/large
+mkdir -p ./storage/app/files/images/carsGallery/medium
+mkdir -p ./storage/app/files/images/carsGallery/small
+
+chmod 777 -R ./storage/app/files
+
+cd ./public
+
+ln -sf ../storage/app/files files
+
+chmod 777 files
+
 exit
 

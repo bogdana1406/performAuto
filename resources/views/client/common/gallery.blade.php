@@ -23,9 +23,9 @@
 					@endif
 					</div>
 					<nav class="nav ml-auto" id="gallery-filter">
-						<a href="#" class="nav-link active" data-toggle="portfilter" data-target="all">@lang('brands.all_brands')<sup class="cars-number">{{ $countAllCars }}</sup></a>
+						<a href="#" class="nav-link {{$activBrand === 'all' ? 'active' : ''}}" data-toggle="portfilter" data-target="all">@lang('brands.all_brands')<sup class="cars-number">{{ $countAllCars }}</sup></a>
 						@foreach($arrayBrandsCount as $brandName => $brandCount)
-						<a href="#" class="nav-link" data-toggle="portfilter" data-target={{ $brandName }}>{{ $brandName }}<sup class="cars-number">{{ $brandCount }}</sup></a>
+						<a href="#" class="nav-link {{$activBrand === $brandName ? 'active' : ''}}" data-toggle="portfilter" data-target={{ $brandName }}>{{ $brandName }}<sup class="cars-number">{{ $brandCount }}</sup></a>
 						@endforeach
 					</nav>
 				</div>
@@ -46,7 +46,7 @@
 					@php
 						$i++
 					@endphp
-				@if($i>8)
+					@if(Request::url() !== route('cars') && $i>2)
 						<div class="col-md-3" data-tag={{ $car->brand->name }} style="display: none">
 					@else
 						<div class="col-md-3" data-tag={{ $car->brand->name }}>
@@ -54,10 +54,12 @@
 					<div class="card">
 						<div class="card-img-top">
 							<a href="#" class="show-modal" data-toggle="modal" data-target="#car{{$car->id}}">
-								@if(Request::hasFile(URL::asset('/images/backend_images/cars/medium/'.$car->image)))
-									<img src="{{ URL::asset('/images/backend_images/cars/medium/'.$car->image) }}" class="img-thumb" alt="car-thumb">
+								@if(!empty($car->image))
+									@if(Storage::exists('files/images/backend_images/medium/'.$car->image))
+									<img src="{{ URL::asset('files/images/backend_images/medium/'.$car->image) }}" class="img-thumb" alt="car-thumb">
 									@else
 									<img src="{{ URL::asset('/images/car-default.jpg') }}" class="img-thumb" alt="car-thumb">
+									@endif
 								@endif
 								{{--<img src="{{ URL::asset('/images/backend_images/cars/small/'.$car->image) }}" class="img-thumb" alt="car-thumb">--}}
 								<div class="search-icon">
@@ -70,8 +72,9 @@
 									   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									      <span aria-hidden="true">&times;</span>
 									    </button>
-									@if(Request::hasFile(URL::asset('/images/backend_images/cars/medium/'.$car->image)))
-										<img src="{{ URL::asset('/images/backend_images/cars/medium/'.$car->image) }}" class="img-thumb" alt="car-thumb">
+
+									@if(Storage::exists('files/images/backend_images/medium/'.$car->image)))
+										<img src="{{ URL::asset('files/images/backend_images/medium/'.$car->image) }}" class="img-thumb" alt="car-thumb">
 									@else
 										<img src="{{ URL::asset('/images/car-default.jpg') }}" class="img-thumb" alt="car-thumb">
 									@endif
@@ -104,9 +107,19 @@
 			</div>
 			<div class="d-flex justify-content-center mt-5 position-relative">
 				{{-- @if (request()->is('cars')) --}}
-				<a href="{{ route('cars') }}" class="btn btn-outline btn-medium {{ Request::is('cars') ? 'd-none' : null }}">all cars</a>
+				<a href="{{ route('cars') }}" class="btn btn-outline btn-medium {{ Request::url() === route('cars')? 'd-none' : null }}">all cars</a>
 
 			</div>
 		</div>
 	</div>
+	</div>
 </section>
+</section>
+
+@if(Request::url() === route('cars'))
+<script>
+    $(document).ready(function() {
+		$('nav#gallery-filter a.active').click();
+	});
+</script>
+@endif

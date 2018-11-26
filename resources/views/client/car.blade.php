@@ -57,8 +57,12 @@
         <div class="slider">
           <ul id="lightSlider">
             @foreach($carImagesGallery as $carImage)
-            <li data-thumb="{{ asset('files/images/carsGallery/small/'.$carImage->filename) }}" class="active">
-              <img alt="Image 1 Title" src="{{ asset('files/images/carsGallery/large/'.$carImage->filename) }}" class="img-fluid">
+            <li data-thumb="{{Storage::exists('/files/images/carsGallery/small/'.$carImage->filename) ?
+             asset('files/images/carsGallery/small/'.$carImage->filename) :
+              asset('/images/default-gallery-small.jpg')}}" class="active">
+              <img alt="Image 1 Title" src="{{ Storage::exists('/files/images/carsGallery/large/'.$carImage->filename) ?
+              asset('files/images/carsGallery/large/'.$carImage->filename) :
+               asset('/images/default-gallery-large.jpg') }}" class="img-fluid">
             </li>
             @endforeach
             {{--<li data-thumb="{{ asset('/images/mers-s2.png') }}">--}}
