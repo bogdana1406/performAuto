@@ -33,7 +33,7 @@
 				  </div>
 					<div class="btn-group" role="group">
 					 <button id="btnGroupDrop2" type="button" class="btn btn-outline dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					  	en
+						 {{App::getLocale()}}
 					  </button>
 					  <div class="dropdown-menu text-center" aria-labelledby="btnGroupDrop2">
 				    	{{--<a class="dropdown-item" href="#">en</a>--}}
@@ -50,13 +50,19 @@
 		    	<li class="nav-item dropdown">
 		        <a class="nav-link dropdown-toggle" href="{{ url('/') }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@lang('navigation.nav-link1')</a>
 						<div class="dropdown-menu triangle-top" aria-labelledby="navbarDropdown">
-			        <a class="dropdown-item" href="#">@lang('navigation.dropdown-link1')<span class="float-right">24</span></a>
-			        <a class="dropdown-item" href="#">@lang('navigation.dropdown-link2')<span class="float-right">2</span></a>
-			        <a class="dropdown-item" href="#">@lang('navigation.dropdown-link3')<span class="float-right">6</span></a>
-			        <a class="dropdown-item" href="#">@lang('navigation.dropdown-link4')<span class="float-right">2</span></a>
-			        <a class="dropdown-item" href="#">@lang('navigation.dropdown-link5')<span class="float-right">1</span></a>
-		          <a class="dropdown-item" href="#">@lang('navigation.dropdown-link6')<span class="float-right">5</span></a>
-		          <a class="dropdown-item" href="#">@lang('navigation.dropdown-link7')<span class="float-right">8</span></a>
+			        <a class="dropdown-item" href="{{ route('cars') }}">@lang('navigation.dropdown-link1')<span class="float-right">{{ $countAllCars }}</span></a>
+
+							@foreach($arrayBrandsCount as $brandName => $brandCount)
+								<a href="{{ route('cars')}}?brand={{$brandName}}" class="dropdown-item" data-toggle="portfilter" data-target={{ $brandName }}>{{ $brandName }}<span class="float-right">{{ $brandCount }}</span></a>
+							@endforeach
+
+			        {{--<a class="dropdown-item" href="#">@lang('navigation.dropdown-link2')<span class="float-right">2</span></a>--}}
+
+			        {{--<a class="dropdown-item" href="#">@lang('navigation.dropdown-link3')<span class="float-right">6</span></a>--}}
+			        {{--<a class="dropdown-item" href="#">@lang('navigation.dropdown-link4')<span class="float-right">2</span></a>--}}
+			        {{--<a class="dropdown-item" href="#">@lang('navigation.dropdown-link5')<span class="float-right">1</span></a>--}}
+		          {{--<a class="dropdown-item" href="#">@lang('navigation.dropdown-link6')<span class="float-right">5</span></a>--}}
+		          {{--<a class="dropdown-item" href="#">@lang('navigation.dropdown-link7')<span class="float-right">8</span></a>--}}
 		        </div>
 		      </li>
 		      <li class="nav-item">

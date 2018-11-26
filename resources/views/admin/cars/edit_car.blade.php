@@ -192,7 +192,7 @@
                                             {{--<img src="{{ asset('/images/backend_images/cars/small/'.$car->image) }}" style="width:30px;">--}}
                                         {{--@endif--}}
                                     @if(!empty($carDetails->image))
-                                        <img style="width:30px;" src="{{ asset('/images/backend_images/cars/small/'.$carDetails->image) }}" > |
+                                        <img style="width:30px;" src="{{ asset('files/images/backend_images/small/'.$carDetails->image) }}" > |
                                         <a href="{{ url('/admin/delete-car-image/'.$carDetails->id) }}">Delete</a>
                                         @endif
                                     </div>
