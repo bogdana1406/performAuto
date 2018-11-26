@@ -3,7 +3,7 @@
 	{{-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> --}}
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>PERFORM auto | @yield('title')</title>
-  <link rel="shortcut icon" type="image/png" href="/img/logo.png">
+  <link rel="shortcut icon" type="image/png" href="/images/logo.png">
   {{-- fonts --}}
   <link rel="stylesheet" href="{{ asset('fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
   <link rel="stylesheet" href="{{ asset('fonts/themify-icons/themify-icons.css')}}">

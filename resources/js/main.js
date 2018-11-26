@@ -155,7 +155,7 @@ $(document).ready(function() {
         $(p).hide();
 
         var t = document.getElementById("thumbnail");
-        t.src = "/img/video-thtumb.jpg";
+        t.src = "/images/video-thtumb.jpg";
 
         onPlayerStateChange = function(event) {
             if (event.data == YT.PlayerState.ENDED) {

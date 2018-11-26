@@ -7,7 +7,7 @@
 			<div id="player"></div>
 				<div id="thumbnail_container" class="thumbnail_container">
 	    		<img class="thumbnail" id="thumbnail"/>
-	    		<a class="start-video"><img width="64" src="img/play-button.svg"></a>
+	    		<a class="start-video"><img width="64" src="/images/play-button.svg"></a>
 			</div>
 		</div>
 	</div>
