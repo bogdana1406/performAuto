@@ -146,7 +146,13 @@
                                     <div class="control-group">
                                         <label class="control-label">About_{{$locale}}</label>
                                         <div class="controls">
-                                            <textarea type="text" rows="10" cols="45" name="about[{{$locale}}]" id="about">{{old("about[$locale]")}}</textarea>
+                                            <textarea type="text" rows="10" cols="45" name="about[{{$locale}}]" id="about">{{old("about.$locale")}}</textarea>
+
+                                            @if($errors->has("about.$locale"))
+                                                <span class="alert alert-danger" role="alert">
+                                                    {{$errors->first("about.$locale")}}
+                                            </span>
+                                            @endif
                                         </div>
                                     </div>
                                 @endforeach
@@ -155,7 +161,13 @@
                                     <div class="control-group">
                                         <label class="control-label">Description_{{$locale}}</label>
                                         <div class="controls">
-                                            <textarea type="text" rows="10" cols="45" name="descriptions[{{$locale}}]" id="description">{{old("descriptions[$locale]")}}</textarea>
+                                            <textarea type="text" rows="10" cols="45" name="descriptions[{{$locale}}]" id="description">{{old("descriptions.$locale")}}</textarea>
+
+                                            @if($errors->has("description.$locale"))
+                                                <span class="alert alert-danger" role="alert">
+                                                    {{$errors->first("description.$locale")}}
+                                            </span>
+                                            @endif
                                         </div>
                                     </div>
                                 @endforeach
