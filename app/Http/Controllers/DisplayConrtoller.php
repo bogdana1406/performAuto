@@ -105,7 +105,7 @@ class DisplayConrtoller extends Controller
 
         $data = $request->all();
 
-//dd($data);
+        //dd($data);
 
         $priceString = $request->input('priceBar');
 
@@ -127,11 +127,11 @@ class DisplayConrtoller extends Controller
             $car->where('year', $request->input('year'))->get();
         }
 
-//        list($priceMin,$priceMax) = explode(",", $priceString);
-//
-//        if($request->has('priceBar')&&($data['priceBar']!="")){
-//            $car->where('price', '>=', $priceMin)->get();
-//        }
+        $priceBar = explode(",", $priceString);
+
+        if($request->has('priceBar')&&($data['priceBar']!="")){
+            $car->whereBetween('price', $priceBar)->get();
+        }
 //
 //        if($request->has('priceBar')&&($data['priceBar']!="")){
 //            $car->where('price', '<=', $priceMax)->get();
