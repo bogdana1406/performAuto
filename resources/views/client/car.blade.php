@@ -48,10 +48,10 @@
           </div>
         </div>
         <div class="alternate-car">
-            <p class="mb-0">{{$carDetails->name}}</p>
-            <span class="alt-price">{{$carDetails->price}} <span class="currency">&euro;</span></span>
-          </div>
-          <a class="btn btn-red btn-large border-0 align-self-start ml-0 mt-3 px-4 py-2 text-white">@lang('car_details.buy')</a>
+          <p class="mb-0">{{$carDetails->name}}</p>
+          <span class="alt-price">{{$carDetails->price}} <span class="currency">&euro;</span></span>
+        </div>
+        <a class="btn btn-red btn-large border-0 align-self-start ml-0 mt-3 px-4 py-2 text-white">@lang('car_details.buy')</a>
       </div>
       <div class="col-sm-6">
         <div class="slider">
@@ -78,8 +78,7 @@
             {{--</li>--}}
             <li></li>
           </ul>
-          <ol id="sliderIndicators" class="carousel-indicators"></ol>
-         
+          {{-- <ol id="sliderIndicators" class="indicators"></ol> --}}
         </div>
       </div>
     </div>

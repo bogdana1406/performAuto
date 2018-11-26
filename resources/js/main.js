@@ -242,6 +242,16 @@ $(document).ready(function() {
     var sideUl = document.getElementsByClassName('lSGallery')[0],
         imgs   = sideUl.getElementsByTagName('img');
         console.log(imgs);
+    sideUl.onclick = function(event) {
+        var target = event.target;
 
+        while (target != sideUl) {
+            if (target.tagName == 'ul') {
+                concole.log('!!!');
+                return;
+            }
+        }
+        target = target.parentNode;
+    }   
 
 });

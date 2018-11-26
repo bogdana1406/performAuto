@@ -178,4 +178,20 @@
       }
     }
   }
+  .indicators {
+    list-style-type: none;
+    display: flex;
+    position: absolute;
+    margin-top: 25px;
+    li {
+      width: 10px;
+      height: 10px;
+      background-color: $text-dark-gray;
+      border-radius: 50%;
+      margin-right: 10px;
+      &.active {
+        background-color: $red;
+      }
+    }
+  }
 }
