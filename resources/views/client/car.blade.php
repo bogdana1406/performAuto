@@ -76,12 +76,8 @@
             </li>
             <li></li>
           </ul>
-          <ol class="carousel-indicators" style="display:none;"></ol>
-          {{-- <div style="text-align:center">
-            <span class="dot" onclick="currentSlide(1)"></span> 
-            <span class="dot" onclick="currentSlide(2)"></span> 
-            <span class="dot" onclick="currentSlide(3)"></span> 
-          </div> --}}
+          <ol id="sliderIndicators" class="carousel-indicators"></ol>
+         
         </div>
       </div>
     </div>

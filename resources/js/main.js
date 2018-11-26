@@ -229,18 +229,19 @@ $(document).ready(function() {
         swipeThreshold: 40,
     });
 
-    function showSlides(n) {
-        var i;
-        var slides = document.querySelectorAll("mySlides");
-        var dots = document.getElementsByClassName("dot");
-        if (n > slides.length) { slideIndex = 1 }
-        if (n < 1) { slideIndex = slides.length }
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
-        }
-        dots[slideIndex - 1].className += " active";
+    var galleryUl = document.getElementById('lightSlider'),
+        n         = galleryUl.children.length,
+        ol        = document.getElementById('sliderIndicators'),
+        vList     = document.createDocumentFragment();
+    for (var i = 0; i < n-1; i++) {
+        var li = document.createElement('li');
+        vList.appendChild(li);
     }
+    ol.appendChild(vList);
+
+    var sideUl = document.getElementsByClassName('lSGallery')[0],
+        imgs   = sideUl.getElementsByTagName('img');
+        console.log(imgs);
+
+
 });
