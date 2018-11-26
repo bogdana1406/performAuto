@@ -54,7 +54,7 @@
 					<div class="card">
 						<div class="card-img-top">
 							<a href="#" class="show-modal" data-toggle="modal" data-target="#car{{$car->id}}">
-								@if(!empty($car->image))
+								@if(Request::hasFile(URL::asset('/images/backend_images/cars/medium/'.$car->image)))
 									<img src="{{ URL::asset('/images/backend_images/cars/medium/'.$car->image) }}" class="img-thumb" alt="car-thumb">
 									@else
 									<img src="{{ URL::asset('/images/car-default.jpg') }}" class="img-thumb" alt="car-thumb">
@@ -70,7 +70,7 @@
 									   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									      <span aria-hidden="true">&times;</span>
 									    </button>
-									@if(!empty($car->image))
+									@if(Request::hasFile(URL::asset('/images/backend_images/cars/medium/'.$car->image)))
 										<img src="{{ URL::asset('/images/backend_images/cars/medium/'.$car->image) }}" class="img-thumb" alt="car-thumb">
 									@else
 										<img src="{{ URL::asset('/images/car-default.jpg') }}" class="img-thumb" alt="car-thumb">
