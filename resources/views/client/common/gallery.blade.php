@@ -33,7 +33,7 @@
 			@if (request()->is('cars'))
 				<div class="search-white">
 
-					@include('includes.main-search')
+					@include('client.includes.main-search')
 
 				</div>
 			@endif

@@ -11,14 +11,6 @@
 |
 */
 
-
-
-
-
-
-
-
-
 Route::get('/admin', 'AdminController@login');
 Route::post('/logout', 'AdminController@logout');
 Route::match(['get', 'post'], '/admin', 'AdminController@login');
