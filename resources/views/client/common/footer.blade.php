@@ -62,7 +62,7 @@
 							<div class="contacts"><i class="fa fa-envelope-o mr-2"></i><a href="mailto:stan@performauto.be">stan@performauto.be</a>
 							</div>
 						</div>
-						<div class="card-img"><img src="{{ asset('/img/dealer1.jpg') }}" alt=""></div>
+						<div class="card-img"><img src="{{ asset('/images/dealer1.jpg') }}" alt=""></div>
 					</div>
 				</div>
 				<div class="col-md-6 pl-4">
@@ -77,7 +77,7 @@
 							<div class="contacts"><i class="fa fa-envelope-o mr-2"></i><a href="dimitri@performauto.be">dimitri@performauto.be</a>
 							</div>
 						</div>
-						<div class="card-img"><img src="{{ asset('/img/dealer2.jpg') }}" alt=""></div>
+						<div class="card-img"><img src="{{ asset('/images/dealer2.jpg') }}" alt=""></div>
 					</div>
 				</div>
 			</div>
@@ -285,7 +285,7 @@
 		<div class="main-wrapper">
 			<nav class="navbar navbar-expand-md navbar-dark pb-4">
 			    <a class="navbar-brand" href="{{ url('/') }}">
-			        <img src="{{ asset('img/logo.png') }}" alt="">
+			        <img src="{{ asset('images/logo.png') }}" alt="">
 			    </a>
 				<div class="ml-md-auto">
 				    <div class="navbar-nav">

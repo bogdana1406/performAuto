@@ -10,6 +10,7 @@ require('./bootstrap-slider');
 require('./bootstrap-portfilter.min');
 require('./owl.carousel.min');
 require('./lightslider.min');
+// require('./jquery.min');
 require('./main');
 
 // window.Vue = require('vue');

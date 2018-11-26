@@ -1,5 +1,5 @@
 .hero {
-    background-image: radial-gradient(ellipse at center, rgba(255, 255, 255, 0) 24%, rgba(255, 255, 255, 0.05) 32%, rgba(94, 115, 160, 0.44) 99%, rgba(94, 115, 160, 0.45) 100%), url('/img/main1700.png');
+    background-image: radial-gradient(ellipse at center, rgba(255, 255, 255, 0) 24%, rgba(255, 255, 255, 0.05) 32%, rgba(94, 115, 160, 0.44) 99%, rgba(94, 115, 160, 0.45) 100%), url('/images/main1700.png');
     background-size: cover;
     background-color: #7F8890;
     height: 45vw;
@@ -41,7 +41,7 @@
 }
 .video-box {
     background-color: $main-black;
-    background-image: url('/img/videobg.png');
+    background-image: url('/images/videobg.png');
     background-size: cover;
     padding-top: 6.25rem;
     padding-bottom: 9rem;

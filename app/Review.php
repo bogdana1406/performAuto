@@ -15,4 +15,8 @@ class Review extends Model
         'mark_review'
     ];
 
+    protected $casts = [
+        'text_review' => 'array',
+    ];
+
 }

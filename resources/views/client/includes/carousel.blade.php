@@ -1,50 +1,50 @@
 <div class="owl-carousel owl-theme">
 	<div class="item">
-		{{-- <img src="{{ asset('/img/slide1.jpg') }}" alt="happy_client"> --}}
+		{{-- <img src="{{ asset('/images/slide1.jpg') }}" alt="happy_client"> --}}
 		<a href="#" class="show-modal" data-toggle="modal" data-target="#cli1">
-			<img src="{{ URL::asset('/img/slide1.jpg') }}" class="img-thumb" alt="happy-client">
+			<img src="{{ URL::asset('/images/slide1.jpg') }}" class="img-thumb" alt="happy-client">
 			<div class="search-icon">
-				<img src="{{ URL::asset('/img/search.png') }}" class="img-icon" alt="search">
+				<img src="{{ URL::asset('/images/search.png') }}" class="img-icon" alt="search">
 			</div>
 		</a>
 	</div>
 	<div class="item">
 		<a href="#" class="show-modal" data-toggle="modal" data-target="#cli2">
-			<img src="{{ URL::asset('/img/slide2.jpg') }}" class="img-thumb" alt="happy-client">
+			<img src="{{ URL::asset('/images/slide2.jpg') }}" class="img-thumb" alt="happy-client">
 			<div class="search-icon">
-				<img src="{{ URL::asset('/img/search.png') }}" class="img-icon" alt="search">
+				<img src="{{ URL::asset('/images/search.png') }}" class="img-icon" alt="search">
 			</div>
 		</a>
 	</div>
 	<div class="item">
 		<a href="#" class="show-modal" data-toggle="modal" data-target="#cli3">
-			<img src="{{ URL::asset('/img/slide3.jpg') }}" class="img-thumb" alt="happy-client">
+			<img src="{{ URL::asset('/images/slide3.jpg') }}" class="img-thumb" alt="happy-client">
 			<div class="search-icon">
-				<img src="{{ URL::asset('/img/search.png') }}" class="img-icon" alt="search">
+				<img src="{{ URL::asset('/images/search.png') }}" class="img-icon" alt="search">
 			</div>
 		</a>
 	</div>
 	<div class="item">
 		<a href="#" class="show-modal" data-toggle="modal" data-target="#cli4">
-			<img src="{{ URL::asset('/img/slide4.jpg') }}" class="img-thumb" alt="happy-client">
+			<img src="{{ URL::asset('/images/slide4.jpg') }}" class="img-thumb" alt="happy-client">
 			<div class="search-icon">
-				<img src="{{ URL::asset('/img/search.png') }}" class="img-icon" alt="search">
+				<img src="{{ URL::asset('/images/search.png') }}" class="img-icon" alt="search">
 			</div>
 		</a>
 	</div>
 	<div class="item">
 		<a href="#" class="show-modal" data-toggle="modal" data-target="#cli5">
-			<img src="{{ URL::asset('/img/slide2.jpg') }}" class="img-thumb" alt="happy-client">
+			<img src="{{ URL::asset('/images/slide2.jpg') }}" class="img-thumb" alt="happy-client">
 			<div class="search-icon">
-				<img src="{{ URL::asset('/img/search.png') }}" class="img-icon" alt="search">
+				<img src="{{ URL::asset('/images/search.png') }}" class="img-icon" alt="search">
 			</div>
 		</a>
 	</div>
 	<div class="item">
 	 	<a href="#" class="show-modal" data-toggle="modal" data-target="#cli6">
-			<img src="{{ URL::asset('/img/slide3.jpg') }}" class="img-thumb" alt="happy-client">
+			<img src="{{ URL::asset('/images/slide3.jpg') }}" class="img-thumb" alt="happy-client">
 			<div class="search-icon">
-				<img src="{{ URL::asset('/img/search.png') }}" class="img-icon" alt="search">
+				<img src="{{ URL::asset('/images/search.png') }}" class="img-icon" alt="search">
 			</div>
 		</a>
 	</div>
@@ -56,7 +56,7 @@
 		   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		      <span aria-hidden="true">&times;</span>
 		    </button>
-			<img src="{{ URL::asset('/img/slide1.jpg') }}" class="img-thumb" alt="happy-client">
+			<img src="{{ URL::asset('/images/slide1.jpg') }}" class="img-thumb" alt="happy-client">
 		</div>
 	</div>
 </div>
@@ -66,7 +66,7 @@
 		   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		      <span aria-hidden="true">&times;</span>
 		    </button>
-			<img src="{{ URL::asset('/img/slide2.jpg') }}" class="img-thumb" alt="happy-client">
+			<img src="{{ URL::asset('/images/slide2.jpg') }}" class="img-thumb" alt="happy-client">
 		</div>
 	</div>
 </div>
@@ -76,7 +76,7 @@
 		   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		      <span aria-hidden="true">&times;</span>
 		    </button>
-			<img src="{{ URL::asset('/img/slide3.jpg') }}" class="img-thumb" alt="happy-client">
+			<img src="{{ URL::asset('/images/slide3.jpg') }}" class="img-thumb" alt="happy-client">
 		</div>
 	</div>
 </div>
@@ -86,7 +86,7 @@
 		   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		      <span aria-hidden="true">&times;</span>
 		    </button>
-			<img src="{{ URL::asset('/img/slide4.jpg') }}" class="img-thumb" alt="happy-client">
+			<img src="{{ URL::asset('/images/slide4.jpg') }}" class="img-thumb" alt="happy-client">
 		</div>
 	</div>
 </div>
@@ -96,7 +96,7 @@
 		   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		      <span aria-hidden="true">&times;</span>
 		    </button>
-			<img src="{{ URL::asset('/img/slide2.jpg') }}" class="img-thumb" alt="happy-client">
+			<img src="{{ URL::asset('/images/slide2.jpg') }}" class="img-thumb" alt="happy-client">
 		</div>
 	</div>
 </div>
@@ -106,7 +106,7 @@
 		   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		      <span aria-hidden="true">&times;</span>
 		    </button>
-			<img src="{{ URL::asset('/img/slide3.jpg') }}" class="img-thumb" alt="happy-client">
+			<img src="{{ URL::asset('/images/slide3.jpg') }}" class="img-thumb" alt="happy-client">
 		</div>
 	</div>
 </div>
