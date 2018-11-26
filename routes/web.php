@@ -11,76 +11,9 @@
 |
 */
 
-//Route::get('/', function () {
-//    return redirect('/'. App\Http\Middleware\LocaleMiddleware::$mainLanguage);
-//});
-
-
 Route::get('/admin', 'AdminController@login');
 Route::post('/logout', 'AdminController@logout');
 Route::match(['get', 'post'], '/admin', 'AdminController@login');
-
-
-Route::get('setlocale/{lang}', function ($lang) {
-
-    $referer = Redirect::back()->getTargetUrl();
-    $parse_url = parse_url($referer, PHP_URL_PATH);
-
-
-    $segments = explode('/', $parse_url);
-
-
-    if (in_array($segments[1], App\Http\Middleware\LocaleMiddleware::$languages)) {
-
-        unset($segments[1]);
-    }
-
-
-    if ($lang != App\Http\Middleware\LocaleMiddleware::$mainLanguage){
-        array_splice($segments, 1, 0, $lang);
-    }
-
-
-    $url = Request::root().implode("/", $segments);
-
-    if(parse_url($referer, PHP_URL_QUERY)){
-        $url = $url.'?'. parse_url($referer, PHP_URL_QUERY);
-    }
-    return redirect($url);
-
-})->name('setlocale');
-
-
-//Route::prefix('{lang?}')->middleware('localisation')->group(function() {
-
-Route::group(['prefix' => App\Http\Middleware\LocaleMiddleware::getLocale()], function(){
-
-    Route::get('/', 'DisplayConrtoller@home');
-
-    Route::get('/home', 'DisplayConrtoller@home');
-
-       Route::get('/advantages', function () {
-           return view('client.advantages');
-       });
-
-       Route::get('/about', function () {
-           return view('client.about');
-       });
-
-       Route::get('/car', function () {
-           return view('client.car');
-       });
-
-       Route::get('/cars', function () {
-           return view('client.cars-gallery');
-       });
-
-       Route::get('/p3', function () {
-           return view('client.page3');
-       });
-});
-
-Auth::routes();
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function(){
     Route::get('/dashboard', 'AdminController@dashboard');
@@ -145,3 +78,35 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function(){
     Route::get('/view-images-table', 'CarsImageController@showImagesTable');
     Route::get('/delete-car-image-record/{id}', 'CarsImageController@deleteCarsImageRecord');
 });
+
+
+Route::get('/', function () {
+    return redirect('/'. App\Http\Middleware\LocaleMiddleware::$mainLanguage);
+});
+
+Route::get('setlocale/{lang}', 'SetLocaleController@setLang')->name('setlocale');
+//Route::prefix('{lang?}')->middleware('localisation')->group(function() {
+
+Route::group(['prefix' => App\Http\Middleware\LocaleMiddleware::getLocale()], function(){
+
+    Route::get('/', 'DisplayConrtoller@home')->name('home');
+
+    Route::get('home', 'DisplayConrtoller@home')->name('home');
+
+    Route::get('advantages', 'DisplayConrtoller@advantages')->name('advantages');
+
+    Route::get('about', 'DisplayConrtoller@about')->name('about');
+
+    Route::get('car/{id}', 'DisplayConrtoller@car')->name('car');
+
+    Route::get('cars', 'DisplayConrtoller@cars')->name('cars');
+
+    Route::get('p3', 'DisplayConrtoller@p3')->name('p3');
+
+   // Route::get('/filter-cars', 'FilterController@showFilter');
+
+    Route::post('filter-cars', 'DisplayConrtoller@showResultFilter')->name('carsFilter');
+});
+
+//Auth::routes();
+

@@ -102,7 +102,7 @@ $(document).ready(function() {
 
     //====Price trackbar====
 
-    $("#priceBar").slider({ min: 5000, max: 25000, range: true, value: [0, 15000] });
+    // $("#priceBar").slider({ min: 5000, max: 25000, range: true, value: [0, 15000] });
     $("#priceBar").on("slide", function(slideEvt) {
         $("#priceBarCurrentSliderVal").text(slideEvt.value);
     });

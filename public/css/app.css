@@ -11648,7 +11648,7 @@ header .dropdown-toggle:after {
 }
 
 .counter {
-  background-image: url("/img/counterbg.png");
+  background-image: url("/images/counterbg.png");
   background-size: cover;
   background-color: #0f0f0f;
   padding-top: 2rem;
@@ -11711,8 +11711,8 @@ header .dropdown-toggle:after {
 }
 
 .gallery .holder {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.95)), to(rgba(255, 255, 255, 0.95))), url("/img/headerbg.png");
-  background-image: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), url("/img/headerbg.png");
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.95)), to(rgba(255, 255, 255, 0.95))), url("/images/headerbg.png");
+  background-image: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), url("/images/headerbg.png");
   background-size: cover;
   overflow: hidden;
   position: relative;
@@ -12053,7 +12053,7 @@ header .dropdown-toggle:after {
 
 footer .top-footer {
   background-color: #111111;
-  background-image: url(/img/footerbg.png);
+  background-image: url(/images/footerbg.png);
   background-size: cover;
   background-position-y: -5px;
 }
@@ -12219,7 +12219,7 @@ footer .sub-footer a:hover {
 }
 
 .hero {
-  background-image: radial-gradient(ellipse at center, rgba(255, 255, 255, 0) 24%, rgba(255, 255, 255, 0.05) 32%, rgba(94, 115, 160, 0.44) 99%, rgba(94, 115, 160, 0.45) 100%), url("/img/main1700.png");
+  background-image: radial-gradient(ellipse at center, rgba(255, 255, 255, 0) 24%, rgba(255, 255, 255, 0.05) 32%, rgba(94, 115, 160, 0.44) 99%, rgba(94, 115, 160, 0.45) 100%), url("/images/main1700.png");
   background-size: cover;
   background-color: #7F8890;
   height: 45vw;
@@ -12263,7 +12263,7 @@ footer .sub-footer a:hover {
 
 .video-box {
   background-color: #0f0f0f;
-  background-image: url("/img/videobg.png");
+  background-image: url("/images/videobg.png");
   background-size: cover;
   padding-top: 6.25rem;
   padding-bottom: 9rem;
@@ -12341,8 +12341,8 @@ footer .sub-footer a:hover {
 }
 
 .hero-about.hero {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.2)), to(rgba(0, 0, 0, 0.2))), url("/img/about1700.png");
-  background-image: linear-gradient(rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%), url("/img/about1700.png");
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.2)), to(rgba(0, 0, 0, 0.2))), url("/images/about1700.png");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%), url("/images/about1700.png");
   background-color: #40413E;
 }
 
@@ -12355,7 +12355,7 @@ footer .sub-footer a:hover {
 }
 
 .hero-advantages.hero {
-  background-image: url("/img/advantages1700.png");
+  background-image: url("/images/advantages1700.png");
 }
 
 .features {
@@ -12428,7 +12428,7 @@ footer .sub-footer a:hover {
 .car-card {
   padding-top: 12vw;
   padding-bottom: 4rem;
-  background-image: url("/img/car_bg.png");
+  background-image: url("/images/car_bg.png");
   background-size: cover;
 }
 

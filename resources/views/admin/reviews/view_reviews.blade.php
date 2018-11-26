@@ -34,7 +34,8 @@
                                     <th>Customer name</th>
                                     <th>Link to facebook</th>
                                     <th>Published on</th>
-                                    <th>Text Review</th>
+                                    <th>Text Review_en</th>
+                                    <th>Text Review_fr</th>
                                     <th>Mark Review</th>
                                     <th>Photo</th>
                                     <th>Actions</th>
@@ -48,7 +49,8 @@
                                         <td>{{ $review->customer_name }}</td>
                                         <td>{{ $review->customer_link }}</td>
                                         <td>{{ $review->published_at }}</td>
-                                        <td>{{ $review->text_review }}</td>
+                                        <td>{{ $review->text_review['en'] }}</td>
+                                        <td>{{ $review->text_review['fr'] }}</td>
                                         <td>{{ $review->mark_review }}</td>
                                         <td>
                                             @if(!empty($review->customer_photo))

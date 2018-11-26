@@ -151,20 +151,24 @@
                                     </div>
                                 </div>
 
-                                <div class="control-group">
-                                    <label class="control-label">About</label>
-                                    <div class="controls">
-                                        <textarea type="text" rows="10" cols="45" name="about" id="about">{{ old('about')?? $carDetails->about }}</textarea>
+                                @foreach(['en', 'fr'] as $locale)
+                                    <div class="control-group">
+                                        <label class="control-label">About_{{$locale}}</label>
+                                        <div class="controls">
+                                            <textarea type="text" rows="10" cols="45" name="about[{{$locale}}]" id="about">{{old('about')?? $carDetails->about[$locale]}}</textarea>
+                                        </div>
                                     </div>
-                                </div>
+                                @endforeach
 
-                                <div class="control-group">
-                                    <label class="control-label">Description</label>
-                                    <div class="controls">
-                                        <textarea type="text" rows="10" cols="45" name="description" id="description">{{ old('description')?? $carDetails->description}}</textarea>
+
+                                @foreach(['en', 'fr'] as $locale)
+                                    <div class="control-group">
+                                        <label class="control-label">Description_{{$locale}}</label>
+                                        <div class="controls">
+                                            <textarea type="text" rows="10" cols="45" name="descriptions[{{$locale}}]" id="description">{{old('descriptions')?? $carDetails->descriptions[$locale]}}</textarea>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="control-group">
+                                @endforeach
 
                                     <label class="control-label">Parameters Small Image</label>
                                     <div class="controls">
@@ -192,7 +196,7 @@
                                         <a href="{{ url('/admin/delete-car-image/'.$carDetails->id) }}">Delete</a>
                                         @endif
                                     </div>
-                                </div>
+
                                         {{--<a href="{{ url('/admin/upload-car-images/'.$carDetails->id) }}" class="btn btn-primary btn-mini">Upload Images</a>--}}
 
                                 <div class="form-actions">
@@ -201,26 +205,26 @@
                             </form>
 
 
-                            <form action="/admin/upload-car-images/{{$carDetails->id}}" method="post" enctype="multipart/form-data">
-                                {{ csrf_field() }}
+                            {{--<form action="/admin/upload-car-images/{{$carDetails->id}}" method="post" enctype="multipart/form-data">--}}
+                                {{--{{ csrf_field() }}--}}
                                 {{--Car model:--}}
-                                <br />
-                                <input type="hidden" name="id_car_image" value="{{ $carDetails->id }}"/>
-                                <br /><br />
-                                <input type="hidden" name="name_car_image" value="{{ $carDetails->model }}"/>
-                                @if (count($errors) > 0)
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                @endif
-                                <br /><br />
-                                Car Images (can attach more than one):
-                                <br />
-                                <input type="file" name="images[]"  multiple />
-                                <br /><br />
-                                <input type="submit" value="Upload" />
+                                {{--<br />--}}
+                                {{--<input type="hidden" name="id_car_image" value="{{ $carDetails->id }}"/>--}}
+                                {{--<br /><br />--}}
+                                {{--<input type="hidden" name="name_car_image" value="{{ $carDetails->model }}"/>--}}
+                                {{--@if (count($errors) > 0)--}}
+                                    {{--<ul>--}}
+                                        {{--@foreach ($errors->all() as $error)--}}
+                                            {{--<li>{{ $error }}</li>--}}
+                                        {{--@endforeach--}}
+                                    {{--</ul>--}}
+                                {{--@endif--}}
+                                {{--<br /><br />--}}
+                                {{--Car Images (can attach more than one):--}}
+                                {{--<br />--}}
+                                {{--<input type="file" name="images[]"  multiple />--}}
+                                {{--<br /><br />--}}
+                                {{--<input type="submit" value="Upload" />--}}
 
 
                                 {{--@if($errors->has('images[]'))--}}

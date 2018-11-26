@@ -26,7 +26,8 @@ class RequestValidateReview extends FormRequest
         return [
             'customer_name' => 'required|min:3',
             'published_at' => 'required',
-            'text_review' => 'required',
+            'text_review' => 'required|array',
+            'text_review.*' => 'required|string',
             'customer_link' => 'required',
             //'customer_photo' => 'required',
             'mark_review' => 'required|integer'

@@ -31,7 +31,7 @@
 			</div>
 			<span class="features-quote">&laquo;@lang('advantages.features-quote')&raquo;</span>
 			<div class="d-flex justify-content-center pt-4">
-				<a href="{{ url('cars') }}" class="btn btn-red btn-medium border-0">Choose your car</a>
+				<a href="{{ route('cars') }}" class="btn btn-red btn-medium border-0">Choose your car</a>
 			</div>
 		</div>
 	</section>

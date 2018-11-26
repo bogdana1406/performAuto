@@ -17,7 +17,7 @@ class ReviewController extends Controller
     public function addReview(RequestValidateReview $request)
     {
         $data = $request->except('_token');
-
+//dd($data);
         if ($request->hasFile('customer_photo')) {
             $photo = $request->file('customer_photo');
             $extension = $photo->getClientOriginalExtension();
@@ -25,7 +25,9 @@ class ReviewController extends Controller
             $filepath = $photo->storeAs('files/images/customers', $filename);
             $data['customer_photo'] = $filepath;
         }
+        //dd($data);
         $review = Review::create($data);
+
         if($review){
             return redirect('/admin/view-reviews')->with('flash_massage_success', 'Review has been added successfully');
         }else{
@@ -42,6 +44,7 @@ class ReviewController extends Controller
     public function editReview(RequestValidateReview $request, $id = null)
     {
           $data = $request->all();
+          //dd($data);
           $review = Review::find($id);
           $old_photo = $review->customer_photo;
           if($request->hasFile('photo'))
@@ -56,17 +59,22 @@ class ReviewController extends Controller
               $filename = rand(111, 99999).".".$extension;
               $filepath = $photo->storeAs('files/images/customers', $filename);
 
-          }else  {
-              $filepath = $data['current_photo'];
+              $data['customer_photo'] = $filepath;
+
           }
 
-          Review::where(['id'=>$id])->update(['customer_name'=>$data['customer_name'],
-                                                'published_at'=>$data['published_at'],
-                                                'text_review'=>$data['text_review'],
-                                                'customer_link'=>$data['customer_link'],
-                                                'mark_review'=>$data['mark_review'],
-                                                'customer_photo'=>$filepath]);
-          //dd(Review::where(['id'=>$id])->value('customer_photo'));
+        $review->update($data);
+//          else  {
+//              $filepath = $data['current_photo'];
+//          }
+
+//          Review::where(['id'=>$id])->update(['customer_name'=>$data['customer_name'],
+//                                                'published_at'=>$data['published_at'],
+//                                                'text_review'=>$data['text_review'],
+//                                                'customer_link'=>$data['customer_link'],
+//                                                'mark_review'=>$data['mark_review'],
+//                                                'customer_photo'=>$filepath]);
+//          //dd(Review::where(['id'=>$id])->value('customer_photo'));
           return redirect('/admin/view-reviews')->with('flash_massage_success', 'Review Update Successfully');
     }
 
