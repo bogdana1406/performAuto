@@ -254,7 +254,7 @@
         // to the map type control.
         var coordinates = {lat: 50.879782, lng: 3.150103},
 
-        	markerImage = 'img/map_marker.png',
+        	markerImage = '/images/map_marker.png',
 
         	map = new google.maps.Map(document.getElementById('map'), {
           		center: {lat: 50.879782, lng: 3.150103},

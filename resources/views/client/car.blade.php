@@ -14,13 +14,13 @@
       	<span>{{$carDetails->price}}</span><span class="currency">&euro;</span>
       </div>
     </div>
-    <nav aria-label="breadcrumb">
+    <nav class="mb-5" aria-label="breadcrumb">
 		 	<ol class="breadcrumb">
 		   	<li class="breadcrumb-item"><a href="{{ URL('/') }}">Home</a></li>
 		   	<li class="breadcrumb-item active" aria-current="page">@lang('car_details.title')</li>
 		 	</ol>
 		</nav>
-    <div class="row">
+    <div class="row pt-4">
       <div class="col-sm-6 d-flex flex-column justify-content-between">
         <div class="car-properties row">
           <span class="col property"><img src="/images/icon-car-seat.png" class="icon mr-2">{{$carDetails->seats}}</span>
@@ -48,10 +48,10 @@
           </div>
         </div>
         <div class="alternate-car">
-            <p class="mb-0">{{$carDetails->name}}</p>
-            <span class="alt-price">{{$carDetails->price}} <span class="currency">&euro;</span></span>
-          </div>
-          <a class="btn btn-red btn-large border-0 align-self-start ml-0 mt-3 px-4 py-2 text-white">@lang('car_details.buy')</a>
+          <p class="mb-0">{{$carDetails->name}}</p>
+          <span class="alt-price">{{$carDetails->price}} <span class="currency">&euro;</span></span>
+        </div>
+        <a class="btn btn-red btn-large border-0 align-self-start ml-0 mt-3 px-4 py-2 text-white">@lang('car_details.buy')</a>
       </div>
       <div class="col-sm-6">
         <div class="slider">
@@ -78,6 +78,7 @@
             {{--</li>--}}
             <li></li>
           </ul>
+          {{-- <ol id="sliderIndicators" class="indicators"></ol> --}}
         </div>
       </div>
     </div>

@@ -125,7 +125,7 @@ $(document).ready(function() {
 
     //====Youtube script====
 
-    if ( document.getElementById('videoBox')) {
+    if (document.getElementById('videoBox')) {
 
         var tag = document.createElement('script');
         tag.src = "//www.youtube.com/iframe_api";
@@ -155,7 +155,7 @@ $(document).ready(function() {
         $(p).hide();
 
         var t = document.getElementById("thumbnail");
-        t.src = "/img/video-thtumb.jpg";
+        t.src = "/images/video-thtumb.jpg";
 
         onPlayerStateChange = function(event) {
             if (event.data == YT.PlayerState.ENDED) {
@@ -193,7 +193,7 @@ $(document).ready(function() {
 
     //====Smooth scrolling====
 
-    $(".toContacts").click(function (){
+    $(".toContacts").click(function() {
         $('html, body').animate({
             scrollTop: $("#contacts").offset().top
         }, 750);
@@ -208,24 +208,50 @@ $(document).ready(function() {
         slideMargin: 10,
 
         keyPress: false,
-        controls: false,
+        controls: true,
         prevHtml: '',
         nextHtml: '',
 
-        vertical:true,
-        verticalHeight:500,
-        vThumbWidth:100,
- 
-        thumbItem:5,
+        vertical: true,
+        verticalHeight: 500,
+        vThumbWidth: 80,
+
+        thumbItem: 5,
         pager: true,
         gallery: true,
-        galleryMargin: 15,
+        galleryMargin: 40,
         thumbMargin: 5,
         currentPagerPosition: 'middle',
 
-        enableTouch:true,
-        enableDrag:true,
-        freeMove:true,
+        enableTouch: true,
+        enableDrag: true,
+        freeMove: true,
         swipeThreshold: 40,
-    }); 
+    });
+
+    var galleryUl = document.getElementById('lightSlider'),
+        n         = galleryUl.children.length,
+        ol        = document.getElementById('sliderIndicators'),
+        vList     = document.createDocumentFragment();
+    for (var i = 0; i < n-1; i++) {
+        var li = document.createElement('li');
+        vList.appendChild(li);
+    }
+    ol.appendChild(vList);
+
+    var sideUl = document.getElementsByClassName('lSGallery')[0],
+        imgs   = sideUl.getElementsByTagName('img');
+        console.log(imgs);
+    sideUl.onclick = function(event) {
+        var target = event.target;
+
+        while (target != sideUl) {
+            if (target.tagName == 'ul') {
+                concole.log('!!!');
+                return;
+            }
+        }
+        target = target.parentNode;
+    }   
+
 });
