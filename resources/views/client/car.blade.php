@@ -5,7 +5,7 @@
 @section('content')
 
 <section class="car-card">
-  <div class="main-wrapper">
+  <div class="main-wrapper pb-4">
     <div class="section-header d-flex justify-content-between">
       <h2 class="car-title">
       	{{$carDetails->name}}
@@ -51,10 +51,10 @@
           <p class="mb-0">{{$carDetails->name}}</p>
           <span class="alt-price">{{$carDetails->price}} <span class="currency">&euro;</span></span>
         </div>
-        <a class="btn btn-red btn-large border-0 align-self-start ml-0 mt-3 px-4 py-2 text-white">@lang('car_details.buy')</a>
+        <button class="btn btn-red btn-large border-0 align-self-start ml-0 mt-3 px-4 text-white" data-toggle="modal" data-target="#contactModal">@lang('car_details.buy')</button>
       </div>
       <div class="col-sm-6">
-        <div class="slider">
+        <div class="slider angles">
           <ul id="lightSlider">
             @foreach($carImagesGallery as $carImage)
             <li data-thumb="{{Storage::exists('/files/images/carsGallery/small/'.$carImage->filename) ?

@@ -12427,7 +12427,7 @@ footer .sub-footer a:hover {
 
 .car-card {
   padding-top: 12vw;
-  padding-bottom: 4rem;
+  padding-bottom: 6rem;
   background-image: url("/images/car_bg.png");
   background-size: cover;
 }
@@ -12534,8 +12534,8 @@ footer .sub-footer a:hover {
   position: relative;
 }
 
-.slider::before,
-.slider::after {
+.slider.angles::before,
+.slider.angles::after {
   content: '';
   position: absolute;
   height: 42px;
@@ -12544,14 +12544,14 @@ footer .sub-footer a:hover {
   border-width: 1px;
 }
 
-.slider::before {
+.slider.angles::before {
   top: -8px;
   left: -8px;
   border-top-style: solid;
   border-left-style: solid;
 }
 
-.slider::after {
+.slider.angles::after {
   bottom: -8px;
   right: 112px;
   border-right-style: solid;
