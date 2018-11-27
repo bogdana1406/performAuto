@@ -13,3 +13,6 @@
 	background: black;
 	color: white;
 }
+.reviews-actions:first-child a {
+	margin-bottom: .4rem;
+}

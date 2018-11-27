@@ -24,7 +24,7 @@
                 <div class="span12">
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
-                            <h5>View Cars</h5>
+                            <h5>View Reviews</h5>
                         </div>
                         <div class="widget-content nopadding">
                             <table class="table table-bordered data-table">
@@ -58,7 +58,7 @@
                                             @endif
                                         </td>
                                         <td class="center">
-                                            <div class="fr">
+                                            <div class="fr reviews-actions">
                                                 <a href="{{ url('/admin/edit-review/'.$review->id) }}" class="btn btn-primary btn-mini">Edit</a>
                                                 <a data-id="{{$review->id}}" href="#" class="btn btn-danger btn-mini delReview">Delete</a>
                                             </div>
