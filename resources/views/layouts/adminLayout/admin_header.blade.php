@@ -8,11 +8,11 @@
 <!--top-Header-menu-->
 <div id="user-nav" class="navbar navbar-inverse">
     <ul class="nav">
-        <li class=""><a title="" href="{{ url('/admin/settings') }}"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
-        <li class="">
+        <li><a title="" href="{{ url('/admin/settings') }}"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
+        <li>
             <form method="post" action="{{url('/logout')}}">
                 {{csrf_field()}}
-                <button type="submit">
+                <button type="submit" class="admin-header-btn">
                     <i class="icon icon-share-alt"></i> <span class="text">Logout</span>
                 </button>
             </form>

@@ -1,0 +1,18 @@
+.admin-header-btn {
+  padding: 9px 10px;
+  display: block;
+  font-size: 11px;
+  color: #999;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+  text-decoration: none;
+  background-color: transparent;
+  border: 0 none;
+}
+
+.admin-header-btn:hover {
+	background: black;
+	color: white;
+}
+.reviews-actions:first-child a {
+	margin-bottom: .4rem;
+}

@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('css/fullcalendar.css')}}" />
     <link rel="stylesheet" href="{{ asset('css/matrix-style.css')}}" />
     <link rel="stylesheet" href="{{ asset('css/matrix-media.css')}}" />
+    <link rel="stylesheet" href="{{ asset('css/admin.css')}}" />
     {{--<link rel="stylesheet" href="{{ asset('css/custom.css')}}" />--}}
     <link rel="stylesheet" href=https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css />
     <link href="{{ asset('fonts/backend_fonts/css/font-awesome.css')}}" rel="stylesheet" />
