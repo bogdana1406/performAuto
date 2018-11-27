@@ -33,18 +33,6 @@ class EngineController extends Controller
         Engine::where(['id'=>$id])->update(['name'=>$data['engine_name']]);
         return redirect('/admin/view-engines')->with('flash_massage_success', 'Engine Update Successfully');
     }
-//    public function editEngine(Request $request, $id = null)
-//    {
-//        if($request->isMethod('post'))
-//        {
-//            $data = $request->all();
-//            Engine::where(['id'=>$id])->update(['name'=>$data['engine_name']]);
-//            return redirect('/admin/view-engines')->with('flash_massage_success', 'Engine Update Successfully');
-//            // echo "<pre>"; print_r($data); die;
-//        }
-//        $engineDetails = Engine::where(['id'=>$id])->first();
-//        return view('admin.engines.edit_engine')->with(compact('engineDetails'));
-//    }
 
     public function deleteEngine($id = null){
         if(!empty($id)) {

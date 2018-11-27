@@ -31,7 +31,6 @@ class SearchController extends Controller
 
         $car = $car->newQuery();
 
-////
         if($request->has('brand_id') && ($data['brand_id']!="false")){
              $car->where('brand_id', $request->input('brand_id'))->get();
         }

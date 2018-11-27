@@ -16,10 +16,10 @@ class AdminController extends Controller
         if($request->isMethod('post')){
         $data = $request->input();
         if(Auth::attempt(['email'=>$data['email'], 'password'=>$data['password'], 'admin'=>'1'])){
-            //echo "Success"; die;
+
             return redirect('/admin/dashboard');
         }else{
-            //echo "Failed"; die;
+
             return redirect('/admin')->with('flash_massage_error', 'Invalid Username or Password');
             }
         }
@@ -54,11 +54,9 @@ class AdminController extends Controller
         if($request->isMethod('post'))
         {
             $data = $request->all();
-        //echo "<pre>"; print_r($data); die;
             $current_user = Auth::user();
 
             $current_password = $data['current_pwd'];
-            //$confirm_password = $data['confirm_pwd'];
             if(Hash::check($current_password, $current_user->password)){
                 $password = bcrypt($data['new_pwd']);
                 $current_user->update(['password'=>$password]);

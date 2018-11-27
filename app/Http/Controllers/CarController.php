@@ -29,8 +29,6 @@ class CarController extends Controller
     public function addCar(RequestValidateCar $request)
     {
         $data = $request->except('_token');
-
-//dd($data);
         $small_h = ($data['small_h'] && ($data['small_h']>0)) ? (int)$data['small_h']:300;
         $small_w = ($data['small_w'] && ($data['small_w']>0)) ? (int)$data['small_w']:300;
         $medium_h = ($data['medium_h'] && ($data['medium_h']>0)) ? (int)$data['medium_h']:600;
@@ -48,19 +46,12 @@ class CarController extends Controller
 
                 Image::make($image_tmp)->save($large_image_path);
                 Image::make($image_tmp)->resize($small_w, $small_h)->save($small_image_path);
-                //$small_ww = Image::make($small_image_path)->width();
-                //$small_hh = Image::make($small_image_path)->height();
-
                 Image::make($image_tmp)->resize($medium_w, $medium_h)->save($medium_image_path);
-                //$medium_ww = Image::make($medium_image_path)->width();
-                //$medium_hh = Image::make($medium_image_path)->height();
 
-               // dd($small_ww, $small_hh, $medium_ww, $medium_hh);
                 $data['image'] = $filename;
             }
         }
         $car = Car::create($data);
-        //dd($car);
 
         if($car){
                 return redirect('/admin/view-cars')->with('flash_massage_success', 'Car has been added successfully');
@@ -75,14 +66,12 @@ class CarController extends Controller
             $brands = Brand::pluck('name', 'id');
             $engines = Engine::pluck('name', 'id');
             $carDetails = Car::where(['id'=>$id])->first();
-            //dd(Car::where(['id'=>$id])->first());
             return view('admin.cars.edit_car')->with(['carDetails'=>$carDetails,'brands'=>$brands, 'engines'=>$engines]);
         }
 
         public function editCar(RequestValidateCar $request, $id = null)
         {
             $data = $request->all();
-           //dd($data);
             $car = Car::find($id);
             $old_image = $car->image;
 
@@ -145,7 +134,6 @@ class CarController extends Controller
                     }
                 }
                 $image_tmp = Input::file('image');
-                //dd($image_tmp);
                 if($image_tmp->isValid()){
                     $extension = $image_tmp->getClientOriginalExtension();
                     $filename = rand(111, 99999).".".$extension;
@@ -163,13 +151,7 @@ class CarController extends Controller
             }
 
             $car->update($data);
-            //dd($car);
-//            Car::where(['id'=>$id])->update(['name'=>$data['name'],'model'=>$data['model'],'brand_id'=>$data['brand_id'],
-//                'seats'=>$data['seats'],'doors'=>$data['doors'],'transmission_types'=>$data['transmission_types'],
-//                'year'=>$data['year'],'engine_id'=>$data['engine_id'],'price'=>$data['price'],'about'=>$data['about'],
-//                'descriptions'=>$data['descriptions'],'image'=>$filename]);
 
-            //return redirect('/admin/view-brands')->with('flash_massage_success', 'Brands Update Successfully');
             return redirect('/admin/view-cars')->with('flash_massage_success', 'Car Update Successfully');
         }
 
@@ -247,10 +229,8 @@ class CarController extends Controller
                         $car->carsImage()->delete();
                         $car->delete();
 
-
                 }
 
-//                Car::where(['id' => $id])->delete();
                 return redirect()->back()->with('flash_massage_success', 'Car has been delete successfully');
              }
 
