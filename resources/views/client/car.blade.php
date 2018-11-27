@@ -54,7 +54,7 @@
         <a class="btn btn-red btn-large border-0 align-self-start ml-0 mt-3 px-4 py-2 text-white">@lang('car_details.buy')</a>
       </div>
       <div class="col-sm-6">
-        <div class="slider">
+        <div class="slider angles">
           <ul id="lightSlider">
             @foreach($carImagesGallery as $carImage)
             <li data-thumb="{{Storage::exists('/files/images/carsGallery/small/'.$carImage->filename) ?
