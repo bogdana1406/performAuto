@@ -26,24 +26,7 @@ class RequestValidateCar extends FormRequest
      */
     public function rules()
     {
-//        $rules = [
-//            'name'=>['required','string',
-//                Rule::unique('cars','name')->ignore(request()->id),
-//                ],
-//            'brand_id'=>'required|exists:brands,id',
-//            'model'=>'required|string|max:50',
-//            'seats'=>'required|integer',
-//            'doors'=>'required|integer',
-//            'transmission_types'=>'required|in:automatic,manual',
-//            'year'=>'required|integer',
-//            'engine_id'=>'required|exists:engines,id',
-//            'price'=>'required',
-//
-//        ];
 
-
-        //return $rules;
-//        $car = Car::all();
         $data = request();
         return [
 
@@ -56,6 +39,10 @@ class RequestValidateCar extends FormRequest
             'year'=>'required|integer',
             'engine_id'=>'required|exists:engines,id',
             'price'=>'required|integer',
+            'descriptions' => 'required|array',
+            'descriptions.*' => 'required|string',
+            'about' => 'required|array',
+            'about.*' => 'required|string'
         ];
     }
 

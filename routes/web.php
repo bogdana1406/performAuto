@@ -15,6 +15,8 @@ Route::get('/admin', 'AdminController@login');
 Route::post('/logout', 'AdminController@logout');
 Route::match(['get', 'post'], '/admin', 'AdminController@login');
 
+Auth::routes();
+
 Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function(){
     Route::get('/dashboard', 'AdminController@dashboard');
     Route::get('/settings', 'AdminController@settings');

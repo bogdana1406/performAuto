@@ -59,7 +59,6 @@ class CarsImageController extends Controller
         if (!empty($id)) {
 
             $imageRecord = CarsImage::where(['id' => $id])->value('filename');
-//            dd($imageRecord);
 
             $existsMedium = Storage::exists('files/images/carsGallery/medium/'.$imageRecord);
             if($existsMedium){
@@ -73,7 +72,6 @@ class CarsImageController extends Controller
             if($existsSmall){
                 Storage::delete('files/images/carsGallery/small/'.$imageRecord);
             }
-            //Storage::delete($imageRecord);
 
             CarsImage::where(['id' => $id])->delete();
 
@@ -87,7 +85,6 @@ class CarsImageController extends Controller
     public function uploadImagesForm()
     {
         $carDetails = Car::pluck('name', 'id');
-        //dd($carDetails);
         return view('admin.images.upload_Form')->with(['carDetails'=>$carDetails]);
     }
 
@@ -95,18 +92,15 @@ class CarsImageController extends Controller
     {
 
             $data = $request->all();
-            //dd($data);
+
             $dataCarImage = [];
 
             if($request->hasFile('images'))
                 $image_tmps = Input::file('images');
-        //dd($image_tmps);
-                //$files = $request->file('images');
-          // dd($files, $image_tmp);
+
             foreach ($image_tmps as $image_tmp){
                     $extension = $image_tmp->getClientOriginalExtension();
                     $filename = rand(111, 99999)."_car_".$data['car_id'].".".$extension;
-                    //dd($filename);
                     $large_image_path = 'files/images/carsGallery/large/'.$filename;
                     $small_image_path = 'files/images/carsGallery/small/'.$filename;
                     $medium_image_path = 'files/images/carsGallery/medium/'.$filename;
@@ -120,31 +114,11 @@ class CarsImageController extends Controller
                         'filename'=>$filename
                     ];
 
-                } //dd($dataCarImage);
+                }
 
                 CarsImage::insert($dataCarImage);
                 return redirect('/admin/view-images-table/');
-            //}
 
-
-
-
-
-//        $data = $request->all();
-//        //$carsImage = new CarsImage;
-//        //$carsImage->car_id = $data['car_id'];
-//        //dd($data['car_id']);
-//
-//
-//        foreach($request->images as $image){
-//            $filename = $image->store('images');
-//            CarsImage::create([
-//                'car_id' =>$data['car_id'],
-//                'filename'=>$filename
-//            ]);
-//        }
-//
-//        return 'Upload successful';
     }
 }
 

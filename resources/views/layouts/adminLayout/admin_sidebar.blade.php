@@ -22,18 +22,18 @@
                 <li><a href="{{ url('/admin/view-reviews') }}">View All Review</a></li>
             </ul>
         </li>
-        <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>General Settings</span> <span class="label label-important">1</span></a>
-            <ul>
-                <li><a href="{{ url('/admin/add-settings-page') }}">Add Home Page</a></li>
-                <li><a href="{{ url('/admin/view-settings-page') }}">View Home Page</a></li>
-            </ul>
-        </li>
-        <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>Pages</span> <span class="label label-important">2</span></a>
-            <ul>
-                <li><a href="{{ url('/admin/add-home-page') }}">Add Home Page</a></li>
-                <li><a href="{{ url('/admin/view-home-page') }}">View Home Page</a></li>
-            </ul>
-        </li>
+        {{--<li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>General Settings</span> <span class="label label-important">1</span></a>--}}
+            {{--<ul>--}}
+                {{--<li><a href="{{ url('/admin/add-settings-page') }}">Add Home Page</a></li>--}}
+                {{--<li><a href="{{ url('/admin/view-settings-page') }}">View Home Page</a></li>--}}
+            {{--</ul>--}}
+        {{--</li>--}}
+        {{--<li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>Pages</span> <span class="label label-important">2</span></a>--}}
+            {{--<ul>--}}
+                {{--<li><a href="{{ url('/admin/add-home-page') }}">Add Home Page</a></li>--}}
+                {{--<li><a href="{{ url('/admin/view-home-page') }}">View Home Page</a></li>--}}
+            {{--</ul>--}}
+        {{--</li>--}}
 
     </ul>
 </div>

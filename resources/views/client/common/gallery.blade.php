@@ -46,7 +46,7 @@
 					@php
 						$i++
 					@endphp
-					@if(Request::url() !== route('cars') && $i>2)
+					@if(Request::url() !== route('cars') && $i>8)
 						<div class="col-md-3" data-tag={{ $car->brand->name }} style="display: none">
 					@else
 						<div class="col-md-3" data-tag={{ $car->brand->name }}>

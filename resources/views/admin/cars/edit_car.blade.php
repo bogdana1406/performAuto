@@ -155,7 +155,13 @@
                                     <div class="control-group">
                                         <label class="control-label">About_{{$locale}}</label>
                                         <div class="controls">
-                                            <textarea type="text" rows="10" cols="45" name="about[{{$locale}}]" id="about">{{old('about')?? $carDetails->about[$locale]}}</textarea>
+                                            <textarea type="text" rows="10" cols="45" name="about[{{$locale}}]" id="about">{{old("about.$locale")?? $carDetails->about[$locale]}}</textarea>
+
+                                            @if($errors->has("about.$locale"))
+                                                <span class="alert alert-danger" role="alert">
+                                                    {{$errors->first("about.$locale")}}
+                                            </span>
+                                            @endif
                                         </div>
                                     </div>
                                 @endforeach
@@ -165,7 +171,13 @@
                                     <div class="control-group">
                                         <label class="control-label">Description_{{$locale}}</label>
                                         <div class="controls">
-                                            <textarea type="text" rows="10" cols="45" name="descriptions[{{$locale}}]" id="description">{{old('descriptions')?? $carDetails->descriptions[$locale]}}</textarea>
+                                            <textarea type="text" rows="10" cols="45" name="descriptions[{{$locale}}]" id="description">{{old("descriptions.$locale")?? $carDetails->descriptions[$locale]}}</textarea>
+                                            @if($errors->has("descriptions.$locale"))
+                                                <span class="alert alert-danger" role="alert">
+                                                    {{$errors->first("descriptions.$locale")}}
+                                            </span>
+                                            @endif
+
                                         </div>
                                     </div>
                                 @endforeach

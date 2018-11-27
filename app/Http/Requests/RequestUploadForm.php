@@ -34,15 +34,7 @@ class RequestUploadForm extends FormRequest
      *
      * @return array
      */
-//    public function rules()
-//    {
-//
-//        return [
-//            'car_id' => 'required|exists:cars,id',
-//            'images[]' => 'required',
-//        ];
-//    }
-//
+
     public function messages()
     {
         return [

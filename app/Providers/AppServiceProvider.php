@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (Schema::hasTable('cars')&& Schema::hasTable('brands')) {
+        if (Schema::hasTable('cars') && Schema::hasTable('brands')) {
 
             $displayConrtoller = App::make(DisplayConrtoller::class);
             $data = $displayConrtoller->getHeaderParams();
