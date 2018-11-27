@@ -14,7 +14,7 @@ const mix = require('laravel-mix');
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .copy('resources/js/admin', 'public/js/admin')
-    .copy('resources/js/jquery.slim.min', 'public/js')
+    .copy('resources/js/client', 'public/js')
     .copy('resources/images', 'public/images')
     .copy('resources/fonts', 'public/fonts')
     .copy('resources/css/backend_css', 'public/css');
