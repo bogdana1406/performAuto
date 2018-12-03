@@ -19,7 +19,9 @@ class CreateCarsTable extends Migration
             $table->integer('brand_id');
             $table->string('model');
             $table->smallInteger('seats');
+            $table->integer('mileage');
             $table->smallInteger('doors');
+            $table->smallInteger('body_type');
             $table->enum('transmission_types', ['manual', 'automatic']);
             $table->smallInteger('year');
             $table->integer('engine_id');

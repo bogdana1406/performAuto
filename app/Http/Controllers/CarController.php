@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CarsImage;
+use App\Enums\BodyTypes;
 use App\Http\Requests\UploadRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -22,8 +23,8 @@ class CarController extends Controller
     {
         $brands = Brand::pluck('name', 'id');
         $engines = Engine::pluck('name', 'id');
-        //dd($brands);
-        return view('admin.cars.add_car')->with(['brands'=>$brands, 'engines'=>$engines]);
+        $bodyTypes = BodyTypes::getLabels();
+        return view('admin.cars.add_car')->with(['brands'=>$brands, 'engines'=>$engines, 'bodyTypes'=>$bodyTypes]);
     }
 
     public function addCar(RequestValidateCar $request)
@@ -66,12 +67,14 @@ class CarController extends Controller
             $brands = Brand::pluck('name', 'id');
             $engines = Engine::pluck('name', 'id');
             $carDetails = Car::where(['id'=>$id])->first();
-            return view('admin.cars.edit_car')->with(['carDetails'=>$carDetails,'brands'=>$brands, 'engines'=>$engines]);
+            $bodyTypes = BodyTypes::getLabels();
+            return view('admin.cars.edit_car')->with(['carDetails'=>$carDetails,'brands'=>$brands, 'engines'=>$engines, 'bodyTypes'=>$bodyTypes]);
         }
 
-        public function editCar(RequestValidateCar $request, $id = null)
+        public function editCar(Request $request, $id = null)
         {
             $data = $request->all();
+            //dd($data);
             $car = Car::find($id);
             $old_image = $car->image;
 
@@ -157,8 +160,9 @@ class CarController extends Controller
 
         public function viewCars()
         {
+            $bodyTypes = BodyTypes::getLabels();
             $cars = Car::all();
-            return view('admin.cars.view_cars')->with(compact('cars'));
+            return view('admin.cars.view_cars')->with(compact('cars', 'bodyTypes'));
         }
 
         public function deleteCarImage($id = null)

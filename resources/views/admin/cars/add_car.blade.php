@@ -67,29 +67,18 @@
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label class="control-label">Seats</label>
+                                    <label class="control-label">Mileage</label>
                                     <div class="controls">
-                                        <input type="text" name="seats" id="seats" value="{{old('seats')}}">
-                                        @if($errors->has('seats'))
+                                        <input type="text" name="mileage" id="mileage" value="{{old('mileage')}}">
+                                        @if($errors->has('mileage'))
                                             <span class="alert alert-danger" role="alert">
-                                              {{$errors->first('seats')}}
+                                              {{$errors->first('mileage')}}
                                             </span>
                                         @endif
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label class="control-label">Doors</label>
-                                    <div class="controls">
-                                        <input type="text" name="doors" id="doors" value="{{old('doors')}}">
-                                        @if($errors->has('doors'))
-                                            <span class="alert alert-danger" role="alert">
-                                              {{$errors->first('doors')}}
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">Transmission_types</label>
+                                    <label class="control-label">Transmission types</label>
                                     <div class="controls">
                                         <select name="transmission_types" style="width: 220px">
                                             <option>Select Transmission_type</option>
@@ -99,6 +88,22 @@
                                         @if($errors->has('transmission_types'))
                                             <span class="alert alert-danger" role="alert">
                                               {{$errors->first('transmission_types')}}
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Body types</label>
+                                    <div class="controls">
+                                        <select name="body_type" style="width: 220px">
+                                            <option>Select Body_type</option>
+                                            @foreach($bodyTypes as $key=>$value)
+                                            <option value="{{ $key }}">{{ $value }}</option>
+                                            @endforeach
+                                        </select>
+                                        @if($errors->has('body_type'))
+                                            <span class="alert alert-danger" role="alert">
+                                              {{$errors->first('body_type')}}
                                             </span>
                                         @endif
                                     </div>
@@ -126,6 +131,28 @@
                                         @if($errors->has('engine_id'))
                                             <span class="alert alert-danger" role="alert">
                                               {{$errors->first('engine_id')}}
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Doors</label>
+                                    <div class="controls">
+                                        <input type="text" name="doors" id="doors" value="{{old('doors')}}">
+                                        @if($errors->has('doors'))
+                                            <span class="alert alert-danger" role="alert">
+                                              {{$errors->first('doors')}}
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Seats</label>
+                                    <div class="controls">
+                                        <input type="text" name="seats" id="seats" value="{{old('seats')}}">
+                                        @if($errors->has('seats'))
+                                            <span class="alert alert-danger" role="alert">
+                                              {{$errors->first('seats')}}
                                             </span>
                                         @endif
                                     </div>

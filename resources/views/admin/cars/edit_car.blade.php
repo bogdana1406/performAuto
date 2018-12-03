@@ -73,26 +73,14 @@
                                             </span>
                                         @endif
                                     </div>
-
                                 </div>
                                 <div class="control-group">
-                                    <label class="control-label">Seats</label>
+                                    <label class="control-label">Meliage</label>
                                     <div class="controls">
-                                        <input type="text" name="seats" id="seats" value="{{ old('seats')??$carDetails->seats }}">
-                                        @if($errors->has('seats'))
+                                        <input type="text" name="mileage" id="mileage" value="{{ old('mileage')??$carDetails->mileage }}">
+                                        @if($errors->has('mileage'))
                                             <span class="alert alert-danger" role="alert">
-                                              {{$errors->first('seats')}}
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">Doors</label>
-                                    <div class="controls">
-                                        <input type="text" name="doors" id="doors" value="{{old('doors')??$carDetails->doors}}">
-                                        @if($errors->has('doors'))
-                                            <span class="alert alert-danger" role="alert">
-                                              {{$errors->first('doors')}}
+                                              {{$errors->first('mileage')}}
                                             </span>
                                         @endif
                                     </div>
@@ -112,6 +100,18 @@
                                         @endif
                                     </div>
                                 </div>
+
+                                <div class="control-group">
+                                    <label class="control-label">Body_type</label>
+                                    <div class="controls">
+                                        <select name="body_type" style="width: 220px">
+                                            @foreach ($bodyTypes as $key=>$value)
+                                                <option {{$key==(old('body_type')??$carDetails->body_type) ? "selected": ""}} value="{{$key}}">{{ $value }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
                                 <div class="control-group">
                                     <label class="control-label">Year</label>
                                     <div class="controls">
@@ -135,6 +135,28 @@
                                         @if($errors->has('engine_id'))
                                             <span class="alert alert-danger" role="alert">
                                               {{$errors->first('engine_id')}}
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Seats</label>
+                                    <div class="controls">
+                                        <input type="text" name="seats" id="seats" value="{{ old('seats')??$carDetails->seats }}">
+                                        @if($errors->has('seats'))
+                                            <span class="alert alert-danger" role="alert">
+                                              {{$errors->first('seats')}}
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Doors</label>
+                                    <div class="controls">
+                                        <input type="text" name="doors" id="doors" value="{{old('doors')??$carDetails->doors}}">
+                                        @if($errors->has('doors'))
+                                            <span class="alert alert-danger" role="alert">
+                                              {{$errors->first('doors')}}
                                             </span>
                                         @endif
                                     </div>

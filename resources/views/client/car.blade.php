@@ -56,6 +56,11 @@
       <div class="col-sm-6">
         <div class="slider angles">
           <ul id="lightSlider">
+            @if((($carImagesGallery)->isEmpty()))
+              <li data-thumb="{{ asset('/images/default-gallery-small.jpg') }}" class="active">
+                <img alt="Image 1 Title" src="{{ asset('/images/default-gallery-large.jpg') }}" class="img-fluid">
+              </li>
+            @else
             @foreach($carImagesGallery as $carImage)
             <li data-thumb="{{Storage::exists('/files/images/carsGallery/small/'.$carImage->filename) ?
              asset('files/images/carsGallery/small/'.$carImage->filename) :
@@ -65,21 +70,7 @@
                asset('/images/default-gallery-large.jpg') }}" class="img-fluid">
             </li>
             @endforeach
-            {{--<li data-thumb="{{ asset('/images/mers-s2.png') }}">--}}
-              {{--<img alt="Image 1 Title" src="{{ asset('/images/mers_big2.jpg') }}" class="img-fluid">--}}
-            {{--</li>--}}
-            {{--<li data-thumb="{{ asset('/images/mers-s3.png') }}">--}}
-              {{--<img alt="Image 1 Title" src="{{ asset('/images/mers_big3.jpg') }}" class="img-fluid">--}}
-            {{--</li>--}}
-            {{--<li data-thumb="{{ asset('/images/mers-s1.png') }}">--}}
-              {{--<img alt="Image 1 Title" src="{{ asset('/images/mers_big.jpg') }}" class="img-fluid">--}}
-            {{--</li>--}}
-            {{--<li data-thumb="{{ asset('/images/mers-s2.png') }}">--}}
-              {{--<img alt="Image 1 Title" src="{{ asset('/images/mers_big2.jpg') }}" class="img-fluid">--}}
-            {{--</li>--}}
-            {{--<li data-thumb="{{ asset('/images/mers-s3.png') }}">--}}
-              {{--<img alt="Image 1 Title" src="{{ asset('/images/mers_big3.jpg') }}" class="img-fluid">--}}
-            {{--</li>--}}
+            @endif
             <li></li>
           </ul>
           {{-- <ol id="sliderIndicators" class="indicators"></ol> --}}

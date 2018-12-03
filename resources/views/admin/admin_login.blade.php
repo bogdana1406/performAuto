@@ -65,9 +65,9 @@
     </form>
 </div>
 
-<script src="{{asset('js/jquery.min.js')}}"></script>
-<script src="{{asset('js/matrix.login.js')}}"></script>
-<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{asset('js/admin/jquery.min.js')}}"></script>
+<script src="{{asset('js/admin/matrix.login.js')}}"></script>
+<script src="{{ asset('js/admin/bootstrap.min.js') }}"></script>
 </body>
 
 </html>

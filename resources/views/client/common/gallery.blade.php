@@ -94,9 +94,9 @@
 						    		<div class="col">
 						    			<span class="car-price">{{$car->price}}</span><span class="currency">&euro;</span>
 						    		</div>
-						    		{{--<div class="col text-right">--}}
-						    			{{--<span class="mileage">150000 km</span>--}}
-						    		{{--</div>--}}
+						    		<div class="col text-right">
+						    			<span class="mileage">{{$car->mileage}} km</span>
+						    		</div>
 						    	</div>
 						    </a>
 						</div>
