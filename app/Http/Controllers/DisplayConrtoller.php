@@ -58,8 +58,9 @@ class DisplayConrtoller extends Controller
         return view('client.about')->with(compact('reviews'));
     }
 
-    public function car($id){
 
+    public function car($id){
+        $bodyTypes = BodyTypes::getLabels();
         $arrayBrandsCount = [];
         $carDetails = Car::find($id);
         if(!$carDetails){
@@ -75,7 +76,7 @@ class DisplayConrtoller extends Controller
         $carImagesGallery = CarsImage::where(['car_id'=>$id])->get();
         //dd(($carImagesGallery)->isEmpty());
         return view('client.car')->with(compact('carDetails', 'cars',
-            'carBrands', 'countAllCars', 'arrayBrandsCount', 'carImagesGallery'));
+            'carBrands', 'countAllCars', 'arrayBrandsCount', 'carImagesGallery', 'bodyTypes'));
     }
 
     public function cars(Request $request){

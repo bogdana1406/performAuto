@@ -61,12 +61,11 @@
                                         @endif
                                     </div>
                                 </div>
-                                @foreach(['en', 'fr'] as $locale)
+                                @foreach(['en', 'fr', 'nl'] as $locale)
                                     <div class="control-group">
                                         <label class="control-label">Text Review_{{$locale}}</label>
                                         <div class="controls">
                                             <textarea type="text" rows="10" cols="45" name="text_review[{{$locale}}]" id="text_review">{{old("text_review.$locale")}}</textarea>
-
                                         @if($errors->has("text_review.$locale"))
                                                 <span class="alert alert-danger" role="alert">
                                                     {{$errors->first("text_review.$locale")}}
@@ -75,19 +74,6 @@
                                         </div>
                                     </div>
                                 @endforeach
-
-
-                                {{--<div class="control-group">--}}
-                                    {{--<label class="control-label">Text Review</label>--}}
-                                    {{--<div class="controls">--}}
-                                        {{--<textarea type="text" rows="10" cols="45" name="text_review" id="text_review" >{{old('text_review')}}</textarea>--}}
-                                        {{--@if($errors->has('text_review'))--}}
-                                            {{--<span class="alert alert-danger" role="alert">--}}
-                                              {{--{{$errors->first('text_review')}}--}}
-                                            {{--</span>--}}
-                                        {{--@endif--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
                                 <div class="control-group">
                                     <label class="control-label">Mark Review</label>
                                     <div class="controls">

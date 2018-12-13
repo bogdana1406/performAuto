@@ -38,6 +38,7 @@
 					  <div class="dropdown-menu text-center" aria-labelledby="btnGroupDrop2">
 						  <a class="dropdown-item" href="<?= route('setlocale', ['lang' => 'en']) ?>">en</a>
 						  <a class="dropdown-item" href="<?= route('setlocale', ['lang' => 'fr']) ?>">fr</a>
+						  <a class="dropdown-item" href="<?= route('setlocale', ['lang' => 'nl']) ?>">nl</a>
 				    </div>
 				  </div>
 				</div>

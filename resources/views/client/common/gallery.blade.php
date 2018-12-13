@@ -55,12 +55,16 @@
 						<div class="card-img-top">
 							<a href="#" class="show-modal" data-toggle="modal" data-target="#car{{$car->id}}">
 								@if(!empty($car->image))
-									@if(Storage::exists('files/images/backend_images/medium/'.$car->image))
-									<img src="{{ URL::asset('files/images/backend_images/medium/'.$car->image) }}" class="img-thumb" alt="car-thumb">
+									@if(Storage::exists('files/images/backend_images/large/'.$car->image))
+									<img src="{{ URL::asset('files/images/backend_images/large/'.$car->image) }}" class="img-thumb" alt="car-thumb">
 									@else
 									<img src="{{ URL::asset('/images/car-default.jpg') }}" class="img-thumb" alt="car-thumb">
 									@endif
 								@endif
+								@if(empty($car->image))
+										<img src="{{ URL::asset('/images/car-default.jpg') }}" class="img-thumb" alt="car-thumb">
+									@endif
+
 								{{--<img src="{{ URL::asset('/images/backend_images/cars/small/'.$car->image) }}" class="img-thumb" alt="car-thumb">--}}
 								<div class="search-icon">
 									<img src="{{ URL::asset('/images/search.png') }}" class="img-icon" alt="search">
@@ -73,8 +77,8 @@
 									      <span aria-hidden="true">&times;</span>
 									    </button>
 
-									@if(Storage::exists('files/images/backend_images/medium/'.$car->image)))
-										<img src="{{ URL::asset('files/images/backend_images/medium/'.$car->image) }}" class="img-thumb" alt="car-thumb">
+									@if(Storage::exists('files/images/backend_images/large/'.$car->image))
+										<img src="{{ URL::asset('files/images/backend_images/large/'.$car->image) }}" class="img-thumb" alt="car-thumb">
 									@else
 										<img src="{{ URL::asset('/images/car-default.jpg') }}" class="img-thumb" alt="car-thumb">
 									@endif

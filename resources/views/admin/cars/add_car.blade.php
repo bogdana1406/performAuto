@@ -169,7 +169,7 @@
                                     </div>
                                 </div>
 
-                                @foreach(['en', 'fr'] as $locale)
+                                @foreach(['en', 'fr', 'nl'] as $locale)
                                     <div class="control-group">
                                         <label class="control-label">About_{{$locale}}</label>
                                         <div class="controls">
@@ -184,7 +184,7 @@
                                     </div>
                                 @endforeach
 
-                                @foreach(['en', 'fr'] as $locale)
+                                @foreach(['en', 'fr', 'nl'] as $locale)
                                     <div class="control-group">
                                         <label class="control-label">Description_{{$locale}}</label>
                                         <div class="controls">
@@ -202,16 +202,16 @@
 
                                     <label class="control-label">Parameters Small Image</label>
                                     <div class="controls">
-                                        <input type="text" class="span1" name="small_h" id="small_h" value="300">
+                                        <input type="text" class="span1" name="small_h" id="small_h" value="450">
 
-                                        <input type="text" class="span1" name="small_w" id="small_w" value="300">
+                                        <input type="text" class="span1" name="small_w" id="small_w" value="800">
                                     </div>
 
                                     <label class="control-label">Parameters Medium Image</label>
                                     <div class="controls">
-                                            <input type="text" class="span1" name="medium_h" id="medium_h" value="600">
+                                            <input type="text" class="span1" name="medium_h" id="medium_h" value="900">
 
-                                           <input type="text" class="span1" name="medium_w" id="medium_w" value="600">
+                                           <input type="text" class="span1" name="medium_w" id="medium_w" value="1600">
                                     </div>
 
                                     <label class="control-label">Image</label>

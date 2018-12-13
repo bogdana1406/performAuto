@@ -51,7 +51,6 @@
                                     <label class="control-label">Brand</label>
                                     <div class="controls">
                                         <select name="brand_id" style="width: 220px">
-                                            {{--<option value="{{ $carDetails->brand->id }}">{{ $carDetails->brand->name }}</option>--}}
                                             @foreach ($brands as $id=>$name)
                                                 <option {{$id==old('brand_id')??$carDetails->brand->id ? "selected": ""}} value="{{$id}}">{{ $name }}</option>
                                             @endforeach
@@ -127,7 +126,6 @@
                                     <label class="control-label">Engine</label>
                                     <div class="controls">
                                         <select name="engine_id" style="width: 220px">
-                                            {{--<option value="{{ $carDetails->engine->id }}">{{ $carDetails->engine->name }}</option>--}}
                                             @foreach ($engines as $id=>$name)
                                                 <option {{$id==old('engine_id')??$carDetails->engine->id ? "selected":""}} value="{{$id}}">{{ $name }}</option>
                                             @endforeach
@@ -173,11 +171,11 @@
                                     </div>
                                 </div>
 
-                                @foreach(['en', 'fr'] as $locale)
+                                @foreach(['en', 'fr', 'nl'] as $locale)
                                     <div class="control-group">
                                         <label class="control-label">About_{{$locale}}</label>
                                         <div class="controls">
-                                            <textarea type="text" rows="10" cols="45" name="about[{{$locale}}]" id="about">{{old("about.$locale")?? $carDetails->about[$locale]}}</textarea>
+                                            <textarea type="text" rows="10" cols="45" name="about[{{$locale}}]" id="about">{{old("about.$locale")?? $carDetails->about[$locale]??""}}</textarea>
 
                                             @if($errors->has("about.$locale"))
                                                 <span class="alert alert-danger" role="alert">
@@ -189,11 +187,11 @@
                                 @endforeach
 
 
-                                @foreach(['en', 'fr'] as $locale)
+                                @foreach(['en', 'fr', 'nl'] as $locale)
                                     <div class="control-group">
                                         <label class="control-label">Description_{{$locale}}</label>
                                         <div class="controls">
-                                            <textarea type="text" rows="10" cols="45" name="descriptions[{{$locale}}]" id="description">{{old("descriptions.$locale")?? $carDetails->descriptions[$locale]}}</textarea>
+                                            <textarea type="text" rows="10" cols="45" name="descriptions[{{$locale}}]" id="description">{{old("descriptions.$locale")?? $carDetails->descriptions[$locale]??""}}</textarea>
                                             @if($errors->has("descriptions.$locale"))
                                                 <span class="alert alert-danger" role="alert">
                                                     {{$errors->first("descriptions.$locale")}}
@@ -206,16 +204,16 @@
 
                                     <label class="control-label">Parameters Small Image</label>
                                     <div class="controls">
-                                        <input type="text" class="span1" name="small_h" id="small_h" value="300">
+                                        <input type="text" class="span1" name="small_h" id="small_h" value="450">
 
-                                        <input type="text" class="span1" name="small_w" id="small_w" value="300">
+                                        <input type="text" class="span1" name="small_w" id="small_w" value="800">
                                     </div>
 
                                     <label class="control-label">Parameters Medium Image</label>
                                     <div class="controls">
-                                        <input type="text" class="span1" name="medium_h" id="medium_h" value="600">
+                                        <input type="text" class="span1" name="medium_h" id="medium_h" value="900">
 
-                                        <input type="text" class="span1" name="medium_w" id="medium_w" value="600">
+                                        <input type="text" class="span1" name="medium_w" id="medium_w" value="1600">
                                     </div>
 
                                     <label class="control-label">Image</label>
@@ -259,14 +257,12 @@
                                 {{--<input type="file" name="images[]"  multiple />--}}
                                 {{--<br /><br />--}}
                                 {{--<input type="submit" value="Upload" />--}}
-
-
                                 {{--@if($errors->has('images[]'))--}}
                                     {{--<span class="alert alert-danger" role="alert">--}}
                                      {{--{{$errors->first('images[]')}}--}}
                                     {{--</span>--}}
                                 {{--@endif--}}
-                            </form>
+                            {{--</form>--}}
                         </div>
                     </div>
                 </div>

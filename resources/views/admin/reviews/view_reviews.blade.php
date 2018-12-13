@@ -36,10 +36,10 @@
                                     <th>Published on</th>
                                     <th>Text Review_en</th>
                                     <th>Text Review_fr</th>
+                                    <th>Text Review_nl</th>
                                     <th>Mark Review</th>
                                     <th>Photo</th>
                                     <th>Actions</th>
-
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -51,6 +51,7 @@
                                         <td>{{ $review->published_at }}</td>
                                         <td>{{ $review->text_review['en'] }}</td>
                                         <td>{{ $review->text_review['fr'] }}</td>
+                                        <td>{{ $review->text_review['nl'] }}</td>
                                         <td>{{ $review->mark_review }}</td>
                                         <td>
                                             @if(!empty($review->customer_photo))
@@ -63,9 +64,7 @@
                                                 <a data-id="{{$review->id}}" href="#" class="btn btn-danger btn-mini delReview">Delete</a>
                                             </div>
                                         </td>
-
                                     </tr>
-
                                 @endforeach
                                 </tbody>
                             </table>

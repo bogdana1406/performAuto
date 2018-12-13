@@ -69,8 +69,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function(){
 
 
     //Images upload Route
-    Route::get('/upload-car-images/{id}', 'CarsImageController@uploadForm');
-    Route::post('/upload-car-images/{id}', 'CarsImageController@uploadSubmit');
+    //Route::get('/upload-car-images/{id}', 'CarsImageController@uploadForm');
+    //Route::post('/upload-car-images/{id}', 'CarsImageController@uploadSubmit');
 
 
     Route::get('/upload-car-images-form', 'CarsImageController@uploadImagesForm');
@@ -87,7 +87,7 @@ Route::get('/', function () {
 });
 
 Route::get('setlocale/{lang}', 'SetLocaleController@setLang')->name('setlocale');
-//Route::prefix('{lang?}')->middleware('localisation')->group(function() {
+
 
 Route::group(['prefix' => App\Http\Middleware\LocaleMiddleware::getLocale()], function(){
 
@@ -103,11 +103,8 @@ Route::group(['prefix' => App\Http\Middleware\LocaleMiddleware::getLocale()], fu
 
     Route::get('cars', 'DisplayConrtoller@cars')->name('cars');
 
-
-   // Route::get('/filter-cars', 'FilterController@showFilter');
-
     Route::post('filter-cars', 'DisplayConrtoller@showResultFilter')->name('carsFilter');
 });
 
-//Auth::routes();
+
 

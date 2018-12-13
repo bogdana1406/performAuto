@@ -30,17 +30,17 @@ class CarController extends Controller
     public function addCar(RequestValidateCar $request)
     {
         $data = $request->except('_token');
-        $small_h = ($data['small_h'] && ($data['small_h']>0)) ? (int)$data['small_h']:300;
-        $small_w = ($data['small_w'] && ($data['small_w']>0)) ? (int)$data['small_w']:300;
-        $medium_h = ($data['medium_h'] && ($data['medium_h']>0)) ? (int)$data['medium_h']:600;
-        $medium_w = ($data['medium_w'] && ($data['medium_w']>0)) ? (int)$data['medium_w']:600;
+        $small_h = ($data['small_h'] && ($data['small_h']>0)) ? (int)$data['small_h']:450;
+        $small_w = ($data['small_w'] && ($data['small_w']>0)) ? (int)$data['small_w']:800;
+        $medium_h = ($data['medium_h'] && ($data['medium_h']>0)) ? (int)$data['medium_h']:900;
+        $medium_w = ($data['medium_w'] && ($data['medium_w']>0)) ? (int)$data['medium_w']:1600;
        // dd($small_h, $small_w, $medium_h, $medium_w);
 
         if($request->hasFile('image')){
             $image_tmp = Input::file('image');
             if($image_tmp->isValid()){
                 $extension = $image_tmp->getClientOriginalExtension();
-                $filename = rand(111, 99999).".".$extension;
+                $filename = rand(111, 999999).".".$extension;
                 $large_image_path = 'files/images/backend_images/large/'.$filename;
                 $small_image_path = 'files/images/backend_images/small/'.$filename;
                 $medium_image_path = 'files/images/backend_images/medium/'.$filename;
@@ -71,7 +71,7 @@ class CarController extends Controller
             return view('admin.cars.edit_car')->with(['carDetails'=>$carDetails,'brands'=>$brands, 'engines'=>$engines, 'bodyTypes'=>$bodyTypes]);
         }
 
-        public function editCar(Request $request, $id = null)
+        public function editCar(RequestValidateCar $request, $id = null)
         {
             $data = $request->all();
             //dd($data);
@@ -79,10 +79,10 @@ class CarController extends Controller
             $old_image = $car->image;
 
             //dd($old_image);
-            $medium_h = ($data['medium_h'] && ($data['medium_h']>0)) ? (int)$data['medium_h']:600;
-            $medium_w = ($data['medium_w'] && ($data['medium_w']>0)) ? (int)$data['medium_w']:600;
-            $small_h = ($data['small_h'] && ($data['small_h']>0)) ? (int)$data['small_h']:300;
-            $small_w = ($data['small_w'] && ($data['small_w']>0)) ? (int)$data['small_w']:300;
+            $medium_h = ($data['medium_h'] && ($data['medium_h']>0)) ? (int)$data['medium_h']:900;
+            $medium_w = ($data['medium_w'] && ($data['medium_w']>0)) ? (int)$data['medium_w']:1600;
+            $small_h = ($data['small_h'] && ($data['small_h']>0)) ? (int)$data['small_h']:450;
+            $small_w = ($data['small_w'] && ($data['small_w']>0)) ? (int)$data['small_w']:800;
 
 
 //            if($old_image){

@@ -42,9 +42,9 @@ class RequestValidateCar extends FormRequest
             'engine_id'=>'required|exists:engines,id',
             'price'=>'required|integer',
             'descriptions' => 'required|array',
-            'descriptions.*' => 'required|string',
+            'descriptions.*' => 'required|string|min:1',
             'about' => 'required|array',
-            'about.*' => 'required|string'
+            'about.*' => 'required|string|min:1'
         ];
     }
 
