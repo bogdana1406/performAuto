@@ -28,7 +28,11 @@
           <span class="col property"><img src="/images/icon-car.png" class="icon mr-2">{{$carDetails->doors}}</span>
           <span class="col property"><img src="/images/icon-gearshift.png" class="icon mr-2">{{$carDetails->transmission_types}}</span>
           <span class="col property"><img src="/images/icon-certificate-shape.png" class="icon mr-2">{{$carDetails->year}}</span>
+
         </div>
+        {{--<div class="car-properties row">--}}
+          {{--{{ $bodyTypes[$carDetails->body_type] }}--}}
+        {{--</div>--}}
         <div class="car-description d-flex flex-column justify-content-between">
           <div class="tabs">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -56,30 +60,21 @@
       <div class="col-sm-6">
         <div class="slider angles">
           <ul id="lightSlider">
+            @if((($carImagesGallery)->isEmpty()))
+              <li data-thumb="{{ asset('/images/default-gallery-small.jpeg') }}" class="active">
+                <img alt="Image 1 Title" src="{{ asset('/images/default-gallery-large.jpeg') }}" class="img-fluid">
+              </li>
+            @else
             @foreach($carImagesGallery as $carImage)
             <li data-thumb="{{Storage::exists('/files/images/carsGallery/small/'.$carImage->filename) ?
              asset('files/images/carsGallery/small/'.$carImage->filename) :
-              asset('/images/default-gallery-small.jpg')}}" class="active">
+              asset('/images/default-gallery-small.jpeg')}}" class="active">
               <img alt="Image 1 Title" src="{{ Storage::exists('/files/images/carsGallery/large/'.$carImage->filename) ?
               asset('files/images/carsGallery/large/'.$carImage->filename) :
-               asset('/images/default-gallery-large.jpg') }}" class="img-fluid">
+               asset('/images/default-gallery-large.jpeg') }}" class="img-fluid">
             </li>
             @endforeach
-            {{--<li data-thumb="{{ asset('/images/mers-s2.png') }}">--}}
-              {{--<img alt="Image 1 Title" src="{{ asset('/images/mers_big2.jpg') }}" class="img-fluid">--}}
-            {{--</li>--}}
-            {{--<li data-thumb="{{ asset('/images/mers-s3.png') }}">--}}
-              {{--<img alt="Image 1 Title" src="{{ asset('/images/mers_big3.jpg') }}" class="img-fluid">--}}
-            {{--</li>--}}
-            {{--<li data-thumb="{{ asset('/images/mers-s1.png') }}">--}}
-              {{--<img alt="Image 1 Title" src="{{ asset('/images/mers_big.jpg') }}" class="img-fluid">--}}
-            {{--</li>--}}
-            {{--<li data-thumb="{{ asset('/images/mers-s2.png') }}">--}}
-              {{--<img alt="Image 1 Title" src="{{ asset('/images/mers_big2.jpg') }}" class="img-fluid">--}}
-            {{--</li>--}}
-            {{--<li data-thumb="{{ asset('/images/mers-s3.png') }}">--}}
-              {{--<img alt="Image 1 Title" src="{{ asset('/images/mers_big3.jpg') }}" class="img-fluid">--}}
-            {{--</li>--}}
+            @endif
             <li></li>
           </ul>
           {{-- <ol id="sliderIndicators" class="indicators"></ol> --}}

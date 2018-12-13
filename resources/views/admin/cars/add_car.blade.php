@@ -67,29 +67,18 @@
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label class="control-label">Seats</label>
+                                    <label class="control-label">Mileage</label>
                                     <div class="controls">
-                                        <input type="text" name="seats" id="seats" value="{{old('seats')}}">
-                                        @if($errors->has('seats'))
+                                        <input type="text" name="mileage" id="mileage" value="{{old('mileage')}}">
+                                        @if($errors->has('mileage'))
                                             <span class="alert alert-danger" role="alert">
-                                              {{$errors->first('seats')}}
+                                              {{$errors->first('mileage')}}
                                             </span>
                                         @endif
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label class="control-label">Doors</label>
-                                    <div class="controls">
-                                        <input type="text" name="doors" id="doors" value="{{old('doors')}}">
-                                        @if($errors->has('doors'))
-                                            <span class="alert alert-danger" role="alert">
-                                              {{$errors->first('doors')}}
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">Transmission_types</label>
+                                    <label class="control-label">Transmission types</label>
                                     <div class="controls">
                                         <select name="transmission_types" style="width: 220px">
                                             <option>Select Transmission_type</option>
@@ -99,6 +88,22 @@
                                         @if($errors->has('transmission_types'))
                                             <span class="alert alert-danger" role="alert">
                                               {{$errors->first('transmission_types')}}
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Body types</label>
+                                    <div class="controls">
+                                        <select name="body_type" style="width: 220px">
+                                            <option>Select Body_type</option>
+                                            @foreach($bodyTypes as $key=>$value)
+                                            <option value="{{ $key }}">{{ $value }}</option>
+                                            @endforeach
+                                        </select>
+                                        @if($errors->has('body_type'))
+                                            <span class="alert alert-danger" role="alert">
+                                              {{$errors->first('body_type')}}
                                             </span>
                                         @endif
                                     </div>
@@ -131,6 +136,28 @@
                                     </div>
                                 </div>
                                 <div class="control-group">
+                                    <label class="control-label">Doors</label>
+                                    <div class="controls">
+                                        <input type="text" name="doors" id="doors" value="{{old('doors')}}">
+                                        @if($errors->has('doors'))
+                                            <span class="alert alert-danger" role="alert">
+                                              {{$errors->first('doors')}}
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Seats</label>
+                                    <div class="controls">
+                                        <input type="text" name="seats" id="seats" value="{{old('seats')}}">
+                                        @if($errors->has('seats'))
+                                            <span class="alert alert-danger" role="alert">
+                                              {{$errors->first('seats')}}
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="control-group">
                                     <label class="control-label">Price</label>
                                     <div class="controls">
                                         <input type="text" name="price" id="price" value="{{old('price')}}">
@@ -142,7 +169,7 @@
                                     </div>
                                 </div>
 
-                                @foreach(['en', 'fr'] as $locale)
+                                @foreach(['en', 'fr', 'nl'] as $locale)
                                     <div class="control-group">
                                         <label class="control-label">About_{{$locale}}</label>
                                         <div class="controls">
@@ -157,7 +184,7 @@
                                     </div>
                                 @endforeach
 
-                                @foreach(['en', 'fr'] as $locale)
+                                @foreach(['en', 'fr', 'nl'] as $locale)
                                     <div class="control-group">
                                         <label class="control-label">Description_{{$locale}}</label>
                                         <div class="controls">
@@ -175,16 +202,16 @@
 
                                     <label class="control-label">Parameters Small Image</label>
                                     <div class="controls">
-                                        <input type="text" class="span1" name="small_h" id="small_h" value="300">
+                                        <input type="text" class="span1" name="small_h" id="small_h" value="450">
 
-                                        <input type="text" class="span1" name="small_w" id="small_w" value="300">
+                                        <input type="text" class="span1" name="small_w" id="small_w" value="800">
                                     </div>
 
                                     <label class="control-label">Parameters Medium Image</label>
                                     <div class="controls">
-                                            <input type="text" class="span1" name="medium_h" id="medium_h" value="600">
+                                            <input type="text" class="span1" name="medium_h" id="medium_h" value="900">
 
-                                           <input type="text" class="span1" name="medium_w" id="medium_w" value="600">
+                                           <input type="text" class="span1" name="medium_w" id="medium_w" value="1600">
                                     </div>
 
                                     <label class="control-label">Image</label>

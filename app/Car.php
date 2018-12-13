@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Car extends Model
 {
-    protected $fillable = ['name', 'brand_id', 'model', 'seats', 'doors', 'transmission_types', 'year', 'engine_id', 'price', 'image', 'about', 'descriptions'];
+    protected $fillable = ['name', 'brand_id', 'model', 'seats',
+       'mileage', 'doors', 'transmission_types', 'year', 'body_type',
+        'engine_id', 'price', 'image', 'about', 'descriptions'];
 
     protected $casts = [
         'about' => 'array',
