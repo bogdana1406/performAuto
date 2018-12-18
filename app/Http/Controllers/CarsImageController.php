@@ -100,7 +100,7 @@ class CarsImageController extends Controller
 
             foreach ($image_tmps as $image_tmp){
                     $extension = $image_tmp->getClientOriginalExtension();
-                    $filename = rand(111, 99999)."_car_".$data['car_id'].".".$extension;
+                    $filename = rand(111, 999999)."_car_".$data['car_id'].".".$extension;
                     $large_image_path = 'files/images/carsGallery/large/'.$filename;
                     $small_image_path = 'files/images/carsGallery/small/'.$filename;
                     $medium_image_path = 'files/images/carsGallery/medium/'.$filename;

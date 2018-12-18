@@ -17,7 +17,7 @@ class LocaleMiddleware
 
 
     public static $mainLanguage = 'en';
-    public static $languages = ['en', 'fr'];
+    public static $languages = ['en', 'fr', 'nl'];
 
 
     public static function getLocale()

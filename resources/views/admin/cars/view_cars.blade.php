@@ -34,6 +34,8 @@
                                     <th>Car Name</th>
                                     <th>Car brand</th>
                                     <th>Car model</th>
+                                    <th>mileage</th>
+                                    <th>Body_type</th>
                                     <th>Seats</th>
                                     <th>Doors</th>
                                     <th>Transmission_type</th>
@@ -52,6 +54,8 @@
                                         <td>{{ $car->name }}</td>
                                         <td>{{ $car->brand->name }}</td>
                                         <td>{{ $car->model }}</td>
+                                        <td>{{ $car->mileage }}</td>
+                                        <td>{{ $bodyTypes[$car->body_type] }}</td>
                                         <td>{{ $car->seats }}</td>
                                         <td>{{ $car->doors }}</td>
                                         <td>{{ $car->transmission_types }}</td>
@@ -84,6 +88,8 @@
                                                 <p>Car ID:            {{ $car->id }}</p>
                                                 <p>Model:             {{ $car->model }}</p>
                                                 <p>Brand:             {{ $car->brand->name }}</p>
+                                                <p>Mileage:           {{ $car->mileage }}</p>
+                                                <p>Body type:         {{ $bodyTypes[$car->body_type] }}</p>
                                                 <p>Seats:             {{ $car->seats }}</p>
                                                 <p>Doors:             {{ $car->doors }}</p>
                                                 <p>Transmission type: {{ $car->transmission_types }}</p>

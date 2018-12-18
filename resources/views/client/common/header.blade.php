@@ -36,10 +36,9 @@
 						 {{App::getLocale()}}
 					  </button>
 					  <div class="dropdown-menu text-center" aria-labelledby="btnGroupDrop2">
-				    	{{--<a class="dropdown-item" href="#">en</a>--}}
-				    	{{--<a class="dropdown-item" href="#">fr</a>--}}
 						  <a class="dropdown-item" href="<?= route('setlocale', ['lang' => 'en']) ?>">en</a>
 						  <a class="dropdown-item" href="<?= route('setlocale', ['lang' => 'fr']) ?>">fr</a>
+						  <a class="dropdown-item" href="<?= route('setlocale', ['lang' => 'nl']) ?>">nl</a>
 				    </div>
 				  </div>
 				</div>
@@ -55,14 +54,6 @@
 							@foreach($arrayBrandsCount as $brandName => $brandCount)
 								<a href="{{ route('cars')}}?brand={{$brandName}}" class="dropdown-item" data-toggle="portfilter" data-target={{ $brandName }}>{{ $brandName }}<span class="float-right">{{ $brandCount }}</span></a>
 							@endforeach
-
-			        {{--<a class="dropdown-item" href="#">@lang('navigation.dropdown-link2')<span class="float-right">2</span></a>--}}
-
-			        {{--<a class="dropdown-item" href="#">@lang('navigation.dropdown-link3')<span class="float-right">6</span></a>--}}
-			        {{--<a class="dropdown-item" href="#">@lang('navigation.dropdown-link4')<span class="float-right">2</span></a>--}}
-			        {{--<a class="dropdown-item" href="#">@lang('navigation.dropdown-link5')<span class="float-right">1</span></a>--}}
-		          {{--<a class="dropdown-item" href="#">@lang('navigation.dropdown-link6')<span class="float-right">5</span></a>--}}
-		          {{--<a class="dropdown-item" href="#">@lang('navigation.dropdown-link7')<span class="float-right">8</span></a>--}}
 		        </div>
 		      </li>
 		      <li class="nav-item">

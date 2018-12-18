@@ -34,15 +34,17 @@ class RequestValidateCar extends FormRequest
             'brand_id'=>'required|exists:brands,id',
             'model'=>'required|string|max:50',
             'seats'=>'required|integer',
+            'mileage'=>'required|integer',
             'doors'=>'required|integer',
+            'body_type'=>'required|integer',
             'transmission_types'=>'required|in:automatic,manual',
             'year'=>'required|integer',
             'engine_id'=>'required|exists:engines,id',
             'price'=>'required|integer',
             'descriptions' => 'required|array',
-            'descriptions.*' => 'required|string',
+            'descriptions.*' => 'required|string|min:1',
             'about' => 'required|array',
-            'about.*' => 'required|string'
+            'about.*' => 'required|string|min:1'
         ];
     }
 
@@ -52,7 +54,7 @@ class RequestValidateCar extends FormRequest
         'name.unique'=>'car name should be unique',
         'brand_id.exists' => 'you should choose brand',
         'engine_id.exists' => 'you should choose type of engines',
-
+        'body_type.integer'=>'you should choose body type',
     ];
 }
 }

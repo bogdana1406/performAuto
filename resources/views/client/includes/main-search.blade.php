@@ -9,13 +9,6 @@
 						@foreach ($carFilterBrands as $id=>$name)
 							<option value="{{ $id }}">{{ $name }}</option>
 						@endforeach
-
-						{{--<option value="1">@lang('brands.brand1')</option>--}}
-						{{--<option value="2">@lang('brands.brand2')</option>--}}
-						{{--<option value="3">@lang('brands.brand3')</option>--}}
-						{{--<option value="4">@lang('brands.brand4')</option>--}}
-						{{--<option value="5">@lang('brands.brand5')</option>--}}
-						{{--<option value="6">@lang('brands.brand6')</option>--}}
 					</select>
 				</div>
 			</div>
@@ -27,7 +20,6 @@
 						@foreach ($carFilterModels as $carFilterModel)
 							<option value="{{ $carFilterModel }}">{{ $carFilterModel }}</option>
 						@endforeach
-		       			{{--<option value="2">...</option>--}}
 				   	</select>
 				</div>
 			</div>
@@ -39,7 +31,6 @@
 						@foreach ($carFilterYears as $carFilterYear)
 							<option value="{{ $carFilterYear }}">{{ $carFilterYear }}</option>
 						@endforeach
-		       			{{--<option value="2">...</option>--}}
 				   	</select>
 				</div>
 			</div>
@@ -56,7 +47,5 @@
 <script>
 	var minPrice = +"{{$carFilterPriceMin}}"||0;
 	var maxPrice = +"{{$carFilterPriceMax}}"||100;
-	//console.log(minPrice);
     $("#priceBar").slider({ min: minPrice, max: maxPrice, range: true, value: [minPrice, maxPrice] });
-//    $("#priceBar").slider({ min: 3, max: 8, range: true, value: [0, 7] });
 </script>
