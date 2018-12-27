@@ -1,19 +1,5 @@
 #!/bin/bash
-
-MYPWD=${PWD}
-
-echo 'Create .env file'
-cp .env.example .env
-
-cd laradock*
-
-cp .env-example .env
-echo "cp .env"
-
-cp nginx/Dockerfile.example nginx/Dockerfile
-cp nginx/sites/default.conf.example nginx/sites/default.conf
-echo "cp nginx conf"
-
+cd laradockAdmin
 docker-compose up -d nginx php-fpm mysql workspace phpmyadmin php-worker
 
 docker-compose exec workspace bash -e ./install/php-install
