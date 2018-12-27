@@ -28,11 +28,12 @@
           <span class="col property"><img src="/images/icon-car.png" class="icon mr-2">{{$carDetails->doors}}</span>
           <span class="col property"><img src="/images/icon-gearshift.png" class="icon mr-2">{{$carDetails->transmission_types}}</span>
           <span class="col property"><img src="/images/icon-certificate-shape.png" class="icon mr-2">{{$carDetails->year}}</span>
-
         </div>
-        {{--<div class="car-properties row">--}}
-          {{--{{ $bodyTypes[$carDetails->body_type] }}--}}
-        {{--</div>--}}
+
+        <div class="car-properties row">
+          <span class="col property"><img src="/images/icon-car.png" class="icon mr-2"> {{ $bodyTypes[$carDetails->body_type] }}</span>
+          <span class="col property"><img src="/images/icon-gas-station.png" class="icon mr-2">{{$carDetails->mileage}}</span>
+        </div>
         <div class="car-description d-flex flex-column justify-content-between">
           <div class="tabs">
             <ul class="nav nav-tabs" id="myTab" role="tablist">

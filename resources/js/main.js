@@ -25,21 +25,30 @@ $(document).ready(function() {
     }
 
     //====Custom select====
-
-    var x, i, j, selElmnt, a, b, c;
+var customSelect = function () {
+    var divCustomSelect, i, j, selElmnt, divSelected, divArrOptions, c;
     /*look for any elements with the class "custom-select":*/
-    x = document.getElementsByClassName("custom-select");
-    for (i = 0; i < x.length; i++) {
-        selElmnt = x[i].getElementsByTagName("select")[0];
+    divCustomSelect = document.getElementsByClassName("custom-select");
+    for (i = 0; i < divCustomSelect.length; i++) {
+        if (divCustomSelect[i].querySelector('div.select-selected')) {
+            divCustomSelect[i].querySelector('div.select-selected').remove();
+        }
+
+        if (divCustomSelect[i].querySelector('div.select-items.select-hide')) {
+            divCustomSelect[i].querySelector('div.select-items.select-hide').remove();
+        }
+
+        selElmnt = divCustomSelect[i].getElementsByTagName("select")[0];
         /*for each element, create a new DIV that will act as the selected item:*/
-        a = document.createElement("DIV");
-        a.setAttribute("class", "select-selected");
-        a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
-        x[i].appendChild(a);
+        divSelected = document.createElement("DIV");
+        divSelected.setAttribute("class", "select-selected");
+
+        divSelected.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+        divCustomSelect[i].appendChild(divSelected);
         /*for each element, create a new DIV that will contain the option list:*/
-        b = document.createElement("DIV");
-        b.setAttribute("class", "select-items select-hide");
-        for (j = 1; j < selElmnt.length; j++) {
+        divArrOptions = document.createElement("DIV");
+        divArrOptions.setAttribute("class", "select-items select-hide");
+        for (j = 0; j < selElmnt.length; j++) {
             /*for each option in the original select element,
             create a new DIV that will act as an option item:*/
             c = document.createElement("DIV");
@@ -52,6 +61,9 @@ $(document).ready(function() {
                 h = this.parentNode.previousSibling;
                 for (i = 0; i < s.length; i++) {
                     if (s.options[i].innerHTML == this.innerHTML) {
+
+                        onChangeSelect(s.options[i].value);
+
                         s.selectedIndex = i;
                         h.innerHTML = this.innerHTML;
                         y = this.parentNode.getElementsByClassName("same-as-selected");
@@ -64,10 +76,10 @@ $(document).ready(function() {
                 }
                 h.click();
             });
-            b.appendChild(c);
+            divArrOptions.appendChild(c);
         }
-        x[i].appendChild(b);
-        a.addEventListener("click", function(e) {
+        divCustomSelect[i].appendChild(divArrOptions);
+        divSelected.addEventListener("click", function(e) {
             /*when the select box is clicked, close any other select boxes,
             and open/close the current select box:*/
             e.stopPropagation();
@@ -99,6 +111,33 @@ $(document).ready(function() {
     /*if the user clicks anywhere outside the select box,
     then close all select boxes:*/
     document.addEventListener("click", closeAllSelect);
+};
+
+    customSelect();
+
+    function onChangeSelect(idBrand) {
+        $.ajax({
+            url: '/filter-brands/'+idBrand,
+            type: "GET",
+            dataType: "json",
+
+            success: function(data) {
+                if (data.length) {
+                    var defaultOption = $('select[name="model"]').children().first();
+
+                    $('select[name="model"]').empty();
+
+                    $('select[name="model"]').append(defaultOption);
+
+                    $.each(data, function (key, val) {
+                        $('select[name="model"]').append('<option value="' + val + '">' + val + '</option>')
+                    });
+                }
+                customSelect();
+            }
+
+        })
+    }
 
     //====Price trackbar====
 

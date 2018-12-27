@@ -6,9 +6,12 @@
 					<label for="inputBrand" class="sr-only">Brand</label>
 					<select name="brand_id" id="inputBrand">
 						<option value="0" >@lang('main_search.select1')</option>
-						@foreach ($carFilterBrands as $id=>$name)
-							<option value="{{ $id }}">{{ $name }}</option>
+						@foreach ($carFilterBrands as $carFilterBrand)
+							<option value="{{ $carFilterBrand->id }}">{{ $carFilterBrand->name }}</option>
 						@endforeach
+						{{--@foreach ($carFilterBrands as $id=>$name)--}}
+							{{--<option value="{{ $id }}">{{ $name }}</option>--}}
+						{{--@endforeach--}}
 					</select>
 				</div>
 			</div>
@@ -48,4 +51,5 @@
 	var minPrice = +"{{$carFilterPriceMin}}"||0;
 	var maxPrice = +"{{$carFilterPriceMax}}"||100;
     $("#priceBar").slider({ min: minPrice, max: maxPrice, range: true, value: [minPrice, maxPrice] });
+
 </script>

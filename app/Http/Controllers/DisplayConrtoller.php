@@ -33,7 +33,12 @@ class DisplayConrtoller extends Controller
 
         $cars = Car::orderBy('id', 'desc')->get();
         $reviews = Review::orderBy('id', 'desc')->get();
-        $carFilterBrands = Brand::has('car')->pluck('name', 'id');
+        //$carFilterBrands = Brand::has('car')->pluck('name', 'id');
+        $carFilterBrands = Brand::get();
+//        foreach ($carFilterBrands as $carFilterBrand){
+//            dd($carFilterBrand->id);
+//        }
+        //dd($carFilterBrands);
         $carFilterModels = array_unique(Car::pluck('model')->toArray());
         $carFilterYears = array_unique(Car::pluck('year')->toArray());
         $carFilterPrice = Car::pluck('price')->toArray();
@@ -127,6 +132,17 @@ class DisplayConrtoller extends Controller
 
         return view('client.cars-gallery')->with(compact('cars', 'carBrands', 'countAllCars', 'arrayBrandsCount'));
 
+    }
+
+
+    public function showModelFilter($brandId)
+    {
+        if ($brandId) {
+            $models = Car::where(['brand_id' => $brandId])->pluck('model');
+        } else {
+            $models = Car::pluck('model');
+        }
+        return json_encode($models);
     }
 }
 
