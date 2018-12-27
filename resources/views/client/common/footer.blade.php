@@ -290,8 +290,8 @@
 				<div class="ml-md-auto">
 				    <div class="navbar-nav">
 				      <a class="nav-item nav-link {{ Request::is('/') ? 'active' : null }}" href="{{ url('/') }}">@lang('navigation.nav-link1')</a>
-				      <a class="nav-item nav-link {{ Request::is('advantages') ? 'active' : null }}" href="{{ url('advantages') }}">@lang('advantages.title')</a>
-				      <a class="nav-item nav-link {{ Request::is('about') ? 'active' : null }}" href="{{ url('about') }}">@lang('about.title')</a>
+				      <a class="nav-item nav-link {{ Request::is('advantages') ? 'active' : null }}" href="{{ route ('advantages') }}">@lang('advantages.title')</a>
+				      <a class="nav-item nav-link {{ Request::is('about') ? 'active' : null }}" href="{{ route ('about') }}">@lang('about.title')</a>
 				      <a class="nav-item nav-link {{ Request::is('') ? 'active' : null }} toContacts" href="#">@lang('navigation.nav-link4')</a>
 				    </div>
 				</div>

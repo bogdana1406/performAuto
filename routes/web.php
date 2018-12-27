@@ -103,8 +103,11 @@ Route::group(['prefix' => App\Http\Middleware\LocaleMiddleware::getLocale()], fu
 
     Route::get('cars', 'DisplayConrtoller@cars')->name('cars');
 
+
+
     Route::post('filter-cars', 'DisplayConrtoller@showResultFilter')->name('carsFilter');
+
 });
 
-
+Route::get('filter-brands/{brandId}', 'DisplayConrtoller@showModelFilter')->name('modelFilter');
 
