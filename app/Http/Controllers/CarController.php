@@ -34,7 +34,7 @@ class CarController extends Controller
         $small_w = ($data['small_w'] && ($data['small_w']>0)) ? (int)$data['small_w']:800;
         $medium_h = ($data['medium_h'] && ($data['medium_h']>0)) ? (int)$data['medium_h']:900;
         $medium_w = ($data['medium_w'] && ($data['medium_w']>0)) ? (int)$data['medium_w']:1600;
-       // dd($small_h, $small_w, $medium_h, $medium_w);
+
 
         if($request->hasFile('image')){
             $image_tmp = Input::file('image');
@@ -74,11 +74,9 @@ class CarController extends Controller
         public function editCar(RequestValidateCar $request, $id = null)
         {
             $data = $request->all();
-            //dd($data);
             $car = Car::find($id);
             $old_image = $car->image;
 
-            //dd($old_image);
             $medium_h = ($data['medium_h'] && ($data['medium_h']>0)) ? (int)$data['medium_h']:900;
             $medium_w = ($data['medium_w'] && ($data['medium_w']>0)) ? (int)$data['medium_w']:1600;
             $small_h = ($data['small_h'] && ($data['small_h']>0)) ? (int)$data['small_h']:450;
@@ -114,7 +112,7 @@ class CarController extends Controller
 //                $small_w = ($data['small_w'] && ($data['small_w']>0)) ? (int)$data['small_w']:300;
 //            }
 
-            //dd($medium_h, $medium_w, $small_h, $small_w);
+
 
 
             if($request->hasFile('image')){
@@ -210,7 +208,7 @@ class CarController extends Controller
 
                 if($car) {
                     $carsImageRecords = $car->carsImage()->pluck('filename')->toArray();
-                    //dd($carsImageRecords);
+
                     foreach($carsImageRecords as $carsImageRecord){
                     $existsLarge = Storage::exists('files/images/carsGallery/large/'.$carsImageRecord);
                     if($existsLarge){

@@ -2,16 +2,16 @@
 
 return [
 
-    'nav-link1' => 'stock',
-    'nav-link2' => 'advantages',
-    'nav-link3' => 'about us',
-    'nav-link4' => 'contacts',
-    'dropdown-link1' => 'show all',
-    'dropdown-link2' => 'bentley',
-    'dropdown-link3' => 'bmw',
-    'dropdown-link4' => 'honda',
-    'dropdown-link5' => 'renge rover',
-    'dropdown-link6' => 'audi',
-    'dropdown-link7' => 'vw'
+    'nav-link1' => 'Voorraad',
+    'nav-link2' => 'Voordelen',
+    'nav-link3' => 'Over ons',
+    'nav-link4' => 'Contacten',
+    'dropdown-link1' => 'Toon alles',
+    'dropdown-link2' => 'Bentley',
+    'dropdown-link3' => 'BMW',
+    'dropdown-link4' => 'Honda',
+    'dropdown-link5' => 'Land Rover',
+    'dropdown-link6' => 'Audi',
+    'dropdown-link7' => 'VW'
 
 ];

@@ -23,6 +23,10 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function(){
     Route::get('/check-pwd', 'AdminController@checkPassword');
     Route::match(['get', 'post'], '/update-pwd', 'AdminController@updatePassword');
 
+    //Courses
+    Route::get('/create-courses', 'CourseController@createCourse');
+    Route::get('/view-courses', 'CourseController@viewCourses');
+    Route::post('/edit-courses', 'CourseController@editCourse');
 
     //brands Route (Admin)
 
@@ -83,31 +87,38 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function(){
 
 
 Route::get('/', function () {
-    return redirect('/'. App\Http\Middleware\LocaleMiddleware::$mainLanguage);
+    return redirect('/'. App\Http\Middleware\LocaleMiddleware::$mainLanguage.'/'.App\Http\Middleware\CurrencyMiddleware::$mainCurrency);
 });
 
 Route::get('setlocale/{lang}', 'SetLocaleController@setLang')->name('setlocale');
 
+Route::get('setcurrency/{curr}', 'SetCurrencyController@setCurr')->name('setcurrency');
 
 Route::group(['prefix' => App\Http\Middleware\LocaleMiddleware::getLocale()], function(){
 
-    Route::get('/', 'DisplayConrtoller@home')->name('home');
+    Route::group(['prefix' => App\Http\Middleware\CurrencyMiddleware::getCurrency()], function() {
 
-    Route::get('home', 'DisplayConrtoller@home')->name('home');
+        Route::get('/', 'DisplayConrtoller@home')->name('home');
 
-    Route::get('advantages', 'DisplayConrtoller@advantages')->name('advantages');
+        Route::get('home', 'DisplayConrtoller@home')->name('home');
 
-    Route::get('about', 'DisplayConrtoller@about')->name('about');
+        Route::get('advantages', 'DisplayConrtoller@advantages')->name('advantages');
 
-    Route::get('car/{id}', 'DisplayConrtoller@car')->name('car');
+        Route::get('about', 'DisplayConrtoller@about')->name('about');
 
-    Route::get('cars', 'DisplayConrtoller@cars')->name('cars');
+        Route::get('car/{id}', 'DisplayConrtoller@car')->name('car');
 
+        Route::get('cars', 'DisplayConrtoller@cars')->name('cars');
 
+        Route::get('filter-cars', 'DisplayConrtoller@showResultFilter')->name('carsFilter');
 
-    Route::post('filter-cars', 'DisplayConrtoller@showResultFilter')->name('carsFilter');
+        Route::post('filter-cars', 'DisplayConrtoller@showResultFilter');
+
+    });
 
 });
 
-Route::get('filter-brands/{brandId}', 'DisplayConrtoller@showModelFilter')->name('modelFilter');
+Route::get('filter-brands', 'DisplayConrtoller@showModelFilter')->name('modelFilter');
+
+
 

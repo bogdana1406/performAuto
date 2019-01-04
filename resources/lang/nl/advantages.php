@@ -2,13 +2,13 @@
 
 return [
 
-	'title' => 'Advantages',
-	'features-title' => 'Become our client and enjoy the service of premium class:',
-	'features-quote' => 'You come as a guest and you leave as our friend',
-	'features1' => 'We well know the business and tendencies of the automobile market. Therefore, we offer only modern and reliable  models that have proven themselves in operation and will be in demand in the secondary market.',
-	'features2' => 'For each car in our catalog operates a dealer program of warranty support for 12 months.',
-	'features3' => 'All presented cars have been trained and maintained and are ready to please their new owner.',
-	'features4' => 'We will take care of your old car on the program of trading at favorable conditions for you.',
-	'features5' => 'The main credo in the business for Performauto is the reputation of the company and individual attention to each client. Come to us for a test drive today and you will definitely recommend us to your friends tomorrow!'
+	'title' => 'Voordelen',
+	'features-title' => 'Word onze klant en geniet van de service van premiumklasse:',
+	'features-quote' => 'Je komt als gast en je vertrekt als onze vriend',
+	'features1' => 'We goed kennen de business en tendensen van de markt voor auto\'s. Daarom bieden wij alleen moderne en betrouwbare modellen die zich hebben bewezen in werking en zal worden in de vraag op de secundaire markt.',
+	'features2' => 'Voor elke auto in onze catalogus exploiteert een dealer programma van de garantie steun voor 12 maanden.',
+	'features3' => 'Alle gepresenteerde auto\'s zijn getraind en onderhouden en zijn klaar om hun nieuwe eigenaar te behagen.',
+	'features4' => 'Wij zorgen voor uw oude auto voor het handelsprogramma tegen gunstige voorwaarden voor u.',
+	'features5' => 'Het belangrijkste credo in de business voor Performauto is de reputatie van het bedrijf en individuele aandacht voor elke klant. Kom vandaag naar ons toe voor een proefrit en je zult ons zeker morgen bij je vrienden aanbevelen!'
 
 ];

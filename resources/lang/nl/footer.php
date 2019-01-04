@@ -2,8 +2,8 @@
 
 return [
 
-    'contacts1' => 'Address',
-    'contacts2' => 'Contacts',
+    'contacts1' => 'Adres',
+    'contacts2' => 'Contacten',
     'street' => 'Roeselarestraat',
 	'city' => 'Ledegem', 
 	'country' => 'Belgium',

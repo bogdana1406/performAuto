@@ -2,7 +2,7 @@
 
 return [
 
-    'contacts1' => 'Address',
+    'contacts1' => 'Adresse',
     'contacts2' => 'Contacts',
     'street' => 'Roeselarestraat',
 	'city' => 'Ledegem', 

@@ -2,10 +2,10 @@
 
 return [
 
-	'title' => 'Send us Yuor information',
-	'name' => 'Your name',
-	'phone' => 'Your phone number',
-	'email' => 'Your email address',
-	'text' => 'Your message',
-	'submit' => 'submit'
+	'title' => 'Envoyez-nous vos informations',
+	'name' => 'Votre nom',
+	'phone' => 'Votre numéro de téléphone',
+	'email' => 'Votre adresse email',
+	'text' => 'Votre message',
+	'submit' => 'Soumettre'
 ];

@@ -3,16 +3,16 @@
 return [
 
     'nav-link1' => 'stock',
-    'nav-link2' => 'advantages',
-    'nav-link3' => 'about us',
+    'nav-link2' => 'avantages',
+    'nav-link3' => 'à propos de nous',
     'nav-link4' => 'contacts',
-    'dropdown-link1' => 'show all',
-    'dropdown-link2' => 'bentley',
-    'dropdown-link3' => 'bmw',
-    'dropdown-link4' => 'honda',
-    'dropdown-link5' => 'renge rover',
-    'dropdown-link6' => 'audi',
-    'dropdown-link7' => 'vw',
-    'navbar-button' => 'order',
+    'dropdown-link1' => 'Montre tout',
+    'dropdown-link2' => 'Bentley',
+    'dropdown-link3' => 'BMW',
+    'dropdown-link4' => 'Honda',
+    'dropdown-link5' => 'Land Rover',
+    'dropdown-link6' => 'Audi',
+    'dropdown-link7' => 'VW',
+    'navbar-button' => 'Classer',
 
 ];

@@ -2,8 +2,8 @@
 
 return [
 
-    'select1' => 'Select brand',
-    'select2' => 'Choose a model',
-    'select3' => 'Year of model',
-    'trackbar_title' => 'Prise',
+    'select1' => 'Selecteer merk',
+    'select2' => 'Kies een model',
+    'select3' => 'Jaar van het model',
+    'trackbar_title' => 'Prijs',
 ];

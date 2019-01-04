@@ -11,7 +11,7 @@
       	{{$carDetails->name}}
       </h2>
       <div class="car-price">
-      	<span>{{$carDetails->price}}</span><span class="currency">&euro;</span>
+      	<span>{{($carDetails->price) * $cours_cur}}</span><span class="currency">{{' '.$curr}}</span>
       </div>
     </div>
     <nav class="mb-5" aria-label="breadcrumb">
@@ -54,7 +54,7 @@
         </div>
         <div class="alternate-car">
           <p class="mb-0">{{$carDetails->name}}</p>
-          <span class="alt-price">{{$carDetails->price}} <span class="currency">&euro;</span></span>
+          <span class="alt-price">{{($carDetails->price) * $cours_cur}} <span class="currency">{{' '.$curr}}</span></span>
         </div>
         <button class="btn btn-red btn-large border-0 align-self-start ml-0 mt-3 px-4 text-white" data-toggle="modal" data-target="#contactModal">@lang('car_details.buy')</button>
       </div>

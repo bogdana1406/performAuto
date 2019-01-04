@@ -2,9 +2,9 @@
 
 return [
 
-    'count-box1' => 'More than 500 cars sold',
-    'count-box2' => 'Profit up to 70% from the new car',
-    'count-box3' => '12 mon. guarantee for each car',
-    'count-box4' => 'More than 50 warranty repairs'
+    'count-box1' => 'Plus de 500 voitures vendues',
+    'count-box2' => 'Profitez jusqu\'à 70% de la nouvelle voiture',
+    'count-box3' => '12 mois garantie pour chaque voiture',
+    'count-box4' => 'Plus de 50 réparations sous garantie'
 
 ];

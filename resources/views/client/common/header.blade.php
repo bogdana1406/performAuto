@@ -16,19 +16,20 @@
 				{{-- !contacts --}}
 				{{-- social --}}
 				<div class="social">
-					<a href="#" class="d-inline-block rounded-circle text-center"><i class="fa fa-facebook"></i></a>
-					<a href="#" class="d-inline-block rounded-circle text-center"><i class="fa fa-instagram"></i></a>
+					<a href="https://www.facebook.com/PerformAuto" class="d-inline-block rounded-circle text-center"><i class="fa fa-facebook"></i></a>
+					<a href="https://www.instagram.com/perform.auto/" class="d-inline-block rounded-circle text-center"><i class="fa fa-instagram"></i></a>
 				</div>
 				{{-- !social --}}
 				{{-- top buttons --}}
 				<div class="top-buttons">
 				  <div class="btn-group" role="group">
 				  	<button id="btnGroupDrop1" type="button" class="btn btn-outline dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				    usd
+				    {{$currency}}
 				    </button>
 				    <div class="dropdown-menu text-center" aria-labelledby="btnGroupDrop1">
-				    	<a class="dropdown-item" href="#">eur</a>
-				    	<a class="dropdown-item" href="#">usd</a>
+						<a class="dropdown-item" href="<?= route('setcurrency', ['curr' => 'eur']) ?>">eur</a>
+						<a class="dropdown-item" href="<?= route('setcurrency', ['curr' => 'usd']) ?>">usd</a>
+						<a class="dropdown-item" href="<?= route('setcurrency', ['curr' => 'btc']) ?>">btc</a>
 				    </div>
 				  </div>
 					<div class="btn-group" role="group">

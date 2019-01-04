@@ -9,9 +9,6 @@
 						@foreach ($carFilterBrands as $carFilterBrand)
 							<option value="{{ $carFilterBrand->id }}">{{ $carFilterBrand->name }}</option>
 						@endforeach
-						{{--@foreach ($carFilterBrands as $id=>$name)--}}
-							{{--<option value="{{ $id }}">{{ $name }}</option>--}}
-						{{--@endforeach--}}
 					</select>
 				</div>
 			</div>
@@ -38,9 +35,10 @@
 				</div>
 			</div>
 			<div class="trackbar col">
-				<span class="trackbar-title">@lang('main_search.trackbar_title')</span>
+				<span class="trackbar-title">@lang('main_search.trackbar_title') ({{$curr}})</span>
 				<input value="" name="priceBar" id="priceBar" type="text"/>
 			</div>
+
 			<div class="col-auto">
 				<button class="btn btn-red btn-large border-0" type="submit">search</button>
 			</div>
@@ -48,8 +46,8 @@
 	</div>
 </div>
 <script>
-	var minPrice = +"{{$carFilterPriceMin}}"||0;
-	var maxPrice = +"{{$carFilterPriceMax}}"||100;
+	var minPrice = +"{{$carFilterPriceMin * $cours_cur}}"||0;
+	var maxPrice = +"{{$carFilterPriceMax * $cours_cur}}"||100;
     $("#priceBar").slider({ min: minPrice, max: maxPrice, range: true, value: [minPrice, maxPrice] });
 
 </script>

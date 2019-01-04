@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Http\Controllers\DisplayConrtoller;
+use App\Http\Middleware\CurrencyMiddleware;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
@@ -25,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
             View::share('arrayBrandsCount', $data['arrayBrandsCount']);
             View::share('countAllCars', $data['countAllCars']);
             View::share('activBrand', $data['activBrand']);
+            View::share('currency', CurrencyMiddleware::getCurrency());
+            View::share('curr', mb_strtoupper(CurrencyMiddleware::getCurrency()));
         }
     }
 

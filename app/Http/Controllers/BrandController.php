@@ -20,7 +20,7 @@ class BrandController extends Controller
           $brand->name = $data['brand_name'];
           $brand->save();
           return redirect('/admin/view-brands')->with('flash_massage_success', 'Brands added Successfully');
-//           //echo "<pre>"; print_r($data); die;
+
     }
 
     public function showEditBrand($id)
@@ -33,10 +33,10 @@ class BrandController extends Controller
     {
 
             $data = $request->all();
-            //dd($data);
+
             Brand::where(['id'=>$id])->update(['name'=>$data['brand_name']]);
             return redirect('/admin/view-brands')->with('flash_massage_success', 'Brands Update Successfully');
-           //echo "<pre>"; print_r($validatedData); die;
+
     }
 
     public function deleteBrand($id = null){

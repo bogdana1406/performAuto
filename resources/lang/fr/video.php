@@ -2,6 +2,6 @@
 
 return [
 
-    'title' => 'Our goal is to help you!'
+    'title' => 'Notre objectif est de vous aider!'
 
 ];

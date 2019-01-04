@@ -62,7 +62,8 @@ var customSelect = function () {
                 for (i = 0; i < s.length; i++) {
                     if (s.options[i].innerHTML == this.innerHTML) {
 
-                        onChangeSelect(s.options[i].value);
+                        onChangeSelect(s.name, s.options[i].value);
+                        //onChangeSelectYear(s.options[i].value);
 
                         s.selectedIndex = i;
                         h.innerHTML = this.innerHTML;
@@ -115,23 +116,30 @@ var customSelect = function () {
 
     customSelect();
 
-    function onChangeSelect(idBrand) {
+    function onChangeSelect(name, val) {
+
+        var t = (selectName,data) => {
+            var defaultOption = $(`select[name=${selectName}]`).children().first();
+
+                    $(`select[name=${selectName}]`).empty();
+
+                    $(`select[name=${selectName}]`).append(defaultOption);
+
+                    $.each(data, function (key, val) {
+                        $(`select[name=${selectName}]`).append('<option value="' + val + '">' + val + '</option>')
+                    });
+        }
+
         $.ajax({
-            url: '/filter-brands/'+idBrand,
+            url: '/filter-brands?name='+ name + '&value=' + val,
             type: "GET",
             dataType: "json",
 
             success: function(data) {
-                if (data.length) {
-                    var defaultOption = $('select[name="model"]').children().first();
-
-                    $('select[name="model"]').empty();
-
-                    $('select[name="model"]').append(defaultOption);
-
-                    $.each(data, function (key, val) {
-                        $('select[name="model"]').append('<option value="' + val + '">' + val + '</option>')
-                    });
+                let {models, year} = data;
+                if (models.length && year) {
+                   t("model", models);
+                   t("year", year);
                 }
                 customSelect();
             }

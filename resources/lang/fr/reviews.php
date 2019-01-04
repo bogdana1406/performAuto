@@ -2,8 +2,8 @@
 
 return [
 
-    'title' => 'Reviews',
-    'sub-title' => 'You come as a guest and you leave as our friend!',
-    'fb-button' => 'See more reviews on Facebook'
+    'title' => 'Avis',
+    'sub-title' => 'Vous venez en tant qu\'invité et vous partez comme notre ami!',
+    'fb-button' => 'Voir plus d\'avis sur Facebook'
 
 ];
