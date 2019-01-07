@@ -2,8 +2,8 @@
 
 return [
 
-    'title' => 'Latest offers',
-    'sub-title' => 'Best Car Details',
-    'full_gallery_title' => 'Available cars'
+    'title' => 'Laatste aanbiedingen',
+    'sub-title' => 'Beste autodetails',
+    'full_gallery_title' => 'Beschikbare auto\'s'
    
 ];

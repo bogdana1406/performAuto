@@ -41,7 +41,7 @@ class CarsImageController extends Controller
                     'filename' => $filepath
                 ];
             }
-            // dd($data);
+
             CarsImage::insert($data);
             return redirect('/admin/view-images-table/');
         }

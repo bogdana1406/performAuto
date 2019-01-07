@@ -96,7 +96,7 @@
 						    	</div>
 						    	<div class="row">
 						    		<div class="col">
-						    			<span class="car-price">{{$car->price}}</span><span class="currency">&euro;</span>
+						    			<span class="car-price">{{($car->price) * $cours_cur}}</span><span class="currency">{{' '.$curr}}</span>
 						    		</div>
 						    		<div class="col text-right">
 						    			<span class="mileage">{{$car->mileage}} km</span>

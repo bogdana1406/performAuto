@@ -6,11 +6,23 @@ use App\Brand;
 use App\Car;
 use App\CarsImage;
 use App\Enums\BodyTypes;
+use App\Http\Middleware\CurrencyMiddleware;
 use App\Review;
 use Illuminate\Http\Request;
 
 class DisplayConrtoller extends Controller
 {
+
+        private function getCourse() {
+        $currency = CurrencyMiddleware::getCurrency();
+        $curr = mb_strtoupper($currency);
+        $data = file_get_contents('https://min-api.cryptocompare.com/data/price?fsym=EUR&tsyms='.$curr);
+        $courses = json_decode($data, true);
+        $course = $courses[$curr];
+        return $course;
+    }
+
+
     public function getHeaderParams(){
         $cars = Car::orderBy('id', 'desc')->get();
         $carBrands = Brand::has('car')->get();
@@ -31,14 +43,10 @@ class DisplayConrtoller extends Controller
 
     public function home(){
 
+        $cours_cur = $this->getCourse();
         $cars = Car::orderBy('id', 'desc')->get();
         $reviews = Review::orderBy('id', 'desc')->get();
-        //$carFilterBrands = Brand::has('car')->pluck('name', 'id');
         $carFilterBrands = Brand::get();
-//        foreach ($carFilterBrands as $carFilterBrand){
-//            dd($carFilterBrand->id);
-//        }
-        //dd($carFilterBrands);
         $carFilterModels = array_unique(Car::pluck('model')->toArray());
         $carFilterYears = array_unique(Car::pluck('year')->toArray());
         $carFilterPrice = Car::pluck('price')->toArray();
@@ -46,7 +54,7 @@ class DisplayConrtoller extends Controller
         $carFilterPriceMax = $carFilterPrice ? max($carFilterPrice) : 100000;
 
         return view('client.home')->with(compact('carDetails', 'cars',
-            'carFilterBrands', 'carFilterModels', 'carFilterYears', 'carFilterPriceMin', 'carFilterPriceMax', 'reviews'));
+            'carFilterBrands', 'carFilterModels', 'carFilterYears', 'carFilterPriceMin', 'carFilterPriceMax', 'reviews', 'cours_cur'));
     }
 
     public function advantages(){
@@ -65,6 +73,8 @@ class DisplayConrtoller extends Controller
 
 
     public function car($id){
+
+        $cours_cur = $this->getCourse();
         $bodyTypes = BodyTypes::getLabels();
         $arrayBrandsCount = [];
         $carDetails = Car::find($id);
@@ -79,13 +89,13 @@ class DisplayConrtoller extends Controller
         }
 
         $carImagesGallery = CarsImage::where(['car_id'=>$id])->get();
-        //dd(($carImagesGallery)->isEmpty());
+
         return view('client.car')->with(compact('carDetails', 'cars',
-            'carBrands', 'countAllCars', 'arrayBrandsCount', 'carImagesGallery', 'bodyTypes'));
+            'carBrands', 'countAllCars', 'arrayBrandsCount', 'carImagesGallery', 'bodyTypes', 'cours_cur'));
     }
 
     public function cars(Request $request){
-
+        $cours_cur = $this->getCourse();
         $activBrand = $request->brand??'all';
         $carBrands = Brand::has('car')->get();
         $cars = Car::orderBy('id', 'desc')->get();
@@ -96,12 +106,14 @@ class DisplayConrtoller extends Controller
             $arrayBrandsCount[$carBrand->name] = $carBrand->car()->count();
         }
 
-        return view('client.cars-gallery')->with(compact('cars', 'carBrands', 'countAllCars', 'arrayBrandsCount', 'activBrand'));
+        return view('client.cars-gallery')->with(compact('cars', 'carBrands',
+            'countAllCars', 'arrayBrandsCount', 'activBrand', 'cours_cur'));
     }
 
 
     public function showResultFilter(Request $request, Car $car){
 
+        $cours_cur = $this->getCourse();
         $arrayBrandsCount = [];
         $data = $request->all();
         $priceString = $request->input('priceBar');
@@ -119,30 +131,45 @@ class DisplayConrtoller extends Controller
             $car->where('year', $request->input('year'))->get();
         }
 
-        list($priceBarMin, $priceBarMax) = explode(",", $priceString);
 
         if($request->has('priceBar')&&($data['priceBar']!="")){
-            $car->where('price', '>=' , (int)$priceBarMin)->where('price', '<=' , (int)$priceBarMax)->get();
+            list($priceBarMin, $priceBarMax) = explode(",", $priceString);
+            $car->where('price', '>=' , ((int)$priceBarMin)/$cours_cur)
+                ->where('price', '<=' , ((int)$priceBarMax)/$cours_cur)->get();
         }
 
         $cars = $car->get();
-
-        $carBrands = $data['brand_id'] ? Brand::whereId($data['brand_id'])->get() : Brand::has('car')->get();
+        $carBrands = isset($data['brand_id']) ? Brand::whereId($data['brand_id'])->get() : Brand::has('car')->get();
         $countAllCars = $cars->count();
 
-        return view('client.cars-gallery')->with(compact('cars', 'carBrands', 'countAllCars', 'arrayBrandsCount'));
+        return view('client.cars-gallery')->with(compact('cars', 'carBrands', 'countAllCars', 'arrayBrandsCount', 'cours_cur'));
 
     }
 
 
-    public function showModelFilter($brandId)
+    public function showModelFilter(Request $request)
     {
-        if ($brandId) {
-            $models = Car::where(['brand_id' => $brandId])->pluck('model');
-        } else {
-            $models = Car::pluck('model');
+        $data = $request->all();
+
+        switch ($data['name']) {
+            case 'brand_id':
+                $cars = Car::where(['brand_id' => $data['value']])->select('model', 'year')->get();
+                $result['models'] = array_unique($cars->pluck('model')->toArray());
+                $result['year'] = array_unique($cars->pluck('year')->toArray());
+                break;
+            case 'model':
+                $result['models'] = [];
+                $result['year'] = Car::where(['model' => $data['value']])->pluck('year');
+                break;
+            default:
+                $result['models'] = array_unique(Car::pluck('model')->toArray());
+                $result['year'] = array_unique(Car::pluck('year')->toArray());
+
+
         }
-        return json_encode($models);
+
+        return json_encode($result);
     }
+
 }
 

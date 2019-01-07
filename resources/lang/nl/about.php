@@ -2,11 +2,10 @@
 
 return [
 
-	'title' => 'About Us',
-    'hero-sub-title' => 'Search Cars',
-    'features-title' => 'PerformAuto is an independent distributor
- specializing in top models of reliable brands.',
-    'features-slogan' => '	PerformAuto is an independent car dealer that specializes in selling the best models of famous brands. Due to the exceptional attitude to reputation, our company for a short time was able to enter the leaders of its segment.',
-    'features-quote' => 'You come as a guest and you leave as our friend'
+	'title' => 'Over ons',
+    'hero-sub-title' => 'Zoeken Cars',
+    'features-title' => 'PerformAuto is een onafhankelijke distributeur die gespecialiseerd is in topmodellen van betrouwbare merken.',
+    'features-slogan' => 'PerformAuto is een onafhankelijke autohandelaar die is gespecialiseerd in de verkoop van de beste modellen van bekende merken. Vanwege de uitzonderlijke reputatie ten opzichte van de reputatie, kon ons bedrijf korte tijd de leiders van zijn segment betreden.',
+    'features-quote' => 'Je komt als gast en je vertrekt als onze vriend'
 
 ];

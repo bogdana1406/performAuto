@@ -76,6 +76,7 @@
       .tooltip-main {
         &::before, .tooltip-inner {
           color: $text-red;
+          content: '';
         }
       }
     }
@@ -114,6 +115,7 @@
       .tooltip-main {
         &::before, .tooltip-inner {
           color: $text-red;
+          content: '';
         }
       }
     }

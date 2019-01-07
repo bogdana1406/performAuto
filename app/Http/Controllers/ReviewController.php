@@ -44,7 +44,6 @@ class ReviewController extends Controller
     public function editReview(RequestValidateReview $request, $id = null)
     {
           $data = $request->all();
-          //dd($data);
           $review = Review::find($id);
           $old_photo = $review->customer_photo;
           if($request->hasFile('photo'))

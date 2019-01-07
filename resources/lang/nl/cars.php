@@ -2,6 +2,6 @@
 
 return [
 
-	'title' => 'Cars',
+	'title' => 'Autos',
 
 ];

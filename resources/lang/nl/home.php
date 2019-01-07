@@ -2,12 +2,12 @@
 
 return [
 
-	'title' => 'Home',
-    'hero-title' => 'Only performance cars',
-    'search-title' => 'Search Cars',
-    'features-title' => 'PerformAuto is an independent distributor
- specializing in top models of reliable brands.',
-    'features-slogan' => 'Our key to success is to meet the needs of every customer. Everyone is welcome for a coffee, advice or help.',
-    'features-quote' => 'You come as a guest and you leave as our friend'
+	'title' => 'Startpagina',
+    'hero-title' => 'Alleen prestatieauto\'s',
+    'search-title' => 'Auto\'s zoeken',
+    'features-title' => 'PerformAuto is een onafhankelijke distributeur
+    gespecialiseerd in topmodellen van betrouwbare merken.',
+    'features-slogan' => 'Onze sleutel tot succes is om tegemoet te komen aan de behoeften van elke klant. Iedereen is welkom voor een kopje koffie, advies of hulp.',
+    'features-quote' => 'Je komt als gast en je vertrekt als onze vriend'
 
 ];
