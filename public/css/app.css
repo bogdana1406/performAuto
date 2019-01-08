@@ -11574,6 +11574,7 @@ header .dropdown-toggle:after {
 .search-white .search .trackbar .tooltip-main::before,
 .search-white .search .trackbar .tooltip-main .tooltip-inner {
   color: #c92223;
+  content: '';
 }
 
 .search-white .search .trackbar-title {
@@ -11823,18 +11824,95 @@ header .dropdown-toggle:after {
   border: 0 none;
 }
 
-.gallery .card a {
+.gallery .card a.to-car {
+  display: block;
   color: #6a6969;
   text-decoration: none;
 }
 
-.gallery .card:hover {
+.gallery .card a.to-car .card-img-top {
+  position: relative;
+}
+
+.gallery .card a.to-car .card-img-top::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  -webkit-transition: all 0.25s ease-out;
+  transition: all 0.25s ease-out;
+}
+
+.gallery .card a.to-car .card-img-top .icon-wrap {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  z-index: 120;
+  opacity: 0;
+  -webkit-transition: all 0.25s ease-out;
+  transition: all 0.25s ease-out;
+}
+
+.gallery .card a.to-car .card-img-top .icon-wrap::before,
+.gallery .card a.to-car .card-img-top .icon-wrap::after {
+  content: '';
+  position: absolute;
+  height: 42px;
+  width: 42px;
+  margin: 10px;
+}
+
+.gallery .card a.to-car .card-img-top .icon-wrap::before {
+  left: 0;
+  border-left: 1px solid #c92223;
+  border-top: 1px solid #c92223;
+}
+
+.gallery .card a.to-car .card-img-top .icon-wrap::after {
+  right: 0;
+  bottom: 0;
+  border-right: 1px solid #c92223;
+  border-bottom: 1px solid #c92223;
+}
+
+.gallery .card a.to-car .card-img-top .icon-wrap .img-icon {
+  -ms-flex-item-align: center;
+      align-self: center;
+  width: 32px;
+  height: 32px;
+}
+
+.gallery .card a.to-car:hover {
   -webkit-box-shadow: 0 0 30px #dedede;
           box-shadow: 0 0 30px #dedede;
 }
 
-.gallery .card:hover .card-img-top::before {
+.gallery .card a.to-car:hover .card-img-top::before {
   opacity: .5;
+}
+
+.gallery .card a.to-car:hover .icon-wrap::before {
+  opacity: 1;
+}
+
+.gallery .card a.to-car:hover .img-icon {
+  opacity: 1;
+}
+
+.gallery .card a.to-car:hover .icon-wrap {
+  opacity: 1;
 }
 
 .gallery .card .card-title {
@@ -11843,6 +11921,10 @@ header .dropdown-toggle:after {
   font-weight: 700;
   color: #0f0f0f;
   margin-bottom: 0;
+  padding-right: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .gallery .card .date {
@@ -12892,6 +12974,7 @@ a.show-modal:hover .search-icon {
 
 .hero .hero-title h2 {
   color: inherit;
+  text-shadow: 0 0 100px #0f0f0f, 0 0 70px #0f0f0f, 0 0 50px #0f0f0f, 0 0 30px #0f0f0f;
   font-size: 2.57rem;
   margin-bottom: .5rem;
   font-weight: inherit;

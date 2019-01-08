@@ -22,13 +22,13 @@
 						    <div class="modal-content">
 						      <div class="modal-header">
 						        <h5 class="modal-title" id="contactModalLabel">@lang('contact_form.title')</h5>
-						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						        <button type="button" class="close mt-2" data-dismiss="modal" aria-label="Close">
 						          <span aria-hidden="true">&times;</span>
 						        </button>
 						      </div>
 						      <div class="modal-body">
 						        <form action="">
-						            <input type="text" name="name" class="form-control" placeholder="@lang('contact_form.name')">
+						            <input type="text" name="name" autocomplete="off" class="form-control" placeholder="@lang('contact_form.name')">
 						            <input type="number" class="form-control" name="phone" placeholder="@lang('contact_form.phone')">
 						            <input type="email" name="email" class="form-control" placeholder="@lang('contact_form.email')">
 						            <textarea class="form-control" placeholder="@lang('contact_form.text')"></textarea>
@@ -290,8 +290,8 @@
 				<div class="ml-md-auto">
 				    <div class="navbar-nav">
 				      <a class="nav-item nav-link {{ Request::is('/') ? 'active' : null }}" href="{{ url('/') }}">@lang('navigation.nav-link1')</a>
-				      <a class="nav-item nav-link {{ Request::is('advantages') ? 'active' : null }}" href="{{ route ('advantages') }}">@lang('advantages.title')</a>
-				      <a class="nav-item nav-link {{ Request::is('about') ? 'active' : null }}" href="{{ route ('about') }}">@lang('about.title')</a>
+				      <a class="nav-item nav-link {{ Request::is('advantages') ? 'active' : null }}" href="{{ route('advantages') }}">@lang('advantages.title')</a>
+				      <a class="nav-item nav-link {{ Request::is('about') ? 'active' : null }}" href="{{ route('about') }}">@lang('about.title')</a>
 				      <a class="nav-item nav-link {{ Request::is('') ? 'active' : null }} toContacts" href="#">@lang('navigation.nav-link4')</a>
 				    </div>
 				</div>

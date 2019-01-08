@@ -54,7 +54,7 @@
         </div>
         <div class="alternate-car">
           <p class="mb-0">{{$carDetails->name}}</p>
-          <span class="alt-price">{{($carDetails->price) * $cours_cur}} <span class="currency">{{' '.$curr}}</span></span>
+          <span class="alt-price ">{{($carDetails->price) * $cours_cur}} <span class="currency {{' '.$curr}}">{{' '.$curr}}</span></span>
         </div>
         <button class="btn btn-red btn-large border-0 align-self-start ml-0 mt-3 px-4 text-white" data-toggle="modal" data-target="#contactModal">@lang('car_details.buy')</button>
       </div>
@@ -70,9 +70,14 @@
             <li data-thumb="{{Storage::exists('/files/images/carsGallery/small/'.$carImage->filename) ?
              asset('files/images/carsGallery/small/'.$carImage->filename) :
               asset('/images/default-gallery-small.jpeg')}}" class="active">
-              <img alt="Image 1 Title" src="{{ Storage::exists('/files/images/carsGallery/large/'.$carImage->filename) ?
-              asset('files/images/carsGallery/large/'.$carImage->filename) :
-               asset('/images/default-gallery-large.jpeg') }}" class="img-fluid">
+              <a href="#" class="show-modal" data-toggle="modal" data-target="#car-img">
+                <img alt="Image 1 Title" src="{{ Storage::exists('/files/images/carsGallery/large/'.$carImage->filename) ?
+                      asset('files/images/carsGallery/large/'.$carImage->filename) :
+                      asset('/images/default-gallery-large.jpeg') }}" class="img-fluid">
+              </a>
+
+              
+
             </li>
             @endforeach
             @endif
@@ -80,6 +85,20 @@
           </ul>
           {{-- <ol id="sliderIndicators" class="indicators"></ol> --}}
         </div>
+      </div>
+    </div>
+  </div>
+  {{-- modal --}}
+  <div class="modal fade" id="car-img" tabindex="-1" role="dialog" aria-labelledby="car-imageLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+          <img src="{{ Storage::exists('/files/images/carsGallery/medium/'.$carImage->filename) ?
+                asset('files/images/carsGallery/medium/'.$carImage->filename) :
+                 asset('/images/default-gallery-medium.jpeg') }}" class="img-thumb" alt="car-thumb">
       </div>
     </div>
   </div>

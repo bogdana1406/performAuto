@@ -16,8 +16,8 @@
 				{{-- !contacts --}}
 				{{-- social --}}
 				<div class="social">
-					<a href="https://www.facebook.com/PerformAuto" class="d-inline-block rounded-circle text-center"><i class="fa fa-facebook"></i></a>
-					<a href="https://www.instagram.com/perform.auto/" class="d-inline-block rounded-circle text-center"><i class="fa fa-instagram"></i></a>
+					<a href="https://www.facebook.com/PerformAuto" target="_blank" class="d-inline-block rounded-circle text-center"><i class="fa fa-facebook"></i></a>
+					<a href="https://www.instagram.com/perform.auto/" target="_blank" class="d-inline-block rounded-circle text-center"><i class="fa fa-instagram"></i></a>
 				</div>
 				{{-- !social --}}
 				{{-- top buttons --}}

@@ -96,23 +96,100 @@
 		line-height: 1.2rem;
 		transition: $transition;
 		border: 0 none;
-		a {
-			color: $text-gray;
-			text-decoration: none;
-		}
-		&:hover {
-			box-shadow: 0 0 30px #dedede;
-			.card-img-top::before {
-				opacity: .5;
-			}	
 
+		//new styles
+
+		a.to-car {
+		  display: block;
+		  color: $text-gray;
+			text-decoration: none;
+		  .card-img-top {
+		  	position: relative;
+			  &::before {
+			    content: '';
+			    position: absolute;
+			    left: 0;
+			    right: 0;
+			    top: 0;
+			    bottom: 0;
+			    z-index: 100;
+			    background-color: rgba(0, 0, 0, .6);
+			    opacity: 0;
+			    transition: $transition;
+			  }
+			  .icon-wrap {
+			    position: absolute;
+			    display: flex;
+			    justify-content: center;
+			    width: 100%;
+			    top: 0;
+			    bottom: 0;
+			    z-index: 120;
+			    opacity: 0;
+			    transition: $transition;
+			    &::before,
+					&::after {
+					  content: '';
+					  position: absolute;
+					  height: 42px;
+					  width: 42px;
+					  margin: 10px;
+					}
+
+					&::before {
+					  left: 0;
+					  border-left: $border-red;
+					  border-top: $border-red;
+					}
+
+					&::after {
+					  right: 0;
+					  bottom: 0;
+					  border-right: $border-red;
+					  border-bottom: $border-red;
+					}
+			    .img-icon {
+			      align-self: center;
+			      width: 32px;
+			      height: 32px;
+			    }
+			  }
+			  &:hover {
+			    
+			  }
+			}
+			&:hover {
+				box-shadow: 0 0 30px #dedede;
+				.card-img-top::before {
+					opacity: .5;
+				}
+				.icon-wrap::before {
+			        opacity: 1;
+		    }
+		    .img-icon {
+		        opacity: 1;
+		    }
+		    .icon-wrap {
+					opacity: 1;
+		    }	
+			}
 		}
+
+// new styles		
+		a {
+			
+		}
+		
 		.card-title {
 			font-size: 1.12rem;
 			line-height: 1.15rem;
 			font-weight: 700;
 			color: $text-black;
 			margin-bottom: 0;
+			padding-right: 0;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
 		}
 		.date {
 			vertical-align: bottom;
