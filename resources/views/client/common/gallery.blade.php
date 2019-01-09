@@ -52,44 +52,42 @@
 						<div class="col-md-3" data-tag={{ $car->brand->name }}>
 					@endif
 					<div class="card">
-						<div class="card-img-top">
-							<a href="#" class="show-modal" data-toggle="modal" data-target="#car{{$car->id}}">
-								@if(!empty($car->image))
-									@if(Storage::exists('files/images/backend_images/large/'.$car->image))
-									<img src="{{ URL::asset('files/images/backend_images/large/'.$car->image) }}" class="img-thumb" alt="car-thumb">
-									@else
-									<img src="{{ URL::asset('/images/car-default.jpg') }}" class="img-thumb" alt="car-thumb">
-									@endif
-								@endif
-								@if(empty($car->image))
-										<img src="{{ URL::asset('/images/car-default.jpg') }}" class="img-thumb" alt="car-thumb">
-									@endif
-
-								{{--<img src="{{ URL::asset('/images/backend_images/cars/small/'.$car->image) }}" class="img-thumb" alt="car-thumb">--}}
-								<div class="search-icon">
-									<img src="{{ URL::asset('/images/search.png') }}" class="img-icon" alt="search">
-								</div>
-							</a>
-							<div class="modal fade" id="car{{$car->id}}" tabindex="-1" role="dialog" aria-labelledby="car{{$car->id}}Label" aria-hidden="true">
-								<div class="modal-dialog modal-dialog-centered" role="document">
-	    						<div class="modal-content">
-									   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									      <span aria-hidden="true">&times;</span>
-									    </button>
-
-									@if(Storage::exists('files/images/backend_images/large/'.$car->image))
+						<a href="{{route('car', ['id'=>$car->id])}}" class="d-block to-car">
+							<div class="card-img-top">
+									@if(!empty($car->image))
+										@if(Storage::exists('files/images/backend_images/large/'.$car->image))
 										<img src="{{ URL::asset('files/images/backend_images/large/'.$car->image) }}" class="img-thumb" alt="car-thumb">
-									@else
+										@else
 										<img src="{{ URL::asset('/images/car-default.jpg') }}" class="img-thumb" alt="car-thumb">
+										@endif
 									@endif
+									@if(empty($car->image))
+											<img src="{{ URL::asset('/images/car-default.jpg') }}" class="img-thumb" alt="car-thumb">
+										@endif
+
+									{{--<img src="{{ URL::asset('/images/backend_images/cars/small/'.$car->image) }}" class="img-thumb" alt="car-thumb">--}}
+									<div class="icon-wrap">
+										<img src="{{ URL::asset('/images/external-link.png') }}" class="img-icon" alt="read more">
 									</div>
-								</div>
+								{{-- <div class="modal fade" id="car{{$car->id}}" tabindex="-1" role="dialog" aria-labelledby="car{{$car->id}}Label" aria-hidden="true">
+									<div class="modal-dialog modal-dialog-centered" role="document">
+		    						<div class="modal-content">
+										   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										      <span aria-hidden="true">&times;</span>
+										    </button>
+
+										@if(Storage::exists('files/images/backend_images/large/'.$car->image))
+											<img src="{{ URL::asset('files/images/backend_images/large/'.$car->image) }}" class="img-thumb" alt="car-thumb">
+										@else
+											<img src="{{ URL::asset('/images/car-default.jpg') }}" class="img-thumb" alt="car-thumb">
+										@endif
+										</div>
+									</div>
+								</div> --}}
 							</div>
-						</div>
-						<div class="card-body">
-						    <a href="{{route('car', ['id'=>$car->id])}}" class="d-block">
+							<div class="card-body">
 						    	<div class="row">
-							    	<h5 class="col card-title d-inline-block">{{$car->name}}</h5>
+							    	<h5 class="col-9 card-title d-inline-block" title="{{$car->name}}">{{$car->name}}</h5>
 						    		<div class="col text-right">
 						    			<span class="date">{{$car->year}}</span>
 						    		</div>
@@ -102,8 +100,8 @@
 						    			<span class="mileage">{{$car->mileage}} km</span>
 						    		</div>
 						    	</div>
-						    </a>
 						</div>
+					</a>
 					</div>
 				</div>
 				@endforeach
