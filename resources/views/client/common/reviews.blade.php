@@ -27,5 +27,5 @@
 			</div>
 			@endforeach
 		</div>
-		<div class="d-flex justify-content-center mt-4"><a href="#" target="_blank" class="btn fb-btn">@lang('reviews.fb-button')</a></div>
+		<div class="d-flex justify-content-center mt-4"><a href="https://www.facebook.com/pg/PerformAuto/reviews" target="_blank" class="btn fb-btn">@lang('reviews.fb-button')</a></div>
 	</div>

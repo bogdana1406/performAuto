@@ -11,7 +11,7 @@
       	{{$carDetails->name}}
       </h2>
       <div class="car-price">
-      	<span>{{($carDetails->price) * $cours_cur}}</span><span class="currency">{{' '.$curr}}</span>
+      	<span><span class="fa fa-{{strtolower($curr)}}" aria-hidden="true"></span> {{($carDetails->price) * $cours_cur}}</span>
       </div>
     </div>
     <nav class="mb-5" aria-label="breadcrumb">
@@ -22,17 +22,14 @@
 		</nav>
     <div class="row pt-4">
       <div class="col-sm-6 d-flex flex-column justify-content-between">
-        <div class="car-properties row">
-          <span class="col property"><img src="/images/icon-car-seat.png" class="icon mr-2">{{$carDetails->seats}}</span>
-          <span class="col property"><img src="/images/icon-gas-station.png" class="icon mr-2">{{$carDetails->engine->name}}</span>
-          <span class="col property"><img src="/images/icon-car.png" class="icon mr-2">{{$carDetails->doors}}</span>
-          <span class="col property"><img src="/images/icon-gearshift.png" class="icon mr-2">{{$carDetails->transmission_types}}</span>
-          <span class="col property"><img src="/images/icon-certificate-shape.png" class="icon mr-2">{{$carDetails->year}}</span>
-        </div>
-
-        <div class="car-properties row">
-          <span class="col property"><img src="/images/icon-car.png" class="icon mr-2"> {{ $bodyTypes[$carDetails->body_type] }}</span>
-          <span class="col property"><img src="/images/icon-gas-station.png" class="icon mr-2">{{$carDetails->mileage}}</span>
+        <div class="car-properties d-flex justify-content-between">
+          <span class="property"><img src="/images/icon-car-seat.png" class="icon mr-2">{{$carDetails->seats}}</span>
+          <span class="property"><img src="/images/icon-gas-station.png" class="icon mr-2">{{$carDetails->engine->name}}</span>
+          <span class="property"><img src="/images/icon-car.png" class="icon mr-2">{{$carDetails->doors}}</span>
+          <span class="property"><img src="/images/icon-gearshift.png" class="icon mr-2">{{$carDetails->transmission_types}}</span>
+          <span class="property"><img src="/images/icon-certificate-shape.png" class="icon mr-2">{{$carDetails->year}}</span>
+          <span class="property"><img src="/images/icon-car.png" class="icon mr-2"> {{ $bodyTypes[$carDetails->body_type] }}</span>
+          <span class="property"><img src="/images/icon-gas-station.png" class="icon mr-2">{{$carDetails->mileage}}</span>
         </div>
         <div class="car-description d-flex flex-column justify-content-between">
           <div class="tabs">
@@ -51,19 +48,20 @@
               </div>
             </div>
           </div>
+          <div class="alternate-car">
+            <p class="mb-0">{{$carDetails->name}}</p>
+            <span class="alt-price"><span class="fa fa-{{strtolower($curr)}}" aria-hidden="true"></span> {{($carDetails->price) * $cours_cur}}</span>
+          </div>
+          <div><button class="btn btn-red btn-large border-0 align-self-start ml-0 mt-3 px-4 text-white" data-toggle="modal" data-target="#contactModal">@lang('car_details.buy')</button></div>
         </div>
-        <div class="alternate-car">
-          <p class="mb-0">{{$carDetails->name}}</p>
-          <span class="alt-price ">{{($carDetails->price) * $cours_cur}} <span class="currency {{' '.$curr}}">{{' '.$curr}}</span></span>
-        </div>
-        <button class="btn btn-red btn-large border-0 align-self-start ml-0 mt-3 px-4 text-white" data-toggle="modal" data-target="#contactModal">@lang('car_details.buy')</button>
       </div>
+      {{-- slider --}}
       <div class="col-sm-6">
         <div class="slider angles">
           <ul id="lightSlider">
             @if((($carImagesGallery)->isEmpty()))
               <li data-thumb="{{ asset('/images/default-gallery-small.jpeg') }}" class="active">
-                <img alt="Image 1 Title" src="{{ asset('/images/default-gallery-large.jpeg') }}" class="img-fluid">
+                <img alt="{{$carDetails->name}} Image" src="{{ asset('/images/default-gallery-large.jpeg') }}" class="img-fluid">
               </li>
             @else
             @foreach($carImagesGallery as $carImage)
@@ -71,34 +69,31 @@
              asset('files/images/carsGallery/small/'.$carImage->filename) :
               asset('/images/default-gallery-small.jpeg')}}" class="active">
               <a href="#" class="show-modal" data-toggle="modal" data-target="#car-img">
-                <img alt="Image 1 Title" src="{{ Storage::exists('/files/images/carsGallery/large/'.$carImage->filename) ?
+                <img alt="{{$carDetails->name}} Image" src="{{ Storage::exists('/files/images/carsGallery/large/'.$carImage->filename) ?
                       asset('files/images/carsGallery/large/'.$carImage->filename) :
                       asset('/images/default-gallery-large.jpeg') }}" class="img-fluid">
               </a>
-
-              
-
             </li>
             @endforeach
             @endif
             <li></li>
           </ul>
-          {{-- <ol id="sliderIndicators" class="indicators"></ol> --}}
         </div>
       </div>
+      {{-- end of slider --}}
     </div>
   </div>
   {{-- modal --}}
   <div class="modal fade" id="car-img" tabindex="-1" role="dialog" aria-labelledby="car-imageLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
       <div class="modal-content">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
 
-          <img src="{{ Storage::exists('/files/images/carsGallery/medium/'.$carImage->filename) ?
-                asset('files/images/carsGallery/medium/'.$carImage->filename) :
-                 asset('/images/default-gallery-medium.jpeg') }}" class="img-thumb" alt="car-thumb">
+        <img src="{{ Storage::exists('/files/images/carsGallery/medium/'.$carImage->filename) ?
+                  asset('files/images/carsGallery/medium/'.$carImage->filename) :
+                  asset('/images/default-gallery-medium.jpeg') }}" class="img-thumb" alt="{{$carDetails->name}}">
       </div>
     </div>
   </div>

@@ -307,8 +307,8 @@
 				<a href="{{ url('/') }}"><span>@lang('footer.designed-by')</span></a>
 			</div>
 			<div class="social">
-				<a href="" class="d-inline-block rounded-circle text-center"><i class="fa fa-facebook"></i></a>
-				<a href="" class="d-inline-block rounded-circle text-center"><i class="fa fa-instagram"></i></a>
+				<a href="https://www.facebook.com/PerformAuto" target="_blank" class="d-inline-block rounded-circle text-center"><i class="fa fa-facebook"></i></a>
+				<a href="https://www.instagram.com/perform.auto" target="_blank" class="d-inline-block rounded-circle text-center"><i class="fa fa-instagram"></i></a>
 			</div>
 		</div>
 	</div>
